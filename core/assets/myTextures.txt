@@ -1,0 +1,67 @@
+myTextures.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+t1
+  rotate: false
+  xy: 2, 2
+  size: 225, 225
+  orig: 225, 225
+  offset: 0, 0
+  index: -1
+t2
+  rotate: false
+  xy: 229, 2
+  size: 225, 225
+  orig: 225, 225
+  offset: 0, 0
+  index: -1
+t3
+  rotate: false
+  xy: 456, 2
+  size: 300, 202
+  orig: 300, 202
+  offset: 0, 0
+  index: -1
+t4
+  rotate: false
+  xy: 2, 229
+  size: 300, 225
+  orig: 300, 225
+  offset: 0, 0
+  index: -1
+t5
+  rotate: false
+  xy: 304, 229
+  size: 300, 225
+  orig: 300, 225
+  offset: 0, 0
+  index: -1
+t6
+  rotate: false
+  xy: 606, 229
+  size: 300, 225
+  orig: 300, 225
+  offset: 0, 0
+  index: -1
+t7
+  rotate: false
+  xy: 2, 456
+  size: 269, 225
+  orig: 269, 225
+  offset: 0, 0
+  index: -1
+t8
+  rotate: false
+  xy: 273, 456
+  size: 225, 225
+  orig: 225, 225
+  offset: 0, 0
+  index: -1
+t9
+  rotate: false
+  xy: 500, 456
+  size: 225, 225
+  orig: 225, 225
+  offset: 0, 0
+  index: -1
