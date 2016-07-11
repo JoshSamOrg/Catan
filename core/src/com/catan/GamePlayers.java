@@ -11,7 +11,7 @@ public class GamePlayers {
 	   return gamePlayers;
    }
    
-   public Player getBasedOnName(String name){
+   public static Player getBasedOnName(String name){
 	   for(int i = 0; i<gamePlayers.size(); i++){
 		   if(gamePlayers.get(i).getName().equals(name)){
 			   return gamePlayers.get(i);

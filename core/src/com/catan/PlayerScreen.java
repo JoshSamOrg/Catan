@@ -1,7 +1,5 @@
 package com.catan;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -10,142 +8,168 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
-import com.badlogic.gdx.scenes.scene2d.ui.CheckBox.CheckBoxStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
-//This class is the screen that users can use to select the players
-//that are going to play the game
 public class PlayerScreen implements Screen {
-    CatanGame game;
-    private Stage stage;
-    private BitmapFont font;
-    private Skin skin;
-    private Pixmap pixmap;
-    private TextureAtlas atlas;
-    private Table table;
-    private ArrayList<CheckBox> boxes = new ArrayList<CheckBox>();
-	
-    //Constructor that takes the main game object as a parameter, in order to be able to switch screens
-	public PlayerScreen(CatanGame game){
-		this.game = game;
-	}
-	
-	@Override
-	public void show() {
-		selectPlayers();
-		selectColor();
-	}
-	
-	public void selectPlayers(){
-		stage = new Stage();
-		Gdx.input.setInputProcessor(stage);
-		font = new BitmapFont(Gdx.files.internal("gameFonts.fnt"));
-		skin = new Skin();
-		table = new Table();
-		table.setFillParent(true);// sizes the table to the stage
-		stage.addActor(table);
-	    atlas = new TextureAtlas(Gdx.files.internal("myTextures.txt")); //gets the spritesheet from the assets folder of the core project
-
-	 // Generate a 1x1 white texture and store it in the skin named "pmap".
-        pixmap = new Pixmap(1, 1, Format.RGBA8888);// (width in pixels, height in pixels, format)
-        //Format is an enumeration and RGBA8888 is an enum constant specifying the pixel format
-        pixmap.setColor(Color.WHITE); 
-        pixmap.fill(); //fills the complete bitmap with the currently set color
-        skin.add("pmap", new Texture(pixmap)); //adds the pixmap to the skin
-
-        // Store the libgdx font under the name "default".
-        skin.add("default", font); //adds the BitmapFont to the skin
-        
-        CheckBoxStyle style = new CheckBoxStyle();
-        
-        Texture texture = new Texture(Gdx.files.internal("playerCheckBox.png"));
-        Sprite sprite = new Sprite(texture);
-        style.checkboxOff = new SpriteDrawable(sprite);
-        
-        texture = new Texture(Gdx.files.internal("playerCheckBoxRed.png"));
-        sprite = new Sprite(texture);
-        style.checkboxOn = new SpriteDrawable(sprite);
-        style.font = font;
-        skin.add("checkBoxStyle", style);
-        GamePlayers.getGamePlayers().add(new Player("Sam"));
-        GamePlayers.getGamePlayers().add(new Player("Josh"));
-        GamePlayers.getGamePlayers().add(new Player("Mark"));
-        
-        for(int i = 0; i<GamePlayers.getGamePlayers().size(); i++){
-        	boxes.add(new CheckBox(GamePlayers.getGamePlayers().get(i).getName(), skin, "checkBoxStyle"));
-        	boxes.get(boxes.size()-1).setName(GamePlayers.getGamePlayers().get(i).getName());
-        	table.add(boxes.get(boxes.size()-1)).width(150).height(60);
-        	table.row();
-        	boxes.get(boxes.size()-1).addListener(new ChangeListener(){
-                
-				public void changed(ChangeEvent event, Actor actor) {
-					MyTextInputListener listener = new MyTextInputListener();
-					Gdx.input.getTextInput(listener, "Select a Color", "", "");
-				}
-        	});
-        }
-	}
-	
-	public int getNumberOfPlayer(){
-		return boxes.size();
-	}
-	
-	public void selectColor(){
+	 private CatanGame game;
+	    private Stage stage;
+	    private static BitmapFont font;
+	    private Skin skin;
+	    private Pixmap pixmap;
+	    private TextureAtlas atlas;
+	    private static boolean selectName = false;
+	    private static SpriteBatch batch;
+	    private static int XCoord = 260;
+	    private static int YCoord = 420;
+	    private static boolean increase = false;
+	    
+	    //Constructor takes the main game object as a parameter, in order to be able to switch screens
+		public PlayerScreen(CatanGame game){
+			this.game = game;
+		}
 		
-	}
+		@Override
+		//adds all of the actors to the stage 
+		public void show() {
+			batch = new SpriteBatch();
+			stage = new Stage();
+			Gdx.input.setInputProcessor(stage);
+			font = new BitmapFont(Gdx.files.internal("gameFonts.fnt"));
+			skin = new Skin();
+		    atlas = new TextureAtlas(Gdx.files.internal("myTextures.txt")); //gets the spritesheet from the assets folder of the core project
 
-	@Override
-	public void render(float delta) {
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); //clears the frame buffer. Now we are free to render a fresh frame with
-		//new scene graphics
-		stage.act(Gdx.graphics.getDeltaTime()); //updates all the actors in the stage.
-		//Delta is the time in seconds between the last frame
-        stage.draw(); //draws all the actors in the stage
-        //stage.setDebugAll(true); //sets debug lines for everything
-	}
+		 // Generate a 1x1 white texture and store it in the skin named "pmap".
+	        pixmap = new Pixmap(1, 1, Format.RGBA8888);// (width in pixels, height in pixels, format)
+	        //Format is an enumeration and RGBA8888 is an enum constant specifying the pixel format
+	        pixmap.setColor(Color.WHITE); 
+	        pixmap.fill(); //fills the complete bitmap with the currently set color
+	        skin.add("pmap", new Texture(pixmap)); //adds the pixmap to the skin
 
-	@Override
-	public void resize(int width, int height) {
-		stage.getViewport().update(width, height, true);//resizes the stage based on the stage's viewport
-        //the third parameter changes the camera position so it is centered on the stage, making 0,0 
-		//the bottom left corner
+	        // Store the libgdx font under the name "default".
+	        skin.add("default", font); //adds the BitmapFont to the skin
+	        
+	        TextureRegion upr = atlas.findRegion("t7"); //gets the image named "t5" from the spriteSheet 
+	        
+	        TextButtonStyle textButtonStyle = new TextButtonStyle();
+	        textButtonStyle.up = new TextureRegionDrawable(upr); //when the button is not clicked or hovered over
+	        textButtonStyle.down = skin.newDrawable("pmap", Color.DARK_GRAY); //when the button is clicked 
+	        textButtonStyle.checked = skin.newDrawable("pmap", Color.BLUE); //when the button is clicked and then released
+	        textButtonStyle.over = skin.newDrawable("pmap", Color.LIGHT_GRAY); //when the mouse is hovered over the button
+	        textButtonStyle.font = font; 
+	        skin.add("tStyle", textButtonStyle); //adds the textButtonStyle to the skin
+	        
+	        TextButton pickAName = new TextButton("Select A Player Name", skin, "tStyle");
+	        pickAName.setBounds(160, 400, 340, 100);
+	        stage.addActor(pickAName);
+	        pickAName.addListener(new ChangeListener(){
 
-	}
+				@Override
+				public void changed(ChangeEvent event, Actor actor) {
+					selectName = true;
+					MyTextInputListener listener = new MyTextInputListener();
+					Gdx.input.getTextInput(listener, "Select a Player Name", "", "");
+				}
+	        });
+		}
+		
+		public static boolean getSelectName(){
+			return selectName;
+		}
+		
+		public static void setSelectName(boolean name){
+			selectName = name;
+		}
 
-	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
+		@Override
+		//renders the screen, draws the actors in the stage, and updates the actors in the stage
+		public void render(float delta) {
+			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); //clears the frame buffer. Now we are free to render a fresh frame with
+			//new scene graphics
+			stage.act(Gdx.graphics.getDeltaTime()); //updates all the actors in the stage.
+			//Delta is the time in seconds between the last frame
+	        stage.draw(); //draws all the actors in the stage
+	        //stage.setDebugAll(true); sets debug lines for everything
+	        
+	        if(MyTextInputListener.getDrawNames()){
+	        	YCoord = 420;
+	        	for(int i = 0; i<GamePlayers.getGamePlayers().size(); i++){
+	        		if(increase){
+		        		setYCoord(getYCoord() - 35);
+		        	}
+	        		batch.begin();
+	        	font.draw(batch, GamePlayers.getGamePlayers().get(i).getName(), XCoord, YCoord);
+	        	batch.end();
+	        }
+	        }
+		}
+		
+		public static BitmapFont getFont(){
+			return font;
+		}
+		
+		public static int getYCoord(){
+			return YCoord;
+		}
+		
+		public static void setYCoord(int y){
+			YCoord = y;
+		}
+		
+		public static boolean getIncrease(){
+			return increase;
+		}
+		
+		public static void setIncrease(boolean inc){
+			increase = inc;
+		}
+		
+		@Override
+		//sets the new stage size to scale with the new window size
+		public void resize(int width, int height) {
+			stage.getViewport().update(width, height, true);//resizes the stage based on the stage's viewport
+	        //the third parameter changes the camera position so it is centered on the stage, making 0,0 
+			//the bottom left corner
 
-	}
+		}
 
-	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
+		@Override
+		public void pause() {
+			// TODO Auto-generated method stub
 
-	}
+		}
 
-	@Override
-	public void hide() {
-		// TODO Auto-generated method stub
+		@Override
+		public void resume() {
+			// TODO Auto-generated method stub
 
-	}
+		}
 
-	@Override
-	//disposes of all allocated resources
-	public void dispose() {
-		stage.dispose();
-		skin.dispose();
-		font.dispose();
-		atlas.dispose();
-		pixmap.dispose();
-		Gdx.input.setInputProcessor(null);
-	}
+		@Override
+		public void hide() {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		//disposes of all allocated resources
+		public void dispose() {
+			stage.dispose();
+			skin.dispose();
+			font.dispose();
+			atlas.dispose();
+			pixmap.dispose();
+			batch.dispose();
+			Gdx.input.setInputProcessor(null);
+
+		}
+
 }
