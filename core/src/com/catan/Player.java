@@ -13,10 +13,12 @@ public class Player {
   private int numberOfSettlers;
   private int numberOfCities;
   private int numberOfCircles;
+  private String color;
   
   //Constructor that initializes all of the player's instance variables
   public Player(){
 	  name = "";
+	  color = "";
 	  victoryPoints = 0;
 	  numberOfRoads = 15;
 	  numberOfSettlements = 5;
@@ -33,6 +35,7 @@ public class Player {
   //and initializes all of the player's instance variables
   public Player(String name){
 	  this.name = name;
+	  color = "";
 	  victoryPoints = 0;
 	  numberOfRoads = 15;
 	  numberOfSettlements = 5;
@@ -103,5 +106,15 @@ public class Player {
   //returns the number of circles a player has
   public int getNumberOfCircles(){
 	  return numberOfCircles;
+  }
+  
+  //returns the player's color
+  public String getColor(){
+	  return color;
+  }
+  
+  //sets the player's color
+  public void setColor(String color){
+	  this.color = color;
   }
 }

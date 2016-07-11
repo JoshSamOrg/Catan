@@ -7,8 +7,8 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Pixmap.Format;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -40,6 +40,11 @@ public class PlayerScreen implements Screen {
 	
 	@Override
 	public void show() {
+		selectPlayers();
+		selectColor();
+	}
+	
+	public void selectPlayers(){
 		stage = new Stage();
 		Gdx.input.setInputProcessor(stage);
 		font = new BitmapFont(Gdx.files.internal("gameFonts.fnt"));
@@ -82,10 +87,19 @@ public class PlayerScreen implements Screen {
         	boxes.get(boxes.size()-1).addListener(new ChangeListener(){
                 
 				public void changed(ChangeEvent event, Actor actor) {
-					System.out.println(actor.getName());
+					MyTextInputListener listener = new MyTextInputListener();
+					Gdx.input.getTextInput(listener, "Select a Color", "", "");
 				}
         	});
         }
+	}
+	
+	public int getNumberOfPlayer(){
+		return boxes.size();
+	}
+	
+	public void selectColor(){
+		
 	}
 
 	@Override
