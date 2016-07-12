@@ -11,6 +11,8 @@ public class GamePlayers {
 	   return gamePlayers;
    }
    
+   //returns the player object with the name specified as the parameter, and null if none of the
+   //players have that name
    public static Player getBasedOnName(String name){
 	   for(int i = 0; i<gamePlayers.size(); i++){
 		   if(gamePlayers.get(i).getName().equals(name)){

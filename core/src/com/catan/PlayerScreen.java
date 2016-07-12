@@ -19,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
+//This class is used to allow users to select a player name
 public class PlayerScreen implements Screen {
 	 private CatanGame game;
 	    private Stage stage;
@@ -26,11 +27,11 @@ public class PlayerScreen implements Screen {
 	    private Skin skin;
 	    private Pixmap pixmap;
 	    private TextureAtlas atlas;
-	    private static boolean selectName = false;
+	    private static boolean selectName = false; //toggles if the user is selecting a name or a color
 	    private static SpriteBatch batch;
 	    private static int XCoord = 260;
 	    private static int YCoord = 420;
-	    private static boolean increase = false;
+	    private static boolean increase = false; //toggles when to increase the YCoord
 	    private static TextButton continueButton;
 	    
 	    //Constructor takes the main game object as a parameter, in order to be able to switch screens
@@ -94,15 +95,17 @@ public class PlayerScreen implements Screen {
 			});
 		}
 		
+		//returns the "Continue" text button
 		public static TextButton getContinueButton(){
 			return continueButton;
 		}
 		
-		
+		//returns the selectName boolean
 		public static boolean getSelectName(){
 			return selectName;
 		}
 		
+		//sets the selectName boolean
 		public static void setSelectName(boolean name){
 			selectName = name;
 		}
@@ -130,22 +133,27 @@ public class PlayerScreen implements Screen {
 	        }
 		}
 		
+		//returns the font
 		public static BitmapFont getFont(){
 			return font;
 		}
 		
+		//returns the YCoord 
 		public static int getYCoord(){
 			return YCoord;
 		}
 		
+		//sets the YCoord
 		public static void setYCoord(int y){
 			YCoord = y;
 		}
 		
+		//returns the increase boolean
 		public static boolean getIncrease(){
 			return increase;
 		}
 		
+		//sets the increase boolean
 		public static void setIncrease(boolean inc){
 			increase = inc;
 		}

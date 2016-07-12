@@ -47,9 +47,9 @@ public class PlayerColorScreen implements Screen {
 	@Override
 	public void show() {
 		selectPlayers();
-		selectColor();
 	}
 	
+	//Allows the users to select what colors they want to play with
 	public void selectPlayers(){
 		stage = new Stage();
 		Gdx.input.setInputProcessor(stage);
@@ -146,10 +146,12 @@ public class PlayerColorScreen implements Screen {
         }
 	}
 	
+	//returns the arraylist of checkBoxes
 	public static ArrayList<CheckBox> getCheckBoxes(){
 		return boxes;
 	}
 	
+	//returns the number of players currently playing the game
 	public static int getNumberOfPlayers(){
 		int number = 0;
 		for(int i = 0; i<boxes.size(); i++){
@@ -160,27 +162,29 @@ public class PlayerColorScreen implements Screen {
 		return number;
 	}
 	
+	//returns the checkBoxStyle with the red font
 	public static CheckBoxStyle getRed(){
 		return red;
 	}
 	
+	//returns the checkBoxStyle with the orange font
 	public static CheckBoxStyle getOrange(){
 		return orange;
 	}
 	
+	//returns the checkBoxStyle with the blue font
 	public static CheckBoxStyle getBlue(){
 		return blue;
 	}
 	
+	//returns the checkBoxStyle with the white font
 	public static CheckBoxStyle getWhite(){
 		return white;
 	}
-	
-	public void selectColor(){
-		
-	}
 
 	@Override
+	//Main render method that gets called continuously
+	//updates and draws all the actors in the stage
 	public void render(float delta) {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); //clears the frame buffer. Now we are free to render a fresh frame with
 		//new scene graphics
@@ -191,6 +195,7 @@ public class PlayerColorScreen implements Screen {
 	}
 
 	@Override
+	//resizes the stage to fit and scale based on a window resize
 	public void resize(int width, int height) {
 		stage.getViewport().update(width, height, true);//resizes the stage based on the stage's viewport
         //the third parameter changes the camera position so it is centered on the stage, making 0,0 

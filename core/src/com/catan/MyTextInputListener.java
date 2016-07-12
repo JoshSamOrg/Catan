@@ -5,12 +5,16 @@ import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.TextInputListener;
 
+//This class handles user input, and the pop up dialog boxes
 public class MyTextInputListener implements TextInputListener {
       private static String currentPlayer = "";
-      private static ArrayList<String> validColors = new ArrayList<String>();
-      private static boolean drawNames = false;
+      private static ArrayList<String> validColors = new ArrayList<String>(); //Keeps track of all the valid colors, and
+                                                                              //what colors have been used already 
+      private static boolean drawNames = false; //A boolean that toggles when to draw the names selected onto the screen
       
 	@Override
+	//This method is called when the user presses enter on the dialog boxes
+	//Sets up the players' names and allows the players to select a color they want to play with
 	public void input(String text) {
 		if(PlayerScreen.getSelectName()){
 			if(GamePlayers.getGamePlayers().size() == 4){
@@ -66,6 +70,9 @@ public class MyTextInputListener implements TextInputListener {
 	}
 
 	@Override
+	//This method is called when the user presses cancel or exits the dialog with the red X
+	//Handles the case where a player has not selected a valid color and attempts to exit the dialog box and
+	//Ensures that each player has selected a valid color to play with
 	public void canceled() {
 		for(int i = 0; i<PlayerColorScreen.getCheckBoxes().size(); i++){
 			if(PlayerColorScreen.getCheckBoxes().get(i).isChecked()){
@@ -76,14 +83,17 @@ public class MyTextInputListener implements TextInputListener {
 		}
 	}
 
+	//Sets the currentPlayer String
 	public static void setCurrentPlayer(String player){
 		currentPlayer = player;
 	}
 	
+	//returns the currentPlayer String
 	public static String getCurrentPlayer(){
 		return currentPlayer;
 	}
 	
+	//Returns the drawNames boolean
 	public static boolean getDrawNames(){
 		return drawNames;
 	}
