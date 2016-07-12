@@ -132,7 +132,7 @@ public class PlayerScreen implements Screen {
 			//Delta is the time in seconds between the last frame
 	        stage.draw(); //draws all the actors in the stage
 	        //stage.setDebugAll(true); sets debug lines for everything
-	        
+	        //batch.setProjectionMatrix(stage.getViewport().getCamera().combined);
 	        if(MyTextInputListener.getDrawNames()){
 	        	YCoord = 420;
 	        	for(int i = 0; i<GamePlayers.getGamePlayers().size(); i++){
