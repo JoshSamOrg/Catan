@@ -71,6 +71,15 @@ public class ScenarioScreen implements Screen {
         TextButton s3 = new TextButton("Scenario 3", skin, "tStyle"); //scenario 3 button
         TextButton s4 = new TextButton("Scenario 4", skin, "tStyle"); //scenario 4 button
         TextButton s5 = new TextButton("Scenario 5", skin, "tStyle"); //scenario 5 button
+        TextButton back = new TextButton("Back", skin, "tStyle");
+        back.setBounds(500, 20, 100, 50);
+        back.addListener(new ChangeListener(){
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				game.setScreen(new MainMenuScreen(game));
+			}
+        });
+        stage.addActor(back);
         table.add(s1).width(300).height(50).spaceBottom(10);
         table.row();
         table.add(s2).width(300).height(50).spaceBottom(10);

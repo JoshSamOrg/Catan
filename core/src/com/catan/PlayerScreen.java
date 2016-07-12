@@ -21,7 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 //This class is used to allow users to select a player name
 public class PlayerScreen implements Screen {
-	 private CatanGame game;
+	    private CatanGame game;
 	    private Stage stage;
 	    private static BitmapFont font;
 	    private Skin skin;
@@ -78,6 +78,19 @@ public class PlayerScreen implements Screen {
 					selectName = true;
 					MyTextInputListener listener = new MyTextInputListener();
 					Gdx.input.getTextInput(listener, "Select a Player Name", "", "");
+				}
+	        });
+	        
+	        TextButton back = new TextButton("Back", skin, "tStyle");
+	        back.setBounds(500, 20, 100, 50);
+	        stage.addActor(back);
+	        back.addListener(new ChangeListener(){
+				@Override
+				public void changed(ChangeEvent event, Actor actor) {
+					selectName = false;
+					increase = false;
+					GamePlayers.getGamePlayers().clear();
+                  game.setScreen(new ScenarioScreen(game));					
 				}
 	        });
 	        

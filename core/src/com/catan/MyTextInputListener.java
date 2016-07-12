@@ -97,4 +97,8 @@ public class MyTextInputListener implements TextInputListener {
 	public static boolean getDrawNames(){
 		return drawNames;
 	}
+	
+	public static ArrayList<String> getValidColors(){
+		return validColors;
+	}
 }

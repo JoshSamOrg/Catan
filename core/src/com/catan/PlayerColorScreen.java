@@ -12,21 +12,25 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox.CheckBoxStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 //This class is the screen that users can use to select the players
 //that are going to play the game
 public class PlayerColorScreen implements Screen {
-    CatanGame game;
+    private CatanGame game;
     private Stage stage;
     private BitmapFont font;
     private Skin skin;
@@ -143,6 +147,28 @@ public class PlayerColorScreen implements Screen {
 					Gdx.input.getTextInput(listener, "Select a Color", "", "");
 				}
         	});
+        	
+        	TextureRegion upr = atlas.findRegion("t7"); //gets the image named "t5" from the spriteSheet 
+        	TextButtonStyle textButtonStyle = new TextButtonStyle();
+	        textButtonStyle.up = new TextureRegionDrawable(upr); //when the button is not clicked or hovered over
+	        textButtonStyle.down = skin.newDrawable("pmap", Color.DARK_GRAY); //when the button is clicked 
+	        textButtonStyle.over = skin.newDrawable("pmap", Color.LIGHT_GRAY); //when the mouse is hovered over the button
+	        textButtonStyle.font = font; 
+	        skin.add("tStyle", textButtonStyle); //adds the textButtonStyle to the skin
+	        
+	        TextButton back = new TextButton("Back", skin, "tStyle");
+	        back.setBounds(500, 20, 100, 50);
+	        stage.addActor(back);
+	        back.addListener(new ChangeListener(){
+				@Override
+				public void changed(ChangeEvent event, Actor actor) {
+					PlayerScreen.setSelectName(false);
+					PlayerScreen.setIncrease(false);
+					GamePlayers.getGamePlayers().clear();
+					MyTextInputListener.getValidColors().clear();
+					game.setScreen(new PlayerScreen(game));
+				}
+	        });
         }
 	}
 	

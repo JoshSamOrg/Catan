@@ -2,6 +2,14 @@ package com.catan;
 
 //This class is the player class that holds all the information of a player in the game
 public class Player {
+	
+	//An enumeration that represents 
+	//the order that the player places their pieces in the game
+	enum Order{
+		FIRST, SECOND, THIRD, FOURTH
+	}
+	
+  private Order order;
   private String name;
   private int victoryPoints;
   private int numberOfRoads;
@@ -17,6 +25,7 @@ public class Player {
   
   //Constructor that initializes all of the player's instance variables
   public Player(){
+	  order = null;
 	  name = "";
 	  color = "";
 	  victoryPoints = 0;
@@ -35,6 +44,7 @@ public class Player {
   //and initializes all of the player's instance variables
   public Player(String name){
 	  this.name = name;
+	  order = null;
 	  color = "";
 	  victoryPoints = 0;
 	  numberOfRoads = 15;
@@ -116,5 +126,15 @@ public class Player {
   //sets the player's color
   public void setColor(String color){
 	  this.color = color;
+  }
+  
+  //returns the order of the player
+  public Order getOrder(){
+	  return order;
+  }
+  
+  //sets the order of the player
+  public void setOrder(Order newOrd){
+	  order = newOrd;
   }
 }
