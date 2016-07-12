@@ -31,6 +31,7 @@ public class PlayerScreen implements Screen {
 	    private static int XCoord = 260;
 	    private static int YCoord = 420;
 	    private static boolean increase = false;
+	    private static TextButton continueButton;
 	    
 	    //Constructor takes the main game object as a parameter, in order to be able to switch screens
 		public PlayerScreen(CatanGame game){
@@ -62,7 +63,6 @@ public class PlayerScreen implements Screen {
 	        TextButtonStyle textButtonStyle = new TextButtonStyle();
 	        textButtonStyle.up = new TextureRegionDrawable(upr); //when the button is not clicked or hovered over
 	        textButtonStyle.down = skin.newDrawable("pmap", Color.DARK_GRAY); //when the button is clicked 
-	        textButtonStyle.checked = skin.newDrawable("pmap", Color.BLUE); //when the button is clicked and then released
 	        textButtonStyle.over = skin.newDrawable("pmap", Color.LIGHT_GRAY); //when the mouse is hovered over the button
 	        textButtonStyle.font = font; 
 	        skin.add("tStyle", textButtonStyle); //adds the textButtonStyle to the skin
@@ -79,7 +79,25 @@ public class PlayerScreen implements Screen {
 					Gdx.input.getTextInput(listener, "Select a Player Name", "", "");
 				}
 	        });
+	        
+	        continueButton = new TextButton("Continue", skin, "tStyle");
+			continueButton.setVisible(false);
+			continueButton.setBounds(160, 50, 180, 100);
+			stage.addActor(continueButton);
+			continueButton.addListener(new ChangeListener(){
+
+				@Override
+				public void changed(ChangeEvent event, Actor actor) {
+					selectName = false;
+					game.setScreen(new PlayerColorScreen(game));
+				}
+			});
 		}
+		
+		public static TextButton getContinueButton(){
+			return continueButton;
+		}
+		
 		
 		public static boolean getSelectName(){
 			return selectName;

@@ -18,6 +18,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox.CheckBoxStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
@@ -111,9 +113,23 @@ public class PlayerColorScreen implements Screen {
         red.font = font;
         red.fontColor = Color.RED;
         skin.add("red", red);
-        GamePlayers.getGamePlayers().add(new Player("Sam"));
-        GamePlayers.getGamePlayers().add(new Player("Josh"));
-        GamePlayers.getGamePlayers().add(new Player("Mark"));
+        TextFieldStyle tfStyle = new TextFieldStyle();
+        tfStyle.font = font;
+        tfStyle.fontColor = Color.GREEN;
+        skin.add("tfStyle", tfStyle);
+        TextField fieldpt1 = new TextField("Select the blue check box by your name to", skin, "tfStyle");
+        table.add(fieldpt1).width(600).height(50);
+        table.row();
+        TextField fieldpt2 = new TextField("choose the color you want your pieces to be.", skin, "tfStyle");
+        table.add(fieldpt2).width(635).height(50);
+        table.row();
+        TextField colors = new TextField("The valid colors to choose from are", skin, "tfStyle");
+        table.add(colors).width(630).height(50);
+        table.row();
+        TextField colors2 = new TextField("'red', 'blue', 'white', and 'orange'.", skin, "tfStyle");
+        table.add(colors2).width(630).height(50);
+        table.row();
+        
         for(int i = 0; i<GamePlayers.getGamePlayers().size(); i++){
         	boxes.add(new CheckBox(GamePlayers.getGamePlayers().get(i).getName(), skin, "white"));
         	boxes.get(boxes.size()-1).setName(GamePlayers.getGamePlayers().get(i).getName());

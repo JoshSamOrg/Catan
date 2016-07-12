@@ -13,9 +13,16 @@ public class MyTextInputListener implements TextInputListener {
 	@Override
 	public void input(String text) {
 		if(PlayerScreen.getSelectName()){
+			if(GamePlayers.getGamePlayers().size() == 4){
+				Gdx.input.getTextInput(this, "Reached Maximum number of players", "", "exit this window and press Continue");
+				return;
+			}
 			PlayerScreen.setIncrease(true);
 			GamePlayers.getGamePlayers().add(new Player(text));
 			drawNames = true;
+			if(GamePlayers.getGamePlayers().size() >=2){
+				PlayerScreen.getContinueButton().setVisible(true);
+			}
 		}
 		else{
 		for(int i = 0; i<PlayerColorScreen.getCheckBoxes().size(); i++){
