@@ -179,7 +179,7 @@ public class PlayerColorScreen implements Screen {
 	        beginGame.addListener(new ChangeListener(){
 				@Override
 				public void changed(ChangeEvent event, Actor actor) {
-					//game.setScreen(new _);
+					game.setScreen(new HexGenerator(game));
 				}
 	        });
         }

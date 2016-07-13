@@ -36,10 +36,15 @@ public class PlayerOrder {
 		counter.get(i).setColor(games.get(set).getColor());
 		games.remove(set);
 	}
-		System.out.println("The first player is:" + counter.get(0).getName());
-		System.out.println("The second player is:" + counter.get(1).getName());
-		System.out.println("The third player is:" + counter.get(2).getName());
-		
-		
+	 	
+	}
+	public ArrayList<Player> getCounter() {
+		return counter;
+	}
+	public ArrayList<Player> getGames() {
+		return games;
+	}
+	public int getCount() {
+		return count;
 	}
 }
