@@ -66,6 +66,16 @@ public class MyTextInputListener implements TextInputListener {
 			}
 		}
 		}
+		shouldBeVisible();
+	}
+
+	private void shouldBeVisible() {
+		for(int i = 0; i<GamePlayers.getGamePlayers().size(); i++){
+			if(GamePlayers.getGamePlayers().get(i).getColor().equals("")){
+				return;
+			}
+		}
+		PlayerColorScreen.getBeginGame().setVisible(true);
 		
 	}
 
