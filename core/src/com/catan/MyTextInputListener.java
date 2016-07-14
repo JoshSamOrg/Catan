@@ -21,11 +21,17 @@ public class MyTextInputListener implements TextInputListener {
 				Gdx.input.getTextInput(this, "Reached Maximum number of players", "", "exit this window and press Continue");
 				return;
 			}
+			if(GamePlayers.getBasedOnName(text) == null){
 			PlayerScreen.setIncrease(true);
 			GamePlayers.getGamePlayers().add(new Player(text));
 			drawNames = true;
 			if(GamePlayers.getGamePlayers().size() >=2){
 				PlayerScreen.getContinueButton().setVisible(true);
+			}
+			}
+			else{
+				Gdx.input.getTextInput(this, "Name already taken", "", "Pick a different name");
+				return;
 			}
 		}
 		else{
@@ -75,7 +81,7 @@ public class MyTextInputListener implements TextInputListener {
 				return;
 			}
 		}
-		PlayerColorScreen.getBeginGame().setVisible(true);
+		PlayerColorScreen.getConfigureBoard().setVisible(true);
 		
 	}
 

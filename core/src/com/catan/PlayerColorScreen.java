@@ -42,7 +42,7 @@ public class PlayerColorScreen implements Screen {
     private static CheckBoxStyle blue;
     private static CheckBoxStyle orange;
     private static CheckBoxStyle red;
-    private static TextButton beginGame;
+    private static TextButton configureBoard;
 	
     //Constructor that takes the main game object as a parameter, in order to be able to switch screens
 	public PlayerColorScreen(CatanGame game){
@@ -172,21 +172,21 @@ public class PlayerColorScreen implements Screen {
 				}
 	        });
 	        
-	        beginGame = new TextButton("Begin Game", skin, "tStyle");
-	        beginGame.setBounds(20, 20, 230, 100);
-	        beginGame.setVisible(false);
-	        stage.addActor(beginGame);
-	        beginGame.addListener(new ChangeListener(){
+	        configureBoard = new TextButton("Configure Board", skin, "tStyle");
+	        configureBoard.setBounds(20, 20, 235, 100);
+	        configureBoard.setVisible(false);
+	        stage.addActor(configureBoard);
+	        configureBoard.addListener(new ChangeListener(){
 				@Override
 				public void changed(ChangeEvent event, Actor actor) {
-					game.setScreen(new HexGenerator(game));
+					game.setScreen(new LoadingScreen(game));
 				}
 	        });
         }
 	}
 	
-	public static TextButton getBeginGame(){
-		return beginGame;
+	public static TextButton getConfigureBoard(){
+		return configureBoard;
 	}
 	
 	//returns the arraylist of checkBoxes
