@@ -181,6 +181,8 @@ public class PickNumbersScreen implements Screen, InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		System.out.println(screenX);
+		System.out.println(Gdx.graphics.getHeight() - 1 - screenY);
 		outer: for(int i = 0; i<numberImages.size(); i++){
 			if(!numberImages.get(i).isVisible()){
 				for(int j = 0; j<coords.length-1; j+=2){
