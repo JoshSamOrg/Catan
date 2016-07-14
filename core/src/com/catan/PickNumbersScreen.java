@@ -56,11 +56,11 @@ public class PickNumbersScreen implements Screen, InputProcessor {
     private int h14y = 180;
     private int grassx = 63;
     private int grassy = 289;
-    private int[] imageCoords = new int[2];
     private int[] coords = {h1x,h1y,h2x,h2y,h3x,h3y,h4x,h4y,h5x,h5y,h6x,h6y,grassx,grassy,h7x,h7y,h8x,h8y,
     		h9x,h9y,h10x,h10y,h11x,h11y,h12x,h12y,h13x,h13y,h14x,h14y};
     private TextureAtlas atlas;
-    private boolean[] openSpots = {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true};
+    private boolean[] openSpots = {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true};//size = 15
+    private int[] HexLocations = {15,15,15,15,15,15,15,15,15,15,15,15,15,15,15}; //size = 15
     private ArrayList<TextureRegion> numbers;
     private ArrayList<ImageButton> numberImages;
     private InputMultiplexer multiplexer;
@@ -109,6 +109,7 @@ public class PickNumbersScreen implements Screen, InputProcessor {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				actor.setVisible(false);
+				multiplexer.removeProcessor(stage);
 			}
     	 });
      }
@@ -156,7 +157,8 @@ public class PickNumbersScreen implements Screen, InputProcessor {
 	public void dispose() {
 		board.dispose();
 		batch.dispose();
-		
+		multiplexer.clear();
+		Gdx.input.setInputProcessor(null);
 	}
 
 	@Override
@@ -179,26 +181,45 @@ public class PickNumbersScreen implements Screen, InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		//System.out.println(screenX);
-		//System.out.println(Gdx.graphics.getHeight()-1 - screenY);
-		for(int i = 0; i<numberImages.size(); i++){
+		outer: for(int i = 0; i<numberImages.size(); i++){
 			if(!numberImages.get(i).isVisible()){
 				for(int j = 0; j<coords.length-1; j+=2){
 					if(isWithinRange(screenX, Gdx.graphics.getHeight() - 1 - screenY, coords[j], coords[j+1])){
 						if(openSpots[j/2]){
+				HexLocations[j/2] = i;
 				numberImages.get(i).setPosition(coords[j], coords[j+1]);
 				numberImages.get(i).setVisible(true);
 				openSpots[j/2] = false;
-				break;
+				multiplexer.addProcessor(stage);
+				break outer;
 			}
 						else{
-							
+							for(int k = 0; k<HexLocations.length; k++){
+								if(HexLocations[k] == i){
+									swap(HexLocations[j/2], i);
+									int temp = HexLocations[k];
+									HexLocations[k] = HexLocations[j/2];
+									HexLocations[j/2] = temp;
+									numberImages.get(i).setVisible(true);
+									multiplexer.addProcessor(stage);
+									break outer;
+								}
+							}
 						}
 					}
 				}
 			}
 		}
 		return false;
+	}
+
+	private void swap(int m, int n) {
+		float x1 = numberImages.get(m).getX();
+		float y1 = numberImages.get(m).getY();
+		float x2 = numberImages.get(n).getX();
+		float y2 = numberImages.get(n).getY();
+		numberImages.get(m).setPosition(x2, y2);
+		numberImages.get(n).setPosition(x1, y1);
 	}
 
 	private boolean isWithinRange(int screenX, int screenY, int hexX, int hexY) {
