@@ -55,7 +55,7 @@ public class HexGenerator implements Screen {
 	private boolean bool13 = true;
 	private boolean bool14 = true;
 	private Stage stage;
-	private BitmapFont font;
+	private BitmapFont font,font2;
 	private Skin skin;
 	private Pixmap pixmap;
 	private TextButton button;
@@ -96,6 +96,8 @@ public class HexGenerator implements Screen {
 		stage=new Stage();
 		Gdx.input.setInputProcessor(stage);
 		font=new BitmapFont(Gdx.files.internal("gameFonts.fnt"));
+		font2=new BitmapFont(Gdx.files.internal("gameFonts.fnt"));
+		font2.getData().setScale(.7f, .7f);
 		skin=new Skin();
 		atlas2 = new TextureAtlas(Gdx.files.internal("myTextures.txt"));
 		pixmap = new Pixmap(1, 1, Format.RGBA8888);
@@ -103,6 +105,7 @@ public class HexGenerator implements Screen {
 		pixmap.fill();
 		skin.add("pmap", new Texture(pixmap));
 		skin.add("default", font);
+		skin.add("default2", font2);
 		TextureRegion upr=atlas2.findRegion("t5");
 		TextButtonStyle textButtonStyle=new TextButtonStyle();
         textButtonStyle.up = new TextureRegionDrawable(upr);
@@ -124,7 +127,7 @@ public class HexGenerator implements Screen {
         }
 
 	public void render(float delta) {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		batch.draw(startingBoard, 0, 0, 650, 650);
@@ -134,7 +137,7 @@ public class HexGenerator implements Screen {
 			bool = false;
 		}
 		batch.begin();
-		batch.draw(board.get(set), 119.25f, 389.6f, 42.4f, 47.53f);
+		batch.draw(board.get(set), 119.25f, 389.8f, 42.4f, 47.53f);
 		batch.end();
 		board.add(board.get(set));
 		board.remove(set);
@@ -145,166 +148,166 @@ public class HexGenerator implements Screen {
 			bool2 = false;
 		}
 		batch.begin();
-		batch.draw(board.get(set2), 162.52f, 389.4f, 42f, 47.8f);
+		batch.draw(board.get(set2), 162.7f, 389.8f, 41.7f, 47.5f);
 		batch.end();
 		board.add(13, board.get(set2));
 		board.remove(set2);
 		set2 = board.size() - 2;
 
-//		if (bool3) {
-//			set3 = rand.nextInt(board.size() - 2);
-//			bool3 = false;
-//		}
-//		batch.begin();
-//		batch.draw(board.get(set3), -180.1f, 327.9f, 340f, 249.3f);
-//		batch.end();
-//		board.add(12, board.get(set3));
-//		board.remove(set3);
-//		set3 = board.size() - 3;
-//
-//		if (bool4) {
-//			set4 = rand.nextInt(board.size() - 3);
-//			bool4 = false;
-//		}
-//		batch.begin();
-//		batch.draw(board.get(set4), -132.6f, 327.9f, 340f, 249.3f);
-//		batch.end();
-//		board.add(11, board.get(set4));
-//		board.remove(set4);
-//		set4 = board.size() - 4;
-//
-//		if (bool5) {
-//			set5 = rand.nextInt(board.size() - 4);
-//			bool5 = false;
-//		}
-//		batch.begin();
-//		batch.draw(board.get(set5), -204.25f, 287.7f, 340f, 249.3f);
-//		batch.end();
-//		board.add(10, board.get(set5));
-//		board.remove(set5);
-//		set5 = board.size() - 5;
-//
-//		if (bool6) {
-//			set6 = rand.nextInt(board.size() - 5);
-//			bool6 = false;
-//		}
-//		batch.begin();
-//		batch.draw(board.get(set6), -156.68f, 287.7f, 340f, 249.3f);
-//		batch.end();
-//		board.add(9, board.get(set6));
-//		board.remove(set6);
-//		set6 = board.size() - 6;
-//
-//		if (bool7) {
-//			set7 = rand.nextInt(board.size() - 6);
-//			bool7 = false;
-//		}
-//		batch.begin();
-//		batch.draw(board.get(set7), -180.6f, 247.4f, 340f, 249.3f);
-//		batch.end();
-//		board.add(8, board.get(set7));
-//		board.remove(set7);
-//		set7 = board.size() - 7;
-//
-//		if (bool8) {
-//			set8 = rand.nextInt(board.size() - 7);
-//			bool8 = false;
-//		}
-//		batch.begin();
-//		batch.draw(board.get(set8), -133.1f, 247.3f, 340f, 249.3f);
-//		batch.end();
-//		board.add(7, board.get(set8));
-//		board.remove(set8);
-//		set8 = board.size() - 8;
-//
-//		if (bool9) {
-//			set9 = rand.nextInt(board.size() - 8);
-//			bool9 = false;
-//		}
-//			batch.begin();
-//		batch.draw(board.get(set9), -203.62f, 207.2f, 340f, 249.3f);
-//		batch.end();
-//		board.add(6, board.get(set9));
-//		board.remove(set9);
-//		set9 = board.size() - 9;
-//
-//		if (bool10) {
-//			set10 = rand.nextInt(board.size() - 9);
-//			bool10 = false;
-//		}
-//		batch.begin();
-//		batch.draw(board.get(set10), -156.25f, 207.2f, 340f, 249.3f);
-//		batch.end();
-//		board.add(5, board.get(set10));
-//		board.remove(set10);
-//		set10 = board.size() - 10;
-//
-//		if (bool11) {
-//			set11 = rand.nextInt(board.size() - 10);
-//			bool11 = false;
-//		}
-//		batch.begin();
-//		batch.draw(board.get(set11), -180.95f, 167.2f, 340f, 249.3f);
-//		batch.end();
-//		board.add(4, board.get(set11));
-//		board.remove(set11);
-//		set11 = board.size() - 11;
-//
-//		if (bool12) {
-//			set12 = rand.nextInt(board.size() - 11);
-//			bool12 = false;
-//		}
-//		batch.begin();
-//		batch.draw(board.get(set12), -133.57f, 167.1f, 340f, 249.3f);
-//		batch.end();
-//		board.add(3, board.get(set12));
-//		board.remove(set12);
-//		set12 = board.size() - 12;
-//
-//		if (bool13) {
-//			set13 = rand.nextInt(board.size() - 12);
-//			bool13 = false;
-//		}
-//		batch.begin();
-//		batch.draw(board.get(set13), -157.1f, 127.4f, 340f, 249.3f);
-//		batch.end();
-//		board.add(2, board.get(set13));
-//		board.remove(set13);
-//		set13 = board.size() - 13;
-//
-//		if (bool14) {
-//			set14 = rand.nextInt(board.size() - 13);
-//			bool14 = false;
-//		}
-//		batch.begin();
-//		batch.draw(board.get(set14), -109.8f, 127.4f, 340f, 249.3f);
-//		batch.end();
-//		board.add(1, board.get(set14));
-//		board.remove(set14);
-//		set14 = board.size() - 14;
-//		
-//		if (counter) {
-//			batch.begin();
-//			button.setVisible(false);
-//			font.draw(batch, orders.getCounter().get(0).getName() + " " + "is going first", 50, 160);
-//			batch.end();
-//			batch.begin();
-//			font.draw(batch, orders.getCounter().get(1).getName() + " " + "is going second", 50, 120);
-//			batch.end();
-//			if(orders.getCount()==3) {
-//				batch.begin();
-//				font.draw(batch, orders.getCounter().get(2).getName() + " " + "is going third", 50, 80);
-//				batch.end();
-//			}
-//			if(orders.getCount()==4) {
-//				batch.begin();
-//				font.draw(batch, orders.getCounter().get(2).getName() + " " + "is going third", 50, 80);
-//				font.draw(batch, orders.getCounter().get(3).getName() + " " + "is going fourth", 50, 40);
-//				batch.end();
-//			}
-//		}
-//		stage.act(Gdx.graphics.getDeltaTime());
-//		stage.draw();
+		if (bool3) {
+			set3 = rand.nextInt(board.size() - 2);
+			bool3 = false;
+		}
+		batch.begin();
+		batch.draw(board.get(set3), 97.8f, 352.1f, 42f, 47.8f);
+		batch.end();
+		board.add(12, board.get(set3));
+		board.remove(set3);
+		set3 = board.size() - 3;
+
+		if (bool4) {
+			set4 = rand.nextInt(board.size() - 3);
+			bool4 = false;
+		}
+		batch.begin();
+		batch.draw(board.get(set4), 141.1f, 352f, 42f, 47.8f);
+		batch.end();
+		board.add(11, board.get(set4));
+		board.remove(set4);
+		set4 = board.size() - 4;
+
+		if (bool5) {
+			set5 = rand.nextInt(board.size() - 4);
+			bool5 = false;
+		}
+		batch.begin();
+		batch.draw(board.get(set5), 76.9f, 315.3f, 41.6f, 46.7f);
+		batch.end();
+		board.add(10, board.get(set5));
+		board.remove(set5);
+		set5 = board.size() - 5;
+
+		if (bool6) {
+			set6 = rand.nextInt(board.size() - 5);
+			bool6 = false;
+		}
+		batch.begin();
+		batch.draw(board.get(set6), 119.8f, 314.95f, 42f, 47.1f);
+		batch.end();
+		board.add(9, board.get(set6));
+		board.remove(set6);
+		set6 = board.size() - 6;
+
+		if (bool7) {
+			set7 = rand.nextInt(board.size() - 6);
+			bool7 = false;
+		}
+		batch.begin();
+		batch.draw(board.get(set7), 98.35f, 278.9f, 42f, 46f);
+		batch.end();
+		board.add(8, board.get(set7));
+		board.remove(set7);
+		set7 = board.size() - 7;
+
+		if (bool8) {
+			set8 = rand.nextInt(board.size() - 7);
+			bool8 = false;
+		}
+		batch.begin();
+		batch.draw(board.get(set8), 142f, 278.85f, 41.3f, 46.35f);
+		batch.end();
+		board.add(7, board.get(set8));
+		board.remove(set8);
+		set8 = board.size() - 8;
+
+		if (bool9) {
+			set9 = rand.nextInt(board.size() - 8);
+			bool9 = false;
+		}
+			batch.begin();
+		batch.draw(board.get(set9), 76.45f, 241.85f, 41.9f, 46.4f);
+		batch.end();
+		board.add(6, board.get(set9));
+		board.remove(set9);
+		set9 = board.size() - 9;
+
+		if (bool10) {
+			set10 = rand.nextInt(board.size() - 9);
+			bool10 = false;
+		}
+		batch.begin();
+		batch.draw(board.get(set10), 119.9f, 241.8f, 41.5f, 47.1f);
+		batch.end();
+		board.add(5, board.get(set10));
+		board.remove(set10);
+		set10 = board.size() - 10;
+
+		if (bool11) {
+			set11 = rand.nextInt(board.size() - 10);
+			bool11 = false;
+		}
+		batch.begin();
+		batch.draw(board.get(set11), 98.4f, 204.5f, 41.7f, 47.4f);
+		batch.end();
+		board.add(4, board.get(set11));
+		board.remove(set11);
+		set11 = board.size() - 11;
+
+		if (bool12) {
+			set12 = rand.nextInt(board.size() - 11);
+			bool12 = false;
+		}
+		batch.begin();
+		batch.draw(board.get(set12), 141.5f, 204.58f, 41.7f, 47.5f);
+		batch.end();
+		board.add(3, board.get(set12));
+		board.remove(set12);
+		set12 = board.size() - 12;
+
+		if (bool13) {
+			set13 = rand.nextInt(board.size() - 12);
+			bool13 = false;
+		}
+		batch.begin();
+		batch.draw(board.get(set13), 119.3f, 167f, 42.2f, 47.5f);
+		batch.end();
+		board.add(2, board.get(set13));
+		board.remove(set13);
+		set13 = board.size() - 13;
+
+		if (bool14) {
+			set14 = rand.nextInt(board.size() - 13);
+			bool14 = false;
+		}
+		batch.begin();
+		batch.draw(board.get(set14), 162.8f, 167.25f, 41.5f, 47.6f);
+		batch.end();
+		board.add(1, board.get(set14));
+		board.remove(set14);
+		set14 = board.size() - 14;
+		
+		if (counter) {
+			batch.begin();
+			button.setVisible(false);
+			font2.draw(batch, orders.getCounter().get(0).getName() + " " + "is going first", 5, 160);
+			batch.end();
+			batch.begin();
+			font2.draw(batch, orders.getCounter().get(1).getName() + " " + "is going second", 5, 120);
+			batch.end();
+			if(orders.getCount()==3) {
+				batch.begin();
+				font2.draw(batch, orders.getCounter().get(2).getName() + " " + "is going third", 5, 80);
+				batch.end();
+			}
+			if(orders.getCount()==4) {
+				batch.begin();
+				font2.draw(batch, orders.getCounter().get(2).getName() + " " + "is going third", 5, 80);
+				font2.draw(batch, orders.getCounter().get(3).getName() + " " + "is going fourth", 5, 40);
+				batch.end();
+			}
+		}
+		stage.act(Gdx.graphics.getDeltaTime());
+		stage.draw();
 	}
 
 	public void dispose() {
