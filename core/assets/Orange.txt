@@ -1,0 +1,68 @@
+Orange.png
+size: 1024, 1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+orangeCircle
+  rotate: false
+  xy: 0, 0
+  size: 205, 200
+  orig: 205, 200
+  offset: 0, 0
+  index: -1
+orangeCity
+  rotate: false
+  xy: 205, 0
+  size: 260, 258
+  orig: 260, 258
+  offset: 0, 0
+  index: -1
+orangeCrew
+  rotate: false
+  xy: 465, 0
+  size: 177, 423
+  orig: 177, 423
+  offset: 0, 0
+  index: -1
+orangeHarborSettlement
+  rotate: false
+  xy: 642, 0
+  size: 245, 227
+  orig: 245, 227
+  offset: 0, 0
+  index: -1
+orangePirateShip
+  rotate: false
+  xy: 0, 423
+  size: 282, 167
+  orig: 282, 167
+  offset: 0, 0
+  index: -1
+orangeRoad
+  rotate: false
+  xy: 282, 423
+  size: 187, 43
+  orig: 187, 43
+  offset: 0, 0
+  index: -1
+orangeSettlement
+  rotate: false
+  xy: 469, 423
+  size: 205, 140
+  orig: 205, 140
+  offset: 0, 0
+  index: -1
+orangeSettler
+  rotate: false
+  xy: 674, 423
+  size: 190, 231
+  orig: 190, 231
+  offset: 0, 0
+  index: -1
+orangeShip
+  rotate: false
+  xy: 0, 654
+  size: 257, 118
+  orig: 257, 118
+  offset: 0, 0
+  index: -1
