@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class LoadingScreen implements Screen{
+	private static boolean setter=false;
 	private CatanGame game;
     private Stage stage;
     private BitmapFont font;
@@ -27,6 +28,7 @@ public class LoadingScreen implements Screen{
     private Pixmap pixmap;
     private TextureAtlas atlas;
     private Table table;
+    private static boolean pickNumbers = false;
     
     public LoadingScreen(CatanGame game){
     	this.game = game;
@@ -72,17 +74,27 @@ public class LoadingScreen implements Screen{
         generateRandomBandPickN.addListener(new ChangeListener(){
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
+				pickNumbers = true;
 				game.setScreen(new HexGenerator(game));
 			}
         });
         generateRandomBandN.addListener(new ChangeListener(){
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
+				pickNumbers = false;
+				setter=true;
 				game.setScreen(new HexGenerator(game));
 			}
         });
 	}
-
+	
+	public static boolean getPickNumbers(){
+		return pickNumbers;
+	}
+	
+	public boolean getSetter() {
+		return setter;
+	}
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); //clears the frame buffer. Now we are free to render a fresh frame with
