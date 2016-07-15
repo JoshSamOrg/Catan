@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -16,19 +18,23 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 
-public class HexGenerator implements Screen {
+public class HexGenerator implements Screen, InputProcessor {
 	
 	private PlayerOrder orders;
 	private ArrayList<TextureRegion> board;
 	private TextureRegion wood, ore, sheep, wheat, brick;
 	int b, w, s, o, wo = 0;
-	private TextureAtlas atlas, atlas2;
+	private TextureAtlas atlas, atlas2, atlas3;
 	private Texture startingBoard;
 	private Random rand;
 	private SpriteBatch batch;
@@ -55,6 +61,51 @@ public class HexGenerator implements Screen {
 	private Skin skin;
 	private Pixmap pixmap;
 	private TextButton button;
+	
+    private int numberWidth = 25;
+    private int numberHeight = 25;
+    private int imageStartX = 20;
+    private int imageY = 10;
+    private int h1x = 127;
+    private int h1y = 401;
+    private int h2x = 170;
+    private int h2y = 402;
+    private int h3x = 106;
+    private int h3y = 365;
+    private int h4x = 149;
+    private int h4y = 364;
+    private int h5x = 85;
+    private int h5y = 327;
+    private int h6x = 128;
+    private int h6y = 327;
+    private int h7x = 106;
+    private int h7y = 291;
+    private int h8x = 149;
+    private int h8y = 291;
+    private int h9x = 84;
+    private int h9y = 254;
+    private int h10x = 127;
+    private int h10y = 254;
+    private int h11x = 106;
+    private int h11y = 216;
+    private int h12x = 149;
+    private int h12y = 216;
+    private int h13x = 127;
+    private int h13y = 180;
+    private int h14x = 171;
+    private int h14y = 180;
+    private int grassx = 63;
+    private int grassy = 289;
+    private int[] coords = {h1x,h1y,h2x,h2y,h3x,h3y,h4x,h4y,h5x,h5y,h6x,h6y,grassx,grassy,h7x,h7y,h8x,h8y,
+    		h9x,h9y,h10x,h10y,h11x,h11y,h12x,h12y,h13x,h13y,h14x,h14y};
+    private boolean[] openSpots = {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true};//size = 15
+    private int[] HexLocations = {15,15,15,15,15,15,15,15,15,15,15,15,15,15,15}; //size = 15
+    private ArrayList<TextureRegion> numbers;
+    private ArrayList<ImageButton> numberImages;
+    private InputMultiplexer multiplexer;
+    private TextButton finalizeNumbers;
+    private TextField field;
+    private TextField field2;
 
 	public HexGenerator(CatanGame game) {
 		this.game = game;
@@ -88,9 +139,15 @@ public class HexGenerator implements Screen {
 		for (int i = 0; i < 2; i++) {
 			board.add(brick);
 		}
-		
+		atlas3 = new TextureAtlas(Gdx.files.internal("mainIslandNumbers.txt"));
+		multiplexer = new InputMultiplexer();
 		stage=new Stage();
-		Gdx.input.setInputProcessor(stage);
+		multiplexer.addProcessor(stage);
+		multiplexer.addProcessor(this);
+		Gdx.input.setInputProcessor(multiplexer);
+		numbers = new ArrayList<TextureRegion>();
+		numberImages = new ArrayList<ImageButton>();
+		drawNumbers();
 		font=new BitmapFont(Gdx.files.internal("gameFonts.fnt"));
 		font2=new BitmapFont(Gdx.files.internal("gameFonts.fnt"));
 		font2.getData().setScale(.7f, .7f);
@@ -112,6 +169,7 @@ public class HexGenerator implements Screen {
         skin.add("tStyle", textButtonStyle);
         button = new TextButton("Player Order", skin, "tStyle");
         button.setBounds(50, 50, 200, 50);
+        button.setVisible(false);
         stage.addActor(button);
         button.addListener(new ChangeListener(){
         	@Override
@@ -120,7 +178,73 @@ public class HexGenerator implements Screen {
 				
 			}
         });
+        
+        finalizeNumbers = new TextButton("Finalize Numbers", skin, "tStyle");
+        finalizeNumbers.setBounds(350, 55, 260, 50);
+        finalizeNumbers.setVisible(false);
+        stage.addActor(finalizeNumbers);
+        finalizeNumbers.addListener(new ChangeListener(){
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				actor.setVisible(false);
+				button.setVisible(true);
+				for(int i = 0; i<numberImages.size(); i++){
+					numberImages.get(i).clearListeners();
+				}
+			}
+        });
+        
+        TextFieldStyle tfstyle = new TextFieldStyle();
+        tfstyle.font = font2;
+        tfstyle.fontColor = Color.BLUE;
+        skin.add("tfstyle", tfstyle);
+        field = new TextField("Click on a number, then move your mouse to the hexagon you", skin, "tfstyle");
+        field2 = new TextField("want the number to go inside of and click inside that hexagon", skin, "tfstyle");
+        field.setBounds(5, 70, 800, 50);
+        field2.setBounds(5, 40, 800, 50);
+        stage.addActor(field);
+        stage.addActor(field2);
         }
+	
+	public boolean isMainIslandFull(){
+		for(int i = 0; i<openSpots.length; i++){
+			if(openSpots[i]){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	private void drawNumbers() {
+	     numbers.add(atlas3.findRegion("12"));
+	     numbers.add(atlas3.findRegion("green3"));
+	     numbers.add(atlas3.findRegion("green3"));
+	     numbers.add(atlas3.findRegion("green6"));
+	     numbers.add(atlas3.findRegion("green6"));
+	     numbers.add(atlas3.findRegion("orange4"));
+	     numbers.add(atlas3.findRegion("orange4"));
+	     numbers.add(atlas3.findRegion("orange5"));
+	     numbers.add(atlas3.findRegion("orange8"));
+	     numbers.add(atlas3.findRegion("orange8"));
+	     numbers.add(atlas3.findRegion("orange9"));
+	     numbers.add(atlas3.findRegion("orange10"));
+	     numbers.add(atlas3.findRegion("orange10"));
+	     numbers.add(atlas3.findRegion("orange11"));
+	     numbers.add(atlas3.findRegion("orange11"));
+	     for(int i = 0; i<numbers.size(); i++){
+	    	 numberImages.add(new ImageButton(new TextureRegionDrawable(numbers.get(i))));
+	    	 numberImages.get(i).setBounds(imageStartX, imageY, 25, 25);
+	    	 stage.addActor(numberImages.get(i));
+	    	 imageStartX+=40;
+	    	 numberImages.get(i).addListener(new ChangeListener(){
+				@Override
+				public void changed(ChangeEvent event, Actor actor) {
+					actor.setVisible(false);
+					multiplexer.removeProcessor(stage);
+				}
+	    	 });
+	     }
+		}
 
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -315,6 +439,7 @@ public class HexGenerator implements Screen {
 		font.dispose();
 		skin.dispose();
 		pixmap.dispose();
+		Gdx.input.setInputProcessor(null);
 	}
 
 	@Override
@@ -339,6 +464,108 @@ public class HexGenerator implements Screen {
 	public void hide() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public boolean keyDown(int keycode) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean keyUp(int keycode) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean keyTyped(char character) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		if(isMainIslandFull() && !finalizeNumbers.isVisible()){
+			return false;
+		}
+		outer: for(int i = 0; i<numberImages.size(); i++){
+			if(!numberImages.get(i).isVisible()){
+				for(int j = 0; j<coords.length-1; j+=2){
+					if(isWithinRange(screenX, Gdx.graphics.getHeight() - 1 - screenY, coords[j], coords[j+1])){
+						if(openSpots[j/2]){
+				HexLocations[j/2] = i;
+				numberImages.get(i).setPosition(coords[j], coords[j+1]);
+				numberImages.get(i).setVisible(true);
+				openSpots[j/2] = false;
+				multiplexer.addProcessor(stage);
+				break outer;
+			}
+						else{
+							for(int k = 0; k<HexLocations.length; k++){
+								if(HexLocations[k] == i){
+									swap(HexLocations[j/2], i);
+									int temp = HexLocations[k];
+									HexLocations[k] = HexLocations[j/2];
+									HexLocations[j/2] = temp;
+									numberImages.get(i).setVisible(true);
+									multiplexer.addProcessor(stage);
+									break outer;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	if(isMainIslandFull()){
+		finalizeNumbers.setVisible(true);
+		field.setVisible(false);
+		field2.setVisible(false);
+	}
+		return false;
+	}
+	
+	private void swap(int m, int n) {
+		float x1 = numberImages.get(m).getX();
+		float y1 = numberImages.get(m).getY();
+		float x2 = numberImages.get(n).getX();
+		float y2 = numberImages.get(n).getY();
+		numberImages.get(m).setPosition(x2, y2);
+		numberImages.get(n).setPosition(x1, y1);
+	}
+
+	private boolean isWithinRange(int screenX, int screenY, int hexX, int hexY) {
+		if(((screenX - hexX <= 30 && screenX >= hexX) || (hexX - screenX <= 6 && hexX >= screenX)) 
+				&& ((screenY - hexY <= 30 && screenY >= hexY)
+				|| (hexY - screenY <= 7 && hexY >= screenY))){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean touchDragged(int screenX, int screenY, int pointer) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean mouseMoved(int screenX, int screenY) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean scrolled(int amount) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
