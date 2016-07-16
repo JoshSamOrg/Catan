@@ -223,7 +223,7 @@ public class HexGenerator implements Screen, InputProcessor {
 
 		TextFieldStyle tfstyle = new TextFieldStyle();
 		tfstyle.font = font2;
-		tfstyle.fontColor = Color.BLUE;
+		tfstyle.fontColor = Color.WHITE;
 		skin.add("tfstyle", tfstyle);
 		field = new TextField(
 				"Click on a number, then move your mouse to the hexagon you",
