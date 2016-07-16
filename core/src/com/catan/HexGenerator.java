@@ -30,7 +30,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 public class HexGenerator implements Screen, InputProcessor {
 
 	private PlayerOrder orders;
-	private NumberGenerator generator;
 	private LoadingScreen load;
 	private ArrayList<TextureRegion> board, board2;
 	private TextureRegion wood, ore, sheep, wheat, brick;
@@ -133,7 +132,6 @@ public class HexGenerator implements Screen, InputProcessor {
 
 	public void show() {
 		board2 = new ArrayList<TextureRegion>();
-		generator = new NumberGenerator();
 		load = new LoadingScreen(game);
 
 		orders = new PlayerOrder();
@@ -496,7 +494,7 @@ public class HexGenerator implements Screen, InputProcessor {
 			set15 = board2.size() - 1;
 			
 			if (find2) {
-				set16 = rand.nextInt(board2.size());
+				set16 = rand.nextInt(board2.size()-1);
 				find2 = false;
 			}
 			batch.begin();
@@ -551,7 +549,7 @@ public class HexGenerator implements Screen, InputProcessor {
 			set20 = board2.size() - 6;
 			
 			if (findg) {
-				setg = rand.nextInt(board2.size() - 5);
+				setg = rand.nextInt(board2.size() - 6);
 				findg = false;
 			}
 			batch.begin();
@@ -559,10 +557,10 @@ public class HexGenerator implements Screen, InputProcessor {
 			batch.end();
 			board2.add(9, board2.get(setg));
 			board2.remove(setg);
-			setg = board2.size() - 6;
+			setg = board2.size() - 7;
 
 			if (find7) {
-				set21 = rand.nextInt(board2.size() - 6);
+				set21 = rand.nextInt(board2.size() - 7);
 				find7 = false;
 			}
 			batch.begin();
@@ -570,10 +568,10 @@ public class HexGenerator implements Screen, InputProcessor {
 			batch.end();
 			board2.add(8, board2.get(set21));
 			board2.remove(set21);
-			set21 = board2.size() - 7;
+			set21 = board2.size() - 8;
 
 			if (find8) {
-				set22 = rand.nextInt(board2.size() - 7);
+				set22 = rand.nextInt(board2.size() - 8);
 				find8 = false;
 			}
 			batch.begin();
@@ -581,10 +579,10 @@ public class HexGenerator implements Screen, InputProcessor {
 			batch.end();
 			board2.add(7, board2.get(set22));
 			board2.remove(set22);
-			set22 = board2.size() - 8;
+			set22 = board2.size() - 9;
 
 			if (find9) {
-				set23 = rand.nextInt(board2.size() - 8);
+				set23 = rand.nextInt(board2.size() - 9);
 				find9 = false;
 			}
 			batch.begin();
@@ -592,10 +590,10 @@ public class HexGenerator implements Screen, InputProcessor {
 			batch.end();
 			board2.add(6, board2.get(set23));
 			board2.remove(set23);
-			set23 = board2.size() - 9;
+			set23 = board2.size() - 10;
 
 			if (find10) {
-				set24 = rand.nextInt(board2.size() - 9);
+				set24 = rand.nextInt(board2.size() - 10);
 				find10 = false;
 			}
 			batch.begin();
@@ -603,10 +601,10 @@ public class HexGenerator implements Screen, InputProcessor {
 			batch.end();
 			board2.add(5, board2.get(set24));
 			board2.remove(set24);
-			set24 = board2.size() - 10;
+			set24 = board2.size() - 11;
 
 			if (find11) {
-				set25 = rand.nextInt(board2.size() - 10);
+				set25 = rand.nextInt(board2.size() - 11);
 				find11 = false;
 			}
 			batch.begin();
@@ -614,10 +612,10 @@ public class HexGenerator implements Screen, InputProcessor {
 			batch.end();
 			board2.add(4, board2.get(set25));
 			board2.remove(set25);
-			set25 = board2.size() - 11;
+			set25 = board2.size() - 12;
 
 			if (find12) {
-				set26 = rand.nextInt(board2.size() - 11);
+				set26 = rand.nextInt(board2.size() - 12);
 				find12 = false;
 			}
 			batch.begin();
@@ -625,10 +623,10 @@ public class HexGenerator implements Screen, InputProcessor {
 			batch.end();
 			board2.add(3, board2.get(set26));
 			board2.remove(set26);
-			set26 = board2.size() - 12;
+			set26 = board2.size() - 13;
 
 			if (find13) {
-				set27 = rand.nextInt(board2.size() - 12);
+				set27 = rand.nextInt(board2.size() - 13);
 				find13 = false;
 			}
 			batch.begin();
@@ -636,10 +634,10 @@ public class HexGenerator implements Screen, InputProcessor {
 			batch.end();
 			board2.add(2, board2.get(set27));
 			board2.remove(set27);
-			set27 = board2.size() - 13;
+			set27 = board2.size() - 14;
 
 			if (find14) {
-				set28 = rand.nextInt(board2.size() - 13);
+				set28 = rand.nextInt(board2.size() - 14);
 				find14 = false;
 			}
 			batch.begin();
@@ -647,7 +645,7 @@ public class HexGenerator implements Screen, InputProcessor {
 			batch.end();
 			board2.add(1, board2.get(set28));
 			board2.remove(set28);
-			set28 = board2.size() - 14;
+			set28 = board2.size() - 15;
 
 		}
 		stage.act(Gdx.graphics.getDeltaTime());
