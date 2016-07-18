@@ -41,6 +41,7 @@ public class HexGenerator implements Screen, InputProcessor {
 	private CatanGame game;
 	private int set, set2, set3, set4, set5, set6, set7, set8, set9, set10,
 			set11, set12, set13, set14, set15, set16, set17, set18, set19, set20, set21, set22, set23, set24, set25, set26, set27, set28, setg = 0;
+	private int seen, seen2, seen3, seen4, seen5, seen6, seen7, seen8, seen9, seen10, seen11, seen12=0;
 	private boolean counter = false;
 	private boolean bool = true;
 	private boolean bool2 = true;
@@ -72,6 +73,20 @@ public class HexGenerator implements Screen, InputProcessor {
 	private boolean find14 = true;
 	private boolean find15 = true;
 	private boolean findg = true;
+	private boolean regular=true;
+	private boolean regular2=true;
+	private boolean regular3=true;
+	private boolean regular4=true;
+	private boolean regular5=true;
+	private boolean regular6=true;
+	private boolean regular7=true;
+	private boolean regular8=true;
+	private boolean regular9=true;
+	private boolean regular10=true;
+	private boolean regular11=true;
+	private boolean regular12=true;
+	private boolean regular13=true;
+	private boolean regular14=true;
 	private Stage stage;
 	private BitmapFont font, font2;
 	private Skin skin;
@@ -162,7 +177,7 @@ public class HexGenerator implements Screen, InputProcessor {
 			board.add(brick);
 		}
 
-		atlas3 = new TextureAtlas(Gdx.files.internal("mainIslandNumbers.txt"));
+		atlas3 = new TextureAtlas(Gdx.files.internal("mainIslandNumbers2.txt"));
 		multiplexer = new InputMultiplexer();
 		stage = new Stage();
 		multiplexer.addProcessor(stage);
@@ -302,6 +317,7 @@ public class HexGenerator implements Screen, InputProcessor {
 		batch.begin();
 		batch.draw(startingBoard, 0, 0, 650, 650);
 		batch.end();
+		if(load.getRandom()) {
 		if (bool) {
 			set = rand.nextInt(board.size());
 			bool = false;
@@ -455,6 +471,7 @@ public class HexGenerator implements Screen, InputProcessor {
 		board.add(1, board.get(set14));
 		board.remove(set14);
 		set14 = board.size() - 14;
+		}
 
 		if (counter) {
 			batch.begin();
@@ -481,7 +498,7 @@ public class HexGenerator implements Screen, InputProcessor {
 				batch.end();
 			}
 		}
-		if (load.getSetter()) {
+		if (load.getSetter() && load.getRandom()) {
 			if (find) {
 				set15 = rand.nextInt(board2.size());
 				find = false;
@@ -646,6 +663,13 @@ public class HexGenerator implements Screen, InputProcessor {
 			board2.add(1, board2.get(set28));
 			board2.remove(set28);
 			set28 = board2.size() - 15;
+			
+			if(load.getRandom()==false && load.getSetter()==false) {
+				System.out.println("here");
+				batch.begin();
+				batch.draw(board.get(0), 119.25f, 389.8f, 42.4f, 47.53f);
+				batch.end();
+			}
 
 		}
 		stage.act(Gdx.graphics.getDeltaTime());

@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class LoadingScreen implements Screen{
+	private static boolean random=true;
 	private static boolean setter=false;
 	private CatanGame game;
     private Stage stage;
@@ -67,14 +68,19 @@ public class LoadingScreen implements Screen{
         
         TextButton generateRandomBandN = new TextButton("Random Board and Random Numbers", skin, "tStyle");
         TextButton generateRandomBandPickN = new TextButton("Random Board, Pick Numbers", skin, "tStyle");
+        TextButton generateRegularBandN = new TextButton("Regular Setup", skin, "tStyle");
         table.add(generateRandomBandN).width(545).height(50).spaceBottom(10);
         table.row();
         table.add(generateRandomBandPickN).width(438).height(50).spaceBottom(10);
+        table.row();
+        table.add(generateRegularBandN).width(545).height(50).spaceBottom(10);
         table.row();
         generateRandomBandPickN.addListener(new ChangeListener(){
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				pickNumbers = true;
+				random = true;
+				setter = false;
 				game.setScreen(new HexGenerator(game));
 			}
         });
@@ -82,14 +88,27 @@ public class LoadingScreen implements Screen{
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				pickNumbers = false;
+				random = true;
 				setter=true;
 				game.setScreen(new HexGenerator(game));
 			}
+        });
+        generateRegularBandN.addListener(new ChangeListener() {
+        	@Override
+        	public void changed(ChangeEvent event, Actor actor) {
+        		random=false;
+        		setter=false;
+        		game.setScreen(new HexGenerator(game));
+        	}
         });
 	}
 	
 	public static boolean getPickNumbers(){
 		return pickNumbers;
+	}
+	
+	public boolean getRandom() {
+		return random;
 	}
 	
 	public boolean getSetter() {
