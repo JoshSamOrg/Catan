@@ -40,7 +40,9 @@ public class HexGenerator implements Screen, InputProcessor {
 	private SpriteBatch batch;
 	private CatanGame game;
 	private int set, set2, set3, set4, set5, set6, set7, set8, set9, set10,
-			set11, set12, set13, set14, set15, set16, set17, set18, set19, set20, set21, set22, set23, set24, set25, set26, set27, set28, setg = 0;
+			set11, set12, set13, set14, set15, set16, set17, set18, set19,
+			set20, set21, set22, set23, set24, set25, set26, set27, set28,
+			setg = 0;
 	private boolean counter = false;
 	private boolean bool = true;
 	private boolean bool2 = true;
@@ -162,7 +164,7 @@ public class HexGenerator implements Screen, InputProcessor {
 			board.add(brick);
 		}
 
-		atlas3 = new TextureAtlas(Gdx.files.internal("mainIslandNumbers.txt"));
+		atlas3 = new TextureAtlas(Gdx.files.internal("mainIslandNumbers2.txt"));
 		multiplexer = new InputMultiplexer();
 		stage = new Stage();
 		multiplexer.addProcessor(stage);
@@ -170,8 +172,8 @@ public class HexGenerator implements Screen, InputProcessor {
 		Gdx.input.setInputProcessor(multiplexer);
 		numbers = new ArrayList<TextureRegion>();
 		numberImages = new ArrayList<ImageButton>();
-		if(LoadingScreen.getPickNumbers()){
-		drawNumbers();
+		if (LoadingScreen.getPickNumbers()) {
+			drawNumbers();
 		}
 		font = new BitmapFont(Gdx.files.internal("gameFonts.fnt"));
 		font2 = new BitmapFont(Gdx.files.internal("gameFonts.fnt"));
@@ -194,8 +196,8 @@ public class HexGenerator implements Screen, InputProcessor {
 		skin.add("tStyle", textButtonStyle);
 		button = new TextButton("Player Order", skin, "tStyle");
 		button.setBounds(50, 50, 200, 50);
-		if(LoadingScreen.getPickNumbers()){
-		button.setVisible(false);
+		if (LoadingScreen.getPickNumbers()) {
+			button.setVisible(false);
 		}
 		stage.addActor(button);
 		button.addListener(new ChangeListener() {
@@ -233,26 +235,26 @@ public class HexGenerator implements Screen, InputProcessor {
 				skin, "tfstyle");
 		field.setBounds(5, 70, 800, 50);
 		field2.setBounds(5, 40, 800, 50);
-		if(LoadingScreen.getPickNumbers()){
-		stage.addActor(field);
-		stage.addActor(field2);
+		if (LoadingScreen.getPickNumbers()) {
+			stage.addActor(field);
+			stage.addActor(field2);
 		}
 
+		board2.add(atlas3.findRegion("3"));
+		board2.add(atlas3.findRegion("4"));
+		board2.add(atlas3.findRegion("5"));
+		board2.add(atlas3.findRegion("6"));
+		board2.add(atlas3.findRegion("8"));
+		board2.add(atlas3.findRegion("9"));
+		board2.add(atlas3.findRegion("10"));
+		board2.add(atlas3.findRegion("11"));
 		board2.add(atlas3.findRegion("12"));
-		board2.add(atlas3.findRegion("green3"));
-		board2.add(atlas3.findRegion("green3"));
-		board2.add(atlas3.findRegion("green6"));
-		board2.add(atlas3.findRegion("green6"));
-		board2.add(atlas3.findRegion("orange4"));
-		board2.add(atlas3.findRegion("orange4"));
-		board2.add(atlas3.findRegion("orange5"));
-		board2.add(atlas3.findRegion("orange8"));
-		board2.add(atlas3.findRegion("orange8"));
-		board2.add(atlas3.findRegion("orange9"));
-		board2.add(atlas3.findRegion("orange10"));
-		board2.add(atlas3.findRegion("orange10"));
-		board2.add(atlas3.findRegion("orange11"));
-		board2.add(atlas3.findRegion("orange11"));
+		board2.add(atlas3.findRegion("3 - Copy"));
+		board2.add(atlas3.findRegion("4 - Copy"));
+		board2.add(atlas3.findRegion("6 - Copy"));
+		board2.add(atlas3.findRegion("8 - Copy"));
+		board2.add(atlas3.findRegion("10 - Copy"));
+		board2.add(atlas3.findRegion("11 - Copy"));
 	}
 
 	public boolean isMainIslandFull() {
@@ -265,21 +267,21 @@ public class HexGenerator implements Screen, InputProcessor {
 	}
 
 	private void drawNumbers() {
+		numbers.add(atlas3.findRegion("3"));
+		numbers.add(atlas3.findRegion("4"));
+		numbers.add(atlas3.findRegion("5"));
+		numbers.add(atlas3.findRegion("6"));
+		numbers.add(atlas3.findRegion("8"));
+		numbers.add(atlas3.findRegion("9"));
+		numbers.add(atlas3.findRegion("10"));
+		numbers.add(atlas3.findRegion("11"));
 		numbers.add(atlas3.findRegion("12"));
-		numbers.add(atlas3.findRegion("green3"));
-		numbers.add(atlas3.findRegion("green3"));
-		numbers.add(atlas3.findRegion("green6"));
-		numbers.add(atlas3.findRegion("green6"));
-		numbers.add(atlas3.findRegion("orange4"));
-		numbers.add(atlas3.findRegion("orange4"));
-		numbers.add(atlas3.findRegion("orange5"));
-		numbers.add(atlas3.findRegion("orange8"));
-		numbers.add(atlas3.findRegion("orange8"));
-		numbers.add(atlas3.findRegion("orange9"));
-		numbers.add(atlas3.findRegion("orange10"));
-		numbers.add(atlas3.findRegion("orange10"));
-		numbers.add(atlas3.findRegion("orange11"));
-		numbers.add(atlas3.findRegion("orange11"));
+		numbers.add(atlas3.findRegion("3 - Copy"));
+		numbers.add(atlas3.findRegion("4 - Copy"));
+		numbers.add(atlas3.findRegion("6 - Copy"));
+		numbers.add(atlas3.findRegion("8 - Copy"));
+		numbers.add(atlas3.findRegion("10 - Copy"));
+		numbers.add(atlas3.findRegion("11 - Copy"));
 		for (int i = 0; i < numbers.size(); i++) {
 			numberImages.add(new ImageButton(new TextureRegionDrawable(numbers
 					.get(i))));
@@ -492,9 +494,9 @@ public class HexGenerator implements Screen, InputProcessor {
 			board2.add(board2.get(set15));
 			board2.remove(set15);
 			set15 = board2.size() - 1;
-			
+
 			if (find2) {
-				set16 = rand.nextInt(board2.size()-1);
+				set16 = rand.nextInt(board2.size() - 1);
 				find2 = false;
 			}
 			batch.begin();
@@ -547,7 +549,7 @@ public class HexGenerator implements Screen, InputProcessor {
 			board2.add(10, board2.get(set20));
 			board2.remove(set20);
 			set20 = board2.size() - 6;
-			
+
 			if (findg) {
 				setg = rand.nextInt(board2.size() - 6);
 				findg = false;
