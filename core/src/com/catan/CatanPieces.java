@@ -3,6 +3,7 @@ package com.catan;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
@@ -20,12 +21,18 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 public class CatanPieces implements Screen, InputProcessor {
     private SpriteBatch batch;
     private Stage stage;
-    private ArrayList<Integer> settlementPositionsMainIsland;
-    private ArrayList<Integer> harborSettlementPositionsMainIsland;
-    private ArrayList<Integer> settlementPositionsGreenIsland;
-    private ArrayList<Integer> harborSettlementPositionsGreenIsland;
-    private ArrayList<Integer> settlementPositionsOrangeIsland;
-    private ArrayList<Integer> harborSettlementPositionsOrangeIsland;
+    private int mouseX = 0;
+    private int mouseY = 0;
+    private ArrayList<Integer> settlementPositionsMainIsland; //adjust for the widget dimensions
+    private ArrayList<Integer> harborSettlementPositionsMainIsland; //adjust for the widget dimensions
+    private ArrayList<Integer> settlementPositionsGreenIsland; //adjust for the widget dimensions
+    private ArrayList<Integer> harborSettlementPositionsGreenIsland; //adjust for the widget dimensions
+    private ArrayList<Integer> settlementPositionsOrangeIsland; //adjust for the widget dimensions
+    private ArrayList<Integer> harborSettlementPositionsOrangeIsland; //adjust for the widget dimensions
+    private ArrayList<Integer> shipPositions; //adjust for the widget dimensions, carries the rotation info in addition
+                                              //to the position
+    private ArrayList<Integer> roadPositions; //adjust for the widget dimensions, carries the rotation info in addition
+                                              //to the position
     private Texture texture;
     private TextureAtlas atlas;
     private InputMultiplexer multiplexer;
@@ -40,6 +47,18 @@ public class CatanPieces implements Screen, InputProcessor {
 	public void show() {
 		batch = new SpriteBatch();
 		stage = new Stage();
+		atlas = new TextureAtlas(Gdx.files.internal("Red.txt"));
+		TextureRegion reg = atlas.findRegion("redShip");
+		settlement = new ImageButton(new TextureRegionDrawable(reg));
+		settlement.setTransform(true);
+		settlement.setBounds(10, 10, 15, 20);
+		stage.addActor(settlement);
+		settlement.addListener(new ChangeListener(){
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				settlement.setVisible(false);
+			}
+		});
 		settlementPositionsMainIsland = new ArrayList<Integer>();
 		findSettlementPositionsMainIsland();
 		harborSettlementPositionsMainIsland = new ArrayList<Integer>();
@@ -52,22 +71,15 @@ public class CatanPieces implements Screen, InputProcessor {
 		findSettlementPositionsOrangeIsland();
 		harborSettlementPositionsOrangeIsland = new ArrayList<Integer>();
 		findHarborSettlementPositionsOrangeIsland();
+		shipPositions = new ArrayList<Integer>();
+		findShipPositions();
+		roadPositions = new ArrayList<Integer>();
+		findRoadPositions();
 		texture = new Texture(Gdx.files.internal("Scenario5Final.png"));
-		atlas = new TextureAtlas(Gdx.files.internal("Red.txt"));
 		multiplexer = new InputMultiplexer();
 		multiplexer.addProcessor(stage);
 		multiplexer.addProcessor(this);
 		Gdx.input.setInputProcessor(multiplexer);
-		TextureRegion reg = atlas.findRegion("redRoad");
-		settlement = new ImageButton(new TextureRegionDrawable(reg));
-		settlement.setBounds(10, 10, 15, 20);
-		stage.addActor(settlement);
-		settlement.addListener(new ChangeListener(){
-			@Override
-			public void changed(ChangeEvent event, Actor actor) {
-				settlement.setVisible(false);
-			}
-		});
 		
 	}
 
@@ -81,7 +93,7 @@ public class CatanPieces implements Screen, InputProcessor {
 		stage.act(Gdx.graphics.getDeltaTime()); //updates all the actors in the stage.
 		//Delta is the time in seconds between the last frame
         stage.draw(); //draws all the actors in the stage
-        //stage.setDebugAll(true); sets debug lines for everything
+        //stage.setDebugAll(true); //sets debug lines for everything
 		
 	}
 
@@ -117,7 +129,24 @@ public class CatanPieces implements Screen, InputProcessor {
 
 	@Override
 	public boolean keyDown(int keycode) {
-		// TODO Auto-generated method stub
+		if(keycode == Keys.A){
+			settlement.setPosition(settlement.getX()-1, settlement.getY());
+			mouseX = mouseX - 1;
+		}
+		if(keycode == Keys.D){
+			settlement.setPosition(settlement.getX()+1, settlement.getY());
+			mouseX = mouseX + 1;
+		}
+		if(keycode == Keys.S){
+			settlement.setPosition(settlement.getX(), settlement.getY()-1);
+			mouseY = mouseY - 1;
+		}
+		if(keycode == Keys.W){
+			settlement.setPosition(settlement.getX(), settlement.getY()+1);
+			mouseY = mouseY + 1;
+		}
+		System.out.println(mouseX);
+		System.out.println(mouseY);
 		return false;
 	}
 
@@ -137,6 +166,8 @@ public class CatanPieces implements Screen, InputProcessor {
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		settlement.setPosition(screenX - (settlement.getWidth()/2), Gdx.graphics.getHeight() - 1 - screenY - (settlement.getHeight()/2));
 		settlement.setVisible(true);
+		mouseX = screenX;
+		mouseY = Gdx.graphics.getHeight()-1 - screenY;
 		System.out.println(screenX);
 		System.out.println(Gdx.graphics.getHeight()-1 - screenY);
 //		Gdx.app.setLogLevel(Application.LOG_DEBUG);
@@ -167,6 +198,504 @@ public class CatanPieces implements Screen, InputProcessor {
 	
 	public ArrayList<Integer> getSettlementPositionsMainIsland(){
 		return settlementPositionsMainIsland;
+	}
+	
+	public ArrayList<Integer> getShipPositions(){
+		return shipPositions;
+	}
+	
+	public ArrayList<Integer> getRoadPositions(){
+		return roadPositions;
+	}
+	
+	public void findRoadPositions(){
+		
+	}
+	
+	public void findShipPositions(){
+		shipPositions.add(134);//1
+		shipPositions.add(432);
+		shipPositions.add(30);
+		shipPositions.add(134);//2
+		shipPositions.add(416);
+		shipPositions.add(90);
+		shipPositions.add(113);//3
+		shipPositions.add(394);
+		shipPositions.add(30);
+		shipPositions.add(112);//4
+		shipPositions.add(379);
+		shipPositions.add(90);
+		shipPositions.add(92);//5
+		shipPositions.add(357);
+		shipPositions.add(30);
+		shipPositions.add(92);//6
+		shipPositions.add(342);
+		shipPositions.add(90);
+		shipPositions.add(70);//7
+		shipPositions.add(320);
+		shipPositions.add(30);
+		shipPositions.add(70);//8
+		shipPositions.add(304);
+		shipPositions.add(90);
+		shipPositions.add(83);//9
+		shipPositions.add(297);
+		shipPositions.add(150);
+		shipPositions.add(91);//10
+		shipPositions.add(267);
+		shipPositions.add(90);
+		shipPositions.add(104);//11
+		shipPositions.add(260);
+		shipPositions.add(150);
+		shipPositions.add(113);//12
+		shipPositions.add(230);
+		shipPositions.add(90);
+		shipPositions.add(126);//13
+		shipPositions.add(223);
+		shipPositions.add(150);
+		shipPositions.add(134);//14
+		shipPositions.add(193);
+		shipPositions.add(90);
+		shipPositions.add(148);//15
+		shipPositions.add(185);
+		shipPositions.add(150);
+		shipPositions.add(155);//16
+		shipPositions.add(172);
+		shipPositions.add(30);
+		shipPositions.add(170);//17
+		shipPositions.add(180);
+		shipPositions.add(-30);
+		shipPositions.add(198);//18
+		shipPositions.add(173);
+		shipPositions.add(30);
+		shipPositions.add(213);//19
+		shipPositions.add(181);
+		shipPositions.add(-30);
+		shipPositions.add(241);//20
+		shipPositions.add(173);
+		shipPositions.add(30);
+		shipPositions.add(255);//21
+		shipPositions.add(181);
+		shipPositions.add(-30);
+		shipPositions.add(284);//22
+		shipPositions.add(173);
+		shipPositions.add(30);
+		shipPositions.add(298);//23
+		shipPositions.add(181);
+		shipPositions.add(-30);
+		shipPositions.add(326);//24
+		shipPositions.add(174);
+		shipPositions.add(30);
+		shipPositions.add(340);//25
+		shipPositions.add(182);
+		shipPositions.add(-30);
+		shipPositions.add(369);//26
+		shipPositions.add(174);
+		shipPositions.add(30);
+		shipPositions.add(383);//27
+		shipPositions.add(182);
+		shipPositions.add(-30);
+		shipPositions.add(412);//28
+		shipPositions.add(174);
+		shipPositions.add(30);
+		shipPositions.add(426);//29
+		shipPositions.add(182);
+		shipPositions.add(-30);
+		shipPositions.add(455);//30
+		shipPositions.add(174);
+		shipPositions.add(30);
+		shipPositions.add(469);//31
+		shipPositions.add(181);
+		shipPositions.add(-30);
+		shipPositions.add(498);//32
+		shipPositions.add(174);
+		shipPositions.add(30);
+		shipPositions.add(519);//33
+		shipPositions.add(194);
+		shipPositions.add(90);
+		shipPositions.add(519);//34
+		shipPositions.add(211);
+		shipPositions.add(30);
+		shipPositions.add(540);//35
+		shipPositions.add(231);
+		shipPositions.add(90);
+		shipPositions.add(541);//36
+		shipPositions.add(248);
+		shipPositions.add(30);
+		shipPositions.add(561);//37
+		shipPositions.add(268);
+		shipPositions.add(90);
+		shipPositions.add(562);//38
+		shipPositions.add(285);
+		shipPositions.add(30);
+		shipPositions.add(582);//39
+		shipPositions.add(305);
+		shipPositions.add(90);
+		shipPositions.add(554);//40
+		shipPositions.add(329);
+		shipPositions.add(-30);
+		shipPositions.add(547);//41
+		shipPositions.add(358);
+		shipPositions.add(-30);
+		shipPositions.add(533);//42
+		shipPositions.add(366);
+		shipPositions.add(-30);
+		shipPositions.add(526);//43
+		shipPositions.add(395);
+		shipPositions.add(-90);
+		shipPositions.add(511);//44
+		shipPositions.add(403);
+		shipPositions.add(-30);
+		shipPositions.add(504);//45
+		shipPositions.add(432);
+		shipPositions.add(-90);
+		shipPositions.add(489);//46
+		shipPositions.add(440);
+		shipPositions.add(-30);
+		shipPositions.add(476);//47
+		shipPositions.add(432);
+		shipPositions.add(30);
+		shipPositions.add(447);//48
+		shipPositions.add(440);
+		shipPositions.add(-30);
+		shipPositions.add(433);//49
+		shipPositions.add(433);
+		shipPositions.add(30);
+		shipPositions.add(403);//50
+		shipPositions.add(440);
+		shipPositions.add(-30);
+		shipPositions.add(391);//51
+		shipPositions.add(432);
+		shipPositions.add(30);
+		shipPositions.add(360);//52
+		shipPositions.add(440);
+		shipPositions.add(-30);
+		shipPositions.add(348);//53
+		shipPositions.add(432);
+		shipPositions.add(30);
+		shipPositions.add(318);//54
+		shipPositions.add(440);
+		shipPositions.add(-30);
+		shipPositions.add(305);//55
+		shipPositions.add(432);
+		shipPositions.add(30);
+		shipPositions.add(276);//56
+		shipPositions.add(439);
+		shipPositions.add(-30);
+		shipPositions.add(263);//57
+		shipPositions.add(431);
+		shipPositions.add(30);
+		shipPositions.add(233);//58
+		shipPositions.add(439);
+		shipPositions.add(-30);
+		shipPositions.add(221);//59
+		shipPositions.add(432);
+		shipPositions.add(30);
+		shipPositions.add(191);//60
+		shipPositions.add(440);
+		shipPositions.add(-30);
+		shipPositions.add(177);//61
+		shipPositions.add(433);
+		shipPositions.add(30);
+		shipPositions.add(148);//62
+		shipPositions.add(440);
+		shipPositions.add(-30);
+		shipPositions.add(205);//63
+		shipPositions.add(431);
+		shipPositions.add(-90);
+		shipPositions.add(204);//64
+		shipPositions.add(414);
+		shipPositions.add(-150);
+		shipPositions.add(185);//65
+		shipPositions.add(394);
+		shipPositions.add(-90);
+		shipPositions.add(184);//66
+		shipPositions.add(377);
+		shipPositions.add(-150);
+		shipPositions.add(164);//67
+		shipPositions.add(357);
+		shipPositions.add(-90);
+		shipPositions.add(171);//68
+		shipPositions.add(330);
+		shipPositions.add(-30);
+		shipPositions.add(185);//69
+		shipPositions.add(320);
+		shipPositions.add(-90);
+		shipPositions.add(184);//70
+		shipPositions.add(303);
+		shipPositions.add(-150);
+		shipPositions.add(164);//71
+		shipPositions.add(284);
+		shipPositions.add(-90);
+		shipPositions.add(171);//72
+		shipPositions.add(257);
+		shipPositions.add(-30);
+		shipPositions.add(186);//73
+		shipPositions.add(246);
+		shipPositions.add(-90);
+		shipPositions.add(192);//74
+		shipPositions.add(219);
+		shipPositions.add(-30);
+		shipPositions.add(206);//75
+		shipPositions.add(209);
+		shipPositions.add(-90);
+		shipPositions.add(249);//76
+		shipPositions.add(430);
+		shipPositions.add(-90);
+		shipPositions.add(228);//77
+		shipPositions.add(394);
+		shipPositions.add(-90);
+		shipPositions.add(207);//78
+		shipPositions.add(357);
+		shipPositions.add(-90);
+		shipPositions.add(228);//79
+		shipPositions.add(320);
+		shipPositions.add(-90);
+		shipPositions.add(206);//80
+		shipPositions.add(283);
+		shipPositions.add(-90);
+		shipPositions.add(228);//81
+		shipPositions.add(247);
+		shipPositions.add(-90);
+		shipPositions.add(249);//82
+		shipPositions.add(209);
+		shipPositions.add(-90);
+		shipPositions.add(213);//83
+		shipPositions.add(403);
+		shipPositions.add(-30);
+		shipPositions.add(192);//84
+		shipPositions.add(366);
+		shipPositions.add(-30);
+		shipPositions.add(256);//85
+		shipPositions.add(403);
+		shipPositions.add(-30);
+		shipPositions.add(235);//86
+		shipPositions.add(366);
+		shipPositions.add(-30);
+		shipPositions.add(213);//87
+		shipPositions.add(330);
+		shipPositions.add(-30);
+		shipPositions.add(192);//88
+		shipPositions.add(293);
+		shipPositions.add(-30);
+		shipPositions.add(234);//89
+		shipPositions.add(293);
+		shipPositions.add(-30);
+		shipPositions.add(213);//90
+		shipPositions.add(256);
+		shipPositions.add(-30);
+		shipPositions.add(233);//91
+		shipPositions.add(219);
+		shipPositions.add(-30);
+		shipPositions.add(241);//92
+		shipPositions.add(395);
+		shipPositions.add(30);
+		shipPositions.add(221);//93
+		shipPositions.add(358);
+		shipPositions.add(30);
+		shipPositions.add(242);//94
+		shipPositions.add(321);
+		shipPositions.add(30);
+		shipPositions.add(220);//95
+		shipPositions.add(285);
+		shipPositions.add(30);
+		shipPositions.add(242);//96
+		shipPositions.add(248);
+		shipPositions.add(30);
+		shipPositions.add(263);//97
+		shipPositions.add(211);
+		shipPositions.add(30);
+		shipPositions.add(220);//98
+		shipPositions.add(211);
+		shipPositions.add(30);
+		shipPositions.add(199);//99
+		shipPositions.add(248);
+		shipPositions.add(30);
+		shipPositions.add(285);//100
+		shipPositions.add(395);
+		shipPositions.add(30);
+		shipPositions.add(264);//101
+		shipPositions.add(358);
+		shipPositions.add(30);
+		shipPositions.add(263);//102
+		shipPositions.add(285);
+		shipPositions.add(30);
+		shipPositions.add(304);//103
+		shipPositions.add(416);
+		shipPositions.add(90);
+		shipPositions.add(283);//104
+		shipPositions.add(378);
+		shipPositions.add(90);
+		shipPositions.add(262);//105
+		shipPositions.add(342);
+		shipPositions.add(90);
+		shipPositions.add(282);//106
+		shipPositions.add(306);
+		shipPositions.add(90);
+		shipPositions.add(262);//107
+		shipPositions.add(268);
+		shipPositions.add(90);
+		shipPositions.add(283);//108
+		shipPositions.add(231);
+		shipPositions.add(90);
+		shipPositions.add(304);//109
+		shipPositions.add(194);
+		shipPositions.add(90);
+		shipPositions.add(199);//110
+		shipPositions.add(322);
+		shipPositions.add(30);
+		shipPositions.add(255);//111
+		shipPositions.add(330);
+		shipPositions.add(-30);
+		shipPositions.add(255);//112
+		shipPositions.add(256);
+		shipPositions.add(-30);
+		shipPositions.add(276);//113
+		shipPositions.add(219);
+		shipPositions.add(-30);
+		shipPositions.add(326);//114
+		shipPositions.add(305);
+		shipPositions.add(90);
+		shipPositions.add(369);//115
+		shipPositions.add(305);
+		shipPositions.add(90);
+		shipPositions.add(411);//116
+		shipPositions.add(305);
+		shipPositions.add(90);
+		shipPositions.add(454);//117
+		shipPositions.add(305);
+		shipPositions.add(90);
+		shipPositions.add(497);//118
+		shipPositions.add(306);
+		shipPositions.add(90);
+		shipPositions.add(540);//119
+		shipPositions.add(305);
+		shipPositions.add(90);
+		shipPositions.add(285);//120
+		shipPositions.add(322);
+		shipPositions.add(30);
+		shipPositions.add(305);//121
+		shipPositions.add(285);
+		shipPositions.add(30);
+		shipPositions.add(327);//122
+		shipPositions.add(322);
+		shipPositions.add(30);
+		shipPositions.add(348);//123
+		shipPositions.add(285);
+		shipPositions.add(30);
+		shipPositions.add(369);//124
+		shipPositions.add(248);
+		shipPositions.add(30);
+		shipPositions.add(370);//125
+		shipPositions.add(323);
+		shipPositions.add(30);
+		shipPositions.add(391);//126
+		shipPositions.add(30);
+		shipPositions.add(413);//127
+		shipPositions.add(322);
+		shipPositions.add(30);
+		shipPositions.add(434);//128
+		shipPositions.add(286);
+		shipPositions.add(30);
+		shipPositions.add(455);//129
+		shipPositions.add(248);
+		shipPositions.add(30);
+		shipPositions.add(455);//130
+		shipPositions.add(322);
+		shipPositions.add(30);
+		shipPositions.add(476);//131
+		shipPositions.add(286);
+		shipPositions.add(30);
+		shipPositions.add(498);//132
+		shipPositions.add(322);
+		shipPositions.add(30);
+		shipPositions.add(519);//133
+		shipPositions.add(285);
+		shipPositions.add(30);
+		shipPositions.add(348);//134
+		shipPositions.add(359);
+		shipPositions.add(30);
+		shipPositions.add(433);//135
+		shipPositions.add(358);
+		shipPositions.add(30);
+		shipPositions.add(348);//136
+		shipPositions.add(342);
+		shipPositions.add(90);
+		shipPositions.add(347);//137
+		shipPositions.add(269);
+		shipPositions.add(90);
+		shipPositions.add(390);//138
+		shipPositions.add(342);
+		shipPositions.add(90);
+		shipPositions.add(390);//139
+		shipPositions.add(268);
+		shipPositions.add(90);
+		shipPositions.add(433);//140
+		shipPositions.add(342);
+		shipPositions.add(90);
+		shipPositions.add(476);//141
+		shipPositions.add(342);
+		shipPositions.add(90);
+		shipPositions.add(433);//142
+		shipPositions.add(268);
+		shipPositions.add(90);
+		shipPositions.add(475);//143
+		shipPositions.add(268);
+		shipPositions.add(90);
+		shipPositions.add(298);//144
+		shipPositions.add(330);
+		shipPositions.add(-30);
+		shipPositions.add(276);//145
+		shipPositions.add(293);
+		shipPositions.add(-30);
+		shipPositions.add(340);//146
+		shipPositions.add(330);
+		shipPositions.add(-30);
+		shipPositions.add(319);//147
+		shipPositions.add(293);
+		shipPositions.add(-30);
+		shipPositions.add(383);//148
+		shipPositions.add(330);
+		shipPositions.add(-30);
+		shipPositions.add(361);//149
+		shipPositions.add(293);
+		shipPositions.add(-30);
+		shipPositions.add(340);//150
+		shipPositions.add(256);
+		shipPositions.add(-30);
+		shipPositions.add(362);//151
+		shipPositions.add(367);
+		shipPositions.add(-30);
+		shipPositions.add(447);//152
+		shipPositions.add(366);
+		shipPositions.add(-30);
+		shipPositions.add(426);//153
+		shipPositions.add(330);
+		shipPositions.add(-30);
+		shipPositions.add(404);//154
+		shipPositions.add(293);
+		shipPositions.add(-30);
+		shipPositions.add(468);//155
+		shipPositions.add(330);
+		shipPositions.add(-30);
+		shipPositions.add(447);//156
+		shipPositions.add(293);
+		shipPositions.add(-30);
+		shipPositions.add(426);//157
+		shipPositions.add(256);
+		shipPositions.add(-30);
+		shipPositions.add(512);//158
+		shipPositions.add(330);
+		shipPositions.add(-30);
+		shipPositions.add(490);//159
+		shipPositions.add(292);
+		shipPositions.add(-30);
+		shipPositions.add(533);//160
+		shipPositions.add(292);
+		shipPositions.add(-30);
+		settlement.setRotation(30);
+		shipPositions.add(540);//161
+		shipPositions.add(322);
+		shipPositions.add(30);
 	}
 	
 	public void findSettlementPositionsOrangeIsland(){
