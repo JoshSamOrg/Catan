@@ -41,6 +41,7 @@ public class HexGenerator implements Screen, InputProcessor {
 	private CatanGame game;
 	private int set, set2, set3, set4, set5, set6, set7, set8, set9, set10,
 			set11, set12, set13, set14, set15, set16, set17, set18, set19, set20, set21, set22, set23, set24, set25, set26, set27, set28, setg = 0;
+	private int seen, seen2, seen3, seen4, seen5, seen6, seen7, seen8, seen9, seen10, seen11, seen12=0;
 	private boolean counter = false;
 	private boolean bool = true;
 	private boolean bool2 = true;
@@ -72,6 +73,20 @@ public class HexGenerator implements Screen, InputProcessor {
 	private boolean find14 = true;
 	private boolean find15 = true;
 	private boolean findg = true;
+	private boolean regular=true;
+	private boolean regular2=true;
+	private boolean regular3=true;
+	private boolean regular4=true;
+	private boolean regular5=true;
+	private boolean regular6=true;
+	private boolean regular7=true;
+	private boolean regular8=true;
+	private boolean regular9=true;
+	private boolean regular10=true;
+	private boolean regular11=true;
+	private boolean regular12=true;
+	private boolean regular13=true;
+	private boolean regular14=true;
 	private Stage stage;
 	private BitmapFont font, font2;
 	private Skin skin;
@@ -162,7 +177,7 @@ public class HexGenerator implements Screen, InputProcessor {
 			board.add(brick);
 		}
 
-		atlas3 = new TextureAtlas(Gdx.files.internal("mainIslandNumbers.txt"));
+		atlas3 = new TextureAtlas(Gdx.files.internal("mainIslandNumbers2.txt"));
 		multiplexer = new InputMultiplexer();
 		stage = new Stage();
 		multiplexer.addProcessor(stage);
@@ -238,21 +253,21 @@ public class HexGenerator implements Screen, InputProcessor {
 		stage.addActor(field2);
 		}
 
+		board2.add(atlas3.findRegion("3"));
+		board2.add(atlas3.findRegion("4"));
+		board2.add(atlas3.findRegion("5"));
+		board2.add(atlas3.findRegion("5"));
+		board2.add(atlas3.findRegion("8"));
+		board2.add(atlas3.findRegion("9"));
+		board2.add(atlas3.findRegion("10"));
+		board2.add(atlas3.findRegion("11"));
 		board2.add(atlas3.findRegion("12"));
-		board2.add(atlas3.findRegion("green3"));
-		board2.add(atlas3.findRegion("green3"));
-		board2.add(atlas3.findRegion("green6"));
-		board2.add(atlas3.findRegion("green6"));
-		board2.add(atlas3.findRegion("orange4"));
-		board2.add(atlas3.findRegion("orange4"));
-		board2.add(atlas3.findRegion("orange5"));
-		board2.add(atlas3.findRegion("orange8"));
-		board2.add(atlas3.findRegion("orange8"));
-		board2.add(atlas3.findRegion("orange9"));
-		board2.add(atlas3.findRegion("orange10"));
-		board2.add(atlas3.findRegion("orange10"));
-		board2.add(atlas3.findRegion("orange11"));
-		board2.add(atlas3.findRegion("orange11"));
+		board2.add(atlas3.findRegion("3 - Copy"));
+		board2.add(atlas3.findRegion("4 - Copy"));
+		board2.add(atlas3.findRegion("6 - Copy"));
+		board2.add(atlas3.findRegion("8 - Copy"));
+		board2.add(atlas3.findRegion("10 - Copy"));
+		board2.add(atlas3.findRegion("11 - Copy"));
 	}
 
 	public boolean isMainIslandFull() {
@@ -265,21 +280,21 @@ public class HexGenerator implements Screen, InputProcessor {
 	}
 
 	private void drawNumbers() {
+		numbers.add(atlas3.findRegion("3"));
+		numbers.add(atlas3.findRegion("4"));
+		numbers.add(atlas3.findRegion("5"));
+		numbers.add(atlas3.findRegion("5"));
+		numbers.add(atlas3.findRegion("8"));
+		numbers.add(atlas3.findRegion("9"));
+		numbers.add(atlas3.findRegion("10"));
+		numbers.add(atlas3.findRegion("11"));
 		numbers.add(atlas3.findRegion("12"));
-		numbers.add(atlas3.findRegion("green3"));
-		numbers.add(atlas3.findRegion("green3"));
-		numbers.add(atlas3.findRegion("green6"));
-		numbers.add(atlas3.findRegion("green6"));
-		numbers.add(atlas3.findRegion("orange4"));
-		numbers.add(atlas3.findRegion("orange4"));
-		numbers.add(atlas3.findRegion("orange5"));
-		numbers.add(atlas3.findRegion("orange8"));
-		numbers.add(atlas3.findRegion("orange8"));
-		numbers.add(atlas3.findRegion("orange9"));
-		numbers.add(atlas3.findRegion("orange10"));
-		numbers.add(atlas3.findRegion("orange10"));
-		numbers.add(atlas3.findRegion("orange11"));
-		numbers.add(atlas3.findRegion("orange11"));
+		numbers.add(atlas3.findRegion("3 - Copy"));
+		numbers.add(atlas3.findRegion("4 - Copy"));
+		numbers.add(atlas3.findRegion("6 - Copy"));
+		numbers.add(atlas3.findRegion("8 - Copy"));
+		numbers.add(atlas3.findRegion("10 - Copy"));
+		numbers.add(atlas3.findRegion("11 - Copy"));
 		for (int i = 0; i < numbers.size(); i++) {
 			numberImages.add(new ImageButton(new TextureRegionDrawable(numbers
 					.get(i))));
@@ -646,8 +661,9 @@ public class HexGenerator implements Screen, InputProcessor {
 			board2.add(1, board2.get(set28));
 			board2.remove(set28);
 			set28 = board2.size() - 15;
-
 		}
+
+
 		stage.act(Gdx.graphics.getDeltaTime());
 		stage.draw();
 	}
