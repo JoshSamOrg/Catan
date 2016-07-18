@@ -40,9 +40,8 @@ public class HexGenerator implements Screen, InputProcessor {
 	private SpriteBatch batch;
 	private CatanGame game;
 	private int set, set2, set3, set4, set5, set6, set7, set8, set9, set10,
-			set11, set12, set13, set14, set15, set16, set17, set18, set19,
-			set20, set21, set22, set23, set24, set25, set26, set27, set28,
-			setg = 0;
+			set11, set12, set13, set14, set15, set16, set17, set18, set19, set20, set21, set22, set23, set24, set25, set26, set27, set28, setg = 0;
+	private int seen, seen2, seen3, seen4, seen5, seen6, seen7, seen8, seen9, seen10, seen11, seen12=0;
 	private boolean counter = false;
 	private boolean bool = true;
 	private boolean bool2 = true;
@@ -74,6 +73,20 @@ public class HexGenerator implements Screen, InputProcessor {
 	private boolean find14 = true;
 	private boolean find15 = true;
 	private boolean findg = true;
+	private boolean regular=true;
+	private boolean regular2=true;
+	private boolean regular3=true;
+	private boolean regular4=true;
+	private boolean regular5=true;
+	private boolean regular6=true;
+	private boolean regular7=true;
+	private boolean regular8=true;
+	private boolean regular9=true;
+	private boolean regular10=true;
+	private boolean regular11=true;
+	private boolean regular12=true;
+	private boolean regular13=true;
+	private boolean regular14=true;
 	private Stage stage;
 	private BitmapFont font, font2;
 	private Skin skin;
@@ -172,8 +185,8 @@ public class HexGenerator implements Screen, InputProcessor {
 		Gdx.input.setInputProcessor(multiplexer);
 		numbers = new ArrayList<TextureRegion>();
 		numberImages = new ArrayList<ImageButton>();
-		if (LoadingScreen.getPickNumbers()) {
-			drawNumbers();
+		if(LoadingScreen.getPickNumbers()){
+		drawNumbers();
 		}
 		font = new BitmapFont(Gdx.files.internal("gameFonts.fnt"));
 		font2 = new BitmapFont(Gdx.files.internal("gameFonts.fnt"));
@@ -196,8 +209,8 @@ public class HexGenerator implements Screen, InputProcessor {
 		skin.add("tStyle", textButtonStyle);
 		button = new TextButton("Player Order", skin, "tStyle");
 		button.setBounds(50, 50, 200, 50);
-		if (LoadingScreen.getPickNumbers()) {
-			button.setVisible(false);
+		if(LoadingScreen.getPickNumbers()){
+		button.setVisible(false);
 		}
 		stage.addActor(button);
 		button.addListener(new ChangeListener() {
@@ -235,15 +248,15 @@ public class HexGenerator implements Screen, InputProcessor {
 				skin, "tfstyle");
 		field.setBounds(5, 70, 800, 50);
 		field2.setBounds(5, 40, 800, 50);
-		if (LoadingScreen.getPickNumbers()) {
-			stage.addActor(field);
-			stage.addActor(field2);
+		if(LoadingScreen.getPickNumbers()){
+		stage.addActor(field);
+		stage.addActor(field2);
 		}
 
 		board2.add(atlas3.findRegion("3"));
 		board2.add(atlas3.findRegion("4"));
 		board2.add(atlas3.findRegion("5"));
-		board2.add(atlas3.findRegion("6"));
+		board2.add(atlas3.findRegion("5"));
 		board2.add(atlas3.findRegion("8"));
 		board2.add(atlas3.findRegion("9"));
 		board2.add(atlas3.findRegion("10"));
@@ -270,7 +283,7 @@ public class HexGenerator implements Screen, InputProcessor {
 		numbers.add(atlas3.findRegion("3"));
 		numbers.add(atlas3.findRegion("4"));
 		numbers.add(atlas3.findRegion("5"));
-		numbers.add(atlas3.findRegion("6"));
+		numbers.add(atlas3.findRegion("5"));
 		numbers.add(atlas3.findRegion("8"));
 		numbers.add(atlas3.findRegion("9"));
 		numbers.add(atlas3.findRegion("10"));
@@ -304,6 +317,7 @@ public class HexGenerator implements Screen, InputProcessor {
 		batch.begin();
 		batch.draw(startingBoard, 0, 0, 650, 650);
 		batch.end();
+		if(load.getRandom()) {
 		if (bool) {
 			set = rand.nextInt(board.size());
 			bool = false;
@@ -457,6 +471,7 @@ public class HexGenerator implements Screen, InputProcessor {
 		board.add(1, board.get(set14));
 		board.remove(set14);
 		set14 = board.size() - 14;
+		}
 
 		if (counter) {
 			batch.begin();
@@ -483,7 +498,7 @@ public class HexGenerator implements Screen, InputProcessor {
 				batch.end();
 			}
 		}
-		if (load.getSetter()) {
+		if (load.getSetter() && load.getRandom()) {
 			if (find) {
 				set15 = rand.nextInt(board2.size());
 				find = false;
@@ -494,9 +509,9 @@ public class HexGenerator implements Screen, InputProcessor {
 			board2.add(board2.get(set15));
 			board2.remove(set15);
 			set15 = board2.size() - 1;
-
+			
 			if (find2) {
-				set16 = rand.nextInt(board2.size() - 1);
+				set16 = rand.nextInt(board2.size()-1);
 				find2 = false;
 			}
 			batch.begin();
@@ -549,7 +564,7 @@ public class HexGenerator implements Screen, InputProcessor {
 			board2.add(10, board2.get(set20));
 			board2.remove(set20);
 			set20 = board2.size() - 6;
-
+			
 			if (findg) {
 				setg = rand.nextInt(board2.size() - 6);
 				findg = false;
@@ -648,6 +663,13 @@ public class HexGenerator implements Screen, InputProcessor {
 			board2.add(1, board2.get(set28));
 			board2.remove(set28);
 			set28 = board2.size() - 15;
+			
+			if(load.getRandom()==false && load.getSetter()==false) {
+				System.out.println("here");
+				batch.begin();
+				batch.draw(board.get(0), 119.25f, 389.8f, 42.4f, 47.53f);
+				batch.end();
+			}
 
 		}
 		stage.act(Gdx.graphics.getDeltaTime());
