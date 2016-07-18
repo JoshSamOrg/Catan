@@ -75,6 +75,7 @@ public class LoadingScreen implements Screen{
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				pickNumbers = true;
+				setter = false;
 				game.setScreen(new HexGenerator(game));
 			}
         });
@@ -91,6 +92,7 @@ public class LoadingScreen implements Screen{
 	public static boolean getPickNumbers(){
 		return pickNumbers;
 	}
+	
 	
 	public boolean getSetter() {
 		return setter;

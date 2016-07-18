@@ -1,0 +1,110 @@
+mainIslandNumbers2.png
+size: 2048, 2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+3 - Copy
+  rotate: false
+  xy: 0, 0
+  size: 388, 389
+  orig: 388, 389
+  offset: 0, 0
+  index: -1
+3
+  rotate: false
+  xy: 388, 0
+  size: 388, 389
+  orig: 388, 389
+  offset: 0, 0
+  index: -1
+4 - Copy
+  rotate: false
+  xy: 776, 0
+  size: 388, 389
+  orig: 388, 389
+  offset: 0, 0
+  index: -1
+4
+  rotate: false
+  xy: 1164, 0
+  size: 388, 389
+  orig: 388, 389
+  offset: 0, 0
+  index: -1
+5
+  rotate: false
+  xy: 1552, 0
+  size: 388, 389
+  orig: 388, 389
+  offset: 0, 0
+  index: -1
+6 - Copy
+  rotate: false
+  xy: 0, 389
+  size: 388, 389
+  orig: 388, 389
+  offset: 0, 0
+  index: -1
+6
+  rotate: false
+  xy: 388, 389
+  size: 388, 389
+  orig: 388, 389
+  offset: 0, 0
+  index: -1
+8 - Copy
+  rotate: false
+  xy: 776, 389
+  size: 388, 389
+  orig: 388, 389
+  offset: 0, 0
+  index: -1
+8
+  rotate: false
+  xy: 1164, 389
+  size: 388, 389
+  orig: 388, 389
+  offset: 0, 0
+  index: -1
+9
+  rotate: false
+  xy: 1552, 389
+  size: 388, 389
+  orig: 388, 389
+  offset: 0, 0
+  index: -1
+10 - Copy
+  rotate: false
+  xy: 0, 778
+  size: 388, 389
+  orig: 388, 389
+  offset: 0, 0
+  index: -1
+10
+  rotate: false
+  xy: 388, 778
+  size: 388, 389
+  orig: 388, 389
+  offset: 0, 0
+  index: -1
+11 - Copy
+  rotate: false
+  xy: 776, 778
+  size: 388, 389
+  orig: 388, 389
+  offset: 0, 0
+  index: -1
+11
+  rotate: false
+  xy: 1164, 778
+  size: 388, 389
+  orig: 388, 389
+  offset: 0, 0
+  index: -1
+12
+  rotate: false
+  xy: 1552, 778
+  size: 385, 386
+  orig: 385, 386
+  offset: 0, 0
+  index: -1
