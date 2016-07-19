@@ -2,178 +2,46 @@ package com.catan;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
-public class CatanPieces implements Screen, InputProcessor {
-    private SpriteBatch batch;
-    private Stage stage;
-    private int mouseX = 0;
-    private int mouseY = 0;
-    private int mpX = 0;
-    private int mpY = 0;
-    private int firstX = -1;
-    private int firstY = -1;
-    private int secondX = -1;
-    private int secondY = -1;
-    private ArrayList<Integer> positions; //adjust for the widget dimensions
-    private Texture texture;
-    private TextureAtlas atlas;
-    private InputMultiplexer multiplexer;
-	private CatanGame game;
-	private ImageButton settlement;
-	private ArrayList<ImageButton> settlements;
-	private ArrayList<ImageButton> roads;
+public class CatanPieces{
+    private static float mpX = 0;
+    private static float mpY = 0;
+    private static int firstX = -1;
+    private static int firstY = -1;
+    private static int secondX = -1;
+    private static int secondY = -1;
+    private static int roadRotation = 0;
+    private static int settlementIndexX = 0;
+    private static int settlementIndexY = 0;
+    private static TextureRegion reg;
+    private static ArrayList<Integer> positions; //adjust for the widget dimensions
+	private static String pieceType = "";
+	private static ArrayList<ImageButton> gamePieces;
 	
-	public CatanPieces(CatanGame game){
-		this.game = game;
+	public static void midpoint(int f, int g, int h, int i){
+		mpX = (f+h)/2f;
+		mpY = (g+i)/2f;
 	}
 	
-	@Override
-	public void show() {
-		batch = new SpriteBatch();
-		stage = new Stage();
-		atlas = new TextureAtlas(Gdx.files.internal("Red.txt"));
-		TextureRegion reg = atlas.findRegion("redRoad");
-		settlement = new ImageButton(new TextureRegionDrawable(reg));
-		settlement.setBounds(10, 10, 10, 10);
-		stage.addActor(settlement);
-		settlement.addListener(new ChangeListener(){
-			@Override
-			public void changed(ChangeEvent event, Actor actor) {
-				settlement.setVisible(false);
-			}
-		});
-		positions = new ArrayList<Integer>();
-		findPositions();
-		texture = new Texture(Gdx.files.internal("Scenario5Final.png"));
-		multiplexer = new InputMultiplexer();
-		multiplexer.addProcessor(stage);
-		multiplexer.addProcessor(this);
-		Gdx.input.setInputProcessor(multiplexer);
-		settlements = new ArrayList<ImageButton>();
-		roads = new ArrayList<ImageButton>();
-		roads.add(new ImageButton(new TextureRegionDrawable(reg)));
-		findSettlements(282, 326);
-		midpoint(positions.get(firstX), positions.get(firstY), positions.get(secondX), positions.get(secondY));
-		roads.get(0).setBounds(mpX-5, mpY-5, 10, 10);
-		stage.addActor(roads.get(0));
+	public static int distance(int f, int g, int h, int i, int sizex, int sizey){
+		if(f-h > 0 && g - i > 0){
+		return (int) Math.sqrt((Math.pow((f-h-sizex), 2)) + (Math.pow((g-i - sizey), 2)));
 	}
-
-	@Override
-	public void render(float delta) {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(texture, 0, 0, 650, 650);
-		batch.end();
-		stage.act(Gdx.graphics.getDeltaTime()); //updates all the actors in the stage.
-		//Delta is the time in seconds between the last frame
-        stage.draw(); //draws all the actors in the stage
-        //stage.setDebugAll(true); //sets debug lines for everything
-		
-	}
-
-	@Override
-	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void hide() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void dispose() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean keyDown(int keycode) {
-		if(keycode == Keys.A){
-			settlement.setPosition(settlement.getX()-1, settlement.getY());
-			mouseX = mouseX - 1;
+		else if(f-h > 0 && g - i < 0){
+			return (int) Math.sqrt((Math.pow((f-h-sizex), 2)) + (Math.pow((g-i + sizey), 2)));
 		}
-		if(keycode == Keys.D){
-			settlement.setPosition(settlement.getX()+1, settlement.getY());
-			mouseX = mouseX + 1;
+		else if(f-h < 0 && g - i > 0){
+			return (int) Math.sqrt((Math.pow((f-h+sizex), 2)) + (Math.pow((g-i - sizey), 2)));
 		}
-		if(keycode == Keys.S){
-			settlement.setPosition(settlement.getX(), settlement.getY()-1);
-			mouseY = mouseY - 1;
+		else{
+			return (int) Math.sqrt((Math.pow((f-h+sizex), 2)) + (Math.pow((g-i +sizey), 2)));
 		}
-		if(keycode == Keys.W){
-			settlement.setPosition(settlement.getX(), settlement.getY()+1);
-			mouseY = mouseY + 1;
-		}
-		System.out.println(mouseX);
-		System.out.println(mouseY);
-		return false;
-	}
-
-	@Override
-	public boolean keyUp(int keycode) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean keyTyped(char character) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		settlement.setPosition(screenX - (settlement.getWidth()/2), Gdx.graphics.getHeight() - 1 - screenY - (settlement.getHeight()/2));
-		settlement.setVisible(true);
-		mouseX = screenX;
-		mouseY = Gdx.graphics.getHeight()-1 - screenY;
-		System.out.println(screenX);
-		System.out.println(Gdx.graphics.getHeight()-1 - screenY);
-		findSettlements(screenX, Gdx.graphics.getHeight()-1 - screenY);
-		return false;
 	}
 	
-	public void midpoint(int f, int g, int h, int i){
-		mpX = (f+h)/2;
-		mpY = (g+i)/2;
-	}
-	
-	public int distance(int f, int g, int h, int i, int size){
-		return (int) Math.sqrt((Math.pow((f-h-size), 2)) + (Math.pow((g-i), 2)));
-	}
-	
-	public void findSettlements(int mousex, int mousey){
+	public static void findRoad(int mousex, int mousey){
 		int smallestDistance = 100;
 		int times = 1;
 		int stop = -1;
@@ -181,8 +49,8 @@ public class CatanPieces implements Screen, InputProcessor {
 			smallestDistance = 100;
 		for(int i = 0; i<positions.size()-1; i+=2){
 			if(i != stop){
-			if(distance(mousex, mousey, positions.get(i), positions.get(i+1), 0) < smallestDistance){
-				smallestDistance = distance(mousex, mousey, positions.get(i), positions.get(i+1), 0);
+			if(distance(mousex, mousey, positions.get(i), positions.get(i+1), 0, 0) < smallestDistance){
+				smallestDistance = distance(mousex, mousey, positions.get(i), positions.get(i+1), 0, 0);
 				if(times == 1){
 				firstX = i;
 				firstY = i+1;
@@ -197,13 +65,93 @@ public class CatanPieces implements Screen, InputProcessor {
 		times--;
 		stop = firstX;
 		}
+		findRoadRotation(positions.get(firstX), positions.get(firstY), positions.get(secondX), positions.get(secondY));
 	}
 	
-	public ArrayList<Integer> getPositions(){
+	public static void findRoadRotation(int x, int y, int a, int b) {
+		if(Math.abs(x - a) < 8){
+			roadRotation = 90;
+		}
+		else if((y > b && x < a) || (b > y && a < x)){
+			roadRotation = -30;
+		}
+		else if((y > b && x > a) || (b > y && a < x)){
+			roadRotation = 30;
+		}
+	}
+	
+	public static void findSettlement(int x, int y){
+		int smallestDistance = 100;
+		for(int i = 0; i<positions.size()-1; i+=2){
+			if(distance(x, y, positions.get(i), positions.get(i+1), 0, 0) < smallestDistance){	
+				smallestDistance = distance(x, y, positions.get(i), positions.get(i+1), 0, 0);
+				settlementIndexX = i;
+				settlementIndexY = i+1;
+			}
+		}
+	}
+	
+	public static float getmpX(){
+		return mpX;
+	}
+	
+	public static float getmpY(){
+		return mpY;
+	}
+	
+	public static int getFirstX(){
+		return firstX;
+	}
+	
+	public static int getFirstY(){
+		return firstY;
+	}
+	
+	public static int getSecondX(){
+		return secondX;
+	}
+	
+	public static int getSecondY(){
+		return secondY;
+	}
+
+	public static ArrayList<Integer> getPositions(){
 		return positions;
 	}
 	
-	public void findPositions(){
+	public static int getRoadRotation(){
+		return roadRotation;
+	}
+	
+	public static int getSettlementIndexX(){
+		return settlementIndexX;
+	}
+	
+	public static int getSettlementIndexY(){
+		return settlementIndexY;
+	}
+	
+	public static ArrayList<ImageButton> getGamePieces(){
+		return gamePieces;
+	}
+	
+	public static TextureRegion getTextureRegion(){
+		return reg;
+	}
+	
+	public static void setTextureRegion(TextureAtlas atlas){
+		reg = atlas.findRegion(pieceType);
+	}
+	
+	public static String getPieceType(){
+		return pieceType;
+	}
+	
+	public static void setPieceType(String newPieceType){
+		pieceType = newPieceType;
+	}
+	
+	public static void findPositions(){
 		positions.add(141);//1
 		positions.add(438);
 		positions.add(119);//2
@@ -556,30 +504,5 @@ public class CatanPieces implements Screen, InputProcessor {
 		positions.add(279);
 		positions.add(503);//76
 		positions.add(254);
-		
 	}
-	@Override
-	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean mouseMoved(int screenX, int screenY) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean scrolled(int amount) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }
