@@ -41,7 +41,6 @@ public class HexGenerator implements Screen, InputProcessor {
 	private CatanGame game;
 	private int set, set2, set3, set4, set5, set6, set7, set8, set9, set10,
 			set11, set12, set13, set14, set15, set16, set17, set18, set19, set20, set21, set22, set23, set24, set25, set26, set27, set28, setg = 0;
-	private int seen, seen2, seen3, seen4, seen5, seen6, seen7, seen8, seen9, seen10, seen11, seen12=0;
 	private boolean counter = false;
 	private boolean bool = true;
 	private boolean bool2 = true;
@@ -73,20 +72,6 @@ public class HexGenerator implements Screen, InputProcessor {
 	private boolean find14 = true;
 	private boolean find15 = true;
 	private boolean findg = true;
-	private boolean regular=true;
-	private boolean regular2=true;
-	private boolean regular3=true;
-	private boolean regular4=true;
-	private boolean regular5=true;
-	private boolean regular6=true;
-	private boolean regular7=true;
-	private boolean regular8=true;
-	private boolean regular9=true;
-	private boolean regular10=true;
-	private boolean regular11=true;
-	private boolean regular12=true;
-	private boolean regular13=true;
-	private boolean regular14=true;
 	private Stage stage;
 	private BitmapFont font, font2;
 	private Skin skin;
