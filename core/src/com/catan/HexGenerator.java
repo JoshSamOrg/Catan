@@ -29,7 +29,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class HexGenerator implements Screen, InputProcessor {
 
-	private PlayerOrder orders;
+	private static PlayerOrder orders;
 	private LoadingScreen load;
 	private ArrayList<TextureRegion> board, board2;
 	private TextureRegion wood, ore, sheep, wheat, brick;
@@ -72,12 +72,13 @@ public class HexGenerator implements Screen, InputProcessor {
 	private boolean find14 = true;
 	private boolean find15 = true;
 	private boolean findg = true;
-	private Stage stage;
+	private static Stage stage;
 	private BitmapFont font, font2;
 	private Skin skin;
 	private Pixmap pixmap;
 	private TextButton button;
 
+	private StartingPlacements places;
 	private int numberWidth = 25;
 	private int numberHeight = 25;
 	private int imageStartX = 20;
@@ -121,6 +122,10 @@ public class HexGenerator implements Screen, InputProcessor {
 			15, 15, 15, 15 }; // size = 15
 	private ArrayList<TextureRegion> numbers;
 	private ArrayList<ImageButton> numberImages;
+	private static ArrayList<ImageButton> orange;
+	private static ArrayList<ImageButton> white;
+	private static ArrayList<ImageButton> blue;
+	private static ArrayList<ImageButton> red;
 	private InputMultiplexer multiplexer;
 	private TextButton finalizeNumbers;
 	private TextField field;
@@ -129,8 +134,24 @@ public class HexGenerator implements Screen, InputProcessor {
 	public HexGenerator(CatanGame game) {
 		this.game = game;
 	}
-
+	public ArrayList<ImageButton> getOrange() {
+		return orange;
+	}
+	public ArrayList<ImageButton> getWhite() {
+		return white;
+	}
+	public ArrayList<ImageButton> getBlue() {
+		return blue;
+	}
+	public ArrayList<ImageButton> getRed() {
+		return red;
+	}
 	public void show() {
+		orange=new ArrayList<ImageButton>();
+		white=new ArrayList<ImageButton>();
+		blue=new ArrayList<ImageButton>();
+		red=new ArrayList<ImageButton>();
+		places=new StartingPlacements();
 		board2 = new ArrayList<TextureRegion>();
 		load = new LoadingScreen(game);
 
@@ -146,6 +167,9 @@ public class HexGenerator implements Screen, InputProcessor {
 		ore = atlas.findRegion("oreNoBlack2");
 		sheep = atlas.findRegion("sheepNoBlack2");
 		brick = atlas.findRegion("brickNoBlack2");
+		places.Start();
+		places.startPositions();
+		
 		for (int i = 0; i < 3; i++) {
 			board.add(sheep);
 		}
@@ -253,6 +277,8 @@ public class HexGenerator implements Screen, InputProcessor {
 		board2.add(atlas3.findRegion("8 - Copy"));
 		board2.add(atlas3.findRegion("10 - Copy"));
 		board2.add(atlas3.findRegion("11 - Copy"));
+		
+		
 	}
 
 	public boolean isMainIslandFull() {
@@ -767,7 +793,13 @@ public class HexGenerator implements Screen, InputProcessor {
 		}
 		return false;
 	}
-
+	
+	public Stage getStage() {
+		return stage;
+	}
+	public PlayerOrder getOrders() {
+		return orders;
+	}
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		// TODO Auto-generated method stub
