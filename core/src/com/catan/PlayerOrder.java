@@ -10,41 +10,48 @@ public class PlayerOrder {
 	private Random rand;
 	private int set = 0;
 	private int count=0;
-	ArrayList<Player> games;
-	ArrayList<Player> counter;
-
+	private ArrayList<Player> games;
+	private static ArrayList<Player> orderedPlayers;
+	private ArrayList<Order> positions;
 	public PlayerOrder() {
-		games=GamePlayers.getGamePlayers();
-		counter=new ArrayList<Player>();
+		positions=new ArrayList<Order>();
+		games=new ArrayList<Player>();
+		orderedPlayers=new ArrayList<Player>();
 		count=GamePlayers.getGamePlayers().size();
 		one = new Player();
 		two = new Player();
 		three = new Player();
 		four = new Player();
 		rand = new Random();
+		positions.add(Order.FIRST);
+		positions.add(Order.SECOND);
+		positions.add(Order.THIRD);
+		positions.add(Order.FOURTH);
+		for (int i=0; i<GamePlayers.getGamePlayers().size(); i++) {
+			games.add(GamePlayers.getGamePlayers().get(i));
+		}
 	}
 
 	public void Orders() {
-			counter.add(one);
-			counter.add(two);
-			counter.add(three);
-			counter.add(four);
+			orderedPlayers.add(one);
+			orderedPlayers.add(two);
+			if (count==3) {
+				orderedPlayers.add(three);
+			}
+			if (count==4) {
+			orderedPlayers.add(three);
+			orderedPlayers.add(four);
+			}
 		for (int i=0; i<count; i++) {
 		set=rand.nextInt(count-i);
-		counter.get(i).setOrder(Order.FIRST);
-		counter.get(i).setName(games.get(set).getName());
-		counter.get(i).setColor(games.get(set).getColor());
+		orderedPlayers.get(i).setOrder(positions.get(i));
+		orderedPlayers.get(i).setName(games.get(set).getName());
+		orderedPlayers.get(i).setColor(games.get(set).getColor());
 		games.remove(set);
 	}
 	 	
 	}
-	public ArrayList<Player> getCounter() {
-		return counter;
-	}
-	public ArrayList<Player> getGames() {
-		return games;
-	}
-	public int getCount() {
-		return count;
+	public static ArrayList<Player> getOrderedPlayers() {
+		return orderedPlayers;
 	}
 }
