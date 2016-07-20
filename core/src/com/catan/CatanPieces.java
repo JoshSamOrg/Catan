@@ -1,10 +1,12 @@
 package com.catan;
 
 import java.util.ArrayList;
-
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.catan.Player.Order;
 
 public class CatanPieces{
     private static float mpX = 0;
@@ -16,10 +18,12 @@ public class CatanPieces{
     private static int roadRotation = 0;
     private static int settlementIndexX = 0;
     private static int settlementIndexY = 0;
+    private static int xPos = 0;
+    private static int yPos = 0;
     private static TextureRegion reg;
     private static ArrayList<Integer> positions; //adjust for the widget dimensions
 	private static String pieceType = "";
-	private static ArrayList<ImageButton> gamePieces;
+	private static ArrayList<ImageButton> gamePieces = new ArrayList<ImageButton>();
 	
 	public static void midpoint(int f, int g, int h, int i){
 		mpX = (f+h)/2f;
@@ -149,6 +153,63 @@ public class CatanPieces{
 	
 	public static void setPieceType(String newPieceType){
 		pieceType = newPieceType;
+	}
+	
+	public static void selectPositions(){
+		for(int i = 0; i<GamePlayers.getGamePlayers().size(); i++){
+			System.out.println(GamePlayers.getGamePlayers().get(i).getOrder());
+		}
+		TextureAtlas atlas;
+		int order = 0;
+		int times = PlayerColorScreen.getNumberOfPlayers();
+		xPos = 15;
+		yPos = 140;
+		while(times>0){
+		for(int i = 0; i<PlayerColorScreen.getNumberOfPlayers(); i++){
+			if(GamePlayers.getGamePlayers().get(i).getOrder() == Order.values()[order]){
+			  if(GamePlayers.getGamePlayers().get(i).getColor().equals("orange")){
+				  atlas = new TextureAtlas(Gdx.files.internal("Orange.txt"));
+				  reg = atlas.findRegion("orangeSettlement");
+				  gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
+				  gamePieces.get(gamePieces.size()-1).setBounds(xPos, yPos, 10, 15);
+				  HexGenerator.getStage().addActor(gamePieces.get(gamePieces.size()-1));
+				  yPos-=40;
+				  break;
+			  }
+			  else if(GamePlayers.getGamePlayers().get(i).getColor().equals("red")){
+				  //System.out.println("red");
+				  atlas = new TextureAtlas(Gdx.files.internal("Red.txt"));
+				  reg = atlas.findRegion("redSettlement");
+				  gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
+				  gamePieces.get(gamePieces.size()-1).setBounds(xPos, yPos, 10, 15);
+				  HexGenerator.getStage().addActor(gamePieces.get(gamePieces.size()-1));
+				  yPos-=40;
+				  break;
+			  }
+			  else if(GamePlayers.getGamePlayers().get(i).getColor().equals("blue")){
+				  //System.out.println("blue");
+				  atlas = new TextureAtlas(Gdx.files.internal("Blue.txt"));
+				  reg = atlas.findRegion("blueSettlement");
+				  gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
+				  gamePieces.get(gamePieces.size()-1).setBounds(xPos, yPos, 10, 15);
+				  HexGenerator.getStage().addActor(gamePieces.get(gamePieces.size()-1));
+				  yPos-=40;
+				  break;
+			  }
+			  else if(GamePlayers.getGamePlayers().get(i).getColor().equals("white")){
+				  atlas = new TextureAtlas(Gdx.files.internal("white.txt"));
+				  reg = atlas.findRegion("whiteSettlement");
+				  gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
+				  gamePieces.get(gamePieces.size()-1).setBounds(xPos, yPos, 10, 15);
+				  HexGenerator.getStage().addActor(gamePieces.get(gamePieces.size()-1));
+				  yPos-=40;
+				  break;
+			  }
+			}
+		}
+		times--;
+		order++;
+		}
 	}
 	
 	public static void findPositions(){

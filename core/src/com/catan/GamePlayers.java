@@ -10,7 +10,6 @@ public class GamePlayers {
    public static ArrayList<Player> getGamePlayers(){
 	   return gamePlayers;
    }
-   
    //returns the player object with the name specified as the parameter, and null if none of the
    //players have that name
    public static Player getBasedOnName(String name){

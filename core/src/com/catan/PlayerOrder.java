@@ -49,7 +49,7 @@ public class PlayerOrder {
 		orderedPlayers.get(i).setColor(games.get(set).getColor());
 		games.remove(set);
 	}
-	 	
+
 	}
 	public ArrayList<Player> getOrderedPlayers() {
 		return orderedPlayers;
