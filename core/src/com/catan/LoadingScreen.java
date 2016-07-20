@@ -76,7 +76,7 @@ public class LoadingScreen implements Screen{
 			public void changed(ChangeEvent event, Actor actor) {
 				pickNumbers = true;
 				setter = false;
-				game.setScreen(new HexGenerator(game));
+				game.setScreen(new HexGeneratorScreen(game));
 			}
         });
         generateRandomBandN.addListener(new ChangeListener(){
@@ -84,7 +84,7 @@ public class LoadingScreen implements Screen{
 			public void changed(ChangeEvent event, Actor actor) {
 				pickNumbers = false;
 				setter=true;
-				game.setScreen(new HexGenerator(game));
+				game.setScreen(new HexGeneratorScreen(game));
 			}
         });
 	}

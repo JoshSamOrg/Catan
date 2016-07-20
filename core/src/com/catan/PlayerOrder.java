@@ -51,7 +51,7 @@ public class PlayerOrder {
 	}
 	 	
 	}
-	public static ArrayList<Player> getOrderedPlayers() {
+	public ArrayList<Player> getOrderedPlayers() {
 		return orderedPlayers;
 	}
 }
