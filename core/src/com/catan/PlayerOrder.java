@@ -36,7 +36,7 @@ public class PlayerOrder {
 		counter.get(i).setColor(games.get(set).getColor());
 		games.remove(set);
 	}
-	 	
+
 	}
 	public ArrayList<Player> getCounter() {
 		return counter;

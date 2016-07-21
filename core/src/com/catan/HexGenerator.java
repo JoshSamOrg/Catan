@@ -78,7 +78,6 @@ public class HexGenerator implements Screen, InputProcessor {
 	private Pixmap pixmap;
 	private TextButton button;
 
-	private StartingPlacements places;
 	private int numberWidth = 25;
 	private int numberHeight = 25;
 	private int imageStartX = 20;
@@ -151,7 +150,6 @@ public class HexGenerator implements Screen, InputProcessor {
 		white=new ArrayList<ImageButton>();
 		blue=new ArrayList<ImageButton>();
 		red=new ArrayList<ImageButton>();
-		places=new StartingPlacements();
 		board2 = new ArrayList<TextureRegion>();
 		load = new LoadingScreen(game);
 
@@ -167,8 +165,6 @@ public class HexGenerator implements Screen, InputProcessor {
 		ore = atlas.findRegion("oreNoBlack2");
 		sheep = atlas.findRegion("sheepNoBlack2");
 		brick = atlas.findRegion("brickNoBlack2");
-		places.Start();
-		places.startPositions();
 		
 		for (int i = 0; i < 3; i++) {
 			board.add(sheep);
@@ -277,8 +273,6 @@ public class HexGenerator implements Screen, InputProcessor {
 		board2.add(atlas3.findRegion("8 - Copy"));
 		board2.add(atlas3.findRegion("10 - Copy"));
 		board2.add(atlas3.findRegion("11 - Copy"));
-		
-		
 	}
 
 	public boolean isMainIslandFull() {
@@ -486,24 +480,25 @@ public class HexGenerator implements Screen, InputProcessor {
 			batch.begin();
 			button.setVisible(false);
 			font2.draw(batch, orders.getCounter().get(0).getName() + " "
-					+ "is going first", 5, 160);
+					+ "is going first", 20, 160);
 			batch.end();
 			batch.begin();
 			font2.draw(batch, orders.getCounter().get(1).getName() + " "
-					+ "is going second", 5, 120);
+					+ "is going second", 20, 120);
 			batch.end();
 			if (orders.getCount() == 3) {
 				batch.begin();
 				font2.draw(batch, orders.getCounter().get(2).getName() + " "
-						+ "is going third", 5, 80);
+						+ "is going third", 20, 80);
+
 				batch.end();
 			}
 			if (orders.getCount() == 4) {
 				batch.begin();
 				font2.draw(batch, orders.getCounter().get(2).getName() + " "
-						+ "is going third", 5, 80);
+						+ "is going third", 20, 80);
 				font2.draw(batch, orders.getCounter().get(3).getName() + " "
-						+ "is going fourth", 5, 40);
+						+ "is going fourth", 20, 40);
 				batch.end();
 			}
 		}
@@ -793,8 +788,7 @@ public class HexGenerator implements Screen, InputProcessor {
 		}
 		return false;
 	}
-	
-	public Stage getStage() {
+	public static Stage getStage() {
 		return stage;
 	}
 	public PlayerOrder getOrders() {
