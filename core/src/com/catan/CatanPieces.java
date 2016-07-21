@@ -24,6 +24,7 @@ public class CatanPieces{
     private static ArrayList<Integer> positions; //adjust for the widget dimensions
 	private static String pieceType = "";
 	private static ArrayList<ImageButton> gamePieces = new ArrayList<ImageButton>();
+	private static HexGeneratorScreen hexObj = new HexGeneratorScreen(null);
 	
 	public static void midpoint(int f, int g, int h, int i){
 		mpX = (f+h)/2f;
@@ -172,27 +173,27 @@ public class CatanPieces{
 				  reg = atlas.findRegion("orangeSettlement");
 				  gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
 				  gamePieces.get(gamePieces.size()-1).setBounds(xPos, yPos, 10, 15);
-				  HexGenerator.getStage().addActor(gamePieces.get(gamePieces.size()-1));
+				  hexObj.getStage().addActor(gamePieces.get(gamePieces.size()-1));
 				  yPos-=40;
 				  break;
 			  }
 			  else if(GamePlayers.getGamePlayers().get(i).getColor().equals("red")){
-				  //System.out.println("red");
+				  System.out.println("red");
 				  atlas = new TextureAtlas(Gdx.files.internal("Red.txt"));
 				  reg = atlas.findRegion("redSettlement");
 				  gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
 				  gamePieces.get(gamePieces.size()-1).setBounds(xPos, yPos, 10, 15);
-				  HexGenerator.getStage().addActor(gamePieces.get(gamePieces.size()-1));
+				  hexObj.getStage().addActor(gamePieces.get(gamePieces.size()-1));
 				  yPos-=40;
 				  break;
 			  }
 			  else if(GamePlayers.getGamePlayers().get(i).getColor().equals("blue")){
-				  //System.out.println("blue");
+				  System.out.println("blue");
 				  atlas = new TextureAtlas(Gdx.files.internal("Blue.txt"));
 				  reg = atlas.findRegion("blueSettlement");
 				  gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
 				  gamePieces.get(gamePieces.size()-1).setBounds(xPos, yPos, 10, 15);
-				  HexGenerator.getStage().addActor(gamePieces.get(gamePieces.size()-1));
+				  hexObj.getStage().addActor(gamePieces.get(gamePieces.size()-1));
 				  yPos-=40;
 				  break;
 			  }
@@ -201,7 +202,7 @@ public class CatanPieces{
 				  reg = atlas.findRegion("whiteSettlement");
 				  gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
 				  gamePieces.get(gamePieces.size()-1).setBounds(xPos, yPos, 10, 15);
-				  HexGenerator.getStage().addActor(gamePieces.get(gamePieces.size()-1));
+				  hexObj.getStage().addActor(gamePieces.get(gamePieces.size()-1));
 				  yPos-=40;
 				  break;
 			  }
