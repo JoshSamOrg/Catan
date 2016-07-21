@@ -133,19 +133,9 @@ public class HexGenerator implements Screen, InputProcessor {
 	public HexGenerator(CatanGame game) {
 		this.game = game;
 	}
-	public ArrayList<ImageButton> getOrange() {
-		return orange;
-	}
-	public ArrayList<ImageButton> getWhite() {
-		return white;
-	}
-	public ArrayList<ImageButton> getBlue() {
-		return blue;
-	}
-	public ArrayList<ImageButton> getRed() {
-		return red;
-	}
+	
 	public void show() {
+		stage = new Stage();
 		orange=new ArrayList<ImageButton>();
 		white=new ArrayList<ImageButton>();
 		blue=new ArrayList<ImageButton>();
@@ -184,7 +174,6 @@ public class HexGenerator implements Screen, InputProcessor {
 
 		atlas3 = new TextureAtlas(Gdx.files.internal("mainIslandNumbers2.txt"));
 		multiplexer = new InputMultiplexer();
-		stage = new Stage();
 		multiplexer.addProcessor(stage);
 		multiplexer.addProcessor(this);
 		Gdx.input.setInputProcessor(multiplexer);
@@ -221,6 +210,22 @@ public class HexGenerator implements Screen, InputProcessor {
 		button.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
+//				if (orders.getOrderedPlayers().get(0).getColor().equals("orange")) {
+//					System.out.println("here1");
+//					orange.get(0).setVisible(true);
+//				}
+//				else if (orders.getOrderedPlayers().get(0).getColor().equals("white")) {
+//					System.out.println("here2");
+//					white.get(0).setVisible(true);
+//				}
+//				else if (orders.getOrderedPlayers().get(0).getColor().equals("blue")) {
+//					System.out.println("here3");
+//					blue.get(0).setVisible(true);
+//				}
+//				else if (orders.getOrderedPlayers().get(0).getColor().equals("red")) {
+//					System.out.println("here4");
+//					red.get(0).setVisible(true);
+//				}
 				counter = true;
 
 			}
@@ -486,14 +491,13 @@ public class HexGenerator implements Screen, InputProcessor {
 			font2.draw(batch, orders.getCounter().get(1).getName() + " "
 					+ "is going second", 20, 120);
 			batch.end();
-			if (orders.getCount() == 3) {
+			if (GamePlayers.getGamePlayers().size() == 3) {
 				batch.begin();
 				font2.draw(batch, orders.getCounter().get(2).getName() + " "
 						+ "is going third", 20, 80);
-
 				batch.end();
 			}
-			if (orders.getCount() == 4) {
+			if (GamePlayers.getGamePlayers().size() == 4) {
 				batch.begin();
 				font2.draw(batch, orders.getCounter().get(2).getName() + " "
 						+ "is going third", 20, 80);
@@ -804,6 +808,19 @@ public class HexGenerator implements Screen, InputProcessor {
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	public static ArrayList<ImageButton> getOrange() {
+		return orange;
+	}
+	public static ArrayList<ImageButton> getWhite() {
+		return white;
+	}
+	public static ArrayList<ImageButton> getBlue() {
+		return blue;
+	}
+	public static ArrayList<ImageButton> getRed() {
+		return red;
 	}
 
 	@Override
