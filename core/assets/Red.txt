@@ -1,0 +1,68 @@
+Red.png
+size: 1000, 692
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+redCircle
+  rotate: false
+  xy: 0, 0
+  size: 199, 197
+  orig: 199, 197
+  offset: 0, 0
+  index: -1
+redCity
+  rotate: false
+  xy: 199, 0
+  size: 238, 236
+  orig: 238, 236
+  offset: 0, 0
+  index: -1
+redCrew
+  rotate: false
+  xy: 437, 0
+  size: 86, 204
+  orig: 86, 204
+  offset: 0, 0
+  index: -1
+redHarborSettlement
+  rotate: false
+  xy: 523, 0
+  size: 320, 293
+  orig: 320, 293
+  offset: 0, 0
+  index: -1
+redPirateShip
+  rotate: false
+  xy: 0, 293
+  size: 388, 238
+  orig: 388, 238
+  offset: 0, 0
+  index: -1
+redRoad
+  rotate: false
+  xy: 388, 293
+  size: 224, 48
+  orig: 224, 48
+  offset: 0, 0
+  index: -1
+redSettlement
+  rotate: false
+  xy: 612, 293
+  size: 171, 109
+  orig: 171, 109
+  offset: 0, 0
+  index: -1
+redSettler
+  rotate: false
+  xy: 783, 293
+  size: 217, 266
+  orig: 217, 266
+  offset: 0, 0
+  index: -1
+redShip
+  rotate: false
+  xy: 0, 559
+  size: 284, 133
+  orig: 284, 133
+  offset: 0, 0
+  index: -1

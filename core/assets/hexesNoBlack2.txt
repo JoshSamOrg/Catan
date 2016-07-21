@@ -1,0 +1,40 @@
+hexesNoBlack2.png
+size: 512, 1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+brickNoBlack2
+  rotate: false
+  xy: 220, 250
+  size: 220, 251
+  orig: 220, 251
+  offset: 0, 0
+  index: -1
+oreNoBlack2
+  rotate: false
+  xy: 0, 501
+  size: 221, 251
+  orig: 221, 251
+  offset: 0, 0
+  index: -1
+sheepNoBlack2
+  rotate: false
+  xy: 0, 0
+  size: 220, 250
+  orig: 220, 250
+  offset: 0, 0
+  index: -1
+wheatNoBlack2
+  rotate: false
+  xy: 0, 250
+  size: 220, 251
+  orig: 220, 251
+  offset: 0, 0
+  index: -1
+woodNoBlack2
+  rotate: false
+  xy: 220, 0
+  size: 220, 250
+  orig: 220, 250
+  offset: 0, 0
+  index: -1
