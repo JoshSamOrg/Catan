@@ -75,6 +75,7 @@ public class MyTextInputListener implements TextInputListener {
 		shouldBeVisible();
 	}
 
+	//makes the configure board visible when all people have selected a valid color
 	private void shouldBeVisible() {
 		for(int i = 0; i<GamePlayers.getGamePlayers().size(); i++){
 			if(GamePlayers.getGamePlayers().get(i).getColor().equals("")){
@@ -114,6 +115,7 @@ public class MyTextInputListener implements TextInputListener {
 		return drawNames;
 	}
 	
+	//returns the validColors arraylist
 	public static ArrayList<String> getValidColors(){
 		return validColors;
 	}

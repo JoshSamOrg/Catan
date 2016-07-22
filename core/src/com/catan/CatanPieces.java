@@ -10,6 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.catan.Player.Order;
 
+//This class allows the player to select their starting positions 
+//of the game. They are able to put a Harbor Settlement, Settlement, Road, and Ship
+//on the board
 public class CatanPieces{
     private static float mpX = 0;
     private static float mpY = 0;
@@ -30,11 +33,15 @@ public class CatanPieces{
 	private static HexGeneratorScreen hexObj = new HexGeneratorScreen(null);
 	private static boolean selectInitialPlacements = false;
 	
+	//determines the midpoint of (f,g) and (h,i)
 	public static void midpoint(int f, int g, int h, int i){
 		mpX = (f+h)/2f;
 		mpY = (g+i)/2f;
 	}
 	
+	//determines the distance between (f,g) and (h,i), and sizex and sizey
+	//help you adjust to the correct distance between the two points, not based
+	//on the lower left corner of an image button
 	public static int distance(int f, int g, int h, int i, int sizex, int sizey){
 		if(f-h > 0 && g - i > 0){
 		return (int) Math.sqrt((Math.pow((f-h-sizex), 2)) + (Math.pow((g-i - sizey), 2)));
@@ -50,6 +57,9 @@ public class CatanPieces{
 		}
 	}
 	
+	//Takes a mousex and mousey, and stores values in the variables firstX, firstY, secondX, and secondY,
+	//which are all indices in the positions arraylist. This method will be used in
+	//coordination with the midpoint method to determine the position of the road
 	public static void findRoad(int mousex, int mousey){
 		int smallestDistance = 100;
 		int times = 1;
@@ -77,6 +87,8 @@ public class CatanPieces{
 		findRoadRotation(positions.get(firstX), positions.get(firstY), positions.get(secondX), positions.get(secondY));
 	}
 	
+	//Determines what rotation a road should be in, given the settlement positions adjacent to where the 
+	//road is being placed
 	public static void findRoadRotation(int x, int y, int a, int b) {
 		if(Math.abs(x - a) < 8){
 			roadRotation = 90;
@@ -89,6 +101,9 @@ public class CatanPieces{
 		}
 	}
 	
+	//Given a point x,y determines the closest settlment position to that point, and stores this
+	//information into settlementIndexX and settlementIndexY, which are indices into
+	//the positions arraylist
 	public static void findSettlement(int x, int y){
 		int smallestDistance = 100;
 		for(int i = 0; i<positions.size()-1; i+=2){
@@ -100,66 +115,83 @@ public class CatanPieces{
 		}
 	}
 	
+	//returns mpX, the x coordinate of the midpoint of two points
 	public static float getmpX(){
 		return mpX;
 	}
 	
+	//returns mpY, the y coordinate fo the midpoint of two points
 	public static float getmpY(){
 		return mpY;
 	}
 	
+	//returns firstX, the index of the x position of the first settlment
 	public static int getFirstX(){
 		return firstX;
 	}
 	
+	//returns firstY, the index of the y position of the first settlement
 	public static int getFirstY(){
 		return firstY;
 	}
 	
+	//returns secondX, the index of the x position of the second settlement
 	public static int getSecondX(){
 		return secondX;
 	}
 	
+	//returns secondY, the index of the y position of the second settlement
 	public static int getSecondY(){
 		return secondY;
 	}
 
+	//returns the positions arraylist
 	public static ArrayList<Integer> getPositions(){
 		return positions;
 	}
 	
+	//returns the roadRotation (the rotation of a given road)
 	public static int getRoadRotation(){
 		return roadRotation;
 	}
 	
+	//returns settlementIndexX, the x index of the x coordinate of a settlement
 	public static int getSettlementIndexX(){
 		return settlementIndexX;
 	}
 	
+	//returns settlementIndexY, the y index of the y coordinate of a settlement
 	public static int getSettlementIndexY(){
 		return settlementIndexY;
 	}
 	
+	//returns gamePieces, the arraylist of image buttons that keeps track of 
+	//what each player places on the board
 	public static ArrayList<ImageButton> getGamePieces(){
 		return gamePieces;
 	}
 	
+	//returns reg, a texture region
 	public static TextureRegion getTextureRegion(){
 		return reg;
 	}
 	
+	//sets up a new atlas, based on the texture region reg
 	public static void setTextureRegion(TextureAtlas atlas){
 		reg = atlas.findRegion(pieceType);
 	}
 	
+	//returns pieceType, a string that determines the type of piece placed on the board
 	public static String getPieceType(){
 		return pieceType;
 	}
 	
+	//sets pieceType equal to the parameter newPieceType
 	public static void setPieceType(String newPieceType){
 		pieceType = newPieceType;
 	}
 	
+	//takes two parameters, the strings piece1 and piece2, and allows the player to select their starting positions
 	public static void selectPositions(String piece1, String piece2){
 		gamePieces.clear();
 		String[] colors = {"red", "blue", "orange", "white"};
@@ -266,7 +298,8 @@ public class CatanPieces{
 		}
 		addGamePiecesListener(0);
 	}
-	
+
+	//add a listener to the element located at index i in the gamePieces arraylist
 	public static void addGamePiecesListener(int i) {
 		gamePieces.get(i).addListener(new ChangeListener(){
 			@Override
@@ -281,6 +314,7 @@ public class CatanPieces{
 		return selectInitialPlacements;
 	}
 	
+	//adds all the hexagon points to the positions arraylist
 	public static void findPositions(){
 		positions.add(141);//1
 		positions.add(438);

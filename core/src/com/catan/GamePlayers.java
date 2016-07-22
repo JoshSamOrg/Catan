@@ -21,6 +21,7 @@ public class GamePlayers {
 	   return null;
    }
    
+   //sets gamePlayers equal to the newPlayers parameter
    public static void setGamePlayers(ArrayList<Player> newPlayers){
 	   gamePlayers = newPlayers;
    }

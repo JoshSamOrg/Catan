@@ -19,6 +19,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
+//Allows the user to click two buttons, one for generating random numbers and a random board
+//and a different button for generating a random board and the ability to pick numbers
 public class LoadingScreen implements Screen{
 	private static boolean setter=false;
 	private CatanGame game;
@@ -30,11 +32,13 @@ public class LoadingScreen implements Screen{
     private Table table;
     private static boolean pickNumbers = false;
     
+    //Constructor- allows for switching screens
     public LoadingScreen(CatanGame game){
     	this.game = game;
     }
 	
 	@Override
+	//draws all the actors and handles all input events
 	public void show() {
 		stage = new Stage(); //stage is an inputprocessor
 		Gdx.input.setInputProcessor(stage); //the inputprocessor is the object that handles all input
@@ -89,19 +93,25 @@ public class LoadingScreen implements Screen{
         });
 	}
 	
+	//returns the pickNUmbers boolean, which is true if the user clicked the pick numbers button
+	// and false otherwise
 	public static boolean getPickNumbers(){
 		return pickNumbers;
 	}
 	
+	//sets pickNumbers boolean
 	public static void setPickNumbers(boolean picknum){
 		pickNumbers = picknum;
 	}
 	
-	
+	//returns the setter boolean which toggles drawing the random numbers
+	//setter is true if the 
 	public boolean getSetter() {
 		return setter;
 	}
+	
 	@Override
+	//draws everything, main render loop
 	public void render(float delta) {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); //clears the frame buffer. Now we are free to render a fresh frame with
 		//new scene graphics
@@ -113,6 +123,7 @@ public class LoadingScreen implements Screen{
 	}
 
 	@Override
+	//resizes the stage
 	public void resize(int width, int height) {
 		stage.getViewport().update(width, height, true);//resizes the stage based on the stage's viewport
         //the third parameter changes the camera position so it is centered on the stage, making 0,0 
