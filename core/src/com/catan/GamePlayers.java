@@ -20,4 +20,8 @@ public class GamePlayers {
 	   }
 	   return null;
    }
+   
+   public static void setGamePlayers(ArrayList<Player> newPlayers){
+	   gamePlayers = newPlayers;
+   }
 }

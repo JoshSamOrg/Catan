@@ -52,7 +52,7 @@ public class PlayerOrder {
 			orderedPlayers.get(i).setColor(games.get(set).getColor());
 			games.remove(set);
 		}
-
+        GamePlayers.setGamePlayers(orderedPlayers);
 	}
 
 	public ArrayList<Player> getOrderedPlayers() {

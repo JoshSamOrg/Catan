@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.catan.Player.Order;
 
@@ -21,10 +23,11 @@ public class CatanPieces{
     private static int xPos = 0;
     private static int yPos = 0;
     private static TextureRegion reg;
-    private static ArrayList<Integer> positions; //adjust for the widget dimensions
+    private static ArrayList<Integer> positions = new ArrayList<Integer>(); //adjust for the widget dimensions
 	private static String pieceType = "";
 	private static ArrayList<ImageButton> gamePieces = new ArrayList<ImageButton>();
 	private static HexGeneratorScreen hexObj = new HexGeneratorScreen(null);
+	private static boolean selectInitialPlacements = false;
 	
 	public static void midpoint(int f, int g, int h, int i){
 		mpX = (f+h)/2f;
@@ -156,61 +159,125 @@ public class CatanPieces{
 		pieceType = newPieceType;
 	}
 	
-	public static void selectPositions(){
-		for(int i = 0; i<GamePlayers.getGamePlayers().size(); i++){
-			System.out.println(GamePlayers.getGamePlayers().get(i).getOrder());
-		}
+	public static void selectPositions(String piece1, String piece2){
+		gamePieces.clear();
+		String[] colors = {"red", "blue", "orange", "white"};
 		TextureAtlas atlas;
 		int order = 0;
+		if(piece1.equals("HarborSettlement") && piece2.equals("Settlement")){
+			order = 0;
+			yPos = 140;
+		}
+		else{
+			order = PlayerColorScreen.getNumberOfPlayers()-1;
+			yPos = 140 - (40 * (PlayerColorScreen.getNumberOfPlayers()-1));
+		}
 		int times = PlayerColorScreen.getNumberOfPlayers();
 		xPos = 15;
-		yPos = 140;
 		while(times>0){
 		for(int i = 0; i<PlayerColorScreen.getNumberOfPlayers(); i++){
 			if(GamePlayers.getGamePlayers().get(i).getOrder() == Order.values()[order]){
 			  if(GamePlayers.getGamePlayers().get(i).getColor().equals("orange")){
 				  atlas = new TextureAtlas(Gdx.files.internal("Orange.txt"));
-				  reg = atlas.findRegion("orangeSettlement");
+				  reg = atlas.findRegion(colors[2] + piece1);
 				  gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
 				  gamePieces.get(gamePieces.size()-1).setBounds(xPos, yPos, 10, 15);
 				  hexObj.getStage().addActor(gamePieces.get(gamePieces.size()-1));
+				  
+				  reg = atlas.findRegion(colors[2] + piece2);
+				  gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
+				  gamePieces.get(gamePieces.size()-1).setBounds(xPos-15, yPos, 10, 15);
+				  hexObj.getStage().addActor(gamePieces.get(gamePieces.size()-1));
+				  if(piece1.equals("HarborSettlement") && piece2.equals("Settlement")){
 				  yPos-=40;
+				  }
+				  else{
+					  yPos+=40;
+				  }
 				  break;
 			  }
 			  else if(GamePlayers.getGamePlayers().get(i).getColor().equals("red")){
-				  System.out.println("red");
 				  atlas = new TextureAtlas(Gdx.files.internal("Red.txt"));
-				  reg = atlas.findRegion("redSettlement");
+				  reg = atlas.findRegion(colors[0] + piece1);
 				  gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
 				  gamePieces.get(gamePieces.size()-1).setBounds(xPos, yPos, 10, 15);
 				  hexObj.getStage().addActor(gamePieces.get(gamePieces.size()-1));
-				  yPos-=40;
+				  
+				  reg = atlas.findRegion(colors[0] + piece2);
+				  gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
+				  gamePieces.get(gamePieces.size()-1).setBounds(xPos-15, yPos, 10, 15);
+				  hexObj.getStage().addActor(gamePieces.get(gamePieces.size()-1));
+				  if(piece1.equals("HarborSettlement") && piece2.equals("Settlement")){
+					  yPos-=40;
+					  }
+					  else{
+						  yPos+=40;
+					  }
 				  break;
 			  }
 			  else if(GamePlayers.getGamePlayers().get(i).getColor().equals("blue")){
-				  System.out.println("blue");
 				  atlas = new TextureAtlas(Gdx.files.internal("Blue.txt"));
-				  reg = atlas.findRegion("blueSettlement");
+				  reg = atlas.findRegion(colors[1] + piece1);
 				  gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
 				  gamePieces.get(gamePieces.size()-1).setBounds(xPos, yPos, 10, 15);
 				  hexObj.getStage().addActor(gamePieces.get(gamePieces.size()-1));
-				  yPos-=40;
+				  
+				  reg = atlas.findRegion(colors[1] + piece2);
+				  gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
+				  gamePieces.get(gamePieces.size()-1).setBounds(xPos-15, yPos, 10, 15);
+				  hexObj.getStage().addActor(gamePieces.get(gamePieces.size()-1));
+				  if(piece1.equals("HarborSettlement") && piece2.equals("Settlement")){
+					  yPos-=40;
+					  }
+					  else{
+						  yPos+=40;
+					  }
 				  break;
 			  }
 			  else if(GamePlayers.getGamePlayers().get(i).getColor().equals("white")){
 				  atlas = new TextureAtlas(Gdx.files.internal("white.txt"));
-				  reg = atlas.findRegion("whiteSettlement");
+				  reg = atlas.findRegion(colors[3] + piece1);
 				  gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
 				  gamePieces.get(gamePieces.size()-1).setBounds(xPos, yPos, 10, 15);
 				  hexObj.getStage().addActor(gamePieces.get(gamePieces.size()-1));
-				  yPos-=40;
+				  
+				  reg = atlas.findRegion(colors[3] + piece2);
+				  gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
+				  gamePieces.get(gamePieces.size()-1).setBounds(xPos-15, yPos, 10, 15);
+				  hexObj.getStage().addActor(gamePieces.get(gamePieces.size()-1));
+				  if(piece1.equals("HarborSettlement") && piece2.equals("Settlement")){
+					  yPos-=40;
+					  }
+					  else{
+						  yPos+=40;
+					  }
 				  break;
 			  }
 			}
 		}
 		times--;
-		order++;
+		if(piece1.equals("HarborSettlement") && piece2.equals("Settlement")){
+			order++;
 		}
+		else{
+			order--;
+		}
+		}
+		addGamePiecesListener(0);
+	}
+	
+	public static void addGamePiecesListener(int i) {
+		gamePieces.get(i).addListener(new ChangeListener(){
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				actor.setVisible(false);
+				selectInitialPlacements = true;
+			}
+		});		
+	}
+
+	public static boolean getSelectInitialPlacements(){
+		return selectInitialPlacements;
 	}
 	
 	public static void findPositions(){
