@@ -27,6 +27,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
+//The main game screen class
 public class HexGeneratorScreen implements Screen, InputProcessor {
 
 	private TextButton finalizePosition;
@@ -134,21 +135,32 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 	private static TextField field;
 	private static TextField field2;
 
+	//Constructor, allows switching screens
 	public HexGeneratorScreen(CatanGame game) {
 		this.game = game;
 	}
+	
+	//gets the orange arraylist of image buttons
 	public ArrayList<ImageButton> getOrange() {
 		return orange;
 	}
+	
+	//gets the white arraylist of image buttons
 	public ArrayList<ImageButton> getWhite() {
 		return white;
 	}
+	
+	//gets the blue arraylist of image buttons
 	public ArrayList<ImageButton> getBlue() {
 		return blue;
 	}
+	
+	//gets the red arraylist of image buttons
 	public ArrayList<ImageButton> getRed() {
 		return red;
 	}
+	
+	//sets up all the actors on the stage, and processes all input events
 	public void show() {
 		CatanPieces.findPositions();
 		orange=new ArrayList<ImageButton>();
@@ -282,6 +294,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 		
 	}
 
+	//determines if the main island is full of numbers, returning true if it is, and false otherwise
 	public boolean isMainIslandFull() {
 		for (int i = 0; i < openSpots.length; i++) {
 			if (openSpots[i]) {
@@ -291,6 +304,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 		return true;
 	}
 
+	//draws the numbers on the bottom of the screen
 	private void drawNumbers() {
 		numbers.add(atlas3.findRegion("3"));
 		numbers.add(atlas3.findRegion("4"));
@@ -323,6 +337,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 		}
 	}
 
+	//draws the board, and randomly generated numbers
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -681,6 +696,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 		//stage.setDebugAll(true);
 	}
 
+	//disposes of all resources
 	public void dispose() {
 		batch.dispose();
 		startingBoard.dispose();
@@ -694,6 +710,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 	}
 
 	@Override
+	//resizes the stage to fit with the new window size
 	public void resize(int width, int height) {
 		stage.getViewport().update(width, height, true);
 
@@ -736,6 +753,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 	}
 
 	@Override
+	//Allows the user to put numbers on the main island, and place pieces on the main island
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		if(CatanPieces.getSelectInitialPlacements()){
 			CatanPieces.findSettlement(screenX, Gdx.graphics.getHeight() - 1 - screenY);
@@ -862,6 +880,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 		return false;
 	}
 
+	//swaps two numbers on the main island
 	private void swap(int m, int n) {
 		float x1 = numberImages.get(m).getX();
 		float y1 = numberImages.get(m).getY();
@@ -871,6 +890,8 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 		numberImages.get(n).setPosition(x1, y1);
 	}
 
+	//determines if the mouse click is within a hexagon on the main island, true if it is, and
+	//false otherwise
 	private boolean isWithinRange(int screenX, int screenY, int hexX, int hexY) {
 		if (((screenX - hexX <= 30 && screenX >= hexX) || (hexX - screenX <= 6 && hexX >= screenX))
 				&& ((screenY - hexY <= 30 && screenY >= hexY) || (hexY
@@ -880,9 +901,12 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 		return false;
 	}
 	
+	//returns the stage for this class
 	public Stage getStage() {
 		return stage;
 	}
+	
+	//returns the orders object for this class
 	public PlayerOrder getOrders() {
 		return orders;
 	}

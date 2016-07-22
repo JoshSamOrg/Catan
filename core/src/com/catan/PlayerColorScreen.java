@@ -50,6 +50,7 @@ public class PlayerColorScreen implements Screen {
 	}
 	
 	@Override
+	//allows the users to select what colors they want to play with
 	public void show() {
 		selectPlayers();
 	}
@@ -185,6 +186,7 @@ public class PlayerColorScreen implements Screen {
         }
 	}
 	
+	//returns the configure board text button
 	public static TextButton getConfigureBoard(){
 		return configureBoard;
 	}
