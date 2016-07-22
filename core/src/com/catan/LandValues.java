@@ -3,10 +3,10 @@ package com.catan;
 import java.util.ArrayList;
 
 public class LandValues {
-private char[] land;
+private static char[] land;
 
-public void LandValue() {
-	land=new char[72];
+public LandValues() {
+	land=new char[73];
 	for (int i=0; i<15; i++) {
 		land[i] = 'l';
 	}
@@ -34,8 +34,11 @@ public void LandValue() {
 	for (int i=61; i<72; i++) {
 		land[i]= 'u';
 	}
+	land[72]= 's';
 }
-
+public char[] getLand() {
+	return land;
+}
 public void landChange(int i) {
 	land[i] = 'l';
 }

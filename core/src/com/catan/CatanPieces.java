@@ -21,7 +21,7 @@ public class CatanPieces{
     private static int xPos = 0;
     private static int yPos = 0;
     private static TextureRegion reg;
-    private static ArrayList<Integer> positions; //adjust for the widget dimensions
+    private static ArrayList<Integer> positions=new ArrayList<Integer>(); //adjust for the widget dimensions
 	private static String pieceType = "";
 	private static ArrayList<ImageButton> gamePieces = new ArrayList<ImageButton>();
 	private static HexGeneratorScreen hexObj = new HexGeneratorScreen(null);
