@@ -16,19 +16,20 @@ public class validPositions implements Screen, InputProcessor {
 	private SpriteBatch batch;
 	private Texture boardStart;
 	private CatanGame game;
-	private boolean inside = false;
+	private boolean settlement = false; //determines whether a settlement location is a valid placement.
 	private static int i = 0;
-	SettlementLocationIndices settle;
-	private static int counter;
+	private SettlementLocationIndices settle;
+	private static int counter; //used to get the index for the settlementLocations array.
 	private int set = 0;
 	private int set2 = 0;
 	private int set3 = 0;
 	private int set4 = 0;
-	private int set5 = 0;
 	private LandValues value;
 	private static boolean[][] markedSettlement;
 
 	public validPositions(CatanGame game) {
+		CatanPieces.findPositions();
+		value = new LandValues();
 		settle = new SettlementLocationIndices();
 		markedSettlement = new boolean[72][6];
 		this.game = game;
@@ -56,7 +57,11 @@ public class validPositions implements Screen, InputProcessor {
 		batch.end();
 
 	}
-
+	/*
+	 * x the x coordinate of the mouse click.
+	 * y the y coordinate of the mouse click.
+	 * Returns the index of the hex found in the land array (in the LandValues class).
+	 */
 	public static int findHex(int x, int y) {
 		if (CatanPieces.distance(x, y, 140, 413, 0, 0) <= 21.5) {
 			i = 0;
@@ -278,7 +283,13 @@ public class validPositions implements Screen, InputProcessor {
 		}
 		return i;
 	}
-
+	/*
+	 * button the image that is going to be placed on the board.
+	 * text the type of piece being put on the board.
+	 * x the x coordinate of the mouse click
+	 * y the y coordinate of the mouse click
+	 * Returns whether the placed image is in a valid location.
+	 */
 	public boolean valid(ImageButton button, String text, int x, int y) {
 		if (text.equals("settlement")) {
 			CatanPieces.findSettlement(x, y);
@@ -314,13 +325,13 @@ public class validPositions implements Screen, InputProcessor {
 							CatanPieces.getPositions().get(CatanPieces.getSettlementIndexY())))) {
 				SettlementLocationIndices.getSettlementLocations()[counter] = true;
 
-				inside = true;
+				settlement = true;
 			} else {
-				inside = false;
+				settlement = false;
 			}
 		}
-		System.out.println("inside:" + inside);
-		return inside;
+		System.out.println("inside:" + settlement);
+		return settlement;
 
 	}
 
@@ -346,8 +357,6 @@ public class validPositions implements Screen, InputProcessor {
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		System.out.println(screenX);
 		System.out.println(Gdx.graphics.getHeight() - 1 - screenY);
-		CatanPieces.findPositions();
-		value = new LandValues();
 		TextureAtlas atlas = new TextureAtlas("Orange.txt");
 		ImageButton buttons = new ImageButton(new TextureRegionDrawable(
 				atlas.findRegion("orangeSettlement")));

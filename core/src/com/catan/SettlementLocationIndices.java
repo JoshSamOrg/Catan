@@ -1,7 +1,7 @@
 package com.catan;
 
 public class SettlementLocationIndices {
-	private static boolean settlementLocations[];
+	private static boolean settlementLocations[]; //holds the information for whether or not a settlement location is occupied or not.
 	private static boolean two = false;
 	private static int a = 0, b = 0, c = 0, d = 0, e = 0, f = 0;
 
@@ -11,7 +11,11 @@ public class SettlementLocationIndices {
 			settlementLocations[i] = false;
 		}
 	}
-
+	/*
+	 * x the x coordinate of a settlement location
+	 * y the y coordinate of a settlement location
+	 * Returns the index of the newly marked hex (from the settlementLocations array).
+	 */
 	public static int getHexLocations(int x, int y) {
 		if (x == 141 && y == 438) {
 			return 0;
@@ -368,7 +372,11 @@ public class SettlementLocationIndices {
 		}
 		return 176;
 	}
-
+	/*
+	 * x the x coordinate of the settlement location
+	 * y the y coordinate of the settlement location
+	 * Returns whether the placement of the settlement follows the two-away rule.
+	 */
 	public static boolean twoAway(int x, int y) {
 		a = validPositions.findHex(x, y + 10);
 		b = validPositions.findHex(x, y + 30);
@@ -433,7 +441,7 @@ public class SettlementLocationIndices {
 		return two;
 	}
 
-	public static boolean[] getSettlementLocations() {
+	public static boolean[] getSettlementLocations() { //returns settlementLocations arraylist.
 		return settlementLocations;
 	}
 }

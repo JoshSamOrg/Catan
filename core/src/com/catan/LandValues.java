@@ -1,9 +1,11 @@
 package com.catan;
 
 import java.util.ArrayList;
-
+/*
+ * Holds the information for the type of hex a person/piece is on.
+ */
 public class LandValues {
-private static char[] land;
+private static char[] land; //array which holds the type of hex each of the 72 hexes are.
 
 public LandValues() {
 	land=new char[73];
@@ -36,13 +38,13 @@ public LandValues() {
 	}
 	land[72]= 's';
 }
-public char[] getLand() {
+public char[] getLand() { //returns the land array
 	return land;
 }
-public void landChange(int i) {
+public void landChange(int i) { //changes the chosen hex to a land hex
 	land[i] = 'l';
 }
-public void seaChange(int i) {
+public void seaChange(int i) { //changes the chosen hex to a sea hex
 	land[i]= 's';
 }
 }
