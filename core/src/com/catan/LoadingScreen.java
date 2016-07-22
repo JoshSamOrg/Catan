@@ -93,6 +93,10 @@ public class LoadingScreen implements Screen{
 		return pickNumbers;
 	}
 	
+	public static void setPickNumbers(boolean picknum){
+		pickNumbers = picknum;
+	}
+	
 	
 	public boolean getSetter() {
 		return setter;

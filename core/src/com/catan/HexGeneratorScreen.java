@@ -29,6 +29,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class HexGeneratorScreen implements Screen, InputProcessor {
 
+	private TextButton finalizePosition;
+	private static String piece1 = "HarborSettlement";
+	private static String piece2 = "Settlement";
+	private static int iCopy = 0;
 	private static PlayerOrder orders;
 	private LoadingScreen load;
 	private ArrayList<TextureRegion> board, board2;
@@ -76,7 +80,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 	private BitmapFont font, font2;
 	private Skin skin;
 	private Pixmap pixmap;
-	private TextButton button;
+	private TextButton playerOrder;
 
 	private int numberWidth = 25;
 	private int numberHeight = 25;
@@ -119,16 +123,16 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 			true, true, true, true, true, true, true, true };// size = 15
 	private int[] HexLocations = { 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15,
 			15, 15, 15, 15 }; // size = 15
-	private ArrayList<TextureRegion> numbers;
-	private ArrayList<ImageButton> numberImages;
+	private static ArrayList<TextureRegion> numbers;
+	private static ArrayList<ImageButton> numberImages;
 	private static ArrayList<ImageButton> orange;
 	private static ArrayList<ImageButton> white;
 	private static ArrayList<ImageButton> blue;
 	private static ArrayList<ImageButton> red;
-	private InputMultiplexer multiplexer;
-	private TextButton finalizeNumbers;
-	private TextField field;
-	private TextField field2;
+	private static InputMultiplexer multiplexer;
+	private static TextButton finalizeNumbers;
+	private static TextField field;
+	private static TextField field2;
 
 	public HexGeneratorScreen(CatanGame game) {
 		this.game = game;
@@ -146,6 +150,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 		return red;
 	}
 	public void show() {
+		CatanPieces.findPositions();
 		orange=new ArrayList<ImageButton>();
 		white=new ArrayList<ImageButton>();
 		blue=new ArrayList<ImageButton>();
@@ -213,17 +218,17 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 		textButtonStyle.over = skin.newDrawable("pmap", Color.LIGHT_GRAY);
 		textButtonStyle.font = font;
 		skin.add("tStyle", textButtonStyle);
-		button = new TextButton("Player Order", skin, "tStyle");
-		button.setBounds(50, 50, 200, 50);
+		playerOrder = new TextButton("Player Order", skin, "tStyle");
+		playerOrder.setBounds(50, 50, 200, 50);
 		if(LoadingScreen.getPickNumbers()){
-		button.setVisible(false);
+		playerOrder.setVisible(false);
 		}
-		stage.addActor(button);
-		button.addListener(new ChangeListener() {
+		stage.addActor(playerOrder);
+		playerOrder.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				counter = true;
-
+				CatanPieces.selectPositions(piece1, piece2);
 			}
 		});
 
@@ -235,7 +240,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				actor.setVisible(false);
-				button.setVisible(true);
+				playerOrder.setVisible(true);
 				for (int i = 0; i < numberImages.size(); i++) {
 					numberImages.get(i).clearListeners();
 				}
@@ -274,7 +279,6 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 		board2.add(atlas3.findRegion("8 - Copy"));
 		board2.add(atlas3.findRegion("10 - Copy"));
 		board2.add(atlas3.findRegion("11 - Copy"));
-		
 		
 	}
 
@@ -481,26 +485,26 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 
 		if (counter) {
 			batch.begin();
-			button.setVisible(false);
+			playerOrder.setVisible(false);
 			font2.draw(batch, orders.getOrderedPlayers().get(0).getName() + " "
-					+ "is going first", 15, 160);
+					+ "is going first", 30, 160);
 			batch.end();
 			batch.begin();
 			font2.draw(batch, orders.getOrderedPlayers().get(1).getName() + " "
-					+ "is going second", 15, 120);
+					+ "is going second", 30, 120);
 			batch.end();
 			if (GamePlayers.getGamePlayers().size() == 3) {
 				batch.begin();
 				font2.draw(batch, orders.getOrderedPlayers().get(2).getName() + " "
-						+ "is going third", 15, 80);
+						+ "is going third", 30, 80);
 				batch.end();
 			}
 			if (GamePlayers.getGamePlayers().size() == 4) {
 				batch.begin();
 				font2.draw(batch, orders.getOrderedPlayers().get(2).getName() + " "
-						+ "is going third", 15, 80);
+						+ "is going third", 30, 80);
 				font2.draw(batch, orders.getOrderedPlayers().get(3).getName() + " "
-						+ "is going fourth", 15, 40);
+						+ "is going fourth", 30, 40);
 				batch.end();
 			}
 		}
@@ -674,6 +678,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 
 		stage.act(Gdx.graphics.getDeltaTime());
 		stage.draw();
+		//stage.setDebugAll(true);
 	}
 
 	public void dispose() {
@@ -732,6 +737,90 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		if(CatanPieces.getSelectInitialPlacements()){
+			CatanPieces.findSettlement(screenX, Gdx.graphics.getHeight() - 1 - screenY);
+			for(int i = 0; i<CatanPieces.getGamePieces().size(); i++){
+				if(!CatanPieces.getGamePieces().get(i).isVisible()){
+					iCopy = i;
+					if(!piece1.equals("Road") && !piece2.equals("Ship")){
+					CatanPieces.getGamePieces().get(i).setPosition(CatanPieces.getPositions().get(CatanPieces.getSettlementIndexX()) - 5,
+							CatanPieces.getPositions().get(CatanPieces.getSettlementIndexY()) - 7);
+					CatanPieces.getGamePieces().get(i).setVisible(true);
+					}
+					else{
+						CatanPieces.findRoad(screenX, Gdx.graphics.getHeight() - 1 - screenY);
+						CatanPieces.midpoint(CatanPieces.getPositions().get(CatanPieces.getFirstX()), 
+								CatanPieces.getPositions().get(CatanPieces.getFirstY()), 
+								CatanPieces.getPositions().get(CatanPieces.getSecondX()), 
+								CatanPieces.getPositions().get(CatanPieces.getSecondY()));
+						int distance = 0;
+						int y = 15;
+						if(CatanPieces.getRoadRotation() != 90){
+							distance = CatanPieces.distance(CatanPieces.getPositions().get(CatanPieces.getFirstX()), 
+									CatanPieces.getPositions().get(CatanPieces.getFirstY()), 
+									CatanPieces.getPositions().get(CatanPieces.getSecondX()), 
+									CatanPieces.getPositions().get(CatanPieces.getSecondY()),10,0);
+						}
+						else{
+							distance = CatanPieces.distance(CatanPieces.getPositions().get(CatanPieces.getFirstX()), 
+									CatanPieces.getPositions().get(CatanPieces.getFirstY()), 
+									CatanPieces.getPositions().get(CatanPieces.getSecondX()), 
+									CatanPieces.getPositions().get(CatanPieces.getSecondY()),0,0);
+						}
+						CatanPieces.getGamePieces().get(i).setBounds(CatanPieces.getmpX() - distance/2, 
+								CatanPieces.getmpY() - y/2, distance, y);
+						CatanPieces.getGamePieces().get(i).setOrigin(distance/2, y/2);
+						CatanPieces.getGamePieces().get(i).setTransform(true);
+						CatanPieces.getGamePieces().get(i).setRotation(CatanPieces.getRoadRotation());
+						if(CatanPieces.getRoadRotation() == 90){
+						CatanPieces.getGamePieces().get(i).setScaleY(.5f);
+						CatanPieces.getGamePieces().get(i).setScaleX(.74f);
+						CatanPieces.getGamePieces().get(i).setX(CatanPieces.getGamePieces().get(i).getX() + .5f);
+						CatanPieces.getGamePieces().get(i).setY(CatanPieces.getGamePieces().get(i).getY() + .5f);
+						}
+						else{
+							CatanPieces.getGamePieces().get(i).setScaleY(.95f);
+							CatanPieces.getGamePieces().get(i).setScaleX(.95f);
+						}
+						CatanPieces.getGamePieces().get(i).setVisible(true);
+					}
+					if(finalizePosition == null){
+					skin.get("tStyle", TextButtonStyle.class).checked = null;//don't want the check to be blue 
+					finalizePosition = new TextButton("Finalize Position", skin, "tStyle");
+					finalizePosition.setBounds(300, 20, 250, 50);
+					stage.addActor(finalizePosition);
+					finalizePosition.addListener(new ChangeListener(){
+						@Override
+						public void changed(ChangeEvent event, Actor actor) {
+							CatanPieces.getGamePieces().get(iCopy).clearListeners();
+							if(iCopy != CatanPieces.getGamePieces().size() - 1){
+								CatanPieces.addGamePiecesListener(iCopy+1);
+							}
+							else if(piece1.equals("HarborSettlement") && piece2.equals("Settlement")){
+								piece1 = "Road";
+								piece2 = "Ship";
+								CatanPieces.selectPositions(piece1, piece2);
+							}
+							else if(iCopy == CatanPieces.getGamePieces().size() - 1 && piece1.equals("Road")
+									&& piece2.equals("Ship")){
+								counter = false;//don't draw the text on the screen anymore
+								actor.setVisible(false);//set the finalize position button so you can't see it
+								makeStartButton();
+							}
+						}
+
+						private void makeStartButton() {
+						TextButton startButton = new TextButton("Start Game", skin, "tStyle");
+						startButton.setBounds(300, 20, 250, 50);
+						stage.addActor(startButton);
+						}
+					});
+					}
+					break;
+				}
+			}
+			return false;
+		}
 		if (isMainIslandFull() && !finalizeNumbers.isVisible()) {
 			return false;
 		}
@@ -746,7 +835,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 									coords[j + 1]);
 							numberImages.get(i).setVisible(true);
 							openSpots[j / 2] = false;
-							multiplexer.addProcessor(stage);
+							multiplexer.addProcessor(0, stage);//stage has to be the first processor in the multiplexer!
 							break outer;
 						} else {
 							for (int k = 0; k < HexLocations.length; k++) {
@@ -756,7 +845,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 									HexLocations[k] = HexLocations[j / 2];
 									HexLocations[j / 2] = temp;
 									numberImages.get(i).setVisible(true);
-									multiplexer.addProcessor(stage);
+									multiplexer.addProcessor(0, stage);//stage has to be the first processor in the multiplexer!
 									break outer;
 								}
 							}
@@ -799,7 +888,6 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 	}
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
