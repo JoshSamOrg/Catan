@@ -5,64 +5,148 @@ filter: Linear,Linear
 repeat: none
 orangeCircle
   rotate: false
-  xy: 0, 0
-  size: 205, 200
-  orig: 205, 200
+  xy: 738, 92
+  size: 136, 133
+  orig: 136, 133
   offset: 0, 0
   index: -1
 orangeCity
   rotate: false
-  xy: 205, 0
-  size: 260, 258
-  orig: 260, 258
+  xy: 874, 92
+  size: 134, 133
+  orig: 134, 133
   offset: 0, 0
   index: -1
 orangeCrew
   rotate: false
-  xy: 465, 0
-  size: 177, 423
-  orig: 177, 423
+  xy: 656, 383
+  size: 77, 185
+  orig: 77, 185
   offset: 0, 0
   index: -1
 orangeHarborSettlement
   rotate: false
-  xy: 642, 0
-  size: 245, 227
-  orig: 245, 227
+  xy: 595, 225
+  size: 170, 158
+  orig: 170, 158
+  offset: 0, 0
+  index: -1
+orangeHarborSettlementFish
+  rotate: false
+  xy: 425, 225
+  size: 170, 157
+  orig: 170, 157
+  offset: 0, 0
+  index: -1
+orangeHarborSettlementOneCrew
+  rotate: false
+  xy: 765, 225
+  size: 170, 158
+  orig: 170, 158
+  offset: 0, 0
+  index: -1
+orangeHarborSettlementOneSpice
+  rotate: false
+  xy: 340, 383
+  size: 170, 158
+  orig: 170, 158
+  offset: 0, 0
+  index: -1
+orangeHarborSettlementSettler
+  rotate: false
+  xy: 255, 225
+  size: 170, 157
+  orig: 170, 157
+  offset: 0, 0
+  index: -1
+orangeHarborSettlementTwoCrew
+  rotate: false
+  xy: 0, 383
+  size: 170, 158
+  orig: 170, 158
+  offset: 0, 0
+  index: -1
+orangeHarborSettlementTwoSpices
+  rotate: false
+  xy: 170, 383
+  size: 170, 158
+  orig: 170, 158
   offset: 0, 0
   index: -1
 orangePirateShip
   rotate: false
-  xy: 0, 423
-  size: 282, 167
-  orig: 282, 167
+  xy: 0, 225
+  size: 255, 151
+  orig: 255, 151
   offset: 0, 0
   index: -1
 orangeRoad
   rotate: false
-  xy: 282, 423
-  size: 187, 43
-  orig: 187, 43
+  xy: 0, 0
+  size: 114, 26
+  orig: 114, 26
   offset: 0, 0
   index: -1
 orangeSettlement
   rotate: false
-  xy: 469, 423
-  size: 205, 140
-  orig: 205, 140
+  xy: 600, 92
+  size: 138, 94
+  orig: 138, 94
   offset: 0, 0
   index: -1
 orangeSettler
   rotate: false
-  xy: 674, 423
-  size: 190, 231
-  orig: 190, 231
+  xy: 510, 383
+  size: 146, 177
+  orig: 146, 177
   offset: 0, 0
   index: -1
 orangeShip
   rotate: false
-  xy: 0, 654
-  size: 257, 118
-  orig: 257, 118
+  xy: 514, 0
+  size: 200, 92
+  orig: 200, 92
+  offset: 0, 0
+  index: -1
+orangeShipFish
+  rotate: false
+  xy: 314, 0
+  size: 200, 92
+  orig: 200, 92
+  offset: 0, 0
+  index: -1
+orangeShipOneCrew
+  rotate: false
+  xy: 714, 0
+  size: 200, 92
+  orig: 200, 92
+  offset: 0, 0
+  index: -1
+orangeShipOneSpice
+  rotate: false
+  xy: 200, 92
+  size: 200, 92
+  orig: 200, 92
+  offset: 0, 0
+  index: -1
+orangeShipSettler
+  rotate: false
+  xy: 400, 92
+  size: 200, 92
+  orig: 200, 92
+  offset: 0, 0
+  index: -1
+orangeShipTwoCrew
+  rotate: false
+  xy: 0, 92
+  size: 200, 92
+  orig: 200, 92
+  offset: 0, 0
+  index: -1
+orangeShipTwoSpices
+  rotate: false
+  xy: 114, 0
+  size: 200, 92
+  orig: 200, 92
   offset: 0, 0
   index: -1

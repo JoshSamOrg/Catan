@@ -5,64 +5,148 @@ filter: Linear,Linear
 repeat: none
 whiteCircle
   rotate: false
-  xy: 707, 138
-  size: 186, 188
-  orig: 186, 188
+  xy: 0, 0
+  size: 88, 89
+  orig: 88, 89
   offset: 0, 0
   index: -1
 whiteCity
   rotate: false
-  xy: 0, 326
-  size: 275, 263
-  orig: 275, 263
+  xy: 88, 0
+  size: 92, 88
+  orig: 92, 88
   offset: 0, 0
   index: -1
 whiteCrew
   rotate: false
-  xy: 829, 326
-  size: 134, 333
-  orig: 134, 333
+  xy: 360, 0
+  size: 60, 149
+  orig: 60, 149
   offset: 0, 0
   index: -1
 whiteHarborSettlement
   rotate: false
-  xy: 497, 326
-  size: 332, 312
-  orig: 332, 312
+  xy: 400, 631
+  size: 200, 188
+  orig: 200, 188
+  offset: 0, 0
+  index: -1
+whiteHarborSettlementFish
+  rotate: false
+  xy: 200, 631
+  size: 200, 188
+  orig: 200, 188
+  offset: 0, 0
+  index: -1
+whiteHarborSettlementOneCrew
+  rotate: false
+  xy: 680, 443
+  size: 200, 188
+  orig: 200, 188
+  offset: 0, 0
+  index: -1
+whiteHarborSettlementOneSpice
+  rotate: false
+  xy: 280, 443
+  size: 200, 188
+  orig: 200, 188
+  offset: 0, 0
+  index: -1
+whiteHarborSettlementSettler
+  rotate: false
+  xy: 480, 443
+  size: 200, 188
+  orig: 200, 188
+  offset: 0, 0
+  index: -1
+whiteHarborSettlementTwoCrew
+  rotate: false
+  xy: 0, 631
+  size: 200, 188
+  orig: 200, 188
+  offset: 0, 0
+  index: -1
+whiteHarborSettlementTwoSpices
+  rotate: false
+  xy: 600, 631
+  size: 200, 188
+  orig: 200, 188
   offset: 0, 0
   index: -1
 whitePirateShip
   rotate: false
-  xy: 397, 138
-  size: 310, 187
-  orig: 310, 187
+  xy: 540, 0
+  size: 200, 121
+  orig: 200, 121
   offset: 0, 0
   index: -1
 whiteRoad
   rotate: false
-  xy: 167, 0
-  size: 546, 138
-  orig: 546, 138
+  xy: 180, 0
+  size: 180, 46
+  orig: 180, 46
   offset: 0, 0
   index: -1
 whiteSettlement
   rotate: false
-  xy: 0, 0
-  size: 167, 115
-  orig: 167, 115
+  xy: 420, 0
+  size: 120, 83
+  orig: 120, 83
   offset: 0, 0
   index: -1
 whiteSettler
   rotate: false
-  xy: 275, 326
-  size: 222, 270
-  orig: 222, 270
+  xy: 740, 0
+  size: 150, 183
+  orig: 150, 183
   offset: 0, 0
   index: -1
 whiteShip
   rotate: false
-  xy: 0, 138
-  size: 397, 184
-  orig: 397, 184
+  xy: 0, 183
+  size: 280, 130
+  orig: 280, 130
+  offset: 0, 0
+  index: -1
+whiteShipFish
+  rotate: false
+  xy: 560, 183
+  size: 280, 130
+  orig: 280, 130
+  offset: 0, 0
+  index: -1
+whiteShipOneCrew
+  rotate: false
+  xy: 280, 183
+  size: 280, 130
+  orig: 280, 130
+  offset: 0, 0
+  index: -1
+whiteShipOneSpice
+  rotate: false
+  xy: 0, 443
+  size: 280, 130
+  orig: 280, 130
+  offset: 0, 0
+  index: -1
+whiteShipSettler
+  rotate: false
+  xy: 280, 313
+  size: 280, 130
+  orig: 280, 130
+  offset: 0, 0
+  index: -1
+whiteShipTwoCrew
+  rotate: false
+  xy: 560, 313
+  size: 280, 130
+  orig: 280, 130
+  offset: 0, 0
+  index: -1
+whiteShipTwoSpices
+  rotate: false
+  xy: 0, 313
+  size: 280, 130
+  orig: 280, 130
   offset: 0, 0
   index: -1

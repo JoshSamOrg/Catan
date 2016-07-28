@@ -1,67 +1,151 @@
 Blue.png
-size: 512, 1024
+size: 1024, 1024
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 blueCircle
   rotate: false
-  xy: 0, 0
+  xy: 195, 420
   size: 214, 213
   orig: 214, 213
   offset: 0, 0
   index: -1
 blueCity
   rotate: false
-  xy: 214, 0
+  xy: 234, 0
   size: 176, 174
   orig: 176, 174
   offset: 0, 0
   index: -1
 blueCrew
   rotate: false
-  xy: 390, 0
+  xy: 0, 0
   size: 96, 232
   orig: 96, 232
   offset: 0, 0
   index: -1
 blueHarborSettlement
   rotate: false
-  xy: 0, 232
+  xy: 390, 245
+  size: 195, 175
+  orig: 195, 175
+  offset: 0, 0
+  index: -1
+blueHarborSettlementFish
+  rotate: false
+  xy: 585, 245
+  size: 195, 175
+  orig: 195, 175
+  offset: 0, 0
+  index: -1
+blueHarborSettlementOneCrew
+  rotate: false
+  xy: 780, 245
+  size: 195, 175
+  orig: 195, 175
+  offset: 0, 0
+  index: -1
+blueHarborSettlementOneSpice
+  rotate: false
+  xy: 195, 245
+  size: 195, 175
+  orig: 195, 175
+  offset: 0, 0
+  index: -1
+blueHarborSettlementSettler
+  rotate: false
+  xy: 0, 420
+  size: 195, 175
+  orig: 195, 175
+  offset: 0, 0
+  index: -1
+blueHarborSettlementTwoCrew
+  rotate: false
+  xy: 0, 245
+  size: 195, 175
+  orig: 195, 175
+  offset: 0, 0
+  index: -1
+blueHarborSettlementTwoSpices
+  rotate: false
+  xy: 782, 0
   size: 195, 175
   orig: 195, 175
   offset: 0, 0
   index: -1
 bluePirateShip
   rotate: false
-  xy: 195, 232
+  xy: 409, 420
   size: 267, 162
   orig: 267, 162
   offset: 0, 0
   index: -1
 blueRoad
   rotate: false
-  xy: 0, 407
+  xy: 410, 0
   size: 184, 41
   orig: 184, 41
   offset: 0, 0
   index: -1
 blueSettlement
   rotate: false
-  xy: 184, 407
+  xy: 96, 0
   size: 138, 95
   orig: 138, 95
   offset: 0, 0
   index: -1
 blueSettler
   rotate: false
-  xy: 322, 407
+  xy: 594, 0
   size: 188, 245
   orig: 188, 245
   offset: 0, 0
   index: -1
 blueShip
   rotate: false
-  xy: 0, 652
+  xy: 0, 781
+  size: 313, 148
+  orig: 313, 148
+  offset: 0, 0
+  index: -1
+blueShipFish
+  rotate: false
+  xy: 626, 633
+  size: 313, 148
+  orig: 313, 148
+  offset: 0, 0
+  index: -1
+blueShipOneCrew
+  rotate: false
+  xy: 313, 781
+  size: 313, 148
+  orig: 313, 148
+  offset: 0, 0
+  index: -1
+blueShipOneSpice
+  rotate: false
+  xy: 626, 781
+  size: 397, 188
+  orig: 397, 188
+  offset: 0, 0
+  index: -1
+blueShipSettler
+  rotate: false
+  xy: 0, 633
+  size: 313, 148
+  orig: 313, 148
+  offset: 0, 0
+  index: -1
+blueShipTwoCrew
+  rotate: false
+  xy: 676, 420
+  size: 313, 148
+  orig: 313, 148
+  offset: 0, 0
+  index: -1
+blueShipTwoSpices
+  rotate: false
+  xy: 313, 633
   size: 313, 148
   orig: 313, 148
   offset: 0, 0

@@ -760,7 +760,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 			for(int i = 0; i<CatanPieces.getGamePieces().size(); i++){
 				if(!CatanPieces.getGamePieces().get(i).isVisible()){
 					iCopy = i;
-					if(!piece1.equals("Road") && !piece2.equals("Ship")){
+					if(!piece1.equals("Road") && !piece2.equals("ShipSettler")){
 					CatanPieces.getGamePieces().get(i).setPosition(CatanPieces.getPositions().get(CatanPieces.getSettlementIndexX()) - 5,
 							CatanPieces.getPositions().get(CatanPieces.getSettlementIndexY()) - 7);
 					CatanPieces.getGamePieces().get(i).setVisible(true);
@@ -816,11 +816,11 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 							}
 							else if(piece1.equals("HarborSettlement") && piece2.equals("Settlement")){
 								piece1 = "Road";
-								piece2 = "Ship";
+								piece2 = "ShipSettler";
 								CatanPieces.selectPositions(piece1, piece2);
 							}
 							else if(iCopy == CatanPieces.getGamePieces().size() - 1 && piece1.equals("Road")
-									&& piece2.equals("Ship")){
+									&& piece2.equals("ShipSettler")){
 								counter = false;//don't draw the text on the screen anymore
 								actor.setVisible(false);//set the finalize position button so you can't see it
 								makeStartButton();
