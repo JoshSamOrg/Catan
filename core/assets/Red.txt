@@ -1,67 +1,151 @@
 Red.png
-size: 1000, 692
+size: 1024, 1024
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 redCircle
   rotate: false
-  xy: 0, 0
-  size: 199, 197
-  orig: 199, 197
+  xy: 831, 103
+  size: 126, 125
+  orig: 126, 125
   offset: 0, 0
   index: -1
 redCity
   rotate: false
-  xy: 199, 0
-  size: 238, 236
-  orig: 238, 236
+  xy: 284, 228
+  size: 165, 164
+  orig: 165, 164
   offset: 0, 0
   index: -1
 redCrew
   rotate: false
-  xy: 437, 0
+  xy: 213, 618
   size: 86, 204
   orig: 86, 204
   offset: 0, 0
   index: -1
 redHarborSettlement
   rotate: false
-  xy: 523, 0
-  size: 320, 293
-  orig: 320, 293
+  xy: 0, 423
+  size: 213, 195
+  orig: 213, 195
+  offset: 0, 0
+  index: -1
+redHarborSettlementFish
+  rotate: false
+  xy: 662, 228
+  size: 213, 195
+  orig: 213, 195
+  offset: 0, 0
+  index: -1
+redHarborSettlementOneCrew
+  rotate: false
+  xy: 213, 423
+  size: 213, 195
+  orig: 213, 195
+  offset: 0, 0
+  index: -1
+redHarborSettlementOneSpice
+  rotate: false
+  xy: 449, 228
+  size: 213, 195
+  orig: 213, 195
+  offset: 0, 0
+  index: -1
+redHarborSettlementSettler
+  rotate: false
+  xy: 426, 423
+  size: 213, 195
+  orig: 213, 195
+  offset: 0, 0
+  index: -1
+redHarborSettlementTwoCrew
+  rotate: false
+  xy: 639, 423
+  size: 213, 195
+  orig: 213, 195
+  offset: 0, 0
+  index: -1
+redHarborSettlementTwoSpices
+  rotate: false
+  xy: 0, 618
+  size: 213, 195
+  orig: 213, 195
   offset: 0, 0
   index: -1
 redPirateShip
   rotate: false
-  xy: 0, 293
+  xy: 299, 618
   size: 388, 238
   orig: 388, 238
   offset: 0, 0
   index: -1
 redRoad
   rotate: false
-  xy: 388, 293
+  xy: 0, 0
   size: 224, 48
   orig: 224, 48
   offset: 0, 0
   index: -1
 redSettlement
   rotate: false
-  xy: 612, 293
+  xy: 660, 103
   size: 171, 109
   orig: 171, 109
   offset: 0, 0
   index: -1
 redSettler
   rotate: false
-  xy: 783, 293
+  xy: 687, 618
   size: 217, 266
   orig: 217, 266
   offset: 0, 0
   index: -1
 redShip
   rotate: false
-  xy: 0, 559
+  xy: 224, 0
+  size: 220, 103
+  orig: 220, 103
+  offset: 0, 0
+  index: -1
+redShipFish
+  rotate: false
+  xy: 444, 0
+  size: 220, 103
+  orig: 220, 103
+  offset: 0, 0
+  index: -1
+redShipOneCrew
+  rotate: false
+  xy: 664, 0
+  size: 220, 103
+  orig: 220, 103
+  offset: 0, 0
+  index: -1
+redShipOneSpice
+  rotate: false
+  xy: 440, 103
+  size: 220, 103
+  orig: 220, 103
+  offset: 0, 0
+  index: -1
+redShipSettler
+  rotate: false
+  xy: 0, 103
+  size: 220, 103
+  orig: 220, 103
+  offset: 0, 0
+  index: -1
+redShipTwoCrew
+  rotate: false
+  xy: 220, 103
+  size: 220, 103
+  orig: 220, 103
+  offset: 0, 0
+  index: -1
+redShipTwoSpices
+  rotate: false
+  xy: 0, 228
   size: 284, 133
   orig: 284, 133
   offset: 0, 0

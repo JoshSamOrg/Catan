@@ -1,10 +1,17 @@
 package com.catan;
 
 import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -13,7 +20,7 @@ import com.catan.Player.Order;
 //This class allows the player to select their starting positions 
 //of the game. They are able to put a Harbor Settlement, Settlement, Road, and Ship
 //on the board
-public class CatanPieces{
+public class CatanPieces implements InputProcessor, Screen{
     private static float mpX = 0;
     private static float mpY = 0;
     private static int firstX = -1;
@@ -32,6 +39,13 @@ public class CatanPieces{
 	private static ArrayList<ImageButton> gamePieces = new ArrayList<ImageButton>();
 	private static HexGeneratorScreen hexObj = new HexGeneratorScreen(null);
 	private static boolean selectInitialPlacements = false;
+	private Stage stage;
+	private Texture texture;
+	private CatanGame game;
+	
+	public CatanPieces(CatanGame game){
+		this.game = game;
+	}
 	
 	//determines the midpoint of (f,g) and (h,i)
 	public static void midpoint(int f, int g, int h, int i){
@@ -96,7 +110,7 @@ public class CatanPieces{
 		else if((y > b && x < a) || (b > y && a < x)){
 			roadRotation = -30;
 		}
-		else if((y > b && x > a) || (b > y && a < x)){
+		else if((y > b && x > a) || (b > y && a > x)){
 			roadRotation = 30;
 		}
 	}
@@ -668,5 +682,110 @@ public class CatanPieces{
 		positions.add(279);
 		positions.add(503);//76
 		positions.add(254);
+	}
+
+	@Override
+	public boolean keyDown(int keycode) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean keyUp(int keycode) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean keyTyped(char character) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		System.out.println(screenX);
+		System.out.println(Gdx.graphics.getHeight() - 1 - screenY);
+		findRoad(screenX, Gdx.graphics.getHeight() - 1 - screenY);
+		System.out.println("settlement 1 " + positions.get(firstX) + "," + positions.get(firstY) + " " + firstX);
+		System.out.println("settlement 2 " + positions.get(secondX) + "," + positions.get(secondY) + " " + secondX);
+		System.out.println("Angle " + roadRotation);
+		return false;
+	}
+
+	@Override
+	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean touchDragged(int screenX, int screenY, int pointer) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean mouseMoved(int screenX, int screenY) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean scrolled(int amount) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void show() {
+		findPositions();
+		stage = new Stage();
+		Gdx.input.setInputProcessor(this);
+		texture = new Texture(Gdx.files.internal("Scenario5Final.png"));
+		TextureRegion region = new TextureRegion(texture);
+		Image img = new Image(new TextureRegionDrawable(region));
+		img.setBounds(0, 0, 650, 650);
+		stage.addActor(img);
+		
+	}
+
+	@Override
+	public void render(float delta) {
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		Gdx.gl.glClearColor(1, 0, 0, 1);
+		stage.act(Gdx.graphics.getDeltaTime());
+		stage.draw();
+		
+	}
+
+	@Override
+	public void resize(int width, int height) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void pause() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void resume() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void hide() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void dispose() {
+		Gdx.input.setInputProcessor(null);
+		
 	}
 }
