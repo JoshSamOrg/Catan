@@ -2,6 +2,7 @@ package com.catan;
 
 public class SettlementLocationIndices {
 	private static boolean settlementLocations[]; //holds the information for whether or not a settlement location is occupied or not.
+	private static boolean harborSettlementLocations[];
 	private static int roadShip[];
 	private static String settlementColors[];
 	private static String roadColors[];
@@ -10,11 +11,13 @@ public class SettlementLocationIndices {
 
 	public SettlementLocationIndices() {
 		roadShip=new int[232];
+		harborSettlementLocations=new boolean[177];
 		settlementLocations = new boolean[177];
 		settlementColors= new String[177];
 		roadColors=new String[232];
 		for (int i = 0; i < settlementLocations.length; i++) {
 			settlementLocations[i] = false;
+			harborSettlementLocations[i] = false;
 			
 		}
 		for (int i=0; i<roadShip.length; i++) {
@@ -26,7 +29,7 @@ public class SettlementLocationIndices {
 	 * y the y coordinate of a settlement location
 	 * Returns the index of the newly marked hex (from the settlementLocations array).
 	 */
-	public static int getHexLocations(int x, int y) {
+	public static int getSettlementLocation(int x, int y) {
 		if (x == 141 && y == 438) {
 			return 0;
 		} else if (x == 119 && y == 401) {
@@ -1092,53 +1095,53 @@ public class SettlementLocationIndices {
 
 		if (a == b && b != 72) {
 			CatanPieces.findSettlement(x - 20, y);
-			c = getHexLocations(
+			c = getSettlementLocation(
 					CatanPieces.getPositions().get(
 							CatanPieces.getSettlementIndexX()),
 					CatanPieces.getPositions().get(
 							CatanPieces.getSettlementIndexY()));
 			CatanPieces.findSettlement(x + 20, y);
-			d = getHexLocations(
+			d = getSettlementLocation(
 					CatanPieces.getPositions().get(
 							CatanPieces.getSettlementIndexX()),
 					CatanPieces.getPositions().get(
 							CatanPieces.getSettlementIndexY()));
 			CatanPieces.findSettlement(x, y - 20);
-			e = getHexLocations(
+			e = getSettlementLocation(
 					CatanPieces.getPositions().get(
 							CatanPieces.getSettlementIndexX()),
 					CatanPieces.getPositions().get(
 							CatanPieces.getSettlementIndexY()));
 
-			if (settlementLocations[c] == false
-					&& settlementLocations[d] == false
-					&& settlementLocations[e] == false) {
+			if ((settlementLocations[c] == false && harborSettlementLocations[c] == false)
+					&& (settlementLocations[d] == false && harborSettlementLocations[d] == false)
+					&& (settlementLocations[e] == false && harborSettlementLocations[e] == false)) {
 				two = true;
 			} else {
 				two = false;
 			}
 		} else {
 			CatanPieces.findSettlement(x - 20, y);
-			c = getHexLocations(
+			c = getSettlementLocation(
 					CatanPieces.getPositions().get(
 							CatanPieces.getSettlementIndexX()),
 					CatanPieces.getPositions().get(
 							CatanPieces.getSettlementIndexY()));
 			CatanPieces.findSettlement(x + 20, y);
-			d = getHexLocations(
+			d = getSettlementLocation(
 					CatanPieces.getPositions().get(
 							CatanPieces.getSettlementIndexX()),
 					CatanPieces.getPositions().get(
 							CatanPieces.getSettlementIndexY()));
 			CatanPieces.findSettlement(x, y + 20);
-			e = getHexLocations(
+			e = getSettlementLocation(
 					CatanPieces.getPositions().get(
 							CatanPieces.getSettlementIndexX()),
 					CatanPieces.getPositions().get(
 							CatanPieces.getSettlementIndexY()));
-			if (settlementLocations[c] == false
-					&& settlementLocations[d] == false
-					&& settlementLocations[e] == false) {
+			if ((settlementLocations[c] == false && harborSettlementLocations[c] == false)
+					&& (settlementLocations[d] == false && harborSettlementLocations[d] == false)
+					&& (settlementLocations[e] == false && harborSettlementLocations[e] == false)) {
 				two = true;
 			} else {
 				two = false;
@@ -1150,6 +1153,9 @@ public class SettlementLocationIndices {
 
 	public static boolean[] getSettlementLocations() { //returns settlementLocations arraylist.
 		return settlementLocations;
+	}
+	public static boolean[] getHarborSettlementLocations() {
+		return harborSettlementLocations;
 	}
 	public static String[] getSettlementColors() {
 		return settlementColors;
