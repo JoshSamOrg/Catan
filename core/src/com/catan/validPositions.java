@@ -302,7 +302,7 @@ public class validPositions implements Screen, InputProcessor {
 			String color) {
 		if (text.equals("settlement")) {
 			System.out.println("settlement");
-			CatanPieces.findSettlement(x, y);
+			CatanPieces.findSettlement(x, y);  //finds the nearest settlement from the location you clicked on the board.
 			set = findHex(
 					CatanPieces.getPositions().get(
 							CatanPieces.getSettlementIndexX()) - 20,
@@ -328,19 +328,20 @@ public class validPositions implements Screen, InputProcessor {
 							CatanPieces.getSettlementIndexX()),
 					CatanPieces.getPositions().get(
 							CatanPieces.getSettlementIndexY()));
-			if ((value.getLand()[set] == 'l' || (value.getLand()[set2] == 'l')
+			if ((value.getLand()[set] == 'l' || (value.getLand()[set2] == 'l') //makes sure all three sides of the placement are land hexes
 					|| (value.getLand()[set3] == 'l') || value.getLand()[set4] == 'l')
 					&& (value.getLand()[set] != 'u'
 							&& value.getLand()[set2] != 'u'
 							&& value.getLand()[set3] != 'u' && value.getLand()[set4] != 'u')
 					&& (SettlementLocationIndices.getSettlementLocations()[counter] == false && SettlementLocationIndices
+					// makes sure the placement is not already occupied by another piece.																			
 							.getHarborSettlementLocations()[counter] == false)
-					&& (SettlementLocationIndices.twoAway(
+					&& (SettlementLocationIndices.twoAway( //makes sure placement follows the two-away rule of the game.
 							CatanPieces.getPositions().get(
 									CatanPieces.getSettlementIndexX()),
 							CatanPieces.getPositions().get(
 									CatanPieces.getSettlementIndexY())))) {
-				SettlementLocationIndices.getSettlementLocations()[counter] = true;
+				SettlementLocationIndices.getSettlementLocations()[counter] = true; //sets the value of the settlement location to occupied (true).
 				SettlementLocationIndices.getSettlementColors()[counter] = color;
 
 				settlement = true;
@@ -491,15 +492,15 @@ public class validPositions implements Screen, InputProcessor {
 		} else if (text.equals("road")) {
 			System.out.println("road");
 			CatanPieces.findRoad(x, y);
-			CatanPieces.midpoint(
+			CatanPieces.midpoint(  //calculates the midpoint of the road location.
 					CatanPieces.getPositions().get(CatanPieces.getFirstX()),
 					CatanPieces.getPositions().get(CatanPieces.getFirstY()),
 					CatanPieces.getPositions().get(CatanPieces.getSecondX()),
 					CatanPieces.getPositions().get(CatanPieces.getSecondY()));
 
 			int distance = 0;
-			if (CatanPieces.getRoadRotation() != 90) {
-				distance = CatanPieces
+			if (CatanPieces.getRoadRotation() != 90) {  //if the road rotation isn't 90 degrees.
+				distance = CatanPieces //sets distance for the bounds of the road.
 						.distance(
 								CatanPieces.getPositions().get(
 										CatanPieces.getFirstX()),
@@ -511,7 +512,7 @@ public class validPositions implements Screen, InputProcessor {
 										CatanPieces.getSecondY()), 10, 0);
 			} else {
 				distance = CatanPieces
-						.distance(
+						.distance( //sets distance for the bounds of the road.
 								CatanPieces.getPositions().get(
 										CatanPieces.getFirstX()),
 								CatanPieces.getPositions().get(
@@ -522,13 +523,13 @@ public class validPositions implements Screen, InputProcessor {
 										CatanPieces.getSecondY()), 0, 0);
 			}
 
-			button.setBounds(CatanPieces.getmpX() - (button.getWidth() / 2),
+			button.setBounds(CatanPieces.getmpX() - (button.getWidth() / 2), //sets bounds of the road.
 					CatanPieces.getmpY() - (button.getHeight() / 2), distance,
 					15);
 			button.setOrigin(button.getWidth() / 2, button.getHeight() / 2);
 			button.setTransform(true);
 			button.setRotation(CatanPieces.getRoadRotation());
-			mid = SettlementLocationIndices.getRoadLocations(
+			mid = SettlementLocationIndices.getRoadLocations(  //location of the road.
 					CatanPieces.getmpX(), CatanPieces.getmpY());
 			if (CatanPieces.getRoadRotation() == 90) {
 				button.setScaleY(.5f);
@@ -540,13 +541,13 @@ public class validPositions implements Screen, InputProcessor {
 				button.setScaleX(.95f);
 			}
 
-			set3 = SettlementLocationIndices.getSettlementLocation(CatanPieces
+			set3 = SettlementLocationIndices.getSettlementLocation(CatanPieces //first possible settlement on the road.
 					.getPositions().get(CatanPieces.getFirstX()), CatanPieces
 					.getPositions().get(CatanPieces.getFirstY()));
-			set4 = SettlementLocationIndices.getSettlementLocation(CatanPieces
+			set4 = SettlementLocationIndices.getSettlementLocation(CatanPieces //second possible settlement on the road.
 					.getPositions().get(CatanPieces.getSecondX()), CatanPieces
 					.getPositions().get(CatanPieces.getSecondY()));
-			if ((SettlementLocationIndices.getSettlementLocations()[set3]
+			if ((SettlementLocationIndices.getSettlementLocations()[set3]  //makes sure a similar-colored settlement is at the end of a road.
 					|| SettlementLocationIndices.getHarborSettlementLocations()[set3]
 					|| SettlementLocationIndices.getSettlementLocations()[set4] || SettlementLocationIndices
 						.getHarborSettlementLocations()[set4])
@@ -556,14 +557,14 @@ public class validPositions implements Screen, InputProcessor {
 									.getSettlementColors()[set4])))
 					&& (SettlementLocationIndices.getRoadShip()[mid] == 0)) {
 				System.out.println("bottom");
-				if (CatanPieces.getRoadRotation() == 90) {
+				if (CatanPieces.getRoadRotation() == 90) {  //if the road is 90 degrees.
 					System.out.println("in the 90 section1");
 					set = findHex((int) (CatanPieces.getmpX() - 20),
 							(int) (CatanPieces.getmpY()));
 					set2 = findHex((int) (CatanPieces.getmpX() + 20),
 							(int) (CatanPieces.getmpY()));
 					if (value.getLand()[set] == 'l'
-							|| value.getLand()[set2] == 'l') {
+							|| value.getLand()[set2] == 'l') { //makes sure at least one of the two hexes the road is on is a land hex.
 						SettlementLocationIndices.getRoadColors()[mid] = color;
 						SettlementLocationIndices.getRoadShip()[mid] = 1;
 
@@ -572,14 +573,14 @@ public class validPositions implements Screen, InputProcessor {
 						settlement = false;
 					}
 				} else if (CatanPieces.getRoadRotation() == -30
-						|| CatanPieces.getRoadRotation() == 30) {
+						|| CatanPieces.getRoadRotation() == 30) {  //if the road is 30 or -30 degrees.
 					System.out.println("in the +-30 section1");
 					set = findHex((int) CatanPieces.getmpX(),
 							(int) CatanPieces.getmpY() - 15);
 					set2 = findHex((int) CatanPieces.getmpX(),
 							(int) CatanPieces.getmpY() + 15);
 					if (value.getLand()[set] == 'l'
-							|| value.getLand()[set2] == 'l') {
+							|| value.getLand()[set2] == 'l') { //makes sure at least one of the two hexes the road is on is a land hex.
 						System.out.println("it is true");
 						SettlementLocationIndices.getRoadColors()[mid] = color;
 						SettlementLocationIndices.getRoadShip()[mid] = 1;
@@ -588,19 +589,19 @@ public class validPositions implements Screen, InputProcessor {
 						settlement = false;
 					}
 				}
-			} else if (SettlementLocationIndices.getSettlementLocations()[set3] == false
+			} else if (SettlementLocationIndices.getSettlementLocations()[set3] == false //if there is not a settlement on the end of the road.
 					&& SettlementLocationIndices.getHarborSettlementLocations()[set3] == false
 					&& SettlementLocationIndices.getSettlementLocations()[set4] == false
 					&& SettlementLocationIndices.getHarborSettlementLocations()[set4] == false) {
 				System.out.println("here in the end");
-				if (CatanPieces.getRoadRotation() == 90) {
+				if (CatanPieces.getRoadRotation() == 90) { //if road rotation is 90 degrees.
 
 					System.out.println("1");
 					CatanPieces.findRoad((int) CatanPieces.getmpX() - 15,
 							(int) CatanPieces.getmpY() + 15);
-					a = CatanPieces.getmpX();
-					b = CatanPieces.getmpY();
-					CatanPieces.midpoint(
+					a = CatanPieces.getmpX(); //x coordinate of midpoint.
+					b = CatanPieces.getmpY(); //y coordinate of midpoint
+					CatanPieces.midpoint( //finds midpoint of road.
 							CatanPieces.getPositions().get(
 									CatanPieces.getFirstX()),
 							CatanPieces.getPositions().get(
@@ -611,7 +612,7 @@ public class validPositions implements Screen, InputProcessor {
 									CatanPieces.getSecondY()));
 					road1 = SettlementLocationIndices.getRoadLocations(
 							CatanPieces.getmpX(), CatanPieces.getmpY());
-					CatanPieces.findRoad((int) a + 15, (int) b + 15);
+					CatanPieces.findRoad((int) a + 15, (int) b + 15); //finds nearest road location
 					CatanPieces.midpoint(
 							CatanPieces.getPositions().get(
 									CatanPieces.getFirstX()),
@@ -623,7 +624,7 @@ public class validPositions implements Screen, InputProcessor {
 									CatanPieces.getSecondY()));
 					road2 = SettlementLocationIndices.getRoadLocations(
 							CatanPieces.getmpX(), CatanPieces.getmpY());
-					CatanPieces.findRoad((int) a + 15, (int) b - 15);
+					CatanPieces.findRoad((int) a + 15, (int) b - 15); //finds nearest road location
 					CatanPieces.midpoint(
 							CatanPieces.getPositions().get(
 									CatanPieces.getFirstX()),
@@ -635,7 +636,7 @@ public class validPositions implements Screen, InputProcessor {
 									CatanPieces.getSecondY()));
 					road3 = SettlementLocationIndices.getRoadLocations(
 							CatanPieces.getmpX(), CatanPieces.getmpY());
-					CatanPieces.findRoad((int) a - 15, (int) b - 15);
+					CatanPieces.findRoad((int) a - 15, (int) b - 15); //finds nearest road location
 					CatanPieces.midpoint(
 							CatanPieces.getPositions().get(
 									CatanPieces.getFirstX()),
@@ -647,7 +648,7 @@ public class validPositions implements Screen, InputProcessor {
 									CatanPieces.getSecondY()));
 					road4 = SettlementLocationIndices.getRoadLocations(
 							CatanPieces.getmpX(), CatanPieces.getmpY());
-					if ((SettlementLocationIndices.getRoadShip()[road1] == 1 && color
+					if ((SettlementLocationIndices.getRoadShip()[road1] == 1 && color //makes sure road and settlement are same color.
 							.equals(SettlementLocationIndices.getRoadColors()[road1]))
 							|| (SettlementLocationIndices.getRoadShip()[road2] == 1 && color
 									.equals(SettlementLocationIndices
