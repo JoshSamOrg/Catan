@@ -113,9 +113,10 @@ public class CatanPieces implements InputProcessor, Screen{
 		else if((y > b && x > a) || (b > y && a > x)){
 			roadRotation = 30;
 		}
+		//System.out.println("roadRotation is: " + roadRotation);
 	}
 	
-	//Given a point x,y determines the closest settlment position to that point, and stores this
+	//Given a point x,y determines the closest settlement position to that point, and stores this
 	//information into settlementIndexX and settlementIndexY, which are indices into
 	//the positions arraylist
 	public static void findSettlement(int x, int y){

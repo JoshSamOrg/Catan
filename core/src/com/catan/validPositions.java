@@ -498,6 +498,9 @@ public class validPositions implements Screen, InputProcessor {
 					CatanPieces.getPositions().get(CatanPieces.getSecondX()),
 					CatanPieces.getPositions().get(CatanPieces.getSecondY()));
 
+			a = CatanPieces.getmpX(); //x coordinate of midpoint.
+			b = CatanPieces.getmpY(); //y coordinate of midpoint.
+
 			int distance = 0;
 			if (CatanPieces.getRoadRotation() != 90) {  //if the road rotation isn't 90 degrees.
 				distance = CatanPieces //sets distance for the bounds of the road.
@@ -529,8 +532,9 @@ public class validPositions implements Screen, InputProcessor {
 			button.setOrigin(button.getWidth() / 2, button.getHeight() / 2);
 			button.setTransform(true);
 			button.setRotation(CatanPieces.getRoadRotation());
+			
 			mid = SettlementLocationIndices.getRoadLocations(  //location of the road.
-					CatanPieces.getmpX(), CatanPieces.getmpY());
+					a, b);
 			if (CatanPieces.getRoadRotation() == 90) {
 				button.setScaleY(.5f);
 				button.setScaleX(.74f);
@@ -558,7 +562,7 @@ public class validPositions implements Screen, InputProcessor {
 					&& (SettlementLocationIndices.getRoadShip()[mid] == 0)) {
 				System.out.println("bottom");
 				if (CatanPieces.getRoadRotation() == 90) {  //if the road is 90 degrees.
-					System.out.println("in the 90 section1");
+					//System.out.println("in the 90 section1");
 					set = findHex((int) (CatanPieces.getmpX() - 20),
 							(int) (CatanPieces.getmpY()));
 					set2 = findHex((int) (CatanPieces.getmpX() + 20),
@@ -574,7 +578,7 @@ public class validPositions implements Screen, InputProcessor {
 					}
 				} else if (CatanPieces.getRoadRotation() == -30
 						|| CatanPieces.getRoadRotation() == 30) {  //if the road is 30 or -30 degrees.
-					System.out.println("in the +-30 section1");
+					//System.out.println("in the +-30 section1");
 					set = findHex((int) CatanPieces.getmpX(),
 							(int) CatanPieces.getmpY() - 15);
 					set2 = findHex((int) CatanPieces.getmpX(),
@@ -593,14 +597,11 @@ public class validPositions implements Screen, InputProcessor {
 					&& SettlementLocationIndices.getHarborSettlementLocations()[set3] == false
 					&& SettlementLocationIndices.getSettlementLocations()[set4] == false
 					&& SettlementLocationIndices.getHarborSettlementLocations()[set4] == false) {
-				System.out.println("here in the end");
+				//System.out.println("not a settlement road");
 				if (CatanPieces.getRoadRotation() == 90) { //if road rotation is 90 degrees.
-
-					System.out.println("1");
-					CatanPieces.findRoad((int) CatanPieces.getmpX() - 15,
-							(int) CatanPieces.getmpY() + 15);
-					a = CatanPieces.getmpX(); //x coordinate of midpoint.
-					b = CatanPieces.getmpY(); //y coordinate of midpoint
+					//System.out.println("1");
+					CatanPieces.findRoad((int) a - 10,
+							(int) b + 17);
 					CatanPieces.midpoint( //finds midpoint of road.
 							CatanPieces.getPositions().get(
 									CatanPieces.getFirstX()),
@@ -612,7 +613,7 @@ public class validPositions implements Screen, InputProcessor {
 									CatanPieces.getSecondY()));
 					road1 = SettlementLocationIndices.getRoadLocations(
 							CatanPieces.getmpX(), CatanPieces.getmpY());
-					CatanPieces.findRoad((int) a + 15, (int) b + 15); //finds nearest road location
+					CatanPieces.findRoad((int) a + 10, (int) b + 17); //finds nearest road location
 					CatanPieces.midpoint(
 							CatanPieces.getPositions().get(
 									CatanPieces.getFirstX()),
@@ -624,7 +625,7 @@ public class validPositions implements Screen, InputProcessor {
 									CatanPieces.getSecondY()));
 					road2 = SettlementLocationIndices.getRoadLocations(
 							CatanPieces.getmpX(), CatanPieces.getmpY());
-					CatanPieces.findRoad((int) a + 15, (int) b - 15); //finds nearest road location
+					CatanPieces.findRoad((int) a + 10, (int) b - 17); //finds nearest road location
 					CatanPieces.midpoint(
 							CatanPieces.getPositions().get(
 									CatanPieces.getFirstX()),
@@ -636,7 +637,7 @@ public class validPositions implements Screen, InputProcessor {
 									CatanPieces.getSecondY()));
 					road3 = SettlementLocationIndices.getRoadLocations(
 							CatanPieces.getmpX(), CatanPieces.getmpY());
-					CatanPieces.findRoad((int) a - 15, (int) b - 15); //finds nearest road location
+					CatanPieces.findRoad((int) a - 10, (int) b - 17); //finds nearest road location
 					CatanPieces.midpoint(
 							CatanPieces.getPositions().get(
 									CatanPieces.getFirstX()),
@@ -659,10 +660,10 @@ public class validPositions implements Screen, InputProcessor {
 							|| (SettlementLocationIndices.getRoadShip()[road4] == 1 && color
 									.equals(SettlementLocationIndices
 											.getRoadColors()[road4]))) {
-						set = findHex((int) (CatanPieces.getmpX() - 20),
-								(int) (CatanPieces.getmpY()));
-						set2 = findHex((int) (CatanPieces.getmpX() + 20),
-								(int) (CatanPieces.getmpY()));
+						set = findHex((int) a - 20,
+								(int) b);
+						set2 = findHex((int) a + 20,
+								(int) b);
 						if (value.getLand()[set] == 'l'
 								|| value.getLand()[set2] == 'l') {
 							SettlementLocationIndices.getRoadColors()[mid] = color;
@@ -675,11 +676,9 @@ public class validPositions implements Screen, InputProcessor {
 						settlement = false;
 					}
 				} else if (CatanPieces.getRoadRotation() == -30) {
-					System.out.println("2");
-					a = CatanPieces.getmpX();
-					b = CatanPieces.getmpY();
-					CatanPieces.findRoad((int) CatanPieces.getmpX() - 20,
-							(int) CatanPieces.getmpY());
+					//System.out.println("2");
+					CatanPieces.findRoad((int) a - 10,
+							(int) b + 17);
 					CatanPieces.midpoint(
 							CatanPieces.getPositions().get(
 									CatanPieces.getFirstX()),
@@ -691,8 +690,8 @@ public class validPositions implements Screen, InputProcessor {
 									CatanPieces.getSecondY()));
 					road1 = SettlementLocationIndices.getRoadLocations(
 							CatanPieces.getmpX(), CatanPieces.getmpY());
-					CatanPieces.findRoad((int) a + 20,
-							(int) CatanPieces.getmpY());
+					CatanPieces.findRoad((int) a + 10,
+							(int) + 17);
 					CatanPieces.midpoint(
 							CatanPieces.getPositions().get(
 									CatanPieces.getFirstX()),
@@ -704,7 +703,7 @@ public class validPositions implements Screen, InputProcessor {
 									CatanPieces.getSecondY()));
 					road2 = SettlementLocationIndices.getRoadLocations(
 							CatanPieces.getmpX(), CatanPieces.getmpY());
-					CatanPieces.findRoad((int) a - 10, (int) b + 20);
+					CatanPieces.findRoad((int) a + 10, (int) b - 17);
 					CatanPieces.midpoint(
 							CatanPieces.getPositions().get(
 									CatanPieces.getFirstX()),
@@ -716,7 +715,7 @@ public class validPositions implements Screen, InputProcessor {
 									CatanPieces.getSecondY()));
 					road3 = SettlementLocationIndices.getRoadLocations(
 							CatanPieces.getmpX(), CatanPieces.getmpY());
-					CatanPieces.findRoad((int) a + 10, (int) b - 20);
+					CatanPieces.findRoad((int) a - 10, (int) b - 17);
 					CatanPieces.midpoint(
 							CatanPieces.getPositions().get(
 									CatanPieces.getFirstX()),
@@ -739,8 +738,8 @@ public class validPositions implements Screen, InputProcessor {
 							|| (SettlementLocationIndices.getRoadShip()[road4] == 1 && color
 									.equals(SettlementLocationIndices
 											.getRoadColors()[road4]))) {
-						set = findHex((int) (CatanPieces.getmpX()),
-								(int) (CatanPieces.getmpY() + 15));
+						set = findHex((int) a,
+								(int) b + 15);
 						set2 = findHex((int) (CatanPieces.getmpX()),
 								(int) (CatanPieces.getmpY() - 15));
 						if (value.getLand()[set] == 'l'
@@ -755,11 +754,9 @@ public class validPositions implements Screen, InputProcessor {
 						settlement = false;
 					}
 				} else if (CatanPieces.getRoadRotation() == 30) {
-					System.out.println("3");
-					CatanPieces.findRoad((int) CatanPieces.getmpX() - 20,
-							(int) CatanPieces.getmpY());
-					a = CatanPieces.getmpX();
-					b = CatanPieces.getmpY();
+					//System.out.println("3");
+					CatanPieces.findRoad((int) a - 10,
+							(int) b + 17);
 					CatanPieces.midpoint(
 							CatanPieces.getPositions().get(
 									CatanPieces.getFirstX()),
@@ -771,8 +768,8 @@ public class validPositions implements Screen, InputProcessor {
 									CatanPieces.getSecondY()));
 					road1 = SettlementLocationIndices.getRoadLocations(
 							CatanPieces.getmpX(), CatanPieces.getmpY());
-					CatanPieces.findRoad((int) a + 20,
-							(int) CatanPieces.getmpY());
+					CatanPieces.findRoad((int) a + 10,
+							(int) b + 17);
 					CatanPieces.midpoint(
 							CatanPieces.getPositions().get(
 									CatanPieces.getFirstX()),
@@ -784,7 +781,7 @@ public class validPositions implements Screen, InputProcessor {
 									CatanPieces.getSecondY()));
 					road2 = SettlementLocationIndices.getRoadLocations(
 							CatanPieces.getmpX(), CatanPieces.getmpY());
-					CatanPieces.findRoad((int) a + 10, (int) b + 20);
+					CatanPieces.findRoad((int) a + 10, (int) b - 17);
 					CatanPieces.midpoint(
 							CatanPieces.getPositions().get(
 									CatanPieces.getFirstX()),
@@ -796,7 +793,7 @@ public class validPositions implements Screen, InputProcessor {
 									CatanPieces.getSecondY()));
 					road3 = SettlementLocationIndices.getRoadLocations(
 							CatanPieces.getmpX(), CatanPieces.getmpY());
-					CatanPieces.findRoad((int) a - 10, (int) b - 20);
+					CatanPieces.findRoad((int) a - 10, (int) b - 17);
 					CatanPieces.midpoint(
 							CatanPieces.getPositions().get(
 									CatanPieces.getFirstX()),
@@ -819,10 +816,10 @@ public class validPositions implements Screen, InputProcessor {
 							|| (SettlementLocationIndices.getRoadShip()[road4] == 1 && color
 									.equals(SettlementLocationIndices
 											.getRoadColors()[road4]))) {
-						set = findHex((int) (CatanPieces.getmpX()),
-								(int) (CatanPieces.getmpY() + 15));
-						set2 = findHex((int) (CatanPieces.getmpX()),
-								(int) (CatanPieces.getmpY() - 15));
+						set = findHex((int) a,
+								(int) b + 15);
+						set2 = findHex((int) a,
+								(int) b - 15);
 						if (value.getLand()[set] == 'l'
 								|| value.getLand()[set2] == 'l') {
 							SettlementLocationIndices.getRoadColors()[mid] = color;
@@ -838,15 +835,19 @@ public class validPositions implements Screen, InputProcessor {
 			} else {
 				settlement = false;
 			}
-		} else if (text.equals("ship")) {
+		} else if (text.equals("buildShip")) {
 			CatanPieces.findRoad(x, y);
 			CatanPieces.midpoint(
 					CatanPieces.getPositions().get(CatanPieces.getFirstX()),
 					CatanPieces.getPositions().get(CatanPieces.getFirstY()),
 					CatanPieces.getPositions().get(CatanPieces.getSecondX()),
 					CatanPieces.getPositions().get(CatanPieces.getSecondY()));
+			
+			a = CatanPieces.getmpX(); //x coordinate of midpoint.
+			b = CatanPieces.getmpY(); //y coordinate of midpoint
+			
 			mid = SettlementLocationIndices.getRoadLocations(
-					CatanPieces.getmpX(), CatanPieces.getmpY());
+					a, b);
 			set3 = SettlementLocationIndices.getSettlementLocation(CatanPieces
 					.getPositions().get(CatanPieces.getFirstX()), CatanPieces
 					.getPositions().get(CatanPieces.getFirstY()));
@@ -863,28 +864,38 @@ public class validPositions implements Screen, InputProcessor {
 							.equals(SettlementLocationIndices
 									.getSettlementColors()[set4]))) {
 				if (CatanPieces.getRoadRotation() == 90) {
-					set = findHex((int) (CatanPieces.getmpX() - 20),
-							(int) (CatanPieces.getmpY()));
-					set2 = findHex((int) (CatanPieces.getmpX() + 20),
-							(int) (CatanPieces.getmpY()));
+					set = findHex((int) a - 20,
+							(int) b);
+					set2 = findHex((int) (a + 20),
+							(int) b);
 					if (value.getLand()[set] == 's'
 							|| value.getLand()[set2] == 's') {
 						SettlementLocationIndices.getRoadColors()[mid] = color;
+						if (SettlementLocationIndices.getRoadShip()[mid] == 0) {
+							SettlementLocationIndices.getRoadShip()[mid] = 2;	
+						}
+						else {
 						SettlementLocationIndices.getRoadShip()[mid]++;
+						}
 						settlement = true;
 					} else {
 						settlement = false;
 					}
 				} else if (CatanPieces.getRoadRotation() == -30
 						|| CatanPieces.getRoadRotation() == 30) {
-					set = findHex((int) CatanPieces.getmpX(),
-							(int) CatanPieces.getmpY() - 15);
-					set2 = findHex((int) CatanPieces.getmpX(),
-							(int) CatanPieces.getmpY() + 15);
+					set = findHex((int) a,
+							(int) b - 15);
+					set2 = findHex((int) a,
+							(int) b + 15);
 					if (value.getLand()[set] == 's'
 							|| value.getLand()[set2] == 's') {
 						SettlementLocationIndices.getRoadColors()[mid] = color;
+						if (SettlementLocationIndices.getRoadShip()[mid] == 0) {
+							SettlementLocationIndices.getRoadShip()[mid] = 2;
+						}
+						else {
 						SettlementLocationIndices.getRoadShip()[mid]++;
+						}
 						settlement = true;
 					} else {
 						settlement = false;
@@ -893,7 +904,64 @@ public class validPositions implements Screen, InputProcessor {
 			} else {
 				settlement = false;
 			}
-		} else {
+		}
+		else if(text.equals("moveShip")) {
+			CatanPieces.findRoad(x, y);
+			CatanPieces.midpoint(
+					CatanPieces.getPositions().get(CatanPieces.getFirstX()),
+					CatanPieces.getPositions().get(CatanPieces.getFirstY()),
+					CatanPieces.getPositions().get(CatanPieces.getSecondX()),
+					CatanPieces.getPositions().get(CatanPieces.getSecondY()));
+			
+			a = CatanPieces.getmpX(); //x coordinate of midpoint.
+			b = CatanPieces.getmpY(); //y coordinate of midpoint
+			
+			mid = SettlementLocationIndices.getRoadLocations(a, b);
+			if (SettlementLocationIndices.getRoadShip()[mid] != 1
+					&& SettlementLocationIndices.getRoadShip()[mid] != 3) {
+				if (CatanPieces.getRoadRotation() == 90) {
+					set = findHex((int) a - 20,
+							(int) b);
+					set2 = findHex((int) (a + 20),
+							(int) b);
+					if (value.getLand()[set] == 's'
+							|| value.getLand()[set2] == 's') {
+						SettlementLocationIndices.getRoadColors()[mid] = color;
+						if (SettlementLocationIndices.getRoadShip()[mid] == 0) {
+							SettlementLocationIndices.getRoadShip()[mid] = 2;
+						}
+						else {
+						SettlementLocationIndices.getRoadShip()[mid]++;
+						}
+						settlement = true;
+					} else {
+						settlement = false;
+					}
+				} else if (CatanPieces.getRoadRotation() == -30
+						|| CatanPieces.getRoadRotation() == 30) {
+					set = findHex((int) a,
+							(int) b - 15);
+					set2 = findHex((int) a,
+							(int) b + 15);
+					if (value.getLand()[set] == 's'
+							|| value.getLand()[set2] == 's') {
+						SettlementLocationIndices.getRoadColors()[mid] = color;
+						if (SettlementLocationIndices.getRoadShip()[mid] == 0) {
+							SettlementLocationIndices.getRoadShip()[mid] = 2;
+						}
+						else {
+						SettlementLocationIndices.getRoadShip()[mid]++;
+						}
+						settlement = true;
+					} else {
+						settlement = false;
+					}
+				}
+			} else {
+				settlement = false;
+			}	
+		}
+		else {
 			settlement = false;
 		}
 		System.out.println("can settle? :" + settlement);
@@ -922,8 +990,8 @@ public class validPositions implements Screen, InputProcessor {
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		x++;
-		System.out.println(screenX);
-		System.out.println(Gdx.graphics.getHeight() - 1 - screenY);
+		System.out.println("x coordinate: " + screenX);
+		System.out.println("y coordinate: " + (Gdx.graphics.getHeight() - 1 - screenY));
 		// CatanPieces.findRoad(screenX, Gdx.graphics.getHeight() - 1 -
 		// screenY);
 		// CatanPieces.midpoint(
@@ -949,7 +1017,7 @@ public class validPositions implements Screen, InputProcessor {
 					Gdx.graphics.getHeight() - 1 - screenY, "orange");
 		}
 		if (x == 2) {
-			valid(buttons2, "road", screenX, Gdx.graphics.getHeight() - 1
+			valid(buttons3, "road", screenX, Gdx.graphics.getHeight() - 1
 					- screenY, "orange");
 		}
 		return false;
