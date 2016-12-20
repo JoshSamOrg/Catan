@@ -260,6 +260,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 		board2.add(new Image(atlas3.findRegion("11 - Copy")));
 		
 		configureHexes();
+		//allows you to pick numbers
 		if(LoadingScreen.getPickNumbers()){
 			drawNumbers();
 		}
