@@ -52,6 +52,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 	private Skin skin;
 	private Pixmap pixmap;
 	private TextButton playerOrder;
+	private ValidPositions vp = new ValidPositions(null);
 
 	private int numberWidth = 25;
 	private int numberHeight = 25;
@@ -132,6 +133,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 	
 	//sets up all the actors on the stage, and processes all input events
 	public void show() {
+		System.out.println("in hex");
 		CatanPieces.findPositions();
 		orange=new ArrayList<ImageButton>();
 		white=new ArrayList<ImageButton>();
@@ -467,15 +469,23 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 	@Override
 	//Allows the user to put numbers on the main island, and place pieces on the main island
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		//counter++
 		if(CatanPieces.getSelectInitialPlacements()){
 			CatanPieces.findSettlement(screenX, Gdx.graphics.getHeight() - 1 - screenY);
+			int xPos = CatanPieces.getPositions().get(CatanPieces.getSettlementIndexX())-5;  //needed so the positions are correct
+			int yPos = CatanPieces.getPositions().get(CatanPieces.getSettlementIndexY())-7;  //needed so the positions are correct
 			for(int i = 0; i<CatanPieces.getGamePieces().size(); i++){
 				if(!CatanPieces.getGamePieces().get(i).isVisible()){
 					iCopy = i;
 					if(!piece1.equals("Road") && !piece2.equals("ShipSettler")){
-					CatanPieces.getGamePieces().get(i).setPosition(CatanPieces.getPositions().get(CatanPieces.getSettlementIndexX()) - 5,
-							CatanPieces.getPositions().get(CatanPieces.getSettlementIndexY()) - 7);
+						if(vp.valid(CatanPieces.getGamePieces().get(i), 
+					CatanPieces.getGamePieces().get(i).getName().substring(CatanPieces.getGamePieces().get(i).getName().indexOf("|") + 1), screenX
+					, Gdx.graphics.getHeight() - 1 - screenY
+					, CatanPieces.getGamePieces().get(i).getName().substring(0, CatanPieces.getGamePieces().get(i).getName().indexOf("|")))){
+					CatanPieces.getGamePieces().get(i).setPosition(xPos,
+							yPos);
 					CatanPieces.getGamePieces().get(i).setVisible(true);
+					}
 					}
 					else{
 						CatanPieces.findRoad(screenX, Gdx.graphics.getHeight() - 1 - screenY);

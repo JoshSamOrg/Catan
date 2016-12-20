@@ -230,11 +230,13 @@ public class CatanPieces implements InputProcessor, Screen{
 				  reg = atlas.findRegion(colors[2] + piece1);
 				  gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
 				  gamePieces.get(gamePieces.size()-1).setBounds(xPos, yPos, 10, 15);
+				  gamePieces.get(gamePieces.size()-1).setName(colors[2] + "|" + piece1.toLowerCase() + "1");
 				  hexObj.getStage().addActor(gamePieces.get(gamePieces.size()-1));
 				  
 				  reg = atlas.findRegion(colors[2] + piece2);
 				  gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
 				  gamePieces.get(gamePieces.size()-1).setBounds(xPos-15, yPos, 10, 15);
+				  gamePieces.get(gamePieces.size()-1).setName(colors[2]+ "|" + piece2.toLowerCase());
 				  hexObj.getStage().addActor(gamePieces.get(gamePieces.size()-1));
 				  if(piece1.equals("HarborSettlement") && piece2.equals("Settlement")){
 				  yPos-=40;
@@ -249,11 +251,13 @@ public class CatanPieces implements InputProcessor, Screen{
 				  reg = atlas.findRegion(colors[0] + piece1);
 				  gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
 				  gamePieces.get(gamePieces.size()-1).setBounds(xPos, yPos, 10, 15);
+				  gamePieces.get(gamePieces.size()-1).setName(colors[0]+ "|" + piece1.toLowerCase() + "1");
 				  hexObj.getStage().addActor(gamePieces.get(gamePieces.size()-1));
 				  
 				  reg = atlas.findRegion(colors[0] + piece2);
 				  gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
 				  gamePieces.get(gamePieces.size()-1).setBounds(xPos-15, yPos, 10, 15);
+				  gamePieces.get(gamePieces.size()-1).setName(colors[0]+ "|" + piece2.toLowerCase());
 				  hexObj.getStage().addActor(gamePieces.get(gamePieces.size()-1));
 				  if(piece1.equals("HarborSettlement") && piece2.equals("Settlement")){
 					  yPos-=40;
@@ -268,11 +272,13 @@ public class CatanPieces implements InputProcessor, Screen{
 				  reg = atlas.findRegion(colors[1] + piece1);
 				  gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
 				  gamePieces.get(gamePieces.size()-1).setBounds(xPos, yPos, 10, 15);
+				  gamePieces.get(gamePieces.size()-1).setName(colors[1]+ "|" + piece1.toLowerCase() + "1");
 				  hexObj.getStage().addActor(gamePieces.get(gamePieces.size()-1));
 				  
 				  reg = atlas.findRegion(colors[1] + piece2);
 				  gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
 				  gamePieces.get(gamePieces.size()-1).setBounds(xPos-15, yPos, 10, 15);
+				  gamePieces.get(gamePieces.size()-1).setName(colors[1]+ "|" + piece2.toLowerCase());
 				  hexObj.getStage().addActor(gamePieces.get(gamePieces.size()-1));
 				  if(piece1.equals("HarborSettlement") && piece2.equals("Settlement")){
 					  yPos-=40;
@@ -287,11 +293,13 @@ public class CatanPieces implements InputProcessor, Screen{
 				  reg = atlas.findRegion(colors[3] + piece1);
 				  gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
 				  gamePieces.get(gamePieces.size()-1).setBounds(xPos, yPos, 10, 15);
+				  gamePieces.get(gamePieces.size()-1).setName(colors[3]+ "|" + piece1.toLowerCase() + "1");
 				  hexObj.getStage().addActor(gamePieces.get(gamePieces.size()-1));
 				  
 				  reg = atlas.findRegion(colors[3] + piece2);
 				  gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
 				  gamePieces.get(gamePieces.size()-1).setBounds(xPos-15, yPos, 10, 15);
+				  gamePieces.get(gamePieces.size()-1).setName(colors[3]+ "|" + piece2.toLowerCase());
 				  hexObj.getStage().addActor(gamePieces.get(gamePieces.size()-1));
 				  if(piece1.equals("HarborSettlement") && piece2.equals("Settlement")){
 					  yPos-=40;
@@ -331,6 +339,7 @@ public class CatanPieces implements InputProcessor, Screen{
 	
 	//adds all the hexagon points to the positions arraylist
 	public static void findPositions(){
+		//System.out.println("set this once");
 		positions.add(141);//1
 		positions.add(438);
 		positions.add(119);//2

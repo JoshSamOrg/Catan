@@ -33,7 +33,7 @@ public class ValidPositions implements Screen, InputProcessor {
 	private static boolean[][] markedSettlement;
 
 	public ValidPositions(CatanGame game) {
-		CatanPieces.findPositions();
+		SettlementLocationIndices set = new SettlementLocationIndices();
 		value = new LandValues();
 		markedSettlement = new boolean[72][6];
 		this.game = game;
@@ -402,8 +402,8 @@ public class ValidPositions implements Screen, InputProcessor {
 			} else {
 				settlement = false;
 			}
-		} else if (text.equals("harbor settlement1")) {
-			System.out.println("harbor settlement1");
+		} else if (text.equals("harborsettlement1")) {
+			System.out.println("harborsettlement1");
 			CatanPieces.findSettlement(x, y);
 			if ((CatanPieces.getPositions().get(CatanPieces.getSettlementIndexX()) == 205 && 
 				 CatanPieces.getPositions().get(CatanPieces.getSettlementIndexY()) == 425)
@@ -459,6 +459,7 @@ public class ValidPositions implements Screen, InputProcessor {
 							CatanPieces.getSettlementIndexX()),
 					CatanPieces.getPositions().get(
 							CatanPieces.getSettlementIndexY()));
+			System.out.println("Counter is: " + counter);
 			if (value.getLand()[set] == value.getLand()[set2]
 					&& value.getLand()[set2] == value.getLand()[set3]
 					&& value.getLand()[set3] == value.getLand()[set4]) {
@@ -469,8 +470,7 @@ public class ValidPositions implements Screen, InputProcessor {
 					&& (value.getLand()[set] != 'u'
 							&& value.getLand()[set2] != 'u'
 							&& value.getLand()[set3] != 'u' && value.getLand()[set4] != 'u'))
-					&& (SettlementLocationIndices
-							.getHarborSettlementLocations()[counter] == false && SettlementLocationIndices
+					&& (SettlementLocationIndices.getHarborSettlementLocations()[counter] == false && SettlementLocationIndices
 							.getSettlementLocations()[counter] == false)
 					&& (SettlementLocationIndices.twoAway(
 							CatanPieces.getPositions().get(
@@ -1010,16 +1010,16 @@ public class ValidPositions implements Screen, InputProcessor {
 		// CatanPieces.getPositions().get(CatanPieces.getSecondY()));
 		// System.out.println("x is: " + CatanPieces.getmpX());
 		// System.out.println("y is: " + CatanPieces.getmpY());
-//		TextureAtlas atlas = new TextureAtlas("Orange.txt");
-//		buttons1 = new ImageButton(new TextureRegionDrawable(
-//				atlas.findRegion("orangeSettlement")));
+		TextureAtlas atlas = new TextureAtlas("Orange.txt");
+		buttons1 = new ImageButton(new TextureRegionDrawable(
+				atlas.findRegion("orangeHarborSettlement")));
 //		buttons2 = new ImageButton(new TextureRegionDrawable(
 //				atlas.findRegion("orangeRoad")));
 //		buttons3 = new ImageButton(new TextureRegionDrawable(
 //				atlas.findRegion("orangeRoad")));
 //		if (x == 0) {
-//			valid(buttons1, "settlement", screenX, Gdx.graphics.getHeight() - 1
-//					- screenY, "orange");
+			valid(buttons1, "harborsettlement1", screenX, Gdx.graphics.getHeight() - 1
+					- screenY, "orange");
 //		}
 //		if (x == 1) {
 //			valid(buttons2, "road", screenX,
