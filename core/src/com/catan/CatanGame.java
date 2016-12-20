@@ -7,7 +7,7 @@ public class CatanGame extends Game {
 	
     //Sets the screen to the MainMenuScreen
 	public void create () {
-		setScreen(new validPositions(this));
+		setScreen(new MainMenuScreen(this));
 	}
 
 	//calls the render method in the Game superclass

@@ -20,7 +20,6 @@ public class validPositions implements Screen, InputProcessor {
 										// location is a valid placement.
 	private static int i = 0;
 	private static ImageButton buttons1, buttons2, buttons3;
-	private SettlementLocationIndices settle;
 	private static int counter; // used to get the index for the
 	private int x = -1; // settlementLocations array.
 	private int set = 0;
@@ -36,7 +35,6 @@ public class validPositions implements Screen, InputProcessor {
 	public validPositions(CatanGame game) {
 		CatanPieces.findPositions();
 		value = new LandValues();
-		settle = new SettlementLocationIndices();
 		markedSettlement = new boolean[72][6];
 		this.game = game;
 	}
@@ -293,13 +291,13 @@ public class validPositions implements Screen, InputProcessor {
 	}
 
 	/*
-	 * button the image that is going to be placed on the board. text the type
-	 * of piece being put on the board. x the x coordinate of the mouse click y
-	 * the y coordinate of the mouse click Returns whether the placed image is
-	 * in a valid location.
+	 * button the image that is going to be placed on the board. 
+	 * text the type of piece being put on the board. 
+	 * x the x coordinate of the mouse click 
+	 * y the y coordinate of the mouse click 
+	 * Returns whether the placed image is in a valid location.
 	 */
-	public boolean valid(ImageButton button, String text, int x, int y,
-			String color) {
+	public boolean valid(ImageButton button, String text, int x, int y, String color) {
 		if (text.equals("settlement")) {
 			System.out.println("settlement");
 			CatanPieces.findSettlement(x, y);  //finds the nearest settlement from the location you clicked on the board.

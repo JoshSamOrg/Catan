@@ -14,6 +14,7 @@ public class PlayerOrder {
 	private ArrayList<Player> orderedPlayers;
 	private ArrayList<Order> positions;
 
+	// Adds the players to the positions arraylist.
 	public PlayerOrder() {
 		positions = new ArrayList<Order>();
 		games = new ArrayList<Player>();
@@ -34,6 +35,7 @@ public class PlayerOrder {
 
 	}
 
+	// Devises and order for the players.
 	public void Orders() {
 		orderedPlayers.add(one);
 		orderedPlayers.add(two);

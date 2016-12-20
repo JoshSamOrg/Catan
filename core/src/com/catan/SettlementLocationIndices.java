@@ -2,10 +2,10 @@ package com.catan;
 
 public class SettlementLocationIndices {
 	private static boolean settlementLocations[]; //holds the information for whether or not a settlement location is occupied or not.
-	private static boolean harborSettlementLocations[];
-	private static int roadShip[];
-	private static String settlementColors[];
-	private static String roadColors[];
+	private static boolean harborSettlementLocations[]; //holds the information for whether or not a harbor settlement location is occupied or not.
+	private static int roadShip[]; //holds the information for whether or not a ship/settlement is occupied or not.
+	private static String settlementColors[]; //holds the information for what color settlement is at this position.
+	private static String roadColors[]; //holds the information for what color road is at this position.
 	private static boolean two = false;
 	private static int a = 0, b = 0, c = 0, d = 0, e = 0;
 
@@ -385,6 +385,12 @@ public class SettlementLocationIndices {
 		}
 		return 176;
 	}
+	
+	/*
+	 * x the x coordinate of a road location
+	 * y the y coordinate of a road location
+	 * Returns the index of the newly marked road (from the roadShip array).
+	 */
 	public static int getRoadLocations(double x, double y) {
 		if (x==130.0 && y==432.0) {
 			return 0;
@@ -1147,11 +1153,10 @@ public class SettlementLocationIndices {
 				two = false;
 			}
 		}
-		System.out.println(two);
 		return two;
 	}
 
-	public static boolean[] getSettlementLocations() { //returns settlementLocations arraylist.
+	public static boolean[] getSettlementLocations() {
 		return settlementLocations;
 	}
 	public static boolean[] getHarborSettlementLocations() {
