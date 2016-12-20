@@ -380,6 +380,32 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 		stage.act(Gdx.graphics.getDeltaTime());
 		stage.draw();
 		//stage.setDebugAll(true);
+		if (counter) {
+			batch.begin();
+			playerOrder.setVisible(false);
+			font2.draw(batch, orders.getOrderedPlayers().get(0).getName() + " "
+					+ "is going first", 30, 160);
+			batch.end();
+			batch.begin();
+			font2.draw(batch, orders.getOrderedPlayers().get(1).getName() + " "
+					+ "is going second", 30, 120);
+			batch.end();
+			if (GamePlayers.getGamePlayers().size() == 3) {
+				batch.begin();
+				font2.draw(batch, orders.getOrderedPlayers().get(2).getName() + " "
+						+ "is going third", 30, 80);
+				batch.end();
+			}
+			if (GamePlayers.getGamePlayers().size() == 4) {
+				batch.begin();
+				font2.draw(batch, orders.getOrderedPlayers().get(2).getName() + " "
+						+ "is going third", 30, 80);
+				font2.draw(batch, orders.getOrderedPlayers().get(3).getName() + " "
+						+ "is going fourth", 30, 40);
+				batch.end();
+			}
+		}
+
 	}
 
 	//disposes of all resources
