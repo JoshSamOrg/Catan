@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
-public class validPositions implements Screen, InputProcessor {
+public class ValidPositions implements Screen, InputProcessor {
 	private SpriteBatch batch;
 	private Texture boardStart;
 	private CatanGame game;
@@ -32,7 +32,7 @@ public class validPositions implements Screen, InputProcessor {
 	private LandValues value;
 	private static boolean[][] markedSettlement;
 
-	public validPositions(CatanGame game) {
+	public ValidPositions(CatanGame game) {
 		CatanPieces.findPositions();
 		value = new LandValues();
 		markedSettlement = new boolean[72][6];
@@ -966,6 +966,17 @@ public class validPositions implements Screen, InputProcessor {
 		return settlement;
 
 	}
+	
+	public boolean moveShip(TextureAtlas atlas, String text, int x, int y) {
+		Ship ship = new Ship(atlas, text);
+		
+		if (ship.hasMove()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 
 	@Override
 	public boolean keyDown(int keycode) {
@@ -986,7 +997,7 @@ public class validPositions implements Screen, InputProcessor {
 	}
 
 	@Override
-	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+	public boolean touchDown(int screenX, int screenY, int pointer, int button) { 
 		x++;
 		System.out.println("x coordinate: " + screenX);
 		System.out.println("y coordinate: " + (Gdx.graphics.getHeight() - 1 - screenY));
@@ -999,25 +1010,25 @@ public class validPositions implements Screen, InputProcessor {
 		// CatanPieces.getPositions().get(CatanPieces.getSecondY()));
 		// System.out.println("x is: " + CatanPieces.getmpX());
 		// System.out.println("y is: " + CatanPieces.getmpY());
-		TextureAtlas atlas = new TextureAtlas("Orange.txt");
-		buttons1 = new ImageButton(new TextureRegionDrawable(
-				atlas.findRegion("orangeSettlement")));
-		buttons2 = new ImageButton(new TextureRegionDrawable(
-				atlas.findRegion("orangeRoad")));
-		buttons3 = new ImageButton(new TextureRegionDrawable(
-				atlas.findRegion("orangeRoad")));
-		if (x == 0) {
-			valid(buttons1, "settlement", screenX, Gdx.graphics.getHeight() - 1
-					- screenY, "orange");
-		}
-		if (x == 1) {
-			valid(buttons2, "road", screenX,
-					Gdx.graphics.getHeight() - 1 - screenY, "orange");
-		}
-		if (x == 2) {
-			valid(buttons3, "road", screenX, Gdx.graphics.getHeight() - 1
-					- screenY, "orange");
-		}
+//		TextureAtlas atlas = new TextureAtlas("Orange.txt");
+//		buttons1 = new ImageButton(new TextureRegionDrawable(
+//				atlas.findRegion("orangeSettlement")));
+//		buttons2 = new ImageButton(new TextureRegionDrawable(
+//				atlas.findRegion("orangeRoad")));
+//		buttons3 = new ImageButton(new TextureRegionDrawable(
+//				atlas.findRegion("orangeRoad")));
+//		if (x == 0) {
+//			valid(buttons1, "settlement", screenX, Gdx.graphics.getHeight() - 1
+//					- screenY, "orange");
+//		}
+//		if (x == 1) {
+//			valid(buttons2, "road", screenX,
+//					Gdx.graphics.getHeight() - 1 - screenY, "orange");
+//		}
+//		if (x == 2) {
+//			valid(buttons3, "road", screenX, Gdx.graphics.getHeight() - 1
+//					- screenY, "orange");
+//		}
 		return false;
 	}
 

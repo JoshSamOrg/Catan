@@ -1096,8 +1096,8 @@ public class SettlementLocationIndices {
 	 * Returns whether the placement of the settlement follows the two-away rule.
 	 */
 	public static boolean twoAway(int x, int y) {
-		a = validPositions.findHex(x, y + 10);
-		b = validPositions.findHex(x, y + 30);
+		a = ValidPositions.findHex(x, y + 10);
+		b = ValidPositions.findHex(x, y + 30);
 
 		if (a == b && b != 72) {
 			CatanPieces.findSettlement(x - 20, y);

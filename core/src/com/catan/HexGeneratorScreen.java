@@ -178,9 +178,6 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 		Gdx.input.setInputProcessor(multiplexer);
 		numbers = new ArrayList<TextureRegion>();
 		numberImages = new ArrayList<ImageButton>();
-		if(LoadingScreen.getPickNumbers()){
-		drawNumbers();
-		}
 		font = new BitmapFont(Gdx.files.internal("gameFonts.fnt"));
 		font2 = new BitmapFont(Gdx.files.internal("gameFonts.fnt"));
 		font2.getData().setScale(.7f, .7f);
@@ -263,8 +260,12 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 		board2.add(new Image(atlas3.findRegion("11 - Copy")));
 		
 		configureHexes();
+		if(LoadingScreen.getPickNumbers()){
+			drawNumbers();
+		}
+		else{
 		configureNumbers();
-		
+	   }
 	}
 	
 	// Randomly places the hexes on the starting board.
