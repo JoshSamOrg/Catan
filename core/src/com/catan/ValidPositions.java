@@ -20,13 +20,12 @@ public class ValidPositions implements Screen, InputProcessor {
 										// location is a valid placement.
 	private static int i = 0;
 	private static ImageButton buttons1, buttons2, buttons3;
-	private static int counter; // used to get the index for the
+	private static int counter=0; // used to get the index for the
 	private int x = -1; // settlementLocations array.
 	private int set = 0;
 	private int set2 = 0;
 	private int set3 = 0;
 	private int set4 = 0;
-	private int mid = 0;
 	private int road1 = 0, road2 = 0, road3 = 0, road4 = 0;
 	private float a = 0, b = 0;
 	private LandValues value;
@@ -532,7 +531,7 @@ public class ValidPositions implements Screen, InputProcessor {
 			button.setTransform(true);
 			button.setRotation(CatanPieces.getRoadRotation());
 			
-			mid = SettlementLocationIndices.getRoadLocations(  //location of the road.
+			counter = SettlementLocationIndices.getRoadLocations(  //location of the road.
 					a, b);
 			if (CatanPieces.getRoadRotation() == 90) {
 				button.setScaleY(.5f);
@@ -556,7 +555,7 @@ public class ValidPositions implements Screen, InputProcessor {
 							.getSettlementColors()[set3]) || (color
 							.equals(SettlementLocationIndices
 									.getSettlementColors()[set4])))
-					&& (SettlementLocationIndices.getRoadShip()[mid] == 0)) {
+					&& (SettlementLocationIndices.getRoadShip()[counter] == 0)) {
 				System.out.println("bottom");
 				if (CatanPieces.getRoadRotation() == 90) {  //if the road is 90 degrees.
 					//System.out.println("in the 90 section1");
@@ -566,8 +565,8 @@ public class ValidPositions implements Screen, InputProcessor {
 							(int) (CatanPieces.getmpY()));
 					if (value.getLand()[set] == 'l'
 							|| value.getLand()[set2] == 'l') { //makes sure at least one of the two hexes the road is on is a land hex.
-						SettlementLocationIndices.getRoadColors()[mid] = color;
-						SettlementLocationIndices.getRoadShip()[mid] = 1;
+						SettlementLocationIndices.getRoadColors()[counter] = color;
+						SettlementLocationIndices.getRoadShip()[counter] = 1;
 
 						settlement = true;
 					} else {
@@ -583,8 +582,8 @@ public class ValidPositions implements Screen, InputProcessor {
 					if (value.getLand()[set] == 'l'
 							|| value.getLand()[set2] == 'l') { //makes sure at least one of the two hexes the road is on is a land hex.
 						System.out.println("it is true");
-						SettlementLocationIndices.getRoadColors()[mid] = color;
-						SettlementLocationIndices.getRoadShip()[mid] = 1;
+						SettlementLocationIndices.getRoadColors()[counter] = color;
+						SettlementLocationIndices.getRoadShip()[counter] = 1;
 						settlement = true;
 					} else {
 						settlement = false;
@@ -663,8 +662,8 @@ public class ValidPositions implements Screen, InputProcessor {
 								(int) b);
 						if (value.getLand()[set] == 'l'
 								|| value.getLand()[set2] == 'l') {
-							SettlementLocationIndices.getRoadColors()[mid] = color;
-							SettlementLocationIndices.getRoadShip()[mid] = 1;
+							SettlementLocationIndices.getRoadColors()[counter] = color;
+							SettlementLocationIndices.getRoadShip()[counter] = 1;
 							settlement = true;
 						} else {
 							settlement = false;
@@ -741,8 +740,8 @@ public class ValidPositions implements Screen, InputProcessor {
 								(int) (CatanPieces.getmpY() - 15));
 						if (value.getLand()[set] == 'l'
 								|| value.getLand()[set2] == 'l') {
-							SettlementLocationIndices.getRoadColors()[mid] = color;
-							SettlementLocationIndices.getRoadShip()[mid] = 1;
+							SettlementLocationIndices.getRoadColors()[counter] = color;
+							SettlementLocationIndices.getRoadShip()[counter] = 1;
 							settlement = true;
 						} else {
 							settlement = false;
@@ -819,8 +818,8 @@ public class ValidPositions implements Screen, InputProcessor {
 								(int) b - 15);
 						if (value.getLand()[set] == 'l'
 								|| value.getLand()[set2] == 'l') {
-							SettlementLocationIndices.getRoadColors()[mid] = color;
-							SettlementLocationIndices.getRoadShip()[mid] = 1;
+							SettlementLocationIndices.getRoadColors()[counter] = color;
+							SettlementLocationIndices.getRoadShip()[counter] = 1;
 							settlement = true;
 						} else {
 							settlement = false;
@@ -843,7 +842,7 @@ public class ValidPositions implements Screen, InputProcessor {
 			a = CatanPieces.getmpX(); //x coordinate of midpoint.
 			b = CatanPieces.getmpY(); //y coordinate of midpoint
 			
-			mid = SettlementLocationIndices.getRoadLocations(
+			counter = SettlementLocationIndices.getRoadLocations(
 					a, b);
 			set3 = SettlementLocationIndices.getSettlementLocation(CatanPieces
 					.getPositions().get(CatanPieces.getFirstX()), CatanPieces
@@ -851,8 +850,8 @@ public class ValidPositions implements Screen, InputProcessor {
 			set4 = SettlementLocationIndices.getSettlementLocation(CatanPieces
 					.getPositions().get(CatanPieces.getSecondX()), CatanPieces
 					.getPositions().get(CatanPieces.getSecondY()));
-			if (SettlementLocationIndices.getRoadShip()[mid] != 1
-					&& SettlementLocationIndices.getRoadShip()[mid] != 3
+			if (SettlementLocationIndices.getRoadShip()[counter] != 1
+					&& SettlementLocationIndices.getRoadShip()[counter] != 3
 					&& ((SettlementLocationIndices
 							.getHarborSettlementLocations()[set3]) || (SettlementLocationIndices
 							.getHarborSettlementLocations()[set4]))
@@ -867,12 +866,12 @@ public class ValidPositions implements Screen, InputProcessor {
 							(int) b);
 					if (value.getLand()[set] == 's'
 							|| value.getLand()[set2] == 's') {
-						SettlementLocationIndices.getRoadColors()[mid] = color;
-						if (SettlementLocationIndices.getRoadShip()[mid] == 0) {
-							SettlementLocationIndices.getRoadShip()[mid] = 2;	
+						SettlementLocationIndices.getRoadColors()[counter] = color;
+						if (SettlementLocationIndices.getRoadShip()[counter] == 0) {
+							SettlementLocationIndices.getRoadShip()[counter] = 2;	
 						}
 						else {
-						SettlementLocationIndices.getRoadShip()[mid]++;
+						SettlementLocationIndices.getRoadShip()[counter]++;
 						}
 						settlement = true;
 					} else {
@@ -886,12 +885,12 @@ public class ValidPositions implements Screen, InputProcessor {
 							(int) b + 15);
 					if (value.getLand()[set] == 's'
 							|| value.getLand()[set2] == 's') {
-						SettlementLocationIndices.getRoadColors()[mid] = color;
-						if (SettlementLocationIndices.getRoadShip()[mid] == 0) {
-							SettlementLocationIndices.getRoadShip()[mid] = 2;
+						SettlementLocationIndices.getRoadColors()[counter] = color;
+						if (SettlementLocationIndices.getRoadShip()[counter] == 0) {
+							SettlementLocationIndices.getRoadShip()[counter] = 2;
 						}
 						else {
-						SettlementLocationIndices.getRoadShip()[mid]++;
+						SettlementLocationIndices.getRoadShip()[counter]++;
 						}
 						settlement = true;
 					} else {
@@ -913,9 +912,9 @@ public class ValidPositions implements Screen, InputProcessor {
 			a = CatanPieces.getmpX(); //x coordinate of midpoint.
 			b = CatanPieces.getmpY(); //y coordinate of midpoint
 			
-			mid = SettlementLocationIndices.getRoadLocations(a, b);
-			if (SettlementLocationIndices.getRoadShip()[mid] != 1
-					&& SettlementLocationIndices.getRoadShip()[mid] != 3) {
+			counter = SettlementLocationIndices.getRoadLocations(a, b);
+			if (SettlementLocationIndices.getRoadShip()[counter] != 1
+					&& SettlementLocationIndices.getRoadShip()[counter] != 3) {
 				if (CatanPieces.getRoadRotation() == 90) {
 					set = findHex((int) a - 20,
 							(int) b);
@@ -923,12 +922,12 @@ public class ValidPositions implements Screen, InputProcessor {
 							(int) b);
 					if (value.getLand()[set] == 's'
 							|| value.getLand()[set2] == 's') {
-						SettlementLocationIndices.getRoadColors()[mid] = color;
-						if (SettlementLocationIndices.getRoadShip()[mid] == 0) {
-							SettlementLocationIndices.getRoadShip()[mid] = 2;
+						SettlementLocationIndices.getRoadColors()[counter] = color;
+						if (SettlementLocationIndices.getRoadShip()[counter] == 0) {
+							SettlementLocationIndices.getRoadShip()[counter] = 2;
 						}
 						else {
-						SettlementLocationIndices.getRoadShip()[mid]++;
+						SettlementLocationIndices.getRoadShip()[counter]++;
 						}
 						settlement = true;
 					} else {
@@ -942,12 +941,12 @@ public class ValidPositions implements Screen, InputProcessor {
 							(int) b + 15);
 					if (value.getLand()[set] == 's'
 							|| value.getLand()[set2] == 's') {
-						SettlementLocationIndices.getRoadColors()[mid] = color;
-						if (SettlementLocationIndices.getRoadShip()[mid] == 0) {
-							SettlementLocationIndices.getRoadShip()[mid] = 2;
+						SettlementLocationIndices.getRoadColors()[counter] = color;
+						if (SettlementLocationIndices.getRoadShip()[counter] == 0) {
+							SettlementLocationIndices.getRoadShip()[counter] = 2;
 						}
 						else {
-						SettlementLocationIndices.getRoadShip()[mid]++;
+						SettlementLocationIndices.getRoadShip()[counter]++;
 						}
 						settlement = true;
 					} else {
@@ -977,6 +976,9 @@ public class ValidPositions implements Screen, InputProcessor {
 		}
 	}
 
+	public static int getCounter() {
+		return counter;
+	}
 	@Override
 	public boolean keyDown(int keycode) {
 		// TODO Auto-generated method stub
