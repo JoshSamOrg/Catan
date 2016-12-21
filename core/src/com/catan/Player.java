@@ -22,6 +22,7 @@ public class Player {
   private int numberOfCities;
   private int numberOfCircles;
   private String color;
+  private Ship ships [];
   
   //Constructor that initializes all of the player's instance variables
   public Player(){
@@ -38,6 +39,7 @@ public class Player {
 	  numberOfSettlers = 2;
 	  numberOfCities = 4;
 	  numberOfCircles = 3;
+	  ships = new Ship[4];
   }
   
   //Constructor with a String parameter that will become the name of the player,

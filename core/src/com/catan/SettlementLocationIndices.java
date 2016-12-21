@@ -7,7 +7,7 @@ public class SettlementLocationIndices {
 	private static String settlementColors[]; //holds the information for what color settlement is at this position.
 	private static String roadColors[]; //holds the information for what color road is at this position.
 	private static boolean two = false;
-	private static int a = 0, b = 0, c = 0, d = 0, e = 0;
+	private static int a = 0, b = 0, c = 0, d = 0, e = 0, f=0;
 
 	public SettlementLocationIndices() {
 		roadShip=new int[232];
@@ -1099,7 +1099,8 @@ public class SettlementLocationIndices {
 		a = ValidPositions.findHex(x, y + 10);
 		b = ValidPositions.findHex(x, y + 30);
 
-		if (a == b && b != 72) {
+		if (b == 72) {
+			System.out.println("two away");
 			CatanPieces.findSettlement(x - 20, y);
 			c = getSettlementLocation(
 					CatanPieces.getPositions().get(
@@ -1127,6 +1128,7 @@ public class SettlementLocationIndices {
 				two = false;
 			}
 		} else {
+			System.out.println("two away2");
 			CatanPieces.findSettlement(x - 20, y);
 			c = getSettlementLocation(
 					CatanPieces.getPositions().get(
@@ -1139,20 +1141,29 @@ public class SettlementLocationIndices {
 							CatanPieces.getSettlementIndexX()),
 					CatanPieces.getPositions().get(
 							CatanPieces.getSettlementIndexY()));
-			CatanPieces.findSettlement(x, y + 20);
+			CatanPieces.findSettlement(x, y + 15);
 			e = getSettlementLocation(
 					CatanPieces.getPositions().get(
 							CatanPieces.getSettlementIndexX()),
 					CatanPieces.getPositions().get(
 							CatanPieces.getSettlementIndexY()));
+			CatanPieces.findSettlement(x, y - 15);
+			f = getSettlementLocation(
+					CatanPieces.getPositions().get(
+							CatanPieces.getSettlementIndexX()),
+					CatanPieces.getPositions().get(
+							CatanPieces.getSettlementIndexY()));
+			
 			if ((settlementLocations[c] == false && harborSettlementLocations[c] == false)
 					&& (settlementLocations[d] == false && harborSettlementLocations[d] == false)
-					&& (settlementLocations[e] == false && harborSettlementLocations[e] == false)) {
+					&& (settlementLocations[e] == false && harborSettlementLocations[e] == false)
+					&& (settlementLocations[f] == false && harborSettlementLocations[f] == false)) {
 				two = true;
 			} else {
 				two = false;
 			}
 		}
+		System.out.println("is two away? " + two);
 		return two;
 	}
 

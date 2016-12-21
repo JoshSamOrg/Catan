@@ -488,6 +488,12 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 					}
 					}
 					else{
+						if(!vp.valid(CatanPieces.getGamePieces().get(i), 
+								CatanPieces.getGamePieces().get(i).getName().substring(CatanPieces.getGamePieces().get(i).getName().indexOf("|") + 1), screenX
+								, Gdx.graphics.getHeight() - 1 - screenY
+								, CatanPieces.getGamePieces().get(i).getName().substring(0, CatanPieces.getGamePieces().get(i).getName().indexOf("|")))){
+							return false;
+						}
 						CatanPieces.findRoad(screenX, Gdx.graphics.getHeight() - 1 - screenY);
 						CatanPieces.midpoint(CatanPieces.getPositions().get(CatanPieces.getFirstX()), 
 								CatanPieces.getPositions().get(CatanPieces.getFirstY()), 

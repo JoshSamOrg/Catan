@@ -33,6 +33,7 @@ public class ValidPositions implements Screen, InputProcessor {
 	private static boolean[][] markedSettlement;
 
 	public ValidPositions(CatanGame game) {
+		CatanPieces.findPositions();
 		SettlementLocationIndices set = new SettlementLocationIndices();
 		value = new LandValues();
 		markedSettlement = new boolean[72][6];
@@ -487,8 +488,8 @@ public class ValidPositions implements Screen, InputProcessor {
 			} else {
 				settlement = false;
 			}
-		} else if (text.equals("road")) {
-			System.out.println("road");
+		} else if (text.equals("road1")) {
+			System.out.println("road1");
 			CatanPieces.findRoad(x, y);
 			CatanPieces.midpoint(  //calculates the midpoint of the road location.
 					CatanPieces.getPositions().get(CatanPieces.getFirstX()),
@@ -550,9 +551,7 @@ public class ValidPositions implements Screen, InputProcessor {
 					.getPositions().get(CatanPieces.getSecondX()), CatanPieces
 					.getPositions().get(CatanPieces.getSecondY()));
 			if ((SettlementLocationIndices.getSettlementLocations()[set3]  //makes sure a similar-colored settlement is at the end of a road.
-					|| SettlementLocationIndices.getHarborSettlementLocations()[set3]
-					|| SettlementLocationIndices.getSettlementLocations()[set4] || SettlementLocationIndices
-						.getHarborSettlementLocations()[set4])
+					|| SettlementLocationIndices.getSettlementLocations()[set4])
 					&& (color.equals(SettlementLocationIndices
 							.getSettlementColors()[set3]) || (color
 							.equals(SettlementLocationIndices
@@ -833,7 +832,7 @@ public class ValidPositions implements Screen, InputProcessor {
 			} else {
 				settlement = false;
 			}
-		} else if (text.equals("buildShip")) {
+		} else if (text.equals("shipsettler")) { //build ship
 			CatanPieces.findRoad(x, y);
 			CatanPieces.midpoint(
 					CatanPieces.getPositions().get(CatanPieces.getFirstX()),
