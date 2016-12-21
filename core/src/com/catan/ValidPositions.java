@@ -33,7 +33,7 @@ public class ValidPositions implements Screen, InputProcessor {
 	private static boolean[][] markedSettlement;
 
 	public ValidPositions(CatanGame game) {
-		CatanPieces.findPositions();
+		//CatanPieces.findPositions();
 		SettlementLocationIndices set = new SettlementLocationIndices();
 		value = new LandValues();
 		markedSettlement = new boolean[72][6];
