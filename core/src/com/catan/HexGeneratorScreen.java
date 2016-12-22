@@ -27,11 +27,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 
 //The main game screen class
 public class HexGeneratorScreen implements Screen, InputProcessor {
 
+	private CatanPieces cp = new CatanPieces(null);
 	private TextButton finalizePosition;
 	private static String piece1 = "HarborSettlement";
 	private static String piece2 = "Settlement";
@@ -210,7 +210,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				counter = true;
-				CatanPieces.selectPositions(piece1, piece2);
+				cp.selectPositions(piece1, piece2);
 			}
 		});
 
@@ -477,57 +477,56 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 	@Override
 	//Allows the user to put numbers on the main island, and place pieces on the main island
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		//counter++
 		if(CatanPieces.getSelectInitialPlacements()){
-			CatanPieces.findSettlement(screenX, Gdx.graphics.getHeight() - 1 - screenY);
-			int xPos = CatanPieces.getPositions().get(CatanPieces.getSettlementIndexX())-5;  //needed so the positions are correct
-			int yPos = CatanPieces.getPositions().get(CatanPieces.getSettlementIndexY())-7;  //needed so the positions are correct
+			cp.findSettlement(screenX, Gdx.graphics.getHeight() - 1 - screenY);
 			for(int i = 0; i<CatanPieces.getGamePieces().size(); i++){
 				if(!CatanPieces.getGamePieces().get(i).isVisible()){
 					iCopy = i;
 					if(!piece1.equals("Road") && !piece2.equals("ShipSettler")){
-						//if(vp.valid(CatanPieces.getGamePieces().get(i), 
-					//CatanPieces.getGamePieces().get(i).getName().substring(CatanPieces.getGamePieces().get(i).getName().indexOf("|") + 1), screenX
-					//, Gdx.graphics.getHeight() - 1 - screenY
-					//, CatanPieces.getGamePieces().get(i).getName().substring(0, CatanPieces.getGamePieces().get(i).getName().indexOf("|")))){
-					CatanPieces.getGamePieces().get(i).setPosition(xPos,
-							yPos);
+						
+						if(vp.valid(CatanPieces.getGamePieces().get(i), 
+					CatanPieces.getGamePieces().get(i).getName().substring(CatanPieces.getGamePieces().get(i).getName().indexOf("|") + 1), screenX
+					, Gdx.graphics.getHeight() - 1 - screenY
+					, CatanPieces.getGamePieces().get(i).getName().substring(0, CatanPieces.getGamePieces().get(i).getName().indexOf("|")))){
+							System.out.println("in hex: " + SettlementLocationIndices.getHarborSettlementLocations()[ValidPositions.getCounter()]);
+					CatanPieces.getGamePieces().get(i).setPosition(CatanPieces.getPositions().get(cp.getSettlementIndexX())-5,
+							CatanPieces.getPositions().get(cp.getSettlementIndexY())-7);
 					System.out.println("Working");
 					CatanPieces.getGamePieces().get(i).setVisible(true);
-					//}
+					}
 					}
 					else{
-//						if(!vp.valid(CatanPieces.getGamePieces().get(i), 
-//								CatanPieces.getGamePieces().get(i).getName().substring(CatanPieces.getGamePieces().get(i).getName().indexOf("|") + 1), screenX
-//								, Gdx.graphics.getHeight() - 1 - screenY
-//								, CatanPieces.getGamePieces().get(i).getName().substring(0, CatanPieces.getGamePieces().get(i).getName().indexOf("|")))){
-//							return false;
-//						}
-						CatanPieces.findRoad(screenX, Gdx.graphics.getHeight() - 1 - screenY);
-						CatanPieces.midpoint(CatanPieces.getPositions().get(CatanPieces.getFirstX()), 
-								CatanPieces.getPositions().get(CatanPieces.getFirstY()), 
-								CatanPieces.getPositions().get(CatanPieces.getSecondX()), 
-								CatanPieces.getPositions().get(CatanPieces.getSecondY()));
+						if(!vp.valid(CatanPieces.getGamePieces().get(i), 
+								CatanPieces.getGamePieces().get(i).getName().substring(CatanPieces.getGamePieces().get(i).getName().indexOf("|") + 1), screenX
+								, Gdx.graphics.getHeight() - 1 - screenY
+								, CatanPieces.getGamePieces().get(i).getName().substring(0, CatanPieces.getGamePieces().get(i).getName().indexOf("|")))){
+							return false;
+						}
+						cp.findRoad(screenX, Gdx.graphics.getHeight() - 1 - screenY);
+						cp.midpoint(CatanPieces.getPositions().get(cp.getFirstX()), 
+								CatanPieces.getPositions().get(cp.getFirstY()), 
+								CatanPieces.getPositions().get(cp.getSecondX()), 
+								CatanPieces.getPositions().get(cp.getSecondY()));
 						int distance = 0;
 						int y = 15;
-						if(CatanPieces.getRoadRotation() != 90){
-							distance = CatanPieces.distance(CatanPieces.getPositions().get(CatanPieces.getFirstX()), 
-									CatanPieces.getPositions().get(CatanPieces.getFirstY()), 
-									CatanPieces.getPositions().get(CatanPieces.getSecondX()), 
-									CatanPieces.getPositions().get(CatanPieces.getSecondY()),10,0);
+						if(cp.getRoadRotation() != 90){
+							distance = CatanPieces.distance(CatanPieces.getPositions().get(cp.getFirstX()), 
+									CatanPieces.getPositions().get(cp.getFirstY()), 
+									CatanPieces.getPositions().get(cp.getSecondX()), 
+									CatanPieces.getPositions().get(cp.getSecondY()),10,0);
 						}
 						else{
-							distance = CatanPieces.distance(CatanPieces.getPositions().get(CatanPieces.getFirstX()), 
-									CatanPieces.getPositions().get(CatanPieces.getFirstY()), 
-									CatanPieces.getPositions().get(CatanPieces.getSecondX()), 
-									CatanPieces.getPositions().get(CatanPieces.getSecondY()),0,0);
+							distance = CatanPieces.distance(CatanPieces.getPositions().get(cp.getFirstX()), 
+									CatanPieces.getPositions().get(cp.getFirstY()), 
+									CatanPieces.getPositions().get(cp.getSecondX()), 
+									CatanPieces.getPositions().get(cp.getSecondY()),0,0);
 						}
-						CatanPieces.getGamePieces().get(i).setBounds(CatanPieces.getmpX() - distance/2, 
-								CatanPieces.getmpY() - y/2, distance, y);
+						CatanPieces.getGamePieces().get(i).setBounds(cp.getmpX() - distance/2, 
+								cp.getmpY() - y/2, distance, y);
 						CatanPieces.getGamePieces().get(i).setOrigin(distance/2, y/2);
 						CatanPieces.getGamePieces().get(i).setTransform(true);
-						CatanPieces.getGamePieces().get(i).setRotation(CatanPieces.getRoadRotation());
-						if(CatanPieces.getRoadRotation() == 90){
+						CatanPieces.getGamePieces().get(i).setRotation(cp.getRoadRotation());
+						if(cp.getRoadRotation() == 90){
 						CatanPieces.getGamePieces().get(i).setScaleY(.5f);
 						CatanPieces.getGamePieces().get(i).setScaleX(.74f);
 						CatanPieces.getGamePieces().get(i).setX(CatanPieces.getGamePieces().get(i).getX() + .5f);
@@ -548,6 +547,29 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 					finalizePosition.addListener(new ChangeListener(){
 						@Override
 						public void changed(ChangeEvent event, Actor actor) {
+							String name = CatanPieces.getGamePieces().get(iCopy).getName();
+							String type = name.substring(CatanPieces.getGamePieces().get(iCopy).getName().indexOf("|") + 1);
+							if (type.equals("harborsettlement1")) {
+								SettlementLocationIndices.getHarborSettlementLocations()[ValidPositions.getCounter()] = true;
+								SettlementLocationIndices.getSettlementColors()[ValidPositions.getCounter()] = ValidPositions.getColors();
+							}
+							else if (type.equals("settlement")) {
+								SettlementLocationIndices.getSettlementLocations()[ValidPositions.getCounter()] = true;
+								SettlementLocationIndices.getSettlementColors()[ValidPositions.getCounter()] = ValidPositions.getColors();
+							}
+							else if (type.equals("road1")) {
+								SettlementLocationIndices.getRoadShip()[ValidPositions.getCounter()] = 1;
+								SettlementLocationIndices.getRoadColors()[ValidPositions.getCounter()] = ValidPositions.getColors();
+							}
+							else if (type.equals("shipsettler")) {
+								SettlementLocationIndices.getRoadColors()[ValidPositions.getCounter()] = ValidPositions.getColors();
+								if (SettlementLocationIndices.getRoadShip()[ValidPositions.getCounter()] == 0) {
+									SettlementLocationIndices.getRoadShip()[ValidPositions.getCounter()] = 2;	
+								}
+								else {
+								SettlementLocationIndices.getRoadShip()[ValidPositions.getCounter()]++;
+								}
+							}
 							CatanPieces.getGamePieces().get(iCopy).clearListeners();
 							//If there are two players, they need to each place a harbor settlement and a settlement
 							if(iCopy == CatanPieces.getGamePieces().size() - 1 && piece1.equals("Road")
@@ -555,7 +577,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 								piece1 = "";
 								piece2 = "";
 								counter = false;
-								CatanPieces.neutralPlacements();
+								cp.neutralPlacements();
 							}
 							else if(iCopy != CatanPieces.getGamePieces().size() - 1){
 								CatanPieces.addGamePiecesListener(iCopy+1);
@@ -564,7 +586,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 								System.out.println("2nd Call");
 								piece1 = "Road";
 								piece2 = "ShipSettler";
-								CatanPieces.selectPositions(piece1, piece2);
+								cp.selectPositions(piece1, piece2);
 							}
 							else if(iCopy == CatanPieces.getGamePieces().size() - 1){
 								counter = false;//don't draw the text on the screen anymore
@@ -649,7 +671,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 	}
 	
 	//returns the stage for this class
-	public Stage getStage() {
+	public static Stage getStage() {
 		return stage;
 	}
 	

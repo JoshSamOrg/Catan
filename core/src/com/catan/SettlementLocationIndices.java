@@ -8,8 +8,9 @@ public class SettlementLocationIndices {
 	private static String roadColors[]; //holds the information for what color road is at this position.
 	private static boolean two = false;
 	private static int a = 0, b = 0, c = 0, d = 0, e = 0, f=0;
-
+	private CatanPieces cp = new CatanPieces(null);	
 	public SettlementLocationIndices() {
+		System.out.println("in settlement");
 		roadShip=new int[232];
 		harborSettlementLocations=new boolean[177];
 		settlementLocations = new boolean[177];
@@ -1095,64 +1096,36 @@ public class SettlementLocationIndices {
 	 * y the y coordinate of the settlement location
 	 * Returns whether the placement of the settlement follows the two-away rule.
 	 */
-	public static boolean twoAway(int x, int y) {
+	public boolean twoAway(int x, int y) {
+		System.out.println("in two away: " + SettlementLocationIndices.getHarborSettlementLocations()[ValidPositions.getCounter()]);
 		a = ValidPositions.findHex(x, y + 10);
 		b = ValidPositions.findHex(x, y + 30);
 
-		if (b == 72) {
-			//System.out.println("two away");
-			CatanPieces.findSettlement(x - 20, y);
+		
+			cp.findSettlement(x - 20, y);
 			c = getSettlementLocation(
 					CatanPieces.getPositions().get(
-							CatanPieces.getSettlementIndexX()),
+							cp.getSettlementIndexX()),
 					CatanPieces.getPositions().get(
-							CatanPieces.getSettlementIndexY()));
-			CatanPieces.findSettlement(x + 20, y);
+							cp.getSettlementIndexY()));
+			cp.findSettlement(x + 20, y);
 			d = getSettlementLocation(
 					CatanPieces.getPositions().get(
-							CatanPieces.getSettlementIndexX()),
+							cp.getSettlementIndexX()),
 					CatanPieces.getPositions().get(
-							CatanPieces.getSettlementIndexY()));
-			CatanPieces.findSettlement(x, y - 20);
+							cp.getSettlementIndexY()));
+			cp.findSettlement(x, y + 15);
 			e = getSettlementLocation(
 					CatanPieces.getPositions().get(
-							CatanPieces.getSettlementIndexX()),
+							cp.getSettlementIndexX()),
 					CatanPieces.getPositions().get(
-							CatanPieces.getSettlementIndexY()));
-
-			if ((settlementLocations[c] == false && harborSettlementLocations[c] == false)
-					&& (settlementLocations[d] == false && harborSettlementLocations[d] == false)
-					&& (settlementLocations[e] == false && harborSettlementLocations[e] == false)) {
-				two = true;
-			} else {
-				two = false;
-			}
-		} else {
-			//System.out.println("two away2");
-			CatanPieces.findSettlement(x - 20, y);
-			c = getSettlementLocation(
-					CatanPieces.getPositions().get(
-							CatanPieces.getSettlementIndexX()),
-					CatanPieces.getPositions().get(
-							CatanPieces.getSettlementIndexY()));
-			CatanPieces.findSettlement(x + 20, y);
-			d = getSettlementLocation(
-					CatanPieces.getPositions().get(
-							CatanPieces.getSettlementIndexX()),
-					CatanPieces.getPositions().get(
-							CatanPieces.getSettlementIndexY()));
-			CatanPieces.findSettlement(x, y + 15);
-			e = getSettlementLocation(
-					CatanPieces.getPositions().get(
-							CatanPieces.getSettlementIndexX()),
-					CatanPieces.getPositions().get(
-							CatanPieces.getSettlementIndexY()));
-			CatanPieces.findSettlement(x, y - 15);
+							cp.getSettlementIndexY()));
+			cp.findSettlement(x, y - 15);
 			f = getSettlementLocation(
 					CatanPieces.getPositions().get(
-							CatanPieces.getSettlementIndexX()),
+							cp.getSettlementIndexX()),
 					CatanPieces.getPositions().get(
-							CatanPieces.getSettlementIndexY()));
+							cp.getSettlementIndexY()));
 			
 			if ((settlementLocations[c] == false && harborSettlementLocations[c] == false)
 					&& (settlementLocations[d] == false && harborSettlementLocations[d] == false)
@@ -1162,7 +1135,6 @@ public class SettlementLocationIndices {
 			} else {
 				two = false;
 			}
-		}
 		//System.out.println("is two away? " + two);
 		return two;
 	}
