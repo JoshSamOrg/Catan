@@ -27,6 +27,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 
 //The main game screen class
 public class HexGeneratorScreen implements Screen, InputProcessor {
@@ -52,8 +53,9 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 	private Skin skin;
 	private Pixmap pixmap;
 	private TextButton playerOrder;
-	//private ValidPositions vp = new ValidPositions(null);
-
+	private ValidPositions vp = new ValidPositions(null);
+	private boolean start = false;
+	private int j=0;
 	private int numberWidth = 25;
 	private int numberHeight = 25;
 	private int imageStartX = 20;
@@ -396,6 +398,23 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 				batch.end();
 			}
 		}
+		if (start) {
+			TextButton start = new TextButton("End Turn", skin, "tStyle");
+			start.setBounds(300, 20, 250, 50);
+			stage.addActor(start);
+			batch.begin();
+			font2.draw(batch, orders.getOrderedPlayers().get(j).getName() + "'s "
+					+ "turn!", 30, 80);
+			batch.end();
+			start.addListener(new ChangeListener(){
+				@Override
+				public void changed(ChangeEvent event, Actor actor) {
+					actor.setVisible(false);
+					j = (j+1) %PlayerColorScreen.getNumberOfPlayers();
+				}
+			});
+			
+		}
 
 	}
 
@@ -558,6 +577,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 						TextButton startButton = new TextButton("Start Game", skin, "tStyle");
 						startButton.setBounds(300, 20, 250, 50);
 						stage.addActor(startButton);
+						start = true;
 						}
 					});
 					}

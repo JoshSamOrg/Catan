@@ -317,6 +317,19 @@ public class CatanPieces implements InputProcessor, Screen {
 			public void changed(ChangeEvent event, Actor actor) {
 				System.out.println("visible is false");
 				actor.setVisible(false);
+				String type = actor.getName().substring(actor.getName().indexOf("|") + 1);
+				if (type.equals("harborsettlement1")) {
+					SettlementLocationIndices.getHarborSettlementLocations()[ValidPositions.getCounter()] = false;
+				}
+				else if (type.equals("settlement")) {
+					SettlementLocationIndices.getSettlementLocations()[ValidPositions.getCounter()] = false;
+				}
+				else if (type.equals("road1")) {
+					SettlementLocationIndices.getRoadShip()[ValidPositions.getCounter()] = 0;
+				}
+				else if (type.equals("shipsettler")) {
+					SettlementLocationIndices.getRoadShip()[ValidPositions.getCounter()] = 0;
+				}
 				selectInitialPlacements = true;
 			}
 		});

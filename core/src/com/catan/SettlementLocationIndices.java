@@ -1100,7 +1100,7 @@ public class SettlementLocationIndices {
 		b = ValidPositions.findHex(x, y + 30);
 
 		if (b == 72) {
-			System.out.println("two away");
+			//System.out.println("two away");
 			CatanPieces.findSettlement(x - 20, y);
 			c = getSettlementLocation(
 					CatanPieces.getPositions().get(
@@ -1128,7 +1128,7 @@ public class SettlementLocationIndices {
 				two = false;
 			}
 		} else {
-			System.out.println("two away2");
+			//System.out.println("two away2");
 			CatanPieces.findSettlement(x - 20, y);
 			c = getSettlementLocation(
 					CatanPieces.getPositions().get(
@@ -1163,7 +1163,7 @@ public class SettlementLocationIndices {
 				two = false;
 			}
 		}
-		System.out.println("is two away? " + two);
+		//System.out.println("is two away? " + two);
 		return two;
 	}
 
