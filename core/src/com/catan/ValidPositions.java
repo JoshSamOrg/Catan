@@ -404,7 +404,7 @@ public class ValidPositions implements Screen, InputProcessor {
 				settlement = false;
 			}
 		} else if (text.equals("harborsettlement1")) {
-			System.out.println("harborsettlement1");
+			//System.out.println("harborsettlement1");
 			CatanPieces.findSettlement(x, y);
 			if ((CatanPieces.getPositions().get(CatanPieces.getSettlementIndexX()) == 205 && 
 				 CatanPieces.getPositions().get(CatanPieces.getSettlementIndexY()) == 425)
@@ -460,7 +460,7 @@ public class ValidPositions implements Screen, InputProcessor {
 							CatanPieces.getSettlementIndexX()),
 					CatanPieces.getPositions().get(
 							CatanPieces.getSettlementIndexY()));
-			System.out.println("Counter is: " + counter);
+			//System.out.println("Counter is: " + counter);
 			if (value.getLand()[set] == value.getLand()[set2]
 					&& value.getLand()[set2] == value.getLand()[set3]
 					&& value.getLand()[set3] == value.getLand()[set4]) {
@@ -489,7 +489,7 @@ public class ValidPositions implements Screen, InputProcessor {
 				settlement = false;
 			}
 		} else if (text.equals("road1")) {
-			System.out.println("road1");
+			//System.out.println("road1");
 			CatanPieces.findRoad(x, y);
 			CatanPieces.midpoint(  //calculates the midpoint of the road location.
 					CatanPieces.getPositions().get(CatanPieces.getFirstX()),
@@ -557,7 +557,7 @@ public class ValidPositions implements Screen, InputProcessor {
 							.equals(SettlementLocationIndices
 									.getSettlementColors()[set4])))
 					&& (SettlementLocationIndices.getRoadShip()[mid] == 0)) {
-				System.out.println("bottom");
+				//System.out.println("bottom");
 				if (CatanPieces.getRoadRotation() == 90) {  //if the road is 90 degrees.
 					//System.out.println("in the 90 section1");
 					set = findHex((int) (CatanPieces.getmpX() - 20),
@@ -582,7 +582,7 @@ public class ValidPositions implements Screen, InputProcessor {
 							(int) CatanPieces.getmpY() + 15);
 					if (value.getLand()[set] == 'l'
 							|| value.getLand()[set2] == 'l') { //makes sure at least one of the two hexes the road is on is a land hex.
-						System.out.println("it is true");
+						//System.out.println("it is true");
 						SettlementLocationIndices.getRoadColors()[mid] = color;
 						SettlementLocationIndices.getRoadShip()[mid] = 1;
 						settlement = true;
@@ -961,7 +961,7 @@ public class ValidPositions implements Screen, InputProcessor {
 		else {
 			settlement = false;
 		}
-		System.out.println("can settle? :" + settlement);
+		//System.out.println("can settle? :" + settlement);
 		return settlement;
 
 	}
@@ -998,8 +998,8 @@ public class ValidPositions implements Screen, InputProcessor {
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) { 
 		x++;
-		System.out.println("x coordinate: " + screenX);
-		System.out.println("y coordinate: " + (Gdx.graphics.getHeight() - 1 - screenY));
+		//System.out.println("x coordinate: " + screenX);
+		//System.out.println("y coordinate: " + (Gdx.graphics.getHeight() - 1 - screenY));
 		// CatanPieces.findRoad(screenX, Gdx.graphics.getHeight() - 1 -
 		// screenY);
 		// CatanPieces.midpoint(

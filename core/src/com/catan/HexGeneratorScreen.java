@@ -52,7 +52,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 	private Skin skin;
 	private Pixmap pixmap;
 	private TextButton playerOrder;
-	private ValidPositions vp = new ValidPositions(null);
+	//private ValidPositions vp = new ValidPositions(null);
 
 	private int numberWidth = 25;
 	private int numberHeight = 25;
@@ -133,7 +133,6 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 	
 	//sets up all the actors on the stage, and processes all input events
 	public void show() {
-		System.out.println("in hex");
 		CatanPieces.findPositions();
 		orange=new ArrayList<ImageButton>();
 		white=new ArrayList<ImageButton>();
@@ -232,12 +231,8 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 		tfstyle.font = font2;
 		tfstyle.fontColor = Color.WHITE;
 		skin.add("tfstyle", tfstyle);
-		field = new TextField(
-				"Click on a number, then move your mouse to the hexagon you",
-				skin, "tfstyle");
-		field2 = new TextField(
-				"want the number to go inside of and click inside that hexagon",
-				skin, "tfstyle");
+		field = new TextField("Click on a number, then move your mouse to the hexagon you",skin, "tfstyle");
+		field2 = new TextField("want the number to go inside of and click inside that hexagon",skin, "tfstyle");
 		field.setBounds(5, 70, 800, 50);
 		field2.setBounds(5, 40, 800, 50);
 		if(LoadingScreen.getPickNumbers()){
@@ -356,8 +351,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 		numbers.add(atlas3.findRegion("10 - Copy"));
 		numbers.add(atlas3.findRegion("11 - Copy"));
 		for (int i = 0; i < numbers.size(); i++) {
-			numberImages.add(new ImageButton(new TextureRegionDrawable(numbers
-					.get(i))));
+			numberImages.add(new ImageButton(new TextureRegionDrawable(numbers.get(i))));
 			numberImages.get(i).setBounds(imageStartX, imageY, 25, 25);
 			stage.addActor(numberImages.get(i));
 			imageStartX += 40;
@@ -385,25 +379,20 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 		if (counter) {
 			batch.begin();
 			playerOrder.setVisible(false);
-			font2.draw(batch, orders.getOrderedPlayers().get(0).getName() + " "
-					+ "is going first", 30, 160);
+			font2.draw(batch, orders.getOrderedPlayers().get(0).getName() + " "+ "is going first", 30, 160);
 			batch.end();
 			batch.begin();
-			font2.draw(batch, orders.getOrderedPlayers().get(1).getName() + " "
-					+ "is going second", 30, 120);
+			font2.draw(batch, orders.getOrderedPlayers().get(1).getName() + " "+ "is going second", 30, 120);
 			batch.end();
 			if (GamePlayers.getGamePlayers().size() == 3) {
 				batch.begin();
-				font2.draw(batch, orders.getOrderedPlayers().get(2).getName() + " "
-						+ "is going third", 30, 80);
+				font2.draw(batch, orders.getOrderedPlayers().get(2).getName() + " "+ "is going third", 30, 80);
 				batch.end();
 			}
 			if (GamePlayers.getGamePlayers().size() == 4) {
 				batch.begin();
-				font2.draw(batch, orders.getOrderedPlayers().get(2).getName() + " "
-						+ "is going third", 30, 80);
-				font2.draw(batch, orders.getOrderedPlayers().get(3).getName() + " "
-						+ "is going fourth", 30, 40);
+				font2.draw(batch, orders.getOrderedPlayers().get(2).getName() + " "+ "is going third", 30, 80);
+				font2.draw(batch, orders.getOrderedPlayers().get(3).getName() + " "+ "is going fourth", 30, 40);
 				batch.end();
 			}
 		}
@@ -478,22 +467,23 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 				if(!CatanPieces.getGamePieces().get(i).isVisible()){
 					iCopy = i;
 					if(!piece1.equals("Road") && !piece2.equals("ShipSettler")){
-						if(vp.valid(CatanPieces.getGamePieces().get(i), 
-					CatanPieces.getGamePieces().get(i).getName().substring(CatanPieces.getGamePieces().get(i).getName().indexOf("|") + 1), screenX
-					, Gdx.graphics.getHeight() - 1 - screenY
-					, CatanPieces.getGamePieces().get(i).getName().substring(0, CatanPieces.getGamePieces().get(i).getName().indexOf("|")))){
+						//if(vp.valid(CatanPieces.getGamePieces().get(i), 
+					//CatanPieces.getGamePieces().get(i).getName().substring(CatanPieces.getGamePieces().get(i).getName().indexOf("|") + 1), screenX
+					//, Gdx.graphics.getHeight() - 1 - screenY
+					//, CatanPieces.getGamePieces().get(i).getName().substring(0, CatanPieces.getGamePieces().get(i).getName().indexOf("|")))){
 					CatanPieces.getGamePieces().get(i).setPosition(xPos,
 							yPos);
+					System.out.println("Working");
 					CatanPieces.getGamePieces().get(i).setVisible(true);
-					}
+					//}
 					}
 					else{
-						if(!vp.valid(CatanPieces.getGamePieces().get(i), 
-								CatanPieces.getGamePieces().get(i).getName().substring(CatanPieces.getGamePieces().get(i).getName().indexOf("|") + 1), screenX
-								, Gdx.graphics.getHeight() - 1 - screenY
-								, CatanPieces.getGamePieces().get(i).getName().substring(0, CatanPieces.getGamePieces().get(i).getName().indexOf("|")))){
-							return false;
-						}
+//						if(!vp.valid(CatanPieces.getGamePieces().get(i), 
+//								CatanPieces.getGamePieces().get(i).getName().substring(CatanPieces.getGamePieces().get(i).getName().indexOf("|") + 1), screenX
+//								, Gdx.graphics.getHeight() - 1 - screenY
+//								, CatanPieces.getGamePieces().get(i).getName().substring(0, CatanPieces.getGamePieces().get(i).getName().indexOf("|")))){
+//							return false;
+//						}
 						CatanPieces.findRoad(screenX, Gdx.graphics.getHeight() - 1 - screenY);
 						CatanPieces.midpoint(CatanPieces.getPositions().get(CatanPieces.getFirstX()), 
 								CatanPieces.getPositions().get(CatanPieces.getFirstY()), 
@@ -528,6 +518,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 							CatanPieces.getGamePieces().get(i).setScaleY(.95f);
 							CatanPieces.getGamePieces().get(i).setScaleX(.95f);
 						}
+						System.out.println("here");
 						CatanPieces.getGamePieces().get(i).setVisible(true);
 					}
 					if(finalizePosition == null){
@@ -539,16 +530,24 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 						@Override
 						public void changed(ChangeEvent event, Actor actor) {
 							CatanPieces.getGamePieces().get(iCopy).clearListeners();
-							if(iCopy != CatanPieces.getGamePieces().size() - 1){
+							//If there are two players, they need to each place a harbor settlement and a settlement
+							if(iCopy == CatanPieces.getGamePieces().size() - 1 && piece1.equals("Road")
+									&& piece2.equals("ShipSettler") && PlayerColorScreen.getNumberOfPlayers() == 2){
+								piece1 = "";
+								piece2 = "";
+								counter = false;
+								CatanPieces.neutralPlacements();
+							}
+							else if(iCopy != CatanPieces.getGamePieces().size() - 1){
 								CatanPieces.addGamePiecesListener(iCopy+1);
 							}
 							else if(piece1.equals("HarborSettlement") && piece2.equals("Settlement")){
+								System.out.println("2nd Call");
 								piece1 = "Road";
 								piece2 = "ShipSettler";
 								CatanPieces.selectPositions(piece1, piece2);
 							}
-							else if(iCopy == CatanPieces.getGamePieces().size() - 1 && piece1.equals("Road")
-									&& piece2.equals("ShipSettler")){
+							else if(iCopy == CatanPieces.getGamePieces().size() - 1){
 								counter = false;//don't draw the text on the screen anymore
 								actor.setVisible(false);//set the finalize position button so you can't see it
 								makeStartButton();
