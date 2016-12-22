@@ -72,219 +72,219 @@ public class ValidPositions implements Screen, InputProcessor {
 			i = 0;
 		} else if (CatanPieces.distance(x, y, 183, 413, 0, 0) <= 23.5) {
 			i = 1;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 118, 375, 0, 0) <= 23.5) {
 			i = 2;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 161, 375, 0, 0) <= 23.5) {
 			i = 3;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 97, 339, 0, 0) <= 23.5) {
 			i = 4;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 140, 339, 0, 0) <= 23.5) {
 			i = 5;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 76, 301, 0, 0) <= 23.5) {
 			i = 6;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 118, 301, 0, 0) <= 23.5) {
 			i = 7;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 161, 301, 0, 0) <= 23.5) {
 			i = 8;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 97, 266, 0, 0) <= 23.5) {
 			i = 9;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 140, 266, 0, 0) <= 23.5) {
 			i = 10;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 118, 228, 0, 0) <= 23.5) {
 			i = 11;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 161, 228, 0, 0) <= 23.5) {
 			i = 12;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 140, 191, 0, 0) <= 23.5) {
 			i = 13;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 183, 191, 0, 0) <= 23.5) {
 			i = 14;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 225, 413, 0, 0) <= 23.5) {
 			i = 15;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 268, 413, 0, 0) <= 22.5) {
 			i = 16;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 204, 375, 0, 0) <= 22.5) {
 			i = 17;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 247, 375, 0, 0) <= 22.5) {
 			i = 18;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 183, 339, 0, 0) <= 22.5) {
 			i = 19;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 225, 339, 0, 0) <= 22.5) {
 			i = 20;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 204, 301, 0, 0) <= 22.5) {
 			i = 21;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 247, 301, 0, 0) <= 22.5) {
 			i = 22;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 183, 266, 0, 0) <= 22.5) {
 			i = 23;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 225, 266, 0, 0) <= 22.5) {
 			i = 24;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 204, 228, 0, 0) <= 22.5) {
 			i = 25;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 247, 228, 0, 0) <= 22.5) {
 			i = 26;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 225, 191, 0, 0) <= 22.5) {
 			i = 27;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 268, 191, 0, 0) <= 22.5) {
 			i = 28;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 310, 413, 0, 0) <= 22.5) {
 			i = 29;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 353, 413, 0, 0) <= 22.5) {
 			i = 30;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 396, 413, 0, 0) <= 22.5) {
 			i = 31;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 438, 413, 0, 0) <= 22.5) {
 			i = 32;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 480, 413, 0, 0) <= 22.5) {
 			i = 33;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 290, 375, 0, 0) <= 22.5) {
 			i = 34;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 332, 375, 0, 0) <= 22.5) {
 			i = 35;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 375, 375, 0, 0) <= 22.5) {
 			i = 36;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 418, 375, 0, 0) <= 22.5) {
 			i = 37;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 461, 375, 0, 0) <= 22.5) {
 			i = 38;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 503, 375, 0, 0) <= 22.5) {
 			i = 39;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 268, 339, 0, 0) <= 22.5) {
 			i = 40;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 311, 339, 0, 0) <= 22.5) {
 			i = 41;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 353, 339, 0, 0) <= 22.5) {
 			i = 42;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 396, 339, 0, 0) <= 22.5) {
 			i = 43;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 439, 339, 0, 0) <= 22.5) {
 			i = 44;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 482, 339, 0, 0) <= 22.5) {
 			i = 45;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 525, 339, 0, 0) <= 22.5) {
 			i = 46;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 290, 301, 0, 0) <= 22.5) {
 			i = 47;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 332, 301, 0, 0) <= 22.5) {
 			i = 48;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 375, 301, 0, 0) <= 22.5) {
 			i = 49;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 418, 301, 0, 0) <= 22.5) {
 			i = 50;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 461, 301, 0, 0) <= 22.5) {
 			i = 51;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 503, 301, 0, 0) <= 22.5) {
 			i = 52;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 546, 301, 0, 0) <= 22.5) {
 			i = 53;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 268, 266, 0, 0) <= 22.5) {
 			i = 54;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 311, 266, 0, 0) <= 22.5) {
 			i = 55;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 353, 266, 0, 0) <= 22.5) {
 			i = 56;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 396, 266, 0, 0) <= 22.5) {
 			i = 57;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 439, 266, 0, 0) <= 22.5) {
 			i = 58;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 482, 266, 0, 0) <= 22.5) {
 			i = 59;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 525, 266, 0, 0) <= 22.5) {
 			i = 60;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 289, 228, 0, 0) <= 22.5) {
 			i = 61;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 332, 228, 0, 0) <= 22.5) {
 			i = 62;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 375, 228, 0, 0) <= 22.5) {
 			i = 63;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 418, 228, 0, 0) <= 22.5) {
 			i = 64;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 461, 228, 0, 0) <= 22.5) {
 			i = 65;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 504, 228, 0, 0) <= 22.5) {
 			i = 66;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 311, 191, 0, 0) <= 22.5) {
 			i = 67;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 354, 191, 0, 0) <= 22.5) {
 			i = 68;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 397, 191, 0, 0) <= 22.5) {
 			i = 69;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 440, 191, 0, 0) <= 22.5) {
 			i = 70;
-			System.out.println(i);
+			//System.out.println(i);
 		} else if (CatanPieces.distance(x, y, 483, 191, 0, 0) <= 22.5) {
 			i = 71;
-			System.out.println(i);
+			//System.out.println(i);
 		} else {
-			System.out.println("not in bounds");
+			//System.out.println("not in bounds");
 			i = 72;
 		}
 		return i;
@@ -299,7 +299,7 @@ public class ValidPositions implements Screen, InputProcessor {
 	 */
 	public boolean valid(ImageButton button, String text, int x, int y, String color) {
 		if (text.equals("settlement")) {
-			System.out.println("settlement");
+			//System.out.println("settlement");
 			CatanPieces.findSettlement(x, y);  //finds the nearest settlement from the location you clicked on the board.
 			set = findHex(
 					CatanPieces.getPositions().get(
@@ -347,7 +347,7 @@ public class ValidPositions implements Screen, InputProcessor {
 				settlement = false;
 			}
 		} else if (text.equals("harbor settlement")) {
-			System.out.println("harbor settlement");
+			//System.out.println("harbor settlement");
 			CatanPieces.findSettlement(x, y);
 			set = findHex(
 					CatanPieces.getPositions().get(
@@ -403,7 +403,7 @@ public class ValidPositions implements Screen, InputProcessor {
 				settlement = false;
 			}
 		} else if (text.equals("harborsettlement1")) {
-			System.out.println("harborsettlement1");
+			//System.out.println("harborsettlement1");
 			CatanPieces.findSettlement(x, y);
 			if ((CatanPieces.getPositions().get(CatanPieces.getSettlementIndexX()) == 205 && 
 				 CatanPieces.getPositions().get(CatanPieces.getSettlementIndexY()) == 425)
@@ -459,7 +459,7 @@ public class ValidPositions implements Screen, InputProcessor {
 							CatanPieces.getSettlementIndexX()),
 					CatanPieces.getPositions().get(
 							CatanPieces.getSettlementIndexY()));
-			System.out.println("Counter is: " + counter);
+			//System.out.println("Counter is: " + counter);
 			if (value.getLand()[set] == value.getLand()[set2]
 					&& value.getLand()[set2] == value.getLand()[set3]
 					&& value.getLand()[set3] == value.getLand()[set4]) {
@@ -488,7 +488,7 @@ public class ValidPositions implements Screen, InputProcessor {
 				settlement = false;
 			}
 		} else if (text.equals("road1")) {
-			System.out.println("road1");
+			//System.out.println("road1");
 			CatanPieces.findRoad(x, y);
 			CatanPieces.midpoint(  //calculates the midpoint of the road location.
 					CatanPieces.getPositions().get(CatanPieces.getFirstX()),
@@ -556,7 +556,7 @@ public class ValidPositions implements Screen, InputProcessor {
 							.equals(SettlementLocationIndices
 									.getSettlementColors()[set4])))
 					&& (SettlementLocationIndices.getRoadShip()[counter] == 0)) {
-				System.out.println("bottom");
+				//System.out.println("bottom");
 				if (CatanPieces.getRoadRotation() == 90) {  //if the road is 90 degrees.
 					//System.out.println("in the 90 section1");
 					set = findHex((int) (CatanPieces.getmpX() - 20),
@@ -581,7 +581,7 @@ public class ValidPositions implements Screen, InputProcessor {
 							(int) CatanPieces.getmpY() + 15);
 					if (value.getLand()[set] == 'l'
 							|| value.getLand()[set2] == 'l') { //makes sure at least one of the two hexes the road is on is a land hex.
-						System.out.println("it is true");
+						//System.out.println("it is true");
 						SettlementLocationIndices.getRoadColors()[counter] = color;
 						SettlementLocationIndices.getRoadShip()[counter] = 1;
 						settlement = true;
@@ -999,9 +999,9 @@ public class ValidPositions implements Screen, InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) { 
-		x++;
-		System.out.println("x coordinate: " + screenX);
-		System.out.println("y coordinate: " + (Gdx.graphics.getHeight() - 1 - screenY));
+		//x++;
+		//System.out.println("x coordinate: " + screenX);
+		//System.out.println("y coordinate: " + (Gdx.graphics.getHeight() - 1 - screenY));
 		// CatanPieces.findRoad(screenX, Gdx.graphics.getHeight() - 1 -
 		// screenY);
 		// CatanPieces.midpoint(
@@ -1011,16 +1011,16 @@ public class ValidPositions implements Screen, InputProcessor {
 		// CatanPieces.getPositions().get(CatanPieces.getSecondY()));
 		// System.out.println("x is: " + CatanPieces.getmpX());
 		// System.out.println("y is: " + CatanPieces.getmpY());
-		TextureAtlas atlas = new TextureAtlas("Orange.txt");
-		buttons1 = new ImageButton(new TextureRegionDrawable(
-				atlas.findRegion("orangeHarborSettlement")));
+		//TextureAtlas atlas = new TextureAtlas("Orange.txt");
+		//buttons1 = new ImageButton(new TextureRegionDrawable(
+				//atlas.findRegion("orangeHarborSettlement")));
 //		buttons2 = new ImageButton(new TextureRegionDrawable(
 //				atlas.findRegion("orangeRoad")));
 //		buttons3 = new ImageButton(new TextureRegionDrawable(
 //				atlas.findRegion("orangeRoad")));
 //		if (x == 0) {
-			valid(buttons1, "harborsettlement1", screenX, Gdx.graphics.getHeight() - 1
-					- screenY, "orange");
+			//valid(buttons1, "harborsettlement1", screenX, Gdx.graphics.getHeight() - 1
+					//- screenY, "orange");
 //		}
 //		if (x == 1) {
 //			valid(buttons2, "road", screenX,
