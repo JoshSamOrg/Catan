@@ -940,15 +940,30 @@ public class ValidPositions implements Screen, InputProcessor {
 
 	}
 	
-	public boolean moveShip(TextureAtlas atlas, String text, int x, int y) {
+	public boolean moveShip(TextureAtlas atlas, String text, int x1, int y1, int x2, int y2) {
 		Ship ship = new Ship(atlas, text);
+		cp.findRoad(x2, y2);
+		cp.midpoint(
+				CatanPieces.getPositions().get(cp.getFirstX()),
+				CatanPieces.getPositions().get(cp.getFirstY()),
+				CatanPieces.getPositions().get(cp.getSecondX()),
+				CatanPieces.getPositions().get(cp.getSecondY()));
 		
-		if (ship.hasMove()) {
+		a = cp.getmpX(); //x coordinate of midpoint.
+		b = cp.getmpY(); //y coordinate of midpoint
+		
+		counter = SettlementLocationIndices.getRoadLocations(
+				a, b);
+		
+		if (ship.hasMove() && sli.oneAway(x1, y1, x2, y2)) {
 			return true;
 		}
 		else {
 			return false;
 		}
+	}
+	public SettlementLocationIndices getSli() {
+		return sli;
 	}
 
 	public static int getCounter() {

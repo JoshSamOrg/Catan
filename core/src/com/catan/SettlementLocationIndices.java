@@ -7,6 +7,7 @@ public class SettlementLocationIndices {
 	private static String settlementColors[]; //holds the information for what color settlement is at this position.
 	private static String roadColors[]; //holds the information for what color road is at this position.
 	private static boolean two = false;
+	private static boolean one = false;
 	private static int a = 0, b = 0, c = 0, d = 0, e = 0, f=0;
 	private CatanPieces cp = new CatanPieces(null);	
 	public SettlementLocationIndices() {
@@ -1135,6 +1136,42 @@ public class SettlementLocationIndices {
 			}
 		return two;
 	}
+	/*
+	 * x1 first x coordinate of touchdown
+	 * y1 first y coordinate of touchdown
+	 * x2 second x coordinate of touchdown
+	 * y2 second y coordinate of touchdown
+	 */
+	public boolean oneAway(int x1, int y1, int x2, int y2) {
+		cp.findRoad(x1, y1);
+		int y = cp.getRoadRotation();
+		cp.midpoint(cp.getFirstX(), cp.getFirstY(), cp.getSecondX(), cp.getSecondY());
+		int a = (int) cp.getmpX();
+		int b = (int) cp.getmpY();
+		
+		cp.findRoad(x2, y2);
+		cp.midpoint(cp.getFirstX(), cp.getFirstY(), cp.getSecondX(), cp.getSecondY());
+		int c = (int) cp.getmpX();
+		int d = (int) cp.getmpY();
+		
+		
+		if(y==90) {
+			System.out.println("here1");
+		if ((Math.abs(a-c))<=15 && (Math.abs(b-d))<17) {
+			one = true;
+		}
+		}
+		else if(y==30 || y==-30) {
+			System.out.println("here2");
+			if ((Math.abs(a-c))<27 && (Math.abs(b-d))<17) {
+				one = true;
+			}
+		}
+		else {
+			one = false;
+		}
+		return one;
+		}
 
 	public static boolean[] getSettlementLocations() {
 		return settlementLocations;
