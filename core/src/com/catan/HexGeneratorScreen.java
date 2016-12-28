@@ -32,6 +32,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 public class HexGeneratorScreen implements Screen, InputProcessor {
 
 	private CatanPieces cp = new CatanPieces(null);
+	private int test = 0;
 	private TextButton finalizePosition;
 	private static String piece1 = "HarborSettlement";
 	private static String piece2 = "Settlement";
@@ -399,14 +400,14 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 			}
 		}
 		if (start) {
-			TextButton start = new TextButton("End Turn", skin, "tStyle");
-			start.setBounds(300, 20, 250, 50);
-			stage.addActor(start);
+			TextButton endTurn = new TextButton("End Turn", skin, "tStyle");
+			endTurn.setBounds(300, 20, 250, 50);
+			stage.addActor(endTurn);
 			batch.begin();
 			font2.draw(batch, orders.getOrderedPlayers().get(j).getName() + "'s "
 					+ "turn!", 30, 80);
 			batch.end();
-			start.addListener(new ChangeListener(){
+			endTurn.addListener(new ChangeListener(){
 				@Override
 				public void changed(ChangeEvent event, Actor actor) {
 					actor.setVisible(false);
@@ -477,6 +478,12 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 	@Override
 	//Allows the user to put numbers on the main island, and place pieces on the main island
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		test++;
+			
+		//System.out.println(screenX);
+		System.out.println(Gdx.graphics.getHeight()-1-screenY);
+		System.out.println(vp.getSli().oneAway(213, 321, 237, 321));
+		if (CatanPieces.getSelectInitialPlacements())
 		if(CatanPieces.getSelectInitialPlacements()){
 			cp.findSettlement(screenX, Gdx.graphics.getHeight() - 1 - screenY);
 			for(int i = 0; i<CatanPieces.getGamePieces().size(); i++){
@@ -491,7 +498,14 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 							System.out.println("in hex: " + SettlementLocationIndices.getHarborSettlementLocations()[ValidPositions.getCounter()]);
 					CatanPieces.getGamePieces().get(i).setPosition(CatanPieces.getPositions().get(cp.getSettlementIndexX())-5,
 							CatanPieces.getPositions().get(cp.getSettlementIndexY())-7);
-					System.out.println("Working");
+					System.out.println("is touched: " + CatanPieces.isGamePieceTouched(screenX, Gdx.graphics.getHeight()-1-screenY));
+					System.out.println(CatanPieces.getGamePieces().get(i).getX());
+					System.out.println(CatanPieces.getGamePieces().get(i).getY());
+					System.out.println(screenX);
+					System.out.println(Gdx.graphics.getHeight() - 1 - screenY);
+					System.out.println(CatanPieces.getGamePieces().get(i).getHeight());
+					System.out.println(CatanPieces.getGamePieces().get(i).getWidth());
+					
 					CatanPieces.getGamePieces().get(i).setVisible(true);
 					}
 					}
@@ -599,7 +613,14 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 						TextButton startButton = new TextButton("Start Game", skin, "tStyle");
 						startButton.setBounds(300, 20, 250, 50);
 						stage.addActor(startButton);
-						start = true;
+						startButton.addListener(new ChangeListener(){
+							@Override
+							public void changed(ChangeEvent event, Actor actor) {
+								start = true;
+								CatanPieces.setSelectInitialPlacements(false);
+							}
+						});
+						
 						}
 					});
 					}

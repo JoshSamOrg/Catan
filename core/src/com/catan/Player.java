@@ -23,6 +23,11 @@ public class Player {
   private int numberOfCircles;
   private String color;
   private Ship ships [];
+  private int wood;
+  private int wheat;
+  private int sheep;
+  private int ore;
+  private int brick;
   
   //Constructor that initializes all of the player's instance variables
   public Player(){
@@ -39,7 +44,12 @@ public class Player {
 	  numberOfSettlers = 2;
 	  numberOfCities = 4;
 	  numberOfCircles = 3;
-	  ships = new Ship[4];
+	  ships = new Ship[3];
+	  wood=0;
+	  wheat =0;
+	  sheep=0;
+	  ore=0;
+	  brick=0;
   }
   
   //Constructor with a String parameter that will become the name of the player,
@@ -58,6 +68,12 @@ public class Player {
 	  numberOfSettlers = 2;
 	  numberOfCities = 4;
 	  numberOfCircles = 3;
+	  ships = new Ship[3];
+	  wood=0;
+	  wheat =0;
+	  sheep=0;
+	  ore=0;
+	  brick=0;
   }
   
   //returns the name of the player

@@ -24,4 +24,7 @@ public void resetMoves() {
 public boolean hasMove() {
 	return moves>0;
 }
+public ImageButton getShip() {
+	return ship;
+}
 }

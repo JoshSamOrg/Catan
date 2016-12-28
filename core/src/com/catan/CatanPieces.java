@@ -147,7 +147,7 @@ public class CatanPieces implements InputProcessor, Screen {
 		return mpX;
 	}
 
-	// returns mpY, the y coordinate fo the midpoint of two points
+	// returns mpY, the y coordinate of the midpoint of two points
 	public float getmpY() {
 		return mpY;
 	}
@@ -319,6 +319,23 @@ public class CatanPieces implements InputProcessor, Screen {
 				selectInitialPlacements = true;
 			}
 		});
+	}
+	
+	public static boolean isGamePieceTouched(int x, int y) {
+		for (int i=0; i<gamePieces.size(); i++) {
+			if((gamePieces.get(i).getWidth()) >= (x - gamePieces.get(i).getX())){
+				if((x - gamePieces.get(i).getX())>=0){
+					if((gamePieces.get(i).getHeight()) >=
+							(y- gamePieces.get(i).getY())){
+						if(y- gamePieces.get(i).getY()>=0){
+							return true;
+						}
+					}
+				}
+			}
+		}
+		
+		return false;
 	}
 
 	// called when there are only two players in the game and they need to each
@@ -766,6 +783,10 @@ public class CatanPieces implements InputProcessor, Screen {
 		positions.add(279);
 		positions.add(503);// 76
 		positions.add(254);
+	}
+	
+	public static void setSelectInitialPlacements(boolean set) {
+		selectInitialPlacements = set;
 	}
 
 	@Override
