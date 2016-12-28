@@ -10,7 +10,6 @@ public class SettlementLocationIndices {
 	private static int a = 0, b = 0, c = 0, d = 0, e = 0, f=0;
 	private CatanPieces cp = new CatanPieces(null);	
 	public SettlementLocationIndices() {
-		System.out.println("in settlement");
 		roadShip=new int[232];
 		harborSettlementLocations=new boolean[177];
 		settlementLocations = new boolean[177];
@@ -1097,7 +1096,6 @@ public class SettlementLocationIndices {
 	 * Returns whether the placement of the settlement follows the two-away rule.
 	 */
 	public boolean twoAway(int x, int y) {
-		System.out.println("in two away: " + SettlementLocationIndices.getHarborSettlementLocations()[ValidPositions.getCounter()]);
 		a = ValidPositions.findHex(x, y + 10);
 		b = ValidPositions.findHex(x, y + 30);
 
@@ -1135,7 +1133,6 @@ public class SettlementLocationIndices {
 			} else {
 				two = false;
 			}
-		//System.out.println("is two away? " + two);
 		return two;
 	}
 

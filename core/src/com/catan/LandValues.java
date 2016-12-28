@@ -1,6 +1,5 @@
 package com.catan;
 
-import java.util.ArrayList;
 /*
  * Holds the information for the type of hex a person/piece is on.
  */

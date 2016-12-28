@@ -488,10 +488,8 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 					CatanPieces.getGamePieces().get(i).getName().substring(CatanPieces.getGamePieces().get(i).getName().indexOf("|") + 1), screenX
 					, Gdx.graphics.getHeight() - 1 - screenY
 					, CatanPieces.getGamePieces().get(i).getName().substring(0, CatanPieces.getGamePieces().get(i).getName().indexOf("|")))){
-							System.out.println("in hex: " + SettlementLocationIndices.getHarborSettlementLocations()[ValidPositions.getCounter()]);
 					CatanPieces.getGamePieces().get(i).setPosition(CatanPieces.getPositions().get(cp.getSettlementIndexX())-5,
 							CatanPieces.getPositions().get(cp.getSettlementIndexY())-7);
-					System.out.println("Working");
 					CatanPieces.getGamePieces().get(i).setVisible(true);
 					}
 					}
@@ -536,7 +534,6 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 							CatanPieces.getGamePieces().get(i).setScaleY(.95f);
 							CatanPieces.getGamePieces().get(i).setScaleX(.95f);
 						}
-						System.out.println("here");
 						CatanPieces.getGamePieces().get(i).setVisible(true);
 					}
 					if(finalizePosition == null){
@@ -583,7 +580,6 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 								CatanPieces.addGamePiecesListener(iCopy+1);
 							}
 							else if(piece1.equals("HarborSettlement") && piece2.equals("Settlement")){
-								System.out.println("2nd Call");
 								piece1 = "Road";
 								piece2 = "ShipSettler";
 								cp.selectPositions(piece1, piece2);

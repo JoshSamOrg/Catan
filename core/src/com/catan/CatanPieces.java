@@ -20,7 +20,7 @@ import com.catan.Player.Order;
 //This class allows the player to select their starting positions 
 //of the game. They are able to put a Harbor Settlement, Settlement, Road, and Ship
 //on the board
-public class CatanPieces implements InputProcessor, Screen {
+public class CatanPieces implements InputProcessor {
 	private float mpX = 0;
 	private float mpY = 0;
 	private int firstX = -1;
@@ -107,8 +107,17 @@ public class CatanPieces implements InputProcessor, Screen {
 			times--;
 			stop = firstX;
 		}
+		try{
 		findRoadRotation(positions.get(firstX), positions.get(firstY),
 				positions.get(secondX), positions.get(secondY));
+	}
+		catch(ArrayIndexOutOfBoundsException e){
+			firstX = 28;
+			firstY = 29;
+			secondX = 30;
+			secondY = 31;
+			roadRotation = -30;
+		}
 	}
 
 	// Determines what rotation a road should be in, given the settlement
@@ -122,7 +131,6 @@ public class CatanPieces implements InputProcessor, Screen {
 		} else if ((y > b && x > a) || (b > y && a > x)) {
 			roadRotation = 30;
 		}
-		// System.out.println("roadRotation is: " + roadRotation);
 	}
 
 	// Given a point x,y determines the closest settlement position to that
@@ -413,7 +421,6 @@ public class CatanPieces implements InputProcessor, Screen {
 
 	// adds all the hexagon points to the positions arraylist
 	public static void findPositions() {
-		// System.out.println("set this once");
 		positions.add(141);// 1
 		positions.add(438);
 		positions.add(119);// 2
@@ -788,14 +795,7 @@ public class CatanPieces implements InputProcessor, Screen {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		System.out.println(screenX);
-		System.out.println(Gdx.graphics.getHeight() - 1 - screenY);
 		findRoad(screenX, Gdx.graphics.getHeight() - 1 - screenY);
-		System.out.println("settlement 1 " + positions.get(firstX) + ","
-				+ positions.get(firstY) + " " + firstX);
-		System.out.println("settlement 2 " + positions.get(secondX) + ","
-				+ positions.get(secondY) + " " + secondX);
-		System.out.println("Angle " + roadRotation);
 		return false;
 	}
 
@@ -821,57 +821,5 @@ public class CatanPieces implements InputProcessor, Screen {
 	public boolean scrolled(int amount) {
 		// TODO Auto-generated method stub
 		return false;
-	}
-
-	@Override
-	public void show() {
-		findPositions();
-		stage = new Stage();
-		Gdx.input.setInputProcessor(this);
-		texture = new Texture(Gdx.files.internal("Scenario5Final.png"));
-		TextureRegion region = new TextureRegion(texture);
-		Image img = new Image(new TextureRegionDrawable(region));
-		img.setBounds(0, 0, 650, 650);
-		stage.addActor(img);
-
-	}
-
-	@Override
-	public void render(float delta) {
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		stage.act(Gdx.graphics.getDeltaTime());
-		stage.draw();
-
-	}
-
-	@Override
-	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void hide() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void dispose() {
-		Gdx.input.setInputProcessor(null);
-
 	}
 }

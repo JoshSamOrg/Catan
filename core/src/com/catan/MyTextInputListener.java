@@ -16,7 +16,13 @@ public class MyTextInputListener implements TextInputListener {
 	//This method is called when the user presses enter on the dialog boxes
 	//Sets up the players' names and allows the players to select a color they want to play with
 	public void input(String text) {
-		if(PlayerScreen.getSelectName()){
+		if(NetworkScreen.getSelectingServerName()){
+			Network.setServerName(text);
+			NetworkScreen.setSelectingServerName(false);
+			new Network();
+			return;
+		}
+	    else if(PlayerScreen.getSelectName()){
 			if(GamePlayers.getGamePlayers().size() == 4){
 				Gdx.input.getTextInput(this, "Reached Maximum number of players", "", "exit this window and press Continue");
 				return;
@@ -98,6 +104,7 @@ public class MyTextInputListener implements TextInputListener {
 				}
 			}
 		}
+		NetworkScreen.setSelectingServerName(false);
 	}
 
 	//Sets the currentPlayer String
