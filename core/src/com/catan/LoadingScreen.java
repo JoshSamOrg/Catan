@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 //Allows the user to click two buttons, one for generating random numbers and a random board
 //and a different button for generating a random board and the ability to pick numbers
@@ -40,7 +41,7 @@ public class LoadingScreen implements Screen{
 	@Override
 	//draws all the actors and handles all input events
 	public void show() {
-		stage = new Stage(); //stage is an inputprocessor
+		stage = new Stage(new ScreenViewport()); //stage is an inputprocessor
 		Gdx.input.setInputProcessor(stage); //the inputprocessor is the object that handles all input
 	    font = new BitmapFont(Gdx.files.internal("gameFonts.fnt")); //gets the fonts from the assets folder of the core project
 	    skin = new Skin();

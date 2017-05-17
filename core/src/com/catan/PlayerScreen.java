@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 //This class is used to allow users to select a player name
 public class PlayerScreen implements Screen {
@@ -43,7 +44,7 @@ public class PlayerScreen implements Screen {
 		//adds all of the actors to the stage 
 		public void show() {
 			batch = new SpriteBatch();
-			stage = new Stage();
+			stage = new Stage(new ScreenViewport());
 			Gdx.input.setInputProcessor(stage);
 			font = new BitmapFont(Gdx.files.internal("gameFonts.fnt"));
 			skin = new Skin();

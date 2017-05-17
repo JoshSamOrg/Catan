@@ -4,14 +4,10 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -43,8 +39,6 @@ public class CatanPieces implements InputProcessor {
 	private static ArrayList<ImageButton> gamePieces = new ArrayList<ImageButton>();
 	//private static HexGeneratorScreen HexGeneratorScreen = new HexGeneratorScreen(null);
 	private static boolean selectInitialPlacements = false;
-	private Stage stage;
-	private Texture texture;
 	private CatanGame game;
 
 	public CatanPieces(CatanGame game) {
@@ -111,6 +105,7 @@ public class CatanPieces implements InputProcessor {
 		findRoadRotation(positions.get(firstX), positions.get(firstY),
 				positions.get(secondX), positions.get(secondY));
 	}
+		//if the user clicks in a nonvalid region when placing a road or a ship (settler)
 		catch(ArrayIndexOutOfBoundsException e){
 			firstX = 28;
 			firstY = 29;
@@ -329,6 +324,8 @@ public class CatanPieces implements InputProcessor {
 		});
 	}
 	
+	//determines if the user has clicked on a game piece or not,
+	//returning true if they have, and false otherwise
 	public static boolean isGamePieceTouched(int x, int y) {
 		for (int i=0; i<gamePieces.size(); i++) {
 			if((gamePieces.get(i).getWidth()) >= (x - gamePieces.get(i).getX())){
@@ -432,12 +429,18 @@ public class CatanPieces implements InputProcessor {
 		addGamePiecesListener(0);
 	}
 
+	//returns selectInitialPlacements, a boolean that queries when the 
+	//user is selecting their placements, true when they are, and false
+	//otherwise
 	public static boolean getSelectInitialPlacements() {
 		return selectInitialPlacements;
 	}
 
-	// adds all the hexagon points to the positions arraylist
+	//adds all the hexagon points to the positions arraylist
+	//these positions are STAGE coordinates, these need to be 
+	//converted to screen coordinates using stage.stageToScreenCoordinates(Vector2) method
 	public static void findPositions() {
+		if(positions.isEmpty()){
 		positions.add(141);// 1
 		positions.add(438);
 		positions.add(119);// 2
@@ -790,8 +793,12 @@ public class CatanPieces implements InputProcessor {
 		positions.add(279);
 		positions.add(503);// 76
 		positions.add(254);
+		}
 	}
 	
+	//sets the selectInitialPlacements boolean, which queries when the user is
+	//selecting their pieces to place, true when they are selecting,
+	//and false otherwise
 	public static void setSelectInitialPlacements(boolean set) {
 		selectInitialPlacements = set;
 	}

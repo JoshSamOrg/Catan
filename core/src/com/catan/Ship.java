@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
+//COMMENT THIS CLASS
 public class Ship {
 private ImageButton ship;
 private int moves;

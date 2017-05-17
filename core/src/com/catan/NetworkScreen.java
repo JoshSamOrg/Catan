@@ -1,14 +1,12 @@
 package com.catan;
 
-import java.io.IOException;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Pixmap.Format;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -20,7 +18,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
+//class that allows the user to set up the server
 public class NetworkScreen implements Screen {
 	private CatanGame game;
     private Stage stage;
@@ -38,7 +38,7 @@ public class NetworkScreen implements Screen {
     
 	@Override
 	public void show() {
-		stage = new Stage(); //stage is an inputprocessor
+		stage = new Stage(new ScreenViewport()); //stage is an inputprocessor
 		Gdx.input.setInputProcessor(stage); //the inputprocessor is the object that handles all input
 	    font = new BitmapFont(Gdx.files.internal("gameFonts.fnt")); //gets the fonts from the assets folder of the core project
 	    skin = new Skin();
@@ -96,10 +96,13 @@ public class NetworkScreen implements Screen {
         });
 	}
 	
+	//returns the selectingServerName boolean, true if the user 
+	//is selecting a server name, and false otherwise
 	public static boolean getSelectingServerName(){
 		return selectingServerName;
 	}
 	
+	//sets the selectingServerName boolean
 	public static void setSelectingServerName(boolean s){
 		selectingServerName = s;
 	}

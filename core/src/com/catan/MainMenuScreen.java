@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 //This class displays the main menu screen for the game
 public class MainMenuScreen implements Screen {
@@ -53,7 +54,7 @@ public class MainMenuScreen implements Screen {
 
 	//This method is called once, and displays all the actors in the stage
 	public void show() {
-		stage = new Stage(); //stage is an inputprocessor
+		stage = new Stage(new ScreenViewport()); //stage is an inputprocessor
 		Gdx.input.setInputProcessor(stage); //the inputprocessor is the object that handles all input
 	    font = new BitmapFont(Gdx.files.internal("gameFonts.fnt")); //gets the fonts from the assets folder of the core project
 	    skin = new Skin();

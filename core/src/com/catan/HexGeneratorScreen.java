@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
@@ -16,6 +18,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -27,12 +30,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 //The main game screen class
 public class HexGeneratorScreen implements Screen, InputProcessor {
 
 	private CatanPieces cp = new CatanPieces(null);
-	private int test = 0;
+	private static int reset = 0;
+	private static int stageX;
+	private static int stageY;
+	private static TextField f,f2,f3,f4;
 	private TextButton finalizePosition;
 	private static String piece1 = "HarborSettlement";
 	private static String piece2 = "Settlement";
@@ -43,12 +50,13 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 	private TextureRegion wood, ore, sheep, wheat, brick;
 	int b, w, s, o, wo = 0;
 	private TextureAtlas atlas, atlas2, atlas3;
+	private static Image boardImage;
 	private Texture startingBoard;
 	private Random rand;
 	private SpriteBatch batch;
+	private static Texture background;
 	private CatanGame game;
 	private int set;
-	private boolean counter = false;
 	private static Stage stage;
 	private BitmapFont font, font2;
 	private Skin skin;
@@ -57,8 +65,6 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 	private ValidPositions vp = new ValidPositions(null);
 	private boolean start = false;
 	private int j=0;
-	private int numberWidth = 25;
-	private int numberHeight = 25;
 	private int imageStartX = 20;
 	private int imageY = 10;
 	private int h1x = 127;
@@ -108,6 +114,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 	private static TextButton finalizeNumbers;
 	private static TextField field;
 	private static TextField field2;
+	
 
 	//Constructor, allows switching screens
 	public HexGeneratorScreen(CatanGame game) {
@@ -136,7 +143,9 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 	
 	//sets up all the actors on the stage, and processes all input events
 	public void show() {
+		stage = new Stage(new ScreenViewport()); //this line must come before the next line!
 		CatanPieces.findPositions();
+		background = new Texture(Gdx.files.internal("blueBackground.png"));
 		orange=new ArrayList<ImageButton>();
 		white=new ArrayList<ImageButton>();
 		blue=new ArrayList<ImageButton>();
@@ -176,7 +185,6 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 
 		atlas3 = new TextureAtlas(Gdx.files.internal("mainIslandNumbers2.txt"));
 		multiplexer = new InputMultiplexer();
-		stage = new Stage();
 		multiplexer.addProcessor(stage);
 		multiplexer.addProcessor(this);
 		Gdx.input.setInputProcessor(multiplexer);
@@ -210,7 +218,8 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 		playerOrder.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				counter = true;
+				drawTextOrder();
+				actor.setVisible(false);
 				cp.selectPositions(piece1, piece2);
 			}
 		});
@@ -259,6 +268,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 		board2.add(new Image(atlas3.findRegion("10 - Copy")));
 		board2.add(new Image(atlas3.findRegion("11 - Copy")));
 		
+		drawBoard();
 		configureHexes();
 		//allows you to pick numbers
 		if(LoadingScreen.getPickNumbers()){
@@ -363,42 +373,138 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 				public void changed(ChangeEvent event, Actor actor) {
 					actor.setVisible(false);
 					multiplexer.removeProcessor(stage);
+					
+					//resets the openSpots array when a number image is clicked within a hex
+					int k = getHexNumber((int)actor.getX(), (int)actor.getY());
+					if(k != -1){
+						openSpots[k] = true;
+					}
 				}
 			});
 		}
 	}
+	
+	//returns the hex number (0-14) that the number is in, and -1 if the number image 
+	//you clicked is not in any of the 15 hexes
+	public static int getHexNumber(int x, int y){
+		if(x == 127 && y == 401){
+			return 0;
+		}
+		if(x == 170 && y == 402){
+			return 1;
+		}
+		if(x == 106 && y == 365){
+			return 2;
+		}
+		if(x == 149 && y == 364){
+			return 3;
+		}
+		if(x == 85 && y == 327){
+			return 4;
+		}
+		if(x == 128 && y == 327){
+			return 5;
+		}
+		if(x == 63 && y == 289){
+			return 6;
+		}
+		if(x == 106 && y == 291){
+			return 7;
+		}
+		if(x == 149 && y == 291){
+			return 8;
+		}
+		if(x == 84 && y == 254){
+			return 9;
+		}
+		if(x == 127 && y == 254){
+			return 10;
+		}
+		if(x == 106 && y == 216){
+			return 11;
+		}
+		if(x == 149 && y == 216){
+			return 12;
+		}
+		if(x == 127 && y == 180){
+			return 13;
+		}
+		if(x == 171 && y == 180){
+			return 14;
+		}
+		return -1;
+	}
+	
+	//draws the game board, changed this code so it would scale better when 
+	//the user resizes the screen
+	public void drawBoard(){
+		boardImage = new Image(startingBoard);
+		boardImage.setBounds(0, 0, 650, 650);
+		stage.addActor(boardImage);
+		stage.getActors().get(stage.getActors().size-1).setZIndex(0);
+		//add a black background behind the board to make it look better
+		Image black = new Image(new Texture(Gdx.files.internal("blackBackground.png")));
+		black.setBounds(0, 0, 645, 645);
+		stage.addActor(black);
+		stage.getActors().get(stage.getActors().size-1).setZIndex(0); //make this background the farthest layer
+	}
+	
+	//draws the text on the screen that says "<name> is going <first,second,third,fourth>"
+	public void drawTextOrder(){
+			playerOrder.setVisible(false);
+			f = new TextField(orders.getOrderedPlayers().get(0).getName() + " "+ 
+			"is going first", skin.get("tfstyle", TextFieldStyle.class));
+			f.setPosition(30, 135);
+			f.setWidth(600);
+			stage.addActor(f);
+			f2 = new TextField(orders.getOrderedPlayers().get(1).getName() + " "+ "is going second",
+					skin.get("tfstyle", TextFieldStyle.class));
+			f2.setPosition(30, 95);
+			f2.setWidth(600);
+			stage.addActor(f2);
+			if (GamePlayers.getGamePlayers().size() == 3) {
+				f3 = new TextField(orders.getOrderedPlayers().get(2).getName() + " "+ "is going third",
+						skin.get("tfstyle", TextFieldStyle.class));
+				f3.setPosition(30, 55);
+				f3.setWidth(600);
+				stage.addActor(f3);
+			}
+			if (GamePlayers.getGamePlayers().size() == 4) {
+				f3 = new TextField(orders.getOrderedPlayers().get(2).getName() + " "+ "is going third",
+						skin.get("tfstyle", TextFieldStyle.class));
+				f3.setPosition(30, 55);
+				f3.setWidth(600);
+				stage.addActor(f3);
+				
+				f4 = new TextField(orders.getOrderedPlayers().get(3).getName() + " "+ "is going fourth",
+						skin.get("tfstyle", TextFieldStyle.class));
+				f4.setPosition(30, 15);
+				f4.setWidth(600);
+				stage.addActor(f4);
+			}
+		}
+	
+	//clears the text saying "<name> is going <first,second,third, or fourth>"
+	public static void clearTextOrder(){
+		f.setVisible(false);
+		f2.setVisible(false);
+		if(f3 != null){
+			f3.setVisible(false);
+		}
+		if(f4 != null){
+		f4.setVisible(false);
+	}
+	}
 
 	//draws the board, and randomly generated numbers
 	public void render(float delta) {
-		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		Gdx.gl.glClearColor(0, 0, 0, 1);
 		batch.begin();
-		batch.draw(startingBoard, 0, 0, 650, 650);
+		batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		batch.end();
-		
 		stage.act(Gdx.graphics.getDeltaTime());
 		stage.draw();
-		//stage.setDebugAll(true);
-		if (counter) {
-			batch.begin();
-			playerOrder.setVisible(false);
-			font2.draw(batch, orders.getOrderedPlayers().get(0).getName() + " "+ "is going first", 30, 160);
-			batch.end();
-			batch.begin();
-			font2.draw(batch, orders.getOrderedPlayers().get(1).getName() + " "+ "is going second", 30, 120);
-			batch.end();
-			if (GamePlayers.getGamePlayers().size() == 3) {
-				batch.begin();
-				font2.draw(batch, orders.getOrderedPlayers().get(2).getName() + " "+ "is going third", 30, 80);
-				batch.end();
-			}
-			if (GamePlayers.getGamePlayers().size() == 4) {
-				batch.begin();
-				font2.draw(batch, orders.getOrderedPlayers().get(2).getName() + " "+ "is going third", 30, 80);
-				font2.draw(batch, orders.getOrderedPlayers().get(3).getName() + " "+ "is going fourth", 30, 40);
-				batch.end();
-			}
-		}
 		if (start) {
 			TextButton endTurn = new TextButton("End Turn", skin, "tStyle");
 			endTurn.setBounds(300, 20, 250, 50);
@@ -416,7 +522,6 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 			});
 			
 		}
-
 	}
 
 	//disposes of all resources
@@ -436,7 +541,6 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 	//resizes the stage to fit with the new window size
 	public void resize(int width, int height) {
 		stage.getViewport().update(width, height, true);
-
 	}
 
 	@Override
@@ -457,9 +561,24 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 
 	}
 
+	//Allows the user to use the arrow keys to change the camera view
+	//PROBLEM: effects the valid positions of all the pieces, easy fix here
 	@Override
 	public boolean keyDown(int keycode) {
-		// TODO Auto-generated method stub
+		if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+			stage.getCamera().translate(-8, 0, 0);
+		}
+		else if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+			stage.getCamera().translate(8, 0, 0);
+		}
+		else if(Gdx.input.isKeyPressed(Input.Keys.UP)){
+			stage.getCamera().translate(0, 8, 0);
+		}
+		else if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+			stage.getCamera().translate(0, -8, 0);
+		}
+		stage.getCamera().update();
+		CatanPieces.findPositions();
 		return false;
 	}
 
@@ -478,36 +597,32 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 	@Override
 	//Allows the user to put numbers on the main island, and place pieces on the main island
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		test++;
-			
-		//System.out.println(screenX);
-		System.out.println(Gdx.graphics.getHeight()-1-screenY);
-		System.out.println(vp.getSli().oneAway(213, 321, 237, 321));
-		if (CatanPieces.getSelectInitialPlacements())
+		stageX = (int) Math.ceil(stage.screenToStageCoordinates(new Vector2(screenX, screenY)).x);
+		stageY = (int) Math.ceil(stage.screenToStageCoordinates(new Vector2(screenX, screenY)).y);
 		if(CatanPieces.getSelectInitialPlacements()){
-			cp.findSettlement(screenX, Gdx.graphics.getHeight() - 1 - screenY);
+			cp.findSettlement(stageX, stageY);
 			for(int i = 0; i<CatanPieces.getGamePieces().size(); i++){
 				if(!CatanPieces.getGamePieces().get(i).isVisible()){
 					iCopy = i;
 					if(!piece1.equals("Road") && !piece2.equals("ShipSettler")){
 						
 						if(vp.valid(CatanPieces.getGamePieces().get(i), 
-					CatanPieces.getGamePieces().get(i).getName().substring(CatanPieces.getGamePieces().get(i).getName().indexOf("|") + 1), screenX
-					, Gdx.graphics.getHeight() - 1 - screenY
+					CatanPieces.getGamePieces().get(i).getName().substring(CatanPieces.getGamePieces().get(i).getName().indexOf("|") + 1), stageX
+					, stageY
 					, CatanPieces.getGamePieces().get(i).getName().substring(0, CatanPieces.getGamePieces().get(i).getName().indexOf("|")))){
 					CatanPieces.getGamePieces().get(i).setPosition(CatanPieces.getPositions().get(cp.getSettlementIndexX())-5,
-							CatanPieces.getPositions().get(cp.getSettlementIndexY())-7);
+							CatanPieces.getPositions().get(cp.getSettlementIndexY())-7);//sets the position of the STAGE not screen
 					CatanPieces.getGamePieces().get(i).setVisible(true);
 					}
 					}
 					else{
 						if(!vp.valid(CatanPieces.getGamePieces().get(i), 
-								CatanPieces.getGamePieces().get(i).getName().substring(CatanPieces.getGamePieces().get(i).getName().indexOf("|") + 1), screenX
-								, Gdx.graphics.getHeight() - 1 - screenY
+								CatanPieces.getGamePieces().get(i).getName().substring(CatanPieces.getGamePieces().get(i).getName().indexOf("|") + 1), stageX
+								, stageY
 								, CatanPieces.getGamePieces().get(i).getName().substring(0, CatanPieces.getGamePieces().get(i).getName().indexOf("|")))){
 							return false;
 						}
-						cp.findRoad(screenX, Gdx.graphics.getHeight() - 1 - screenY);
+						cp.findRoad(stageX, stageY);
 						cp.midpoint(CatanPieces.getPositions().get(cp.getFirstX()), 
 								CatanPieces.getPositions().get(cp.getFirstY()), 
 								CatanPieces.getPositions().get(cp.getSecondX()), 
@@ -580,7 +695,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 									&& piece2.equals("ShipSettler") && PlayerColorScreen.getNumberOfPlayers() == 2){
 								piece1 = "";
 								piece2 = "";
-								counter = false;
+								clearTextOrder(); //don't draw the text on the screen anymore
 								cp.neutralPlacements();
 							}
 							else if(iCopy != CatanPieces.getGamePieces().size() - 1){
@@ -592,7 +707,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 								cp.selectPositions(piece1, piece2);
 							}
 							else if(iCopy == CatanPieces.getGamePieces().size() - 1){
-								counter = false;//don't draw the text on the screen anymore
+								clearTextOrder(); //don't draw the text on the screen anymore
 								actor.setVisible(false);//set the finalize position button so you can't see it
 								makeStartButton();
 							}
@@ -624,12 +739,11 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 		outer: for (int i = 0; i < numberImages.size(); i++) {
 			if (!numberImages.get(i).isVisible()) {
 				for (int j = 0; j < coords.length - 1; j += 2) {
-					if (isWithinRange(screenX, Gdx.graphics.getHeight() - 1
-							- screenY, coords[j], coords[j + 1])) {
+					if (isWithinRange(stageX, stageY, coords[j], coords[j + 1])) {
+						reset = j/2;
 						if (openSpots[j / 2]) {
 							HexLocations[j / 2] = i;
-							numberImages.get(i).setPosition(coords[j],
-									coords[j + 1]);
+							numberImages.get(i).setPosition(coords[j],coords[j + 1]);
 							numberImages.get(i).setVisible(true);
 							openSpots[j / 2] = false;
 							multiplexer.addProcessor(0, stage);//stage has to be the first processor in the multiplexer!
@@ -641,6 +755,8 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 									int temp = HexLocations[k];
 									HexLocations[k] = HexLocations[j / 2];
 									HexLocations[j / 2] = temp;
+									openSpots[j/2] = false; 
+									openSpots[k] = false; 
 									numberImages.get(i).setVisible(true);
 									multiplexer.addProcessor(0, stage);//stage has to be the first processor in the multiplexer!
 									break outer;
@@ -696,7 +812,6 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -706,9 +821,20 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 		return false;
 	}
 
+	//This method allows you to zoom in or zoom out with a mouse scroll
+	//PROBLEM: effects the valid positions of all the pieces, trickier fix
+	//amount = -1 if scrolled up
+	//amount = 1 if scrolled down
 	@Override
 	public boolean scrolled(int amount) {
-		// TODO Auto-generated method stub
+		if(amount == -1){
+			((OrthographicCamera)stage.getCamera()).zoom += 0.02f; //needs an explicit cast here
+		}
+		else if(amount == 1){
+			((OrthographicCamera)stage.getCamera()).zoom -= 0.02f; //needs an explicit cast here
+		}
+		stage.getCamera().update(); //updates the stage's camera
+		CatanPieces.findPositions();
 		return false;
 	}
 

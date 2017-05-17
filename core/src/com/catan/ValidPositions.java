@@ -940,6 +940,7 @@ public class ValidPositions implements Screen, InputProcessor {
 
 	}
 	
+	//COMMENT
 	public boolean moveShip(TextureAtlas atlas, String text, int x1, int y1, int x2, int y2) {
 		Ship ship = new Ship(atlas, text);
 		cp.findRoad(x2, y2);
@@ -962,6 +963,9 @@ public class ValidPositions implements Screen, InputProcessor {
 			return false;
 		}
 	}
+	
+	//COMMENT getSli, getCounter, and getColors
+	
 	public SettlementLocationIndices getSli() {
 		return sli;
 	}

@@ -1156,13 +1156,11 @@ public class SettlementLocationIndices {
 		
 		
 		if(y==90) {
-			System.out.println("here1");
 		if ((Math.abs(a-c))<=15 && (Math.abs(b-d))<17) {
 			one = true;
 		}
 		}
 		else if(y==30 || y==-30) {
-			System.out.println("here2");
 			if ((Math.abs(a-c))<27 && (Math.abs(b-d))<17) {
 				one = true;
 			}
@@ -1172,7 +1170,9 @@ public class SettlementLocationIndices {
 		}
 		return one;
 		}
-
+	
+	//COMMENT THESE METHODS
+		
 	public static boolean[] getSettlementLocations() {
 		return settlementLocations;
 	}

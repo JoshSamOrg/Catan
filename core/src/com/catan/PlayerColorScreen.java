@@ -26,6 +26,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 //This class is the screen that users can use to select the players
 //that are going to play the game
@@ -57,7 +58,7 @@ public class PlayerColorScreen implements Screen {
 	
 	//Allows the users to select what colors they want to play with
 	public void selectPlayers(){
-		stage = new Stage();
+		stage = new Stage(new ScreenViewport());
 		Gdx.input.setInputProcessor(stage);
 		font = new BitmapFont(Gdx.files.internal("gameFonts.fnt"));
 		skin = new Skin();
