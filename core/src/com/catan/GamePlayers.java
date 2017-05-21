@@ -21,6 +21,15 @@ public class GamePlayers {
 	   return null;
    }
    
+   public static Player getBasedOnColor(String color){
+	   for(int i = 0; i<gamePlayers.size(); i++){
+		   if(gamePlayers.get(i).getColor().equals(color)){
+			   return gamePlayers.get(i);
+		   }
+	   }
+	   return null;
+   }
+   
    //sets gamePlayers equal to the newPlayers parameter
    public static void setGamePlayers(ArrayList<Player> newPlayers){
 	   gamePlayers = newPlayers;

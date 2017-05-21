@@ -298,7 +298,7 @@ public class ValidPositions implements Screen, InputProcessor {
 	 */
 	public boolean valid(ImageButton button, String text, int x, int y, String color) {
 		colors = color;
-		if (text.equals("settlement")) {
+		if (text.equals("Settlement")) {
 			//("settlement");
 			cp.findSettlement(x, y);  //finds the nearest settlement from the location you clicked on the board.
 			set = findHex(
@@ -395,7 +395,7 @@ public class ValidPositions implements Screen, InputProcessor {
 			} else {
 				settlement = false;
 			}
-		} else if (text.equals("harborsettlement1")) {
+		} else if (text.equals("HarborSettlement")) {
 			s++;
 			if(s==0) {
 				count = counter;
@@ -486,7 +486,7 @@ public class ValidPositions implements Screen, InputProcessor {
 			} else {
 				settlement = false;
 			}
-		} else if (text.equals("road1")) {
+		} else if (text.equals("Road")) {
 			//("road1");
 			cp.findRoad(x, y);
 			cp.midpoint(  //calculates the midpoint of the road location.
@@ -820,7 +820,7 @@ public class ValidPositions implements Screen, InputProcessor {
 			} else {
 				settlement = false;
 			}
-		} else if (text.equals("shipsettler")) { //build ship
+		} else if (text.equals("ShipSettler")) { //build ship
 			cp.findRoad(x, y);
 			cp.midpoint(
 					CatanPieces.getPositions().get(cp.getFirstX()),

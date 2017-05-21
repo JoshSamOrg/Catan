@@ -30,6 +30,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 //The main game screen class
@@ -517,7 +518,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 				@Override
 				public void changed(ChangeEvent event, Actor actor) {
 					actor.setVisible(false);
-					j = (j+1) %PlayerColorScreen.getNumberOfPlayers();
+					j = (j+1)%PlayerColorScreen.getNumberOfPlayers();
 				}
 			});
 			
@@ -534,6 +535,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 		font.dispose();
 		skin.dispose();
 		pixmap.dispose();
+		Host.getServer().close();
 		Gdx.input.setInputProcessor(null);
 	}
 
@@ -668,19 +670,19 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 						public void changed(ChangeEvent event, Actor actor) {
 							String name = CatanPieces.getGamePieces().get(iCopy).getName();
 							String type = name.substring(CatanPieces.getGamePieces().get(iCopy).getName().indexOf("|") + 1);
-							if (type.equals("harborsettlement1")) {
+							if (type.equals("HarborSettlement")) {
 								SettlementLocationIndices.getHarborSettlementLocations()[ValidPositions.getCounter()] = true;
 								SettlementLocationIndices.getSettlementColors()[ValidPositions.getCounter()] = ValidPositions.getColors();
 							}
-							else if (type.equals("settlement")) {
+							else if (type.equals("Settlement")) {
 								SettlementLocationIndices.getSettlementLocations()[ValidPositions.getCounter()] = true;
 								SettlementLocationIndices.getSettlementColors()[ValidPositions.getCounter()] = ValidPositions.getColors();
 							}
-							else if (type.equals("road1")) {
+							else if (type.equals("Road")) {
 								SettlementLocationIndices.getRoadShip()[ValidPositions.getCounter()] = 1;
 								SettlementLocationIndices.getRoadColors()[ValidPositions.getCounter()] = ValidPositions.getColors();
 							}
-							else if (type.equals("shipsettler")) {
+							else if (type.equals("ShipSettler")) {
 								SettlementLocationIndices.getRoadColors()[ValidPositions.getCounter()] = ValidPositions.getColors();
 								if (SettlementLocationIndices.getRoadShip()[ValidPositions.getCounter()] == 0) {
 									SettlementLocationIndices.getRoadShip()[ValidPositions.getCounter()] = 2;	
@@ -721,6 +723,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 							@Override
 							public void changed(ChangeEvent event, Actor actor) {
 								start = true;
+								updatePlayerPieces(stage.getActors());
 								CatanPieces.setSelectInitialPlacements(false);
 							}
 						});
@@ -794,6 +797,149 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 			return true;
 		}
 		return false;
+	}
+	
+	//updates each player's pieces
+	public void updatePlayerPieces(Array<Actor> actors){
+		for(int i = 0; i<actors.size; i++){
+			//i.e. the actor is a number or a hex
+			if(actors.get(i).getName() == null){
+				continue;
+			}
+			int index = actors.get(i).getName().indexOf("|");
+		  if(actors.get(i).getName().substring(0, index).equals("red") &&
+				  GamePlayers.getBasedOnColor("red") != null){
+			  index = actors.get(i).getName().indexOf("|") + 1;
+			  switch(actors.get(i).getName().substring(index)){
+			  case "HarborSettlement": 
+				  HarborSettlement hs = new HarborSettlement(new TextureAtlas(Gdx.files.internal("Red.txt")), "redHarborSettlement");
+				  float x = actors.get(i).getX();
+				  float y = actors.get(i).getY();
+				  float w = actors.get(i).getWidth();
+				  float h = actors.get(i).getHeight();
+				  hs.getHarborSettlement().setBounds(x, y, w, h);
+				  GamePlayers.getBasedOnColor("red").getHarborSettlements().add(hs);
+				  break;
+			  case "Settlement":
+				  Settlement s = new Settlement(new TextureAtlas(Gdx.files.internal("Red.txt")), "redSettlement");
+				  float x2 = actors.get(i).getX();
+				  float y2 = actors.get(i).getY();
+				  float w2 = actors.get(i).getWidth();
+				  float h2 = actors.get(i).getHeight();
+				  s.getSettlement().setBounds(x2, y2, w2, h2);
+				  GamePlayers.getBasedOnColor("red").getSettlements().add(s);
+				  break;
+			  case "Road":
+				  Road r = new Road(new TextureAtlas(Gdx.files.internal("Red.txt")), "redRoad");
+				  float x1 = actors.get(i).getX();
+				  float y1 = actors.get(i).getY();
+				  float w1 = actors.get(i).getWidth();
+				  float h1 = actors.get(i).getHeight();
+				  r.getRoad().setBounds(x1, y1, w1, h1);
+				  GamePlayers.getBasedOnColor("red").getRoads().add(r);
+				  break;
+			  }
+		  }
+		  else if(actors.get(i).getName().substring(0, index).equals("blue") &&
+				  GamePlayers.getBasedOnColor("blue") != null){
+			  index = actors.get(i).getName().indexOf("|") + 1;
+			  switch(actors.get(i).getName().substring(index)){
+			  case "HarborSettlement": 
+				  HarborSettlement hs = new HarborSettlement(new TextureAtlas(Gdx.files.internal("Blue.txt")), "blueHarborSettlement");
+				  float x = actors.get(i).getX();
+				  float y = actors.get(i).getY();
+				  float w = actors.get(i).getWidth();
+				  float h = actors.get(i).getHeight();
+				  hs.getHarborSettlement().setBounds(x, y, w, h);
+				  GamePlayers.getBasedOnColor("blue").getHarborSettlements().add(hs);
+				  break;
+			  case "Settlement":
+				  Settlement s = new Settlement(new TextureAtlas(Gdx.files.internal("Blue.txt")), "blueSettlement");
+				  float x2 = actors.get(i).getX();
+				  float y2 = actors.get(i).getY();
+				  float w2 = actors.get(i).getWidth();
+				  float h2 = actors.get(i).getHeight();
+				  s.getSettlement().setBounds(x2, y2, w2, h2);
+				  GamePlayers.getBasedOnColor("blue").getSettlements().add(s);
+				  break;
+			  case "Road":
+				  Road r = new Road(new TextureAtlas(Gdx.files.internal("Blue.txt")), "blueRoad");
+				  float x1 = actors.get(i).getX();
+				  float y1 = actors.get(i).getY();
+				  float w1 = actors.get(i).getWidth();
+				  float h1 = actors.get(i).getHeight();
+				  r.getRoad().setBounds(x1, y1, w1, h1);
+				  GamePlayers.getBasedOnColor("blue").getRoads().add(r);
+				  break;
+			  }
+		  }
+		  else if(actors.get(i).getName().substring(0, index).equals("white") &&
+				  GamePlayers.getBasedOnColor("white") != null){
+			  index = actors.get(i).getName().indexOf("|") + 1;
+			  switch(actors.get(i).getName().substring(index)){
+			  case "HarborSettlement": 
+				  HarborSettlement hs = new HarborSettlement(new TextureAtlas(Gdx.files.internal("White.txt")), "whiteHarborSettlement");
+				  float x = actors.get(i).getX();
+				  float y = actors.get(i).getX();
+				  float w = actors.get(i).getWidth();
+				  float h = actors.get(i).getHeight();
+				  hs.getHarborSettlement().setBounds(x, y, w, h);
+				  GamePlayers.getBasedOnColor("white").getHarborSettlements().add(hs);
+				  break;
+			  case "Settlement":
+				  Settlement s = new Settlement(new TextureAtlas(Gdx.files.internal("White.txt")), "whiteSettlement");
+				  float x2 = actors.get(i).getX();
+				  float y2 = actors.get(i).getX();
+				  float w2 = actors.get(i).getWidth();
+				  float h2 = actors.get(i).getHeight();
+				  s.getSettlement().setBounds(x2, y2, w2, h2);
+				  GamePlayers.getBasedOnColor("white").getSettlements().add(s);
+				  break;
+			  case "Road":
+				  Road r = new Road(new TextureAtlas(Gdx.files.internal("White.txt")), "whiteRoad");
+				  float x1 = actors.get(i).getX();
+				  float y1 = actors.get(i).getX();
+				  float w1 = actors.get(i).getWidth();
+				  float h1 = actors.get(i).getHeight();
+				  r.getRoad().setBounds(x1, y1, w1, h1);
+				  GamePlayers.getBasedOnColor("white").getRoads().add(r);
+				  break;
+			  }
+		  }
+		  else if(actors.get(i).getName().substring(0, index).equals("orange") &&
+				  GamePlayers.getBasedOnColor("orange") != null){
+			  index = actors.get(i).getName().indexOf("|") + 1;
+			  switch(actors.get(i).getName().substring(index)){
+			  case "HarborSettlement": 
+				  HarborSettlement hs = new HarborSettlement(new TextureAtlas(Gdx.files.internal("Orange.txt")), "orangeHarborSettlement");
+				  float x = actors.get(i).getX();
+				  float y = actors.get(i).getX();
+				  float w = actors.get(i).getWidth();
+				  float h = actors.get(i).getHeight();
+				  hs.getHarborSettlement().setBounds(x, y, w, h);
+				  GamePlayers.getBasedOnColor("orange").getHarborSettlements().add(hs);
+				  break;
+			  case "Settlement":
+				  Settlement s = new Settlement(new TextureAtlas(Gdx.files.internal("Orange.txt")), "orangeSettlement");
+				  float x2 = actors.get(i).getX();
+				  float y2 = actors.get(i).getX();
+				  float w2 = actors.get(i).getWidth();
+				  float h2 = actors.get(i).getHeight();
+				  s.getSettlement().setBounds(x2, y2, w2, h2);
+				  GamePlayers.getBasedOnColor("orange").getSettlements().add(s);
+				  break;
+			  case "Road":
+				  Road r = new Road(new TextureAtlas(Gdx.files.internal("Orange.txt")), "orangeRoad");
+				  float x1 = actors.get(i).getX();
+				  float y1 = actors.get(i).getX();
+				  float w1 = actors.get(i).getWidth();
+				  float h1 = actors.get(i).getHeight();
+				  r.getRoad().setBounds(x1, y1, w1, h1);
+				  GamePlayers.getBasedOnColor("orange").getRoads().add(r);
+				  break;
+			  }
+		  }
+		}
 	}
 	
 	//returns the stage for this class

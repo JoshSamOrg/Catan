@@ -3,10 +3,8 @@ package com.catan;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -16,7 +14,7 @@ import com.catan.Player.Order;
 //This class allows the player to select their starting positions 
 //of the game. They are able to put a Harbor Settlement, Settlement, Road, and Ship
 //on the board
-public class CatanPieces implements InputProcessor {
+public class CatanPieces {
 	private float mpX = 0;
 	private float mpY = 0;
 	private int firstX = -1;
@@ -240,14 +238,15 @@ public class CatanPieces implements InputProcessor {
 						reg = atlas.findRegion(colors[2] + piece1);
 						gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
 						gamePieces.get(gamePieces.size() - 1).setBounds(xPos,yPos, 10, 15);
-						gamePieces.get(gamePieces.size() - 1).setName(colors[2] + "|" + piece1.toLowerCase() + "1");
+						gamePieces.get(gamePieces.size() - 1).setName(colors[2] + "|" + piece1);
 						HexGeneratorScreen.getStage().addActor(gamePieces.get(gamePieces.size() - 1));
-
+                        
 						reg = atlas.findRegion(colors[2] + piece2);
 						gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
 						gamePieces.get(gamePieces.size() - 1).setBounds(xPos - 15, yPos, 10, 15);
-						gamePieces.get(gamePieces.size() - 1).setName(colors[2] + "|" + piece2.toLowerCase());
+						gamePieces.get(gamePieces.size() - 1).setName(colors[2] + "|" + piece2);
 						HexGeneratorScreen.getStage().addActor(gamePieces.get(gamePieces.size() - 1));
+						
 						yPos -= 40;
 						break;
 					} else if (GamePlayers.getGamePlayers().get(i).getColor().equals("red")) {
@@ -255,14 +254,15 @@ public class CatanPieces implements InputProcessor {
 						reg = atlas.findRegion(colors[0] + piece1);
 						gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
 						gamePieces.get(gamePieces.size() - 1).setBounds(xPos,yPos, 10, 15);
-						gamePieces.get(gamePieces.size() - 1).setName(colors[0] + "|" + piece1.toLowerCase() + "1");
+						gamePieces.get(gamePieces.size() - 1).setName(colors[0] + "|" + piece1);
 						HexGeneratorScreen.getStage().addActor(gamePieces.get(gamePieces.size() - 1));
 
 						reg = atlas.findRegion(colors[0] + piece2);
 						gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
 						gamePieces.get(gamePieces.size() - 1).setBounds(xPos - 15, yPos, 10, 15);
-						gamePieces.get(gamePieces.size() - 1).setName(colors[0] + "|" + piece2.toLowerCase());
+						gamePieces.get(gamePieces.size() - 1).setName(colors[0] + "|" + piece2);
 						HexGeneratorScreen.getStage().addActor(gamePieces.get(gamePieces.size() - 1));
+						
 						yPos -= 40;
 						break;
 					} else if (GamePlayers.getGamePlayers().get(i).getColor().equals("blue")) {
@@ -270,14 +270,15 @@ public class CatanPieces implements InputProcessor {
 						reg = atlas.findRegion(colors[1] + piece1);
 						gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
 						gamePieces.get(gamePieces.size() - 1).setBounds(xPos,yPos, 10, 15);
-						gamePieces.get(gamePieces.size() - 1).setName(colors[1] + "|" + piece1.toLowerCase() + "1");
+						gamePieces.get(gamePieces.size() - 1).setName(colors[1] + "|" + piece1);
 						HexGeneratorScreen.getStage().addActor(gamePieces.get(gamePieces.size() - 1));
 
 						reg = atlas.findRegion(colors[1] + piece2);
 						gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
 						gamePieces.get(gamePieces.size() - 1).setBounds(xPos - 15, yPos, 10, 15);
-						gamePieces.get(gamePieces.size() - 1).setName(colors[1] + "|" + piece2.toLowerCase());
+						gamePieces.get(gamePieces.size() - 1).setName(colors[1] + "|" + piece2);
 						HexGeneratorScreen.getStage().addActor(gamePieces.get(gamePieces.size() - 1));
+						
 						yPos -= 40;
 						break;
 					} else if (GamePlayers.getGamePlayers().get(i).getColor().equals("white")) {
@@ -285,14 +286,15 @@ public class CatanPieces implements InputProcessor {
 						reg = atlas.findRegion(colors[3] + piece1);
 						gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
 						gamePieces.get(gamePieces.size() - 1).setBounds(xPos,yPos, 10, 15);
-						gamePieces.get(gamePieces.size() - 1).setName(colors[3] + "|" + piece1.toLowerCase() + "1");
+						gamePieces.get(gamePieces.size() - 1).setName(colors[3] + "|" + piece1);
 						HexGeneratorScreen.getStage().addActor(gamePieces.get(gamePieces.size() - 1));
 
 						reg = atlas.findRegion(colors[3] + piece2);
 						gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
 						gamePieces.get(gamePieces.size() - 1).setBounds(xPos - 15, yPos, 10, 15);
-						gamePieces.get(gamePieces.size() - 1).setName(colors[3] + "|" + piece2.toLowerCase());
+						gamePieces.get(gamePieces.size() - 1).setName(colors[3] + "|" + piece2);
 						HexGeneratorScreen.getStage().addActor(gamePieces.get(gamePieces.size() - 1));
+
 						yPos -= 40;
 						break;
 					}
@@ -301,9 +303,10 @@ public class CatanPieces implements InputProcessor {
 			times--;
 			order++;
 		}
+		//rearranging the element order of gamePieces to get the listeners correct
 		if (piece1.equals("HarborSettlement") && piece2.equals("Settlement")) {
 			for (int i = gamePieces.size() - 1; i > -1; i--) {
-				if (gamePieces.get(i).getName().substring(gamePieces.get(i).getName().indexOf("|") + 1).equals("settlement")) {
+				if (gamePieces.get(i).getName().substring(gamePieces.get(i).getName().indexOf("|") + 1).equals("Settlement")) {
 					ImageButton button = gamePieces.remove(i);
 					gamePieces.add(button);
 				}
@@ -363,13 +366,13 @@ public class CatanPieces implements InputProcessor {
 				reg = atlas.findRegion(colors[0] + "HarborSettlement");
 				gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
 				gamePieces.get(gamePieces.size() - 1).setBounds(xPos, yPos, 10,15);
-				gamePieces.get(gamePieces.size() - 1).setName(colors[0] + "|" + "harborsettlement1");
+				gamePieces.get(gamePieces.size() - 1).setName(colors[0] + "|" + "HarborSettlement");
 				HexGeneratorScreen.getStage().addActor(gamePieces.get(gamePieces.size() - 1));
 				
 				reg = atlas.findRegion(colors[0] + "Settlement");
 				gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
 				gamePieces.get(gamePieces.size() - 1).setBounds(xPos - 15,yPos, 10, 15);
-				gamePieces.get(gamePieces.size() - 1).setName(colors[0] + "|" + "settlement");
+				gamePieces.get(gamePieces.size() - 1).setName(colors[0] + "|" + "Settlement");
 				HexGeneratorScreen.getStage().addActor(gamePieces.get(gamePieces.size() - 1));
 				yPos -= 40;
 			}
@@ -378,13 +381,13 @@ public class CatanPieces implements InputProcessor {
 					reg = atlas.findRegion(colors[1] + "HarborSettlement");
 					gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
 					gamePieces.get(gamePieces.size() - 1).setBounds(xPos, yPos, 10,15);
-					gamePieces.get(gamePieces.size() - 1).setName(colors[1] + "|" + "harborsettlement1");
+					gamePieces.get(gamePieces.size() - 1).setName(colors[1] + "|" + "HarborSettlement");
 					HexGeneratorScreen.getStage().addActor(gamePieces.get(gamePieces.size() - 1));
 					
 					reg = atlas.findRegion(colors[1] + "Settlement");
 					gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
 					gamePieces.get(gamePieces.size() - 1).setBounds(xPos - 15,yPos, 10, 15);
-					gamePieces.get(gamePieces.size() - 1).setName(colors[1] + "|" + "settlement");
+					gamePieces.get(gamePieces.size() - 1).setName(colors[1] + "|" + "Settlement");
 					HexGeneratorScreen.getStage().addActor(gamePieces.get(gamePieces.size() - 1));
 					yPos -= 40;
 				}
@@ -393,13 +396,13 @@ public class CatanPieces implements InputProcessor {
 					reg = atlas.findRegion(colors[2] + "HarborSettlement");
 					gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
 					gamePieces.get(gamePieces.size() - 1).setBounds(xPos, yPos, 10,15);
-					gamePieces.get(gamePieces.size() - 1).setName(colors[2] + "|" + "harborsettlement1");
+					gamePieces.get(gamePieces.size() - 1).setName(colors[2] + "|" + "HarborSettlement");
 					HexGeneratorScreen.getStage().addActor(gamePieces.get(gamePieces.size() - 1));
 					
 					reg = atlas.findRegion(colors[2] + "Settlement");
 					gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
 					gamePieces.get(gamePieces.size() - 1).setBounds(xPos - 15,yPos, 10, 15);
-					gamePieces.get(gamePieces.size() - 1).setName(colors[2] + "|" + "settlement");
+					gamePieces.get(gamePieces.size() - 1).setName(colors[2] + "|" + "Settlement");
 					HexGeneratorScreen.getStage().addActor(gamePieces.get(gamePieces.size() - 1));
 					yPos -= 40;
 				}
@@ -408,13 +411,13 @@ public class CatanPieces implements InputProcessor {
 					reg = atlas.findRegion(colors[3] + "HarborSettlement");
 					gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
 					gamePieces.get(gamePieces.size() - 1).setBounds(xPos, yPos, 10,15);
-					gamePieces.get(gamePieces.size() - 1).setName(colors[3] + "|" + "harborsettlement1");
+					gamePieces.get(gamePieces.size() - 1).setName(colors[3] + "|" + "HarborSettlement");
 					HexGeneratorScreen.getStage().addActor(gamePieces.get(gamePieces.size() - 1));
 					
 					reg = atlas.findRegion(colors[3] + "Settlement");
 					gamePieces.add(new ImageButton(new TextureRegionDrawable(reg)));
 					gamePieces.get(gamePieces.size() - 1).setBounds(xPos - 15,yPos, 10, 15);
-					gamePieces.get(gamePieces.size() - 1).setName(colors[3] + "|" + "settlement");
+					gamePieces.get(gamePieces.size() - 1).setName(colors[3] + "|" + "Settlement");
 					HexGeneratorScreen.getStage().addActor(gamePieces.get(gamePieces.size() - 1));
 					yPos -= 40;
 				}
@@ -428,7 +431,7 @@ public class CatanPieces implements InputProcessor {
 		gamePieces.set(3, temp);
 		addGamePiecesListener(0);
 	}
-
+	
 	//returns selectInitialPlacements, a boolean that queries when the 
 	//user is selecting their placements, true when they are, and false
 	//otherwise
@@ -801,53 +804,5 @@ public class CatanPieces implements InputProcessor {
 	//and false otherwise
 	public static void setSelectInitialPlacements(boolean set) {
 		selectInitialPlacements = set;
-	}
-
-	@Override
-	public boolean keyDown(int keycode) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean keyUp(int keycode) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean keyTyped(char character) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		findRoad(screenX, Gdx.graphics.getHeight() - 1 - screenY);
-		return false;
-	}
-
-	@Override
-	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean mouseMoved(int screenX, int screenY) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean scrolled(int amount) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 }

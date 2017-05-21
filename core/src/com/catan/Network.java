@@ -31,6 +31,7 @@ public class Network {
 	   Kryo kryo = ep.getKryo();
 	   kryo.register(Request.class);
 	   kryo.register(Response.class);
+	   kryo.register(HashMap.class);
    }
    
    //private ip address of this computer
@@ -65,7 +66,7 @@ public class Network {
    
    //static inner class
    public static class Request{
-	   public String request;
+	   public HashMap<String, String> request;
    }
    
    //static inner class

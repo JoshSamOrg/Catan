@@ -1,5 +1,7 @@
 package com.catan;
 
+import java.util.ArrayList;
+
 //This class is the player class that holds all the information of a player in the game
 public class Player {
 	
@@ -22,12 +24,17 @@ public class Player {
   private int numberOfCities;
   private int numberOfCircles;
   private String color;
-  private Ship ships [];
+  private ArrayList<Ship> ships;
+  private ArrayList<Settlement> settlements;
+  private ArrayList<Road> roads;
+  private ArrayList<HarborSettlement> harborSettlements;
+  private ArrayList<Settler> settlers;
   private int wood;
   private int wheat;
   private int sheep;
   private int ore;
   private int brick;
+  private int gold;
   
   //Constructor that initializes all of the player's instance variables
   public Player(){
@@ -44,12 +51,17 @@ public class Player {
 	  numberOfSettlers = 2;
 	  numberOfCities = 4;
 	  numberOfCircles = 3;
-	  ships = new Ship[3];
+	  ships = new ArrayList<Ship>();
+	  settlements = new ArrayList<Settlement>();
+	  roads = new ArrayList<Road>();
+	  harborSettlements = new ArrayList<HarborSettlement>();
+	  settlers = new ArrayList<Settler>();
 	  wood=0;
 	  wheat =0;
 	  sheep=0;
 	  ore=0;
 	  brick=0;
+	  gold = 0;
   }
   
   //Constructor with a String parameter that will become the name of the player,
@@ -68,12 +80,17 @@ public class Player {
 	  numberOfSettlers = 2;
 	  numberOfCities = 4;
 	  numberOfCircles = 3;
-	  ships = new Ship[3];
+	  ships = new ArrayList<Ship>();
+	  settlements = new ArrayList<Settlement>();
+	  roads = new ArrayList<Road>();
+	  harborSettlements = new ArrayList<HarborSettlement>();
+	  settlers = new ArrayList<Settler>();
 	  wood=0;
 	  wheat =0;
 	  sheep=0;
 	  ore=0;
 	  brick=0;
+	  gold = 0;
   }
   
   //returns the name of the player
@@ -154,5 +171,60 @@ public class Player {
   //sets the order of the player
   public void setOrder(Order newOrd){
 	  order = newOrd;
+  }
+  
+  //returns the player's wood
+  public int getWood(){
+	  return wood;
+  }
+  
+  //returns the player's wheat 
+  public int getWheat(){
+	  return wheat;
+  }
+  
+  //returns the player's ore
+  public int getOre(){
+	  return ore;
+  }
+  
+  //returns the player's brick
+  public int getBrick(){
+	  return brick;
+  }
+  
+  //returns the player's sheep
+  public int getSheep(){
+	  return sheep;
+  }
+  
+  //returns the player's gold
+  public int getGold(){
+	  return gold;
+  }
+  
+  //returns the player's ships
+  public ArrayList<Ship> getShips(){
+	  return ships;
+  }
+  
+  //returns the player's settlements
+  public ArrayList<Settlement> getSettlements(){
+	  return settlements;
+  }
+  
+  //returns the player's roads
+  public ArrayList<Road> getRoads(){
+	  return roads;
+  }
+  
+  //returns the player's harbor settlements
+  public ArrayList<HarborSettlement> getHarborSettlements(){
+	  return harborSettlements;
+  }
+  
+  //returns the player's settlers
+  public ArrayList<Settler> getSettlers(){
+	  return settlers;
   }
 }
