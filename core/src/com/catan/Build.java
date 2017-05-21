@@ -44,9 +44,4 @@ public class Build {
 			HexGeneratorScreen.getStage().addActor(player.getShips().get(size - 1).getShip());
 		}
 	}
-	
-	//builds a road or ship
-	public static void buildRoadStructure(String type, TextureAtlas atlas){
-		
-	}
 }

@@ -32,6 +32,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.catan.Network.Response;
 
 //The main game screen class
 public class HexGeneratorScreen implements Screen, InputProcessor {
@@ -504,8 +505,8 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 		batch.begin();
 		batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		batch.end();
-		stage.act(Gdx.graphics.getDeltaTime());
-		stage.draw();
+		stage.act(Gdx.graphics.getDeltaTime()); //updates the actors in the stage
+		stage.draw(); //draws the actors in the stage
 		if (start) {
 			TextButton endTurn = new TextButton("End Turn", skin, "tStyle");
 			endTurn.setBounds(300, 20, 250, 50);
@@ -725,6 +726,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 								start = true;
 								updatePlayerPieces(stage.getActors());
 								CatanPieces.setSelectInitialPlacements(false);
+						        Host.sendMessage("Start Game");
 							}
 						});
 						
@@ -838,6 +840,16 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 				  r.getRoad().setBounds(x1, y1, w1, h1);
 				  GamePlayers.getBasedOnColor("red").getRoads().add(r);
 				  break;
+			  case "ShipSettler":
+				  Ship sh = new Ship(new TextureAtlas(Gdx.files.internal("Red.txt")), "redShipSettler");
+				  float x3 = actors.get(i).getX();
+				  float y3 = actors.get(i).getY();
+				  float w3 = actors.get(i).getWidth();
+				  float h3 = actors.get(i).getHeight();
+				  sh.getShip().setBounds(x3, y3, w3, h3);
+				  sh.getShip().setName("redShipSettler");
+				  GamePlayers.getBasedOnColor("red").getShips().add(sh);
+				  break;
 			  }
 		  }
 		  else if(actors.get(i).getName().substring(0, index).equals("blue") &&
@@ -870,6 +882,16 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 				  float h1 = actors.get(i).getHeight();
 				  r.getRoad().setBounds(x1, y1, w1, h1);
 				  GamePlayers.getBasedOnColor("blue").getRoads().add(r);
+				  break;
+			  case "ShipSettler":
+				  Ship sh = new Ship(new TextureAtlas(Gdx.files.internal("Blue.txt")), "blueShipSettler");
+				  float x3 = actors.get(i).getX();
+				  float y3 = actors.get(i).getY();
+				  float w3 = actors.get(i).getWidth();
+				  float h3 = actors.get(i).getHeight();
+				  sh.getShip().setBounds(x3, y3, w3, h3);
+				  sh.getShip().setName("blueShipSettler");
+				  GamePlayers.getBasedOnColor("blue").getShips().add(sh);
 				  break;
 			  }
 		  }
@@ -904,6 +926,16 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 				  r.getRoad().setBounds(x1, y1, w1, h1);
 				  GamePlayers.getBasedOnColor("white").getRoads().add(r);
 				  break;
+			  case "ShipSettler":
+				  Ship sh = new Ship(new TextureAtlas(Gdx.files.internal("White.txt")), "whiteShipSettler");
+				  float x3 = actors.get(i).getX();
+				  float y3 = actors.get(i).getY();
+				  float w3 = actors.get(i).getWidth();
+				  float h3 = actors.get(i).getHeight();
+				  sh.getShip().setBounds(x3, y3, w3, h3);
+				  sh.getShip().setName("whiteShipSettler");
+				  GamePlayers.getBasedOnColor("white").getShips().add(sh);
+				  break;
 			  }
 		  }
 		  else if(actors.get(i).getName().substring(0, index).equals("orange") &&
@@ -936,6 +968,16 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 				  float h1 = actors.get(i).getHeight();
 				  r.getRoad().setBounds(x1, y1, w1, h1);
 				  GamePlayers.getBasedOnColor("orange").getRoads().add(r);
+				  break;
+			  case "ShipSettler":
+				  Ship sh = new Ship(new TextureAtlas(Gdx.files.internal("Orange.txt")), "orangeShipSettler");
+				  float x3 = actors.get(i).getX();
+				  float y3 = actors.get(i).getY();
+				  float w3 = actors.get(i).getWidth();
+				  float h3 = actors.get(i).getHeight();
+				  sh.getShip().setBounds(x3, y3, w3, h3);
+				  sh.getShip().setName("orangeShipSettler");
+				  GamePlayers.getBasedOnColor("orange").getShips().add(sh);
 				  break;
 			  }
 		  }

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.catan.Network.Request;
+import com.catan.Network.Response;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
@@ -38,12 +39,12 @@ public class Host {
 	   });
    }
    
+   
    //processes the request sent by a client
    public static void processRequest(HashMap<String, String> map){
 	   final String key = (String) map.keySet().toArray()[0];
 	   final String value = map.get(key);
 	   final String color = findAtlas(key);
-	   System.out.println(color);
 	   //tricky, but any graphics operations directly involving 
 	   //OpenGL (the atlas in this case) need to be executed on the rendering thread
 	   //postRunnable passes data from the current thread to the rendering thread
@@ -55,6 +56,7 @@ public class Host {
 	   });
    }
    
+   //returns a valid texture atlas internal file, (.txt)
    public static String findAtlas(String name){
 		for(int i = 0; i<GamePlayers.getGamePlayers().size(); i++){
 			if(GamePlayers.getGamePlayers().get(i).getName().equals(name)){
@@ -72,5 +74,11 @@ public class Host {
    //returns the server object
    public static Server getServer(){
 	   return server;
+   }
+   
+   public static void sendMessage(String message){
+	   Response r = new Response();
+	   r.response = message;
+	   //server.sendToTCP(connectionID, object)
    }
 }
