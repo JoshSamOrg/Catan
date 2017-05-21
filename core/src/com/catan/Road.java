@@ -13,6 +13,10 @@ public class Road {
 	  road = new ImageButton(new TextureRegionDrawable(atlas.findRegion(text)));
   }
   
+  public Road(ImageButton button){
+		road = button;
+	}
+  
   //returns the image button road
   public ImageButton getRoad(){
 	  return road;

@@ -13,6 +13,10 @@ public class HarborSettlement {
 	  harborSettlement = new ImageButton(new TextureRegionDrawable(atlas.findRegion(text)));
   }
   
+  public HarborSettlement(ImageButton button){
+		harborSettlement = button;
+	}
+  
   //returns the image button harbor settlement
   public ImageButton getHarborSettlement(){
 	  return harborSettlement;

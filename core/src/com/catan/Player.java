@@ -29,6 +29,7 @@ public class Player {
   private ArrayList<Road> roads;
   private ArrayList<HarborSettlement> harborSettlements;
   private ArrayList<Settler> settlers;
+  private ArrayList<Crew> crews;
   private int wood;
   private int wheat;
   private int sheep;
@@ -56,6 +57,7 @@ public class Player {
 	  roads = new ArrayList<Road>();
 	  harborSettlements = new ArrayList<HarborSettlement>();
 	  settlers = new ArrayList<Settler>();
+	  crews = new ArrayList<Crew>();
 	  wood=0;
 	  wheat =0;
 	  sheep=0;
@@ -85,6 +87,7 @@ public class Player {
 	  roads = new ArrayList<Road>();
 	  harborSettlements = new ArrayList<HarborSettlement>();
 	  settlers = new ArrayList<Settler>();
+	  crews = new ArrayList<Crew>();
 	  wood=0;
 	  wheat =0;
 	  sheep=0;
@@ -226,5 +229,10 @@ public class Player {
   //returns the player's settlers
   public ArrayList<Settler> getSettlers(){
 	  return settlers;
+  }
+  
+  //returns the player's crews
+  public ArrayList<Crew> getCrews(){
+	  return crews;
   }
 }

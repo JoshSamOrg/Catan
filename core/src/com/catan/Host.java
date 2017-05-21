@@ -76,9 +76,10 @@ public class Host {
 	   return server;
    }
    
+   //sends a message to all the clients
    public static void sendMessage(String message){
 	   Response r = new Response();
 	   r.response = message;
-	   //server.sendToTCP(connectionID, object)
+	   server.sendToAllTCP(r);
    }
 }

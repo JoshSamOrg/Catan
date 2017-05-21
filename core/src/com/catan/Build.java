@@ -13,7 +13,7 @@ public class Build {
 			buildStructure(pieceType, a);
 	}
 	
-	//builds a settlement, harbor settlement, road, or ship
+	//builds any structure within the game
 	public static void buildStructure(String type, TextureAtlas atlas){
 		if(type.equals("Settlement")){
 			player.getSettlements().add(new Settlement(atlas, color + type));
@@ -42,6 +42,20 @@ public class Build {
 			player.getShips().get(size - 1).getShip().setBounds(270, 100, 10, 15);
 			player.getShips().get(size - 1).getShip().setName(color + type);
 			HexGeneratorScreen.getStage().addActor(player.getShips().get(size - 1).getShip());
+		}
+		else if(type.equals("Settler")){
+			player.getSettlers().add(new Settler(atlas, color + type));
+			int size = player.getSettlers().size();
+			player.getSettlers().get(size - 1).getSettler().setBounds(270, 100, 10, 15);
+			player.getSettlers().get(size - 1).getSettler().setName(color + type);
+			HexGeneratorScreen.getStage().addActor(player.getSettlers().get(size - 1).getSettler());
+		}
+		else if(type.equals("Crew")){
+			player.getCrews().add(new Crew(atlas, color + type));
+			int size = player.getCrews().size();
+			player.getCrews().get(size - 1).getCrew().setBounds(270, 100, 10, 15);
+			player.getCrews().get(size - 1).getCrew().setName(color + type);
+			HexGeneratorScreen.getStage().addActor(player.getCrews().get(size - 1).getCrew());
 		}
 	}
 }

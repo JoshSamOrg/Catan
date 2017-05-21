@@ -13,6 +13,10 @@ public class Settler {
 	  settler = new ImageButton(new TextureRegionDrawable(atlas.findRegion(text)));
   }
   
+  public Settler(ImageButton button){
+		settler = button;
+	}
+  
   //returns the image button settler
   public ImageButton getSettler(){
 	  return settler;

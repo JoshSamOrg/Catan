@@ -2,9 +2,13 @@ package com.catan;
 
 import java.util.ArrayList;
 
+import com.catan.Player.Order;
+
 //This class stores an arraylist of players that are playing the game
 public class GamePlayers {
    private static ArrayList<Player> gamePlayers = new ArrayList<Player>();
+   private static int updatePlayer = 0;
+   private static String currentPlayer = "";
    
    //returns the arraylist of gamePlayers
    public static ArrayList<Player> getGamePlayers(){
@@ -34,4 +38,20 @@ public class GamePlayers {
    public static void setGamePlayers(ArrayList<Player> newPlayers){
 	   gamePlayers = newPlayers;
    }
+   
+   //updates the current player (who's turn it is)
+public static void updateCurrentPlayer() {
+	Order current = Player.Order.values()[updatePlayer];
+	for(int i = 0; i<GamePlayers.getGamePlayers().size(); i++){
+		if(GamePlayers.getGamePlayers().get(i).getOrder() == current){
+			updatePlayer = (updatePlayer + 1) % GamePlayers.getGamePlayers().size();
+			currentPlayer = GamePlayers.getGamePlayers().get(i).getName();
+		}
+	}
+}
+
+//returns the current player's name (who's turn it is)
+public static String getCurrentPlayer(){
+	return currentPlayer;
+}
 }

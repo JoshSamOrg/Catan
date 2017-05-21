@@ -518,6 +518,10 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 			endTurn.addListener(new ChangeListener(){
 				@Override
 				public void changed(ChangeEvent event, Actor actor) {
+					GamePlayers.updateCurrentPlayer();
+					if(Host.getServer() != null){
+				        Host.sendMessage("P" + GamePlayers.getCurrentPlayer());
+					}
 					actor.setVisible(false);
 					j = (j+1)%PlayerColorScreen.getNumberOfPlayers();
 				}
@@ -726,7 +730,10 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 								start = true;
 								updatePlayerPieces(stage.getActors());
 								CatanPieces.setSelectInitialPlacements(false);
-						        Host.sendMessage("Start Game");
+						        GamePlayers.updateCurrentPlayer(); //sets the current player (who is going first turn wise)
+								if(Host.getServer() != null){
+						        Host.sendMessage("P" + GamePlayers.getCurrentPlayer());
+							}
 							}
 						});
 						
@@ -814,39 +821,19 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 			  index = actors.get(i).getName().indexOf("|") + 1;
 			  switch(actors.get(i).getName().substring(index)){
 			  case "HarborSettlement": 
-				  HarborSettlement hs = new HarborSettlement(new TextureAtlas(Gdx.files.internal("Red.txt")), "redHarborSettlement");
-				  float x = actors.get(i).getX();
-				  float y = actors.get(i).getY();
-				  float w = actors.get(i).getWidth();
-				  float h = actors.get(i).getHeight();
-				  hs.getHarborSettlement().setBounds(x, y, w, h);
+				  HarborSettlement hs = new HarborSettlement((ImageButton) actors.get(i));
 				  GamePlayers.getBasedOnColor("red").getHarborSettlements().add(hs);
 				  break;
 			  case "Settlement":
-				  Settlement s = new Settlement(new TextureAtlas(Gdx.files.internal("Red.txt")), "redSettlement");
-				  float x2 = actors.get(i).getX();
-				  float y2 = actors.get(i).getY();
-				  float w2 = actors.get(i).getWidth();
-				  float h2 = actors.get(i).getHeight();
-				  s.getSettlement().setBounds(x2, y2, w2, h2);
+				  Settlement s = new Settlement((ImageButton) actors.get(i));
 				  GamePlayers.getBasedOnColor("red").getSettlements().add(s);
 				  break;
 			  case "Road":
-				  Road r = new Road(new TextureAtlas(Gdx.files.internal("Red.txt")), "redRoad");
-				  float x1 = actors.get(i).getX();
-				  float y1 = actors.get(i).getY();
-				  float w1 = actors.get(i).getWidth();
-				  float h1 = actors.get(i).getHeight();
-				  r.getRoad().setBounds(x1, y1, w1, h1);
+				  Road r = new Road((ImageButton) actors.get(i));
 				  GamePlayers.getBasedOnColor("red").getRoads().add(r);
 				  break;
 			  case "ShipSettler":
-				  Ship sh = new Ship(new TextureAtlas(Gdx.files.internal("Red.txt")), "redShipSettler");
-				  float x3 = actors.get(i).getX();
-				  float y3 = actors.get(i).getY();
-				  float w3 = actors.get(i).getWidth();
-				  float h3 = actors.get(i).getHeight();
-				  sh.getShip().setBounds(x3, y3, w3, h3);
+				  Ship sh = new Ship((ImageButton) actors.get(i));
 				  sh.getShip().setName("redShipSettler");
 				  GamePlayers.getBasedOnColor("red").getShips().add(sh);
 				  break;
@@ -857,39 +844,19 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 			  index = actors.get(i).getName().indexOf("|") + 1;
 			  switch(actors.get(i).getName().substring(index)){
 			  case "HarborSettlement": 
-				  HarborSettlement hs = new HarborSettlement(new TextureAtlas(Gdx.files.internal("Blue.txt")), "blueHarborSettlement");
-				  float x = actors.get(i).getX();
-				  float y = actors.get(i).getY();
-				  float w = actors.get(i).getWidth();
-				  float h = actors.get(i).getHeight();
-				  hs.getHarborSettlement().setBounds(x, y, w, h);
+				  HarborSettlement hs = new HarborSettlement((ImageButton) actors.get(i));
 				  GamePlayers.getBasedOnColor("blue").getHarborSettlements().add(hs);
 				  break;
 			  case "Settlement":
-				  Settlement s = new Settlement(new TextureAtlas(Gdx.files.internal("Blue.txt")), "blueSettlement");
-				  float x2 = actors.get(i).getX();
-				  float y2 = actors.get(i).getY();
-				  float w2 = actors.get(i).getWidth();
-				  float h2 = actors.get(i).getHeight();
-				  s.getSettlement().setBounds(x2, y2, w2, h2);
+				  Settlement s = new Settlement((ImageButton) actors.get(i));
 				  GamePlayers.getBasedOnColor("blue").getSettlements().add(s);
 				  break;
 			  case "Road":
-				  Road r = new Road(new TextureAtlas(Gdx.files.internal("Blue.txt")), "blueRoad");
-				  float x1 = actors.get(i).getX();
-				  float y1 = actors.get(i).getY();
-				  float w1 = actors.get(i).getWidth();
-				  float h1 = actors.get(i).getHeight();
-				  r.getRoad().setBounds(x1, y1, w1, h1);
+				  Road r = new Road((ImageButton) actors.get(i));
 				  GamePlayers.getBasedOnColor("blue").getRoads().add(r);
 				  break;
 			  case "ShipSettler":
-				  Ship sh = new Ship(new TextureAtlas(Gdx.files.internal("Blue.txt")), "blueShipSettler");
-				  float x3 = actors.get(i).getX();
-				  float y3 = actors.get(i).getY();
-				  float w3 = actors.get(i).getWidth();
-				  float h3 = actors.get(i).getHeight();
-				  sh.getShip().setBounds(x3, y3, w3, h3);
+				  Ship sh = new Ship((ImageButton) actors.get(i));
 				  sh.getShip().setName("blueShipSettler");
 				  GamePlayers.getBasedOnColor("blue").getShips().add(sh);
 				  break;
@@ -900,39 +867,19 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 			  index = actors.get(i).getName().indexOf("|") + 1;
 			  switch(actors.get(i).getName().substring(index)){
 			  case "HarborSettlement": 
-				  HarborSettlement hs = new HarborSettlement(new TextureAtlas(Gdx.files.internal("White.txt")), "whiteHarborSettlement");
-				  float x = actors.get(i).getX();
-				  float y = actors.get(i).getX();
-				  float w = actors.get(i).getWidth();
-				  float h = actors.get(i).getHeight();
-				  hs.getHarborSettlement().setBounds(x, y, w, h);
+				  HarborSettlement hs = new HarborSettlement((ImageButton) actors.get(i));
 				  GamePlayers.getBasedOnColor("white").getHarborSettlements().add(hs);
 				  break;
 			  case "Settlement":
-				  Settlement s = new Settlement(new TextureAtlas(Gdx.files.internal("White.txt")), "whiteSettlement");
-				  float x2 = actors.get(i).getX();
-				  float y2 = actors.get(i).getX();
-				  float w2 = actors.get(i).getWidth();
-				  float h2 = actors.get(i).getHeight();
-				  s.getSettlement().setBounds(x2, y2, w2, h2);
+				  Settlement s = new Settlement((ImageButton) actors.get(i));
 				  GamePlayers.getBasedOnColor("white").getSettlements().add(s);
 				  break;
 			  case "Road":
-				  Road r = new Road(new TextureAtlas(Gdx.files.internal("White.txt")), "whiteRoad");
-				  float x1 = actors.get(i).getX();
-				  float y1 = actors.get(i).getX();
-				  float w1 = actors.get(i).getWidth();
-				  float h1 = actors.get(i).getHeight();
-				  r.getRoad().setBounds(x1, y1, w1, h1);
+				  Road r = new Road((ImageButton) actors.get(i));
 				  GamePlayers.getBasedOnColor("white").getRoads().add(r);
 				  break;
 			  case "ShipSettler":
-				  Ship sh = new Ship(new TextureAtlas(Gdx.files.internal("White.txt")), "whiteShipSettler");
-				  float x3 = actors.get(i).getX();
-				  float y3 = actors.get(i).getY();
-				  float w3 = actors.get(i).getWidth();
-				  float h3 = actors.get(i).getHeight();
-				  sh.getShip().setBounds(x3, y3, w3, h3);
+				  Ship sh = new Ship((ImageButton) actors.get(i));
 				  sh.getShip().setName("whiteShipSettler");
 				  GamePlayers.getBasedOnColor("white").getShips().add(sh);
 				  break;
@@ -943,39 +890,19 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 			  index = actors.get(i).getName().indexOf("|") + 1;
 			  switch(actors.get(i).getName().substring(index)){
 			  case "HarborSettlement": 
-				  HarborSettlement hs = new HarborSettlement(new TextureAtlas(Gdx.files.internal("Orange.txt")), "orangeHarborSettlement");
-				  float x = actors.get(i).getX();
-				  float y = actors.get(i).getX();
-				  float w = actors.get(i).getWidth();
-				  float h = actors.get(i).getHeight();
-				  hs.getHarborSettlement().setBounds(x, y, w, h);
+				  HarborSettlement hs = new HarborSettlement((ImageButton) actors.get(i));
 				  GamePlayers.getBasedOnColor("orange").getHarborSettlements().add(hs);
 				  break;
 			  case "Settlement":
-				  Settlement s = new Settlement(new TextureAtlas(Gdx.files.internal("Orange.txt")), "orangeSettlement");
-				  float x2 = actors.get(i).getX();
-				  float y2 = actors.get(i).getX();
-				  float w2 = actors.get(i).getWidth();
-				  float h2 = actors.get(i).getHeight();
-				  s.getSettlement().setBounds(x2, y2, w2, h2);
+				  Settlement s = new Settlement((ImageButton) actors.get(i));
 				  GamePlayers.getBasedOnColor("orange").getSettlements().add(s);
 				  break;
 			  case "Road":
-				  Road r = new Road(new TextureAtlas(Gdx.files.internal("Orange.txt")), "orangeRoad");
-				  float x1 = actors.get(i).getX();
-				  float y1 = actors.get(i).getX();
-				  float w1 = actors.get(i).getWidth();
-				  float h1 = actors.get(i).getHeight();
-				  r.getRoad().setBounds(x1, y1, w1, h1);
+				  Road r = new Road((ImageButton) actors.get(i));
 				  GamePlayers.getBasedOnColor("orange").getRoads().add(r);
 				  break;
 			  case "ShipSettler":
-				  Ship sh = new Ship(new TextureAtlas(Gdx.files.internal("Orange.txt")), "orangeShipSettler");
-				  float x3 = actors.get(i).getX();
-				  float y3 = actors.get(i).getY();
-				  float w3 = actors.get(i).getWidth();
-				  float h3 = actors.get(i).getHeight();
-				  sh.getShip().setBounds(x3, y3, w3, h3);
+				  Ship sh = new Ship((ImageButton) actors.get(i));
 				  sh.getShip().setName("orangeShipSettler");
 				  GamePlayers.getBasedOnColor("orange").getShips().add(sh);
 				  break;

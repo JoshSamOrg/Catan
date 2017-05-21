@@ -15,6 +15,11 @@ public Ship(TextureAtlas atlas, String text) {
 	moves = 4;
 }
 
+public Ship(ImageButton button){
+	ship = button;
+	moves = 4;
+}
+
 public void decrement() {
 	moves--;
 }

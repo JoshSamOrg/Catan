@@ -12,6 +12,10 @@ public class Settlement {
 	  settlement = new ImageButton(new TextureRegionDrawable(atlas.findRegion(text)));
   }
   
+  public Settlement(ImageButton button){
+		settlement = button;
+	}
+  
   //returns the image button settlement
   public ImageButton getSettlement(){
 	  return settlement;
