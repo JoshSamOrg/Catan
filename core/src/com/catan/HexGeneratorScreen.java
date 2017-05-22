@@ -696,7 +696,11 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 								SettlementLocationIndices.getRoadShip()[ValidPositions.getCounter()]++;
 								}
 							}
-							CatanPieces.getGamePieces().get(iCopy).clearListeners();
+							//tricky line, but actors initially start out with a listener at index zero,
+							//then I added another listener at index 1. You CANNOT delete the listener at
+							//index 0, and if you do, you will never be able to add a changelistener again 
+							//to the actor (I think you can still add a click listener, but not entirely sure)
+							CatanPieces.getGamePieces().get(iCopy).getListeners().removeIndex(1);
 							//If there are two players, they need to each place a harbor settlement and a settlement
 							if(iCopy == CatanPieces.getGamePieces().size() - 1 && piece1.equals("Road")
 									&& piece2.equals("ShipSettler") && PlayerColorScreen.getNumberOfPlayers() == 2){
