@@ -508,24 +508,10 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 		stage.act(Gdx.graphics.getDeltaTime()); //updates the actors in the stage
 		stage.draw(); //draws the actors in the stage
 		if (start) {
-			TextButton endTurn = new TextButton("End Turn", skin, "tStyle");
-			endTurn.setBounds(300, 20, 250, 50);
-			stage.addActor(endTurn);
 			batch.begin();
 			font2.draw(batch, orders.getOrderedPlayers().get(j).getName() + "'s "
 					+ "turn!", 30, 80);
 			batch.end();
-			endTurn.addListener(new ChangeListener(){
-				@Override
-				public void changed(ChangeEvent event, Actor actor) {
-					GamePlayers.updateCurrentPlayer();
-					if(Host.getServer() != null){
-				        Host.sendMessage("P" + GamePlayers.getCurrentPlayer());
-					}
-					actor.setVisible(false);
-					j = (j+1)%PlayerColorScreen.getNumberOfPlayers();
-				}
-			});
 			
 		}
 	}
@@ -670,6 +656,11 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 					finalizePosition = new TextButton("Finalize Position", skin, "tStyle");
 					finalizePosition.setBounds(300, 20, 250, 50);
 					stage.addActor(finalizePosition);
+					}
+					else if(!finalizePosition.isVisible()){
+						finalizePosition.setVisible(true);
+						return false;
+					}
 					finalizePosition.addListener(new ChangeListener(){
 						@Override
 						public void changed(ChangeEvent event, Actor actor) {
@@ -700,7 +691,9 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 							//then I added another listener at index 1. You CANNOT delete the listener at
 							//index 0, and if you do, you will never be able to add a changelistener again 
 							//to the actor (I think you can still add a click listener, but not entirely sure)
-							CatanPieces.getGamePieces().get(iCopy).getListeners().removeIndex(1);
+							if(CatanPieces.getGamePieces().get(iCopy).getListeners().size > 1){
+							    CatanPieces.getGamePieces().get(iCopy).getListeners().removeIndex(1);
+							}
 							//If there are two players, they need to each place a harbor settlement and a settlement
 							if(iCopy == CatanPieces.getGamePieces().size() - 1 && piece1.equals("Road")
 									&& piece2.equals("ShipSettler") && PlayerColorScreen.getNumberOfPlayers() == 2){
@@ -722,6 +715,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 								actor.setVisible(false);//set the finalize position button so you can't see it
 								makeStartButton();
 							}
+							actor.setVisible(false);
 						}
 
 						private void makeStartButton() {
@@ -735,15 +729,31 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 								updatePlayerPieces(stage.getActors());
 								CatanPieces.setSelectInitialPlacements(false);
 						        GamePlayers.updateCurrentPlayer(); //sets the current player (who is going first turn wise)
+						        TextButton endTurn = new TextButton("End Turn", skin, "tStyle");
+								endTurn.setBounds(300, 20, 250, 50);
+								stage.addActor(endTurn);
 								if(Host.getServer() != null){
-						        Host.sendMessage("P" + GamePlayers.getCurrentPlayer());
-							}
+							        Host.sendCurrentPlayer("P" + GamePlayers.getCurrentPlayer());
+							        Host.sendBuildCount(GamePlayers.getCurrentPlayer());
+								}
+								endTurn.addListener(new ChangeListener(){
+									@Override
+									public void changed(ChangeEvent event, Actor actor) {
+										GamePlayers.updateCurrentPlayer();
+										//sends the current player to all clients, and the
+										//build count for the current player
+										if(Host.getServer() != null){
+									        Host.sendCurrentPlayer("P" + GamePlayers.getCurrentPlayer());
+									        Host.sendBuildCount(GamePlayers.getCurrentPlayer());
+										}
+										j = (j+1)%PlayerColorScreen.getNumberOfPlayers();
+									}
+								});
 							}
 						});
 						
 						}
 					});
-					}
 					break;
 				}
 			}

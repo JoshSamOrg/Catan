@@ -211,9 +211,19 @@ public class Player {
 	  return ships;
   }
   
+  //returns true when the player has an unused ship, and false otherwise
+  public boolean hasShips(){
+	  return ships.size() < numberOfShips;
+  }
+  
   //returns the player's settlements
   public ArrayList<Settlement> getSettlements(){
 	  return settlements;
+  }
+  
+//returns true when the player has an unused settlement, and false otherwise
+  public boolean hasSettlements(){
+	  return settlements.size() < numberOfSettlements;
   }
   
   //returns the player's roads
@@ -221,9 +231,19 @@ public class Player {
 	  return roads;
   }
   
+//returns true when the player has an unused road, and false otherwise
+  public boolean hasRoads(){
+	  return roads.size() < numberOfRoads;
+  }
+  
   //returns the player's harbor settlements
   public ArrayList<HarborSettlement> getHarborSettlements(){
 	  return harborSettlements;
+  }
+  
+//returns true when the player has an unused harbor settlement, and false otherwise
+  public boolean hasHarborSettlements(){
+	  return harborSettlements.size() < numberOfHarborSettlements;
   }
   
   //returns the player's settlers
@@ -231,8 +251,18 @@ public class Player {
 	  return settlers;
   }
   
+//returns true when the player has an unused settler, and false otherwise
+  public boolean hasSettlers(){
+	  return settlers.size() < numberOfSettlers;
+  }
+  
   //returns the player's crews
   public ArrayList<Crew> getCrews(){
 	  return crews;
+  }
+  
+//returns true when the player has an unused crew, and false otherwise
+  public boolean hasCrews(){
+	  return crews.size() < numberOfCrew;
   }
 }

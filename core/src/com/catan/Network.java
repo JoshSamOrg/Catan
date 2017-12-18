@@ -2,8 +2,10 @@ package com.catan;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer.Random;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.EndPoint;
 
@@ -26,12 +28,13 @@ public class Network {
 	   map.put(serverName, ipAddress);
    }
    
-   //method that registers the two classes Request and Response
+   //method that registers all necessary classes
    public static void register(EndPoint ep){
 	   Kryo kryo = ep.getKryo();
 	   kryo.register(Request.class);
 	   kryo.register(Response.class);
 	   kryo.register(HashMap.class);
+	   kryo.register(ArrayList.class);
    }
    
    //private ip address of this computer
@@ -67,10 +70,14 @@ public class Network {
    //static inner class
    public static class Request{
 	   public HashMap<String, String> request;
+	   public String nameAndID = "";
+	   public String hello = "";
    }
    
    //static inner class
    public static class Response{
-	   public String response;
+	   public String response = "";
+	   public HashMap<String, Boolean> buildCount;
+	   public HashMap<String, String> validNames; //this variable needs to be static!
    }
 }

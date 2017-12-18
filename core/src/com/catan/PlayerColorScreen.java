@@ -1,5 +1,6 @@
 package com.catan;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
@@ -276,5 +277,10 @@ public class PlayerColorScreen implements Screen {
 		atlas.dispose();
 		pixmap.dispose();
 		Gdx.input.setInputProcessor(null);
+		try {
+			Host.getServer().dispose();
+		} catch (IOException e) {
+			System.out.println("Server cannot be disposed of");
+		}
 	}
 }
