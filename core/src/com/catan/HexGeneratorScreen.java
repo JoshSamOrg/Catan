@@ -194,7 +194,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 		numberImages = new ArrayList<ImageButton>();
 		font = new BitmapFont(Gdx.files.internal("gameFonts.fnt"));
 		font2 = new BitmapFont(Gdx.files.internal("gameFonts.fnt"));
-		font2.getData().setScale(.7f, .7f);
+		font2.getData().setScale(.5f, .5f);
 		skin = new Skin();
 		atlas2 = new TextureAtlas(Gdx.files.internal("myTextures.txt"));
 		pixmap = new Pixmap(1, 1, Format.RGBA8888);
@@ -514,6 +514,16 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 			batch.end();
 			
 		}
+		ArrayList<Integer> lst = CatanPieces.getPositions();
+		for(int i = 0; i<lst.size()-1; i+=2){
+		batch.begin();
+		int x = (int) Math.ceil(stage.screenToStageCoordinates(new Vector2(lst.get(i), lst.get(i+1))).x);
+		int y = (int) Math.ceil(stage.screenToStageCoordinates(new Vector2(lst.get(i), lst.get(i+1))).y);
+		font2.draw(batch, (i)/2 + "", x - 6, Gdx.graphics.getHeight()-y+7);
+		batch.end();
+		}
+		Board board = new Board();
+		
 	}
 
 	//disposes of all resources
