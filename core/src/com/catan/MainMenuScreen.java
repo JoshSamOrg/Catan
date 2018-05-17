@@ -34,6 +34,8 @@ public class MainMenuScreen implements Screen {
     
     //Constructor- passes an instance of CatanGame, in order to have the ability to switch screens
     MainMenuScreen(CatanGame game){
+    	Board b = new Board();
+    	b.initialize(); //initializes board with points, hexes, segments, and all associations of the three.
     	this.game = game;
     }
 	

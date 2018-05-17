@@ -8,6 +8,7 @@ public class Point<E> {
 	private ArrayList<Hex<E>> hexes;
 	private E type;
 	private ArrayList<Point<E>> neighbors;
+	private ArrayList<Segment<E>> segments;
 	
 	public Point(int x, int y) {
 		type = null;
@@ -15,6 +16,7 @@ public class Point<E> {
 		this.y = y;
 		hexes = new ArrayList<>();
 		neighbors = new ArrayList<>();
+		segments = new ArrayList<>();
 	}
 	
 	//returns the x coordinate of the point
@@ -29,9 +31,27 @@ public class Point<E> {
 	public ArrayList<Hex<E>> getHexes() {
 		return hexes;
 	}
+	
+	public void setHexes(ArrayList<Hex<E>> s) {
+		hexes = s;
+		return;
+	}
+	
+	public void setSegments(ArrayList<Segment<E>> s) {
+		segments = s;
+		return;
+	}
+	
+	public ArrayList<Segment<E>> getSegments() {
+		return segments;
+	}
 	//returns the type of the piece placed on the point
 	public E getType() {
 		return type;
+	}
+	public void setType(E t) {
+		type = t;
+		return;
 	}
 	
 	//returns the neighbors of the point

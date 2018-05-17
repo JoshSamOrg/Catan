@@ -146,7 +146,6 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 	//sets up all the actors on the stage, and processes all input events
 	public void show() {
 		stage = new Stage(new ScreenViewport()); //this line must come before the next line!
-		CatanPieces.findPositions();
 		background = new Texture(Gdx.files.internal("blueBackground.png"));
 		orange=new ArrayList<ImageButton>();
 		white=new ArrayList<ImageButton>();
@@ -612,7 +611,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 						if(vp.valid(CatanPieces.getGamePieces().get(i), 
 					CatanPieces.getGamePieces().get(i).getName().substring(CatanPieces.getGamePieces().get(i).getName().indexOf("|") + 1), stageX
 					, stageY
-					, CatanPieces.getGamePieces().get(i).getName().substring(0, CatanPieces.getGamePieces().get(i).getName().indexOf("|")))){
+					, CatanPieces.getGamePieces().get(i).getName().substring(0, CatanPieces.getGamePieces().get(i).getName().indexOf("|")), true)){
 					CatanPieces.getGamePieces().get(i).setPosition(CatanPieces.getPositions().get(cp.getSettlementIndexX())-5,
 							CatanPieces.getPositions().get(cp.getSettlementIndexY())-7);//sets the position of the STAGE not screen
 					CatanPieces.getGamePieces().get(i).setVisible(true);
@@ -622,7 +621,7 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 						if(!vp.valid(CatanPieces.getGamePieces().get(i), 
 								CatanPieces.getGamePieces().get(i).getName().substring(CatanPieces.getGamePieces().get(i).getName().indexOf("|") + 1), stageX
 								, stageY
-								, CatanPieces.getGamePieces().get(i).getName().substring(0, CatanPieces.getGamePieces().get(i).getName().indexOf("|")))){
+								, CatanPieces.getGamePieces().get(i).getName().substring(0, CatanPieces.getGamePieces().get(i).getName().indexOf("|")), true)){
 							return false;
 						}
 						cp.findRoad(stageX, stageY);
@@ -679,14 +678,41 @@ public class HexGeneratorScreen implements Screen, InputProcessor {
 							if (type.equals("HarborSettlement")) {
 								SettlementLocationIndices.getHarborSettlementLocations()[ValidPositions.getCounter()] = true;
 								SettlementLocationIndices.getSettlementColors()[ValidPositions.getCounter()] = ValidPositions.getColors();
+								int placement = cp.getSettlementIndexY() / 2;
+								Point p = (Point) Board.getPoints().get(placement);
+								String color = ValidPositions.getColors();
+								p.setType(color + "Harborsettlement"); //changed to lower case s!
 							}
 							else if (type.equals("Settlement")) {
 								SettlementLocationIndices.getSettlementLocations()[ValidPositions.getCounter()] = true;
 								SettlementLocationIndices.getSettlementColors()[ValidPositions.getCounter()] = ValidPositions.getColors();
+								int placement = cp.getSettlementIndexY() / 2;
+								Point p = (Point) Board.getPoints().get(placement);
+								String color = ValidPositions.getColors();
+								p.setType(color + "Settlement");
+								System.out.println("x: " + p.getX());
+								System.out.println("y: " + p.getY());
 							}
 							else if (type.equals("Road")) {
 								SettlementLocationIndices.getRoadShip()[ValidPositions.getCounter()] = 1;
 								SettlementLocationIndices.getRoadColors()[ValidPositions.getCounter()] = ValidPositions.getColors();
+								Segment s = null;
+								int placement1 = cp.getFirstY() / 2;
+								int placement2 = cp.getSecondY() / 2;
+								Point one = (Point) Board.getPoints().get(placement1);
+								Point two = (Point) Board.getPoints().get(placement2);
+								for (int i=0; i<one.getSegments().size(); i++) {
+									for (int j=0; j<two.getSegments().size(); j++) {
+										if (one.getSegments().get(i).equals((two.getSegments().get(j)))) {
+											s = (Segment) one.getSegments().get(i);
+											break;
+											
+										}
+									}
+								}
+								String color = ValidPositions.getColors();
+								s.setType(color + "Road");
+								
 							}
 							else if (type.equals("ShipSettler")) {
 								SettlementLocationIndices.getRoadColors()[ValidPositions.getCounter()] = ValidPositions.getColors();

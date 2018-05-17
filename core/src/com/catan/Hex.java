@@ -28,4 +28,12 @@ public class Hex<E> {
 	public ArrayList<Point<E>> getPoints() {
 		return points;
 	}
+	public void setType(Character t) {
+		type = t;
+		return;
+	}
+	public void setPoints(ArrayList<Point<E>> p) {
+		points = p;
+		return;
+	}
 }

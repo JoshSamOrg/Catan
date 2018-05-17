@@ -18,6 +18,11 @@ public class Segment<E> {
 		return points;
 	}
 	
+	public void setType(E t) {
+		type = t;
+		return;
+	}
+	
 	//returns the type of the piece placed on the segment
 	public E getType() {
 		return type;

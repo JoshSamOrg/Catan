@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Board<E> {
-	private ArrayList<Point<E>> points = new ArrayList<>();
-	private ArrayList<Segment<E>> segments = new ArrayList<>();
-	private ArrayList<Hex<E>> hexes = new ArrayList<>();
-	public Board() {
+	private static CatanPieces cp = new CatanPieces(null);
+	private static ArrayList<Point> points = new ArrayList<>();
+	private static ArrayList<Segment> segments = new ArrayList<>();
+	private static ArrayList<Hex> hexes = new ArrayList<>();
+	
+	public void initialize() {
+		System.out.println("In initialize");
+		CatanPieces.findPositions();
 		ArrayList<Integer> pos = CatanPieces.getPositions();
 		for(int i = 0; i<pos.size()-1; i+=2){
 			Point<E> temp = new Point<E>(pos.get(i), pos.get(i+1));
@@ -19,2347 +23,3883 @@ public class Board<E> {
 		for (int k=0; k<72; k++) {
 			hexes.add(new Hex<E>());
 		}
+		
 //creates the list of points and their neighbors.
 //0
 points.get(0).getNeighbors().add(points.get(2));
 points.get(0).getNeighbors().add(points.get(61));
+ArrayList<Hex<E>> h0 = new ArrayList<>();
+h0.add(hexes.get(0));
+points.get(0).setHexes(h0);
 
 //1
 points.get(1).getNeighbors().add(points.get(2));
 points.get(1).getNeighbors().add(points.get(3));
 points.get(1).getNeighbors().add(points.get(65));
+ArrayList<Hex<E>> h1 = new ArrayList<>();
+h1.add(hexes.get(0));
+h1.add(hexes.get(9));
+points.get(1).setHexes(h1);
 //2
 points.get(2).getNeighbors().add(points.get(0));
 points.get(2).getNeighbors().add(points.get(1));
+ArrayList<Hex<E>> h2 = new ArrayList<>();
+h2.add(hexes.get(0));
+points.get(2).setHexes(h2);
 //3
 points.get(3).getNeighbors().add(points.get(4));
 points.get(3).getNeighbors().add(points.get(1));
+ArrayList<Hex<E>> h3 = new ArrayList<>();
+h3.add(hexes.get(9));
+points.get(3).setHexes(h3);
 //4
 points.get(4).getNeighbors().add(points.get(3));
 points.get(4).getNeighbors().add(points.get(5));
 points.get(4).getNeighbors().add(points.get(69));
+ArrayList<Hex<E>> h4 = new ArrayList<>();
+h4.add(hexes.get(9));
+h4.add(hexes.get(19));
+points.get(4).setHexes(h4);
 //5
 points.get(5).getNeighbors().add(points.get(4));
 points.get(5).getNeighbors().add(points.get(6));
+ArrayList<Hex<E>> h5 = new ArrayList<>();
+h5.add(hexes.get(19));
+points.get(5).setHexes(h5);
 //6
 points.get(6).getNeighbors().add(points.get(5));
 points.get(6).getNeighbors().add(points.get(7));
 points.get(6).getNeighbors().add(points.get(70));
+ArrayList<Hex<E>> h6 = new ArrayList<>();
+h6.add(hexes.get(19));
+h6.add(hexes.get(30));
+points.get(6).setHexes(h6);
 //7
 points.get(7).getNeighbors().add(points.get(6));
 points.get(7).getNeighbors().add(points.get(8));
+ArrayList<Hex<E>> h7 = new ArrayList<>();
+h7.add(hexes.get(30));
+points.get(7).setHexes(h7);
 //8
 points.get(8).getNeighbors().add(points.get(7));
 points.get(8).getNeighbors().add(points.get(9));
+ArrayList<Hex<E>> h8 = new ArrayList<>();
+h8.add(hexes.get(30));
+points.get(8).setHexes(h8);
 //9
 points.get(9).getNeighbors().add(points.get(8));
 points.get(9).getNeighbors().add(points.get(10));
 points.get(9).getNeighbors().add(points.get(74));
+ArrayList<Hex<E>> h9 = new ArrayList<>();
+h9.add(hexes.get(30));
+h9.add(hexes.get(42));
+points.get(9).setHexes(h9);
 //10
 points.get(10).getNeighbors().add(points.get(9));
 points.get(10).getNeighbors().add(points.get(11));
+ArrayList<Hex<E>> h10 = new ArrayList<>();
+h10.add(hexes.get(42));
+points.get(10).setHexes(h10);
 //11
 points.get(11).getNeighbors().add(points.get(10));
 points.get(11).getNeighbors().add(points.get(12));
 points.get(11).getNeighbors().add(points.get(80));
+ArrayList<Hex<E>> h11 = new ArrayList<>();
+h11.add(hexes.get(53));
+h11.add(hexes.get(42));
+points.get(11).setHexes(h11);
 //12
 points.get(12).getNeighbors().add(points.get(11));
 points.get(12).getNeighbors().add(points.get(13));
 points.get(1).getNeighbors().add(points.get(65));
+ArrayList<Hex<E>> h12 = new ArrayList<>();
+h12.add(hexes.get(53));
+points.get(12).setHexes(h12);
 //13
 points.get(13).getNeighbors().add(points.get(12));
 points.get(13).getNeighbors().add(points.get(14));
 points.get(13).getNeighbors().add(points.get(83));
+ArrayList<Hex<E>> h13 = new ArrayList<>();
+h13.add(hexes.get(53));
+h13.add(hexes.get(63));
+points.get(13).setHexes(h13);
 //14
 points.get(14).getNeighbors().add(points.get(13));
 points.get(14).getNeighbors().add(points.get(15));
+ArrayList<Hex<E>> h14 = new ArrayList<>();
+h14.add(hexes.get(63));
+points.get(14).setHexes(h14);
 //15
 points.get(15).getNeighbors().add(points.get(14));
 points.get(15).getNeighbors().add(points.get(16));
+ArrayList<Hex<E>> h15 = new ArrayList<>();
+h15.add(hexes.get(63));
+points.get(15).setHexes(h15);
 //16
 points.get(16).getNeighbors().add(points.get(15));
 points.get(16).getNeighbors().add(points.get(17));
 points.get(16).getNeighbors().add(points.get(86));
+ArrayList<Hex<E>> h16 = new ArrayList<>();
+h16.add(hexes.get(63));
+h16.add(hexes.get(64));
+points.get(16).setHexes(h16);
+
 //17
 points.get(17).getNeighbors().add(points.get(16));
 points.get(17).getNeighbors().add(points.get(18));
+ArrayList<Hex<E>> h17 = new ArrayList<>();
+h17.add(hexes.get(64));
+points.get(17).setHexes(h17);
 
 //18
 points.get(18).getNeighbors().add(points.get(17));
 points.get(18).getNeighbors().add(points.get(19));
 points.get(18).getNeighbors().add(points.get(87));
+ArrayList<Hex<E>> h18 = new ArrayList<>();
+h18.add(hexes.get(64));
+h18.add(hexes.get(65));
+points.get(18).setHexes(h18);
 //19
 points.get(19).getNeighbors().add(points.get(18));
 points.get(19).getNeighbors().add(points.get(20));
+ArrayList<Hex<E>> h19 = new ArrayList<>();
+h19.add(hexes.get(65));
+points.get(19).setHexes(h19);
 //20
 points.get(20).getNeighbors().add(points.get(19));
 points.get(20).getNeighbors().add(points.get(21));
 points.get(20).getNeighbors().add(points.get(99));
+ArrayList<Hex<E>> h20 = new ArrayList<>();
+h20.add(hexes.get(65));
+h20.add(hexes.get(66));
+points.get(20).setHexes(h20);
 //21
 points.get(21).getNeighbors().add(points.get(20));
 points.get(21).getNeighbors().add(points.get(22));
+ArrayList<Hex<E>> h21 = new ArrayList<>();
+h21.add(hexes.get(66));
+points.get(21).setHexes(h21);
 
 //22
 points.get(22).getNeighbors().add(points.get(21));
 points.get(22).getNeighbors().add(points.get(23));
 points.get(22).getNeighbors().add(points.get(111));
+ArrayList<Hex<E>> h22 = new ArrayList<>();
+h22.add(hexes.get(66));
+h22.add(hexes.get(67));
+points.get(22).setHexes(h22);
 //23
 points.get(23).getNeighbors().add(points.get(22));
 points.get(23).getNeighbors().add(points.get(24));
+ArrayList<Hex<E>> h23 = new ArrayList<>();
+h23.add(hexes.get(67));
+points.get(23).setHexes(h23);
 //24
 points.get(24).getNeighbors().add(points.get(23));
 points.get(24).getNeighbors().add(points.get(25));
 points.get(24).getNeighbors().add(points.get(123));
+ArrayList<Hex<E>> h24 = new ArrayList<>();
+h24.add(hexes.get(67));
+h24.add(hexes.get(68));
+points.get(24).setHexes(h24);
 //25
 points.get(25).getNeighbors().add(points.get(24));
 points.get(25).getNeighbors().add(points.get(26));
+ArrayList<Hex<E>> h25 = new ArrayList<>();
+h25.add(hexes.get(68));
+points.get(25).setHexes(h25);
 //26
 points.get(26).getNeighbors().add(points.get(25));
 points.get(26).getNeighbors().add(points.get(27));
 points.get(26).getNeighbors().add(points.get(135));
+ArrayList<Hex<E>> h26 = new ArrayList<>();
+h26.add(hexes.get(68));
+h26.add(hexes.get(69));
+points.get(26).setHexes(h26);
 //27
 points.get(27).getNeighbors().add(points.get(26));
 points.get(27).getNeighbors().add(points.get(28));
+ArrayList<Hex<E>> h27 = new ArrayList<>();
+h27.add(hexes.get(69));
+points.get(27).setHexes(h27);
 //28
 points.get(28).getNeighbors().add(points.get(27));
 points.get(28).getNeighbors().add(points.get(29));
 points.get(28).getNeighbors().add(points.get(147));
+ArrayList<Hex<E>> h28 = new ArrayList<>();
+h28.add(hexes.get(69));
+h28.add(hexes.get(70));
+points.get(28).setHexes(h28);
 //29
 points.get(29).getNeighbors().add(points.get(28));
 points.get(29).getNeighbors().add(points.get(30));
+ArrayList<Hex<E>> h29 = new ArrayList<>();
+h29.add(hexes.get(70));
+points.get(29).setHexes(h29);
 //30
 points.get(30).getNeighbors().add(points.get(29));
 points.get(30).getNeighbors().add(points.get(31));
 points.get(30).getNeighbors().add(points.get(159));
+ArrayList<Hex<E>> h30 = new ArrayList<>();
+h30.add(hexes.get(70));
+h30.add(hexes.get(71));
+points.get(30).setHexes(h30);
 //31
 points.get(31).getNeighbors().add(points.get(30));
 points.get(31).getNeighbors().add(points.get(32));
+ArrayList<Hex<E>> h31 = new ArrayList<>();
+h31.add(hexes.get(71));
+points.get(31).setHexes(h31);
 //32
 points.get(32).getNeighbors().add(points.get(31));
 points.get(32).getNeighbors().add(points.get(33));
+ArrayList<Hex<E>> h32 = new ArrayList<>();
+h32.add(hexes.get(71));
+points.get(32).setHexes(h32);
 //33
 points.get(33).getNeighbors().add(points.get(32));
 points.get(33).getNeighbors().add(points.get(34));
 points.get(33).getNeighbors().add(points.get(169));
+ArrayList<Hex<E>> h33 = new ArrayList<>();
+h33.add(hexes.get(62));
+h33.add(hexes.get(71));
+points.get(33).setHexes(h33);
 //34
 points.get(34).getNeighbors().add(points.get(33));
 points.get(34).getNeighbors().add(points.get(35));
+ArrayList<Hex<E>> h34 = new ArrayList<>();
+h34.add(hexes.get(62));
+points.get(34).setHexes(h34);
 //35
 points.get(35).getNeighbors().add(points.get(34));
 points.get(35).getNeighbors().add(points.get(36));
 points.get(35).getNeighbors().add(points.get(175));
+ArrayList<Hex<E>> h35 = new ArrayList<>();
+h35.add(hexes.get(52));
+h35.add(hexes.get(62));
+points.get(35).setHexes(h35);
 //36
 points.get(36).getNeighbors().add(points.get(35));
 points.get(36).getNeighbors().add(points.get(37));
+ArrayList<Hex<E>> h36 = new ArrayList<>();
+h36.add(hexes.get(52));
+points.get(36).setHexes(h36);
 //37
 points.get(37).getNeighbors().add(points.get(36));
 points.get(37).getNeighbors().add(points.get(38));
 points.get(37).getNeighbors().add(points.get(173));
+ArrayList<Hex<E>> h37 = new ArrayList<>();
+h37.add(hexes.get(52));
+h37.add(hexes.get(41));
+points.get(37).setHexes(h37);
 //38
 points.get(38).getNeighbors().add(points.get(37));
 points.get(38).getNeighbors().add(points.get(39));
+ArrayList<Hex<E>> h38 = new ArrayList<>();
+h38.add(hexes.get(41));
+points.get(38).setHexes(h38);
 //39
 points.get(39).getNeighbors().add(points.get(38));
 points.get(39).getNeighbors().add(points.get(40));
+ArrayList<Hex<E>> h39 = new ArrayList<>();
+h39.add(hexes.get(41));
+points.get(39).setHexes(h39);
 //40
 points.get(40).getNeighbors().add(points.get(39));
 points.get(40).getNeighbors().add(points.get(41));
 points.get(40).getNeighbors().add(points.get(172));
+ArrayList<Hex<E>> h40 = new ArrayList<>();
+h40.add(hexes.get(29));
+h40.add(hexes.get(41));
+points.get(40).setHexes(h40);
 //41
 points.get(41).getNeighbors().add(points.get(40));
 points.get(41).getNeighbors().add(points.get(42));
+ArrayList<Hex<E>> h41 = new ArrayList<>();
+h41.add(hexes.get(29));
+points.get(41).setHexes(h41);
 //42
 points.get(42).getNeighbors().add(points.get(41));
 points.get(42).getNeighbors().add(points.get(43));
 points.get(42).getNeighbors().add(points.get(170));
+ArrayList<Hex<E>> h42 = new ArrayList<>();
+h42.add(hexes.get(18));
+h42.add(hexes.get(29));
+points.get(42).setHexes(h42);
 //43
 points.get(43).getNeighbors().add(points.get(42));
 points.get(43).getNeighbors().add(points.get(44));
+ArrayList<Hex<E>> h43 = new ArrayList<>();
+h43.add(hexes.get(18));
+points.get(43).setHexes(h43);
 //44
 points.get(44).getNeighbors().add(points.get(43));
 points.get(44).getNeighbors().add(points.get(45));
 points.get(44).getNeighbors().add(points.get(160));
+ArrayList<Hex<E>> h44 = new ArrayList<>();
+h44.add(hexes.get(8));
+h44.add(hexes.get(18));
+points.get(44).setHexes(h44);
 //45
 points.get(45).getNeighbors().add(points.get(44));
 points.get(45).getNeighbors().add(points.get(46));
+ArrayList<Hex<E>> h45 = new ArrayList<>();
+h45.add(hexes.get(8));
+points.get(45).setHexes(h45);
 //46
 points.get(46).getNeighbors().add(points.get(45));
 points.get(46).getNeighbors().add(points.get(47));
+ArrayList<Hex<E>> h46 = new ArrayList<>();
+h46.add(hexes.get(8));
+points.get(46).setHexes(h46);
 //47
 points.get(47).getNeighbors().add(points.get(46));
 points.get(47).getNeighbors().add(points.get(48));
 points.get(47).getNeighbors().add(points.get(148));
+ArrayList<Hex<E>> h47 = new ArrayList<>();
+h47.add(hexes.get(7));
+h47.add(hexes.get(8));
+points.get(47).setHexes(h47);
 //48
 points.get(48).getNeighbors().add(points.get(47));
 points.get(48).getNeighbors().add(points.get(49));
-
+ArrayList<Hex<E>> h48 = new ArrayList<>();
+h48.add(hexes.get(7));
+points.get(48).setHexes(h48);
 //49
 points.get(49).getNeighbors().add(points.get(48));
 points.get(49).getNeighbors().add(points.get(50));
 points.get(49).getNeighbors().add(points.get(136));
+ArrayList<Hex<E>> h49 = new ArrayList<>();
+h49.add(hexes.get(6));
+h49.add(hexes.get(7));
+points.get(49).setHexes(h49);
 //50
 points.get(50).getNeighbors().add(points.get(49));
 points.get(50).getNeighbors().add(points.get(51));
+ArrayList<Hex<E>> h50 = new ArrayList<>();
+h50.add(hexes.get(6));
+points.get(50).setHexes(h50);
 //51
 points.get(51).getNeighbors().add(points.get(50));
 points.get(51).getNeighbors().add(points.get(52));
 points.get(51).getNeighbors().add(points.get(124));
+ArrayList<Hex<E>> h51 = new ArrayList<>();
+h51.add(hexes.get(5));
+h51.add(hexes.get(6));
+points.get(51).setHexes(h51);
 //52
 points.get(52).getNeighbors().add(points.get(51));
 points.get(52).getNeighbors().add(points.get(53));
+ArrayList<Hex<E>> h52 = new ArrayList<>();
+h52.add(hexes.get(5));
+points.get(52).setHexes(h52);
 //53
 points.get(53).getNeighbors().add(points.get(52));
 points.get(53).getNeighbors().add(points.get(54));
 points.get(53).getNeighbors().add(points.get(112));
+ArrayList<Hex<E>> h53 = new ArrayList<>();
+h53.add(hexes.get(4));
+h53.add(hexes.get(5));
+points.get(53).setHexes(h53);
 //54
 points.get(54).getNeighbors().add(points.get(53));
 points.get(54).getNeighbors().add(points.get(55));
+ArrayList<Hex<E>> h54 = new ArrayList<>();
+h54.add(hexes.get(4));
+points.get(54).setHexes(h54);
 //55
 points.get(55).getNeighbors().add(points.get(54));
 points.get(55).getNeighbors().add(points.get(56));
 points.get(55).getNeighbors().add(points.get(100));
+ArrayList<Hex<E>> h55 = new ArrayList<>();
+h55.add(hexes.get(3));
+h55.add(hexes.get(4));
+points.get(55).setHexes(h55);
 //56
 points.get(56).getNeighbors().add(points.get(55));
 points.get(56).getNeighbors().add(points.get(57));
+ArrayList<Hex<E>> h56 = new ArrayList<>();
+h56.add(hexes.get(3));
+points.get(56).setHexes(h56);
 //57
 points.get(57).getNeighbors().add(points.get(56));
 points.get(57).getNeighbors().add(points.get(58));
 points.get(57).getNeighbors().add(points.get(88));
+ArrayList<Hex<E>> h57 = new ArrayList<>();
+h57.add(hexes.get(2));
+h57.add(hexes.get(3));
+points.get(57).setHexes(h57);
 //58
 points.get(58).getNeighbors().add(points.get(57));
 points.get(58).getNeighbors().add(points.get(59));
+ArrayList<Hex<E>> h58 = new ArrayList<>();
+h58.add(hexes.get(2));
+points.get(58).setHexes(h58);
 //59
 points.get(59).getNeighbors().add(points.get(58));
 points.get(59).getNeighbors().add(points.get(60));
 points.get(59).getNeighbors().add(points.get(62));
+ArrayList<Hex<E>> h59 = new ArrayList<>();
+h59.add(hexes.get(1));
+h59.add(hexes.get(2));
+points.get(59).setHexes(h59);
 //60
 points.get(60).getNeighbors().add(points.get(59));
 points.get(60).getNeighbors().add(points.get(61));
+ArrayList<Hex<E>> h60 = new ArrayList<>();
+h60.add(hexes.get(1));
+points.get(60).setHexes(h60);
 //61
 points.get(61).getNeighbors().add(points.get(0));
 points.get(61).getNeighbors().add(points.get(60));
 points.get(61).getNeighbors().add(points.get(64));
+ArrayList<Hex<E>> h61 = new ArrayList<>();
+h61.add(hexes.get(0));
+h47.add(hexes.get(1));
+points.get(61).setHexes(h61);
 //62
 points.get(62).getNeighbors().add(points.get(59));
 points.get(62).getNeighbors().add(points.get(63));
 points.get(62).getNeighbors().add(points.get(89));
+ArrayList<Hex<E>> h62 = new ArrayList<>();
+h62.add(hexes.get(1));
+h62.add(hexes.get(2));
+h62.add(hexes.get(10));
+points.get(62).setHexes(h62);
 //63
 points.get(63).getNeighbors().add(points.get(62));
 points.get(63).getNeighbors().add(points.get(64));
 points.get(63).getNeighbors().add(points.get(68));
+ArrayList<Hex<E>> h63 = new ArrayList<>();
+h63.add(hexes.get(10));
+h63.add(hexes.get(11));
+h63.add(hexes.get(1));
+points.get(63).setHexes(h63);
 //64
 points.get(64).getNeighbors().add(points.get(61));
 points.get(64).getNeighbors().add(points.get(63));
 points.get(64).getNeighbors().add(points.get(65));
+ArrayList<Hex<E>> h64 = new ArrayList<>();
+h64.add(hexes.get(0));
+h64.add(hexes.get(1));
+h64.add(hexes.get(10));
+points.get(64).setHexes(h64);
 //65
 points.get(65).getNeighbors().add(points.get(1));
 points.get(65).getNeighbors().add(points.get(64));
 points.get(65).getNeighbors().add(points.get(66));
+ArrayList<Hex<E>> h65 = new ArrayList<>();
+h65.add(hexes.get(0));
+h65.add(hexes.get(9));
+h65.add(hexes.get(10));
+points.get(65).setHexes(h65);
 //66
 points.get(66).getNeighbors().add(points.get(65));
 points.get(66).getNeighbors().add(points.get(67));
 points.get(66).getNeighbors().add(points.get(69));
+ArrayList<Hex<E>> h66 = new ArrayList<>();
+h66.add(hexes.get(9));
+h66.add(hexes.get(10));
+h66.add(hexes.get(20));
+points.get(66).setHexes(h66);
 //67
 points.get(67).getNeighbors().add(points.get(66));
 points.get(67).getNeighbors().add(points.get(68));
 points.get(67).getNeighbors().add(points.get(73));
+ArrayList<Hex<E>> h67 = new ArrayList<>();
+h67.add(hexes.get(10));
+h67.add(hexes.get(20));
+h67.add(hexes.get(21));
+points.get(67).setHexes(h67);
 //68
 points.get(68).getNeighbors().add(points.get(63));
 points.get(68).getNeighbors().add(points.get(67));
 points.get(68).getNeighbors().add(points.get(91));
+ArrayList<Hex<E>> h68 = new ArrayList<>();
+h68.add(hexes.get(10));
+h68.add(hexes.get(11));
+h68.add(hexes.get(21));
+points.get(68).setHexes(h68);
 //69
 points.get(69).getNeighbors().add(points.get(4));
 points.get(69).getNeighbors().add(points.get(66));
 points.get(69).getNeighbors().add(points.get(71));
+ArrayList<Hex<E>> h69 = new ArrayList<>();
+h69.add(hexes.get(19));
+h69.add(hexes.get(20));
+h69.add(hexes.get(9));
+points.get(69).setHexes(h69);
 //70
 points.get(70).getNeighbors().add(points.get(6));
 points.get(70).getNeighbors().add(points.get(71));
 points.get(70).getNeighbors().add(points.get(74));
+ArrayList<Hex<E>> h70 = new ArrayList<>();
+h70.add(hexes.get(30));
+h70.add(hexes.get(31));
+h70.add(hexes.get(19));
+points.get(70).setHexes(h70);
 //71
 points.get(71).getNeighbors().add(points.get(70));
 points.get(71).getNeighbors().add(points.get(72));
 points.get(71).getNeighbors().add(points.get(69));
+ArrayList<Hex<E>> h71 = new ArrayList<>();
+h71.add(hexes.get(19));
+h71.add(hexes.get(20));
+h71.add(hexes.get(31));
+points.get(71).setHexes(h71);
 //72
 points.get(72).getNeighbors().add(points.get(71));
 points.get(72).getNeighbors().add(points.get(73));
 points.get(72).getNeighbors().add(points.get(76));
+ArrayList<Hex<E>> h72 = new ArrayList<>();
+h72.add(hexes.get(20));
+h72.add(hexes.get(31));
+h72.add(hexes.get(32));
+points.get(72).setHexes(h72);
 //73
 points.get(73).getNeighbors().add(points.get(67));
 points.get(73).getNeighbors().add(points.get(72));
 points.get(73).getNeighbors().add(points.get(79));
+ArrayList<Hex<E>> h73 = new ArrayList<>();
+h73.add(hexes.get(20));
+h73.add(hexes.get(21));
+h73.add(hexes.get(32));
+points.get(73).setHexes(h73);
 //74
 points.get(74).getNeighbors().add(points.get(9));
 points.get(74).getNeighbors().add(points.get(70));
 points.get(74).getNeighbors().add(points.get(75));
+ArrayList<Hex<E>> h74 = new ArrayList<>();
+h74.add(hexes.get(30));
+h74.add(hexes.get(31));
+h74.add(hexes.get(42));
+points.get(74).setHexes(h74);
 //75
 points.get(75).getNeighbors().add(points.get(74));
 points.get(75).getNeighbors().add(points.get(76));
 points.get(75).getNeighbors().add(points.get(80));
+ArrayList<Hex<E>> h75 = new ArrayList<>();
+h75.add(hexes.get(31));
+h75.add(hexes.get(42));
+h75.add(hexes.get(43));
+points.get(75).setHexes(h75);
 //76
 points.get(76).getNeighbors().add(points.get(75));
 points.get(76).getNeighbors().add(points.get(77));
 points.get(76).getNeighbors().add(points.get(72));
+ArrayList<Hex<E>> h76 = new ArrayList<>();
+h76.add(hexes.get(31));
+h76.add(hexes.get(32));
+h76.add(hexes.get(43));
+points.get(76).setHexes(h76);
 //77
 points.get(77).getNeighbors().add(points.get(76));
 points.get(77).getNeighbors().add(points.get(78));
 points.get(77).getNeighbors().add(points.get(82));
+ArrayList<Hex<E>> h77 = new ArrayList<>();
+h77.add(hexes.get(32));
+h77.add(hexes.get(43));
+h77.add(hexes.get(44));
+points.get(77).setHexes(h77);
 //78
 points.get(78).getNeighbors().add(points.get(77));
 points.get(78).getNeighbors().add(points.get(95));
 points.get(78).getNeighbors().add(points.get(79));
+ArrayList<Hex<E>> h78 = new ArrayList<>();
+h78.add(hexes.get(32));
+h78.add(hexes.get(32));
+h78.add(hexes.get(44));
+points.get(78).setHexes(h78);
 //79
 points.get(79).getNeighbors().add(points.get(73));
 points.get(79).getNeighbors().add(points.get(78));
 points.get(79).getNeighbors().add(points.get(92));
+ArrayList<Hex<E>> h79 = new ArrayList<>();
+h79.add(hexes.get(32));
+h79.add(hexes.get(33));
+h79.add(hexes.get(21));
+points.get(79).setHexes(h79);
 //80
 points.get(80).getNeighbors().add(points.get(11));
 points.get(80).getNeighbors().add(points.get(75));
 points.get(80).getNeighbors().add(points.get(81));
+ArrayList<Hex<E>> h80 = new ArrayList<>();
+h80.add(hexes.get(42));
+h80.add(hexes.get(43));
+h80.add(hexes.get(53));
+points.get(80).setHexes(h80);
 //81
 points.get(81).getNeighbors().add(points.get(80));
 points.get(81).getNeighbors().add(points.get(82));
 points.get(81).getNeighbors().add(points.get(83));
+ArrayList<Hex<E>> h81 = new ArrayList<>();
+h81.add(hexes.get(53));
+h81.add(hexes.get(54));
+h81.add(hexes.get(43));
+points.get(81).setHexes(h81);
 //82
 points.get(82).getNeighbors().add(points.get(77));
 points.get(82).getNeighbors().add(points.get(81));
 points.get(82).getNeighbors().add(points.get(84));
+ArrayList<Hex<E>> h82 = new ArrayList<>();
+h82.add(hexes.get(43));
+h82.add(hexes.get(44));
+h82.add(hexes.get(54));
+points.get(82).setHexes(h82);
 //83
 points.get(83).getNeighbors().add(points.get(13));
 points.get(83).getNeighbors().add(points.get(81));
 points.get(83).getNeighbors().add(points.get(86));
+ArrayList<Hex<E>> h83 = new ArrayList<>();
+h83.add(hexes.get(53));
+h83.add(hexes.get(54));
+h83.add(hexes.get(63));
+points.get(83).setHexes(h83);
 //84
 points.get(84).getNeighbors().add(points.get(82));
 points.get(84).getNeighbors().add(points.get(85));
 points.get(84).getNeighbors().add(points.get(96));
+ArrayList<Hex<E>> h84 = new ArrayList<>();
+h84.add(hexes.get(44));
+h84.add(hexes.get(54));
+h84.add(hexes.get(55));
+points.get(84).setHexes(h84);
 //85
 points.get(85).getNeighbors().add(points.get(84));
 points.get(85).getNeighbors().add(points.get(86));
 points.get(85).getNeighbors().add(points.get(87));
+ArrayList<Hex<E>> h85 = new ArrayList<>();
+h85.add(hexes.get(54));
+h85.add(hexes.get(55));
+h85.add(hexes.get(64));
+points.get(85).setHexes(h85);
 //86
 points.get(86).getNeighbors().add(points.get(16));
 points.get(86).getNeighbors().add(points.get(83));
 points.get(86).getNeighbors().add(points.get(85));
+ArrayList<Hex<E>> h86 = new ArrayList<>();
+h86.add(hexes.get(63));
+h86.add(hexes.get(64));
+h86.add(hexes.get(54));
+points.get(86).setHexes(h86);
 //87
 points.get(87).getNeighbors().add(points.get(18));
 points.get(87).getNeighbors().add(points.get(85));
 points.get(87).getNeighbors().add(points.get(98));
+ArrayList<Hex<E>> h87 = new ArrayList<>();
+h87.add(hexes.get(55));
+h87.add(hexes.get(64));
+h87.add(hexes.get(65));
+points.get(87).setHexes(h87);
 //88
 points.get(88).getNeighbors().add(points.get(57));
 points.get(88).getNeighbors().add(points.get(89));
 points.get(88).getNeighbors().add(points.get(101));
+ArrayList<Hex<E>> h88 = new ArrayList<>();
+h88.add(hexes.get(2));
+h88.add(hexes.get(3));
+h88.add(hexes.get(12));
+points.get(88).setHexes(h88);
 //89
 points.get(89).getNeighbors().add(points.get(62));
 points.get(89).getNeighbors().add(points.get(88));
 points.get(89).getNeighbors().add(points.get(90));
+ArrayList<Hex<E>> h89 = new ArrayList<>();
+h89.add(hexes.get(2));
+h89.add(hexes.get(11));
+h89.add(hexes.get(12));
+points.get(89).setHexes(h89);
 //90
 points.get(90).getNeighbors().add(points.get(89));
 points.get(90).getNeighbors().add(points.get(91));
 points.get(90).getNeighbors().add(points.get(103));
+ArrayList<Hex<E>> h90 = new ArrayList<>();
+h90.add(hexes.get(11));
+h90.add(hexes.get(12));
+h90.add(hexes.get(22));
+points.get(90).setHexes(h90);
 //91
 points.get(91).getNeighbors().add(points.get(68));
 points.get(91).getNeighbors().add(points.get(90));
 points.get(91).getNeighbors().add(points.get(92));
+ArrayList<Hex<E>> h91 = new ArrayList<>();
+h91.add(hexes.get(11));
+h91.add(hexes.get(21));
+h91.add(hexes.get(22));
+points.get(91).setHexes(h91);
 //92
 points.get(92).getNeighbors().add(points.get(91));
 points.get(92).getNeighbors().add(points.get(79));
 points.get(92).getNeighbors().add(points.get(93));
+ArrayList<Hex<E>> h92 = new ArrayList<>();
+h92.add(hexes.get(21));
+h92.add(hexes.get(22));
+h92.add(hexes.get(33));
+points.get(92).setHexes(h92);
 //93
 points.get(93).getNeighbors().add(points.get(92));
 points.get(93).getNeighbors().add(points.get(94));
 points.get(93).getNeighbors().add(points.get(104));
+ArrayList<Hex<E>> h93 = new ArrayList<>();
+h93.add(hexes.get(22));
+h93.add(hexes.get(33));
+h93.add(hexes.get(34));
+points.get(93).setHexes(h93);
 //94
 points.get(94).getNeighbors().add(points.get(93));
 points.get(94).getNeighbors().add(points.get(95));
 points.get(94).getNeighbors().add(points.get(107));
+ArrayList<Hex<E>> h94 = new ArrayList<>();
+h94.add(hexes.get(33));
+h94.add(hexes.get(34));
+h94.add(hexes.get(45));
+points.get(94).setHexes(h94);
 //95
 points.get(95).getNeighbors().add(points.get(78));
 points.get(95).getNeighbors().add(points.get(94));
 points.get(95).getNeighbors().add(points.get(96));
+ArrayList<Hex<E>> h95 = new ArrayList<>();
+h95.add(hexes.get(33));
+h95.add(hexes.get(44));
+h95.add(hexes.get(45));
+points.get(95).setHexes(h95);
 //96
 points.get(96).getNeighbors().add(points.get(84));
 points.get(96).getNeighbors().add(points.get(95));
 points.get(96).getNeighbors().add(points.get(97));
+ArrayList<Hex<E>> h96 = new ArrayList<>();
+h96.add(hexes.get(44));
+h96.add(hexes.get(45));
+h96.add(hexes.get(55));
+points.get(96).setHexes(h96);
 //97
 points.get(97).getNeighbors().add(points.get(96));
 points.get(97).getNeighbors().add(points.get(98));
 points.get(97).getNeighbors().add(points.get(108));
+ArrayList<Hex<E>> h97 = new ArrayList<>();
+h97.add(hexes.get(55));
+h97.add(hexes.get(56));
+h97.add(hexes.get(45));
+points.get(97).setHexes(h97);
 //98
 points.get(98).getNeighbors().add(points.get(87));
 points.get(98).getNeighbors().add(points.get(97));
 points.get(98).getNeighbors().add(points.get(99));
+ArrayList<Hex<E>> h98 = new ArrayList<>();
+h98.add(hexes.get(55));
+h98.add(hexes.get(56));
+h98.add(hexes.get(65));
+points.get(98).setHexes(h98);
 //99
 points.get(99).getNeighbors().add(points.get(20));
 points.get(99).getNeighbors().add(points.get(98));
 points.get(99).getNeighbors().add(points.get(110));
+ArrayList<Hex<E>> h99 = new ArrayList<>();
+h99.add(hexes.get(56));
+h99.add(hexes.get(65));
+h99.add(hexes.get(66));
+points.get(99).setHexes(h99);
 //100
 points.get(100).getNeighbors().add(points.get(55));
 points.get(100).getNeighbors().add(points.get(101));
 points.get(100).getNeighbors().add(points.get(113));
+ArrayList<Hex<E>> h100 = new ArrayList<>();
+h100.add(hexes.get(3));
+h100.add(hexes.get(4));
+h100.add(hexes.get(13));
+points.get(100).setHexes(h100);
 //101
 points.get(101).getNeighbors().add(points.get(88));
 points.get(101).getNeighbors().add(points.get(100));
 points.get(101).getNeighbors().add(points.get(102));
+ArrayList<Hex<E>> h101 = new ArrayList<>();
+h101.add(hexes.get(3));
+h101.add(hexes.get(12));
+h101.add(hexes.get(13));
+points.get(101).setHexes(h101);
 //102
 points.get(102).getNeighbors().add(points.get(101));
 points.get(102).getNeighbors().add(points.get(103));
 points.get(102).getNeighbors().add(points.get(115));
+ArrayList<Hex<E>> h102 = new ArrayList<>();
+h102.add(hexes.get(12));
+h102.add(hexes.get(13));
+h102.add(hexes.get(23));
+points.get(102).setHexes(h102);
 //103
 points.get(103).getNeighbors().add(points.get(90));
 points.get(103).getNeighbors().add(points.get(102));
 points.get(103).getNeighbors().add(points.get(104));
+ArrayList<Hex<E>> h103 = new ArrayList<>();
+h103.add(hexes.get(12));
+h103.add(hexes.get(22));
+h103.add(hexes.get(23));
+points.get(103).setHexes(h103);
 //104
 points.get(104).getNeighbors().add(points.get(93));
 points.get(104).getNeighbors().add(points.get(103));
 points.get(104).getNeighbors().add(points.get(105));
+ArrayList<Hex<E>> h104 = new ArrayList<>();
+h104.add(hexes.get(22));
+h104.add(hexes.get(23));
+h104.add(hexes.get(34));
+points.get(104).setHexes(h104);
 //105
 points.get(105).getNeighbors().add(points.get(104));
 points.get(105).getNeighbors().add(points.get(106));
 points.get(105).getNeighbors().add(points.get(116));
+ArrayList<Hex<E>> h105 = new ArrayList<>();
+h105.add(hexes.get(34));
+h105.add(hexes.get(35));
+h105.add(hexes.get(23));
+points.get(105).setHexes(h105);
 //106
 points.get(106).getNeighbors().add(points.get(105));
 points.get(106).getNeighbors().add(points.get(107));
 points.get(106).getNeighbors().add(points.get(119));
+ArrayList<Hex<E>> h106 = new ArrayList<>();
+h106.add(hexes.get(34));
+h106.add(hexes.get(35));
+h106.add(hexes.get(46));
+points.get(106).setHexes(h106);
 //107
 points.get(107).getNeighbors().add(points.get(94));
 points.get(107).getNeighbors().add(points.get(106));
 points.get(107).getNeighbors().add(points.get(108));
+ArrayList<Hex<E>> h107 = new ArrayList<>();
+h107.add(hexes.get(45));
+h107.add(hexes.get(46));
+h107.add(hexes.get(34));
+points.get(107).setHexes(h107);
 //108
 points.get(108).getNeighbors().add(points.get(97));
 points.get(108).getNeighbors().add(points.get(107));
 points.get(108).getNeighbors().add(points.get(109));
+ArrayList<Hex<E>> h108 = new ArrayList<>();
+h108.add(hexes.get(45));
+h108.add(hexes.get(46));
+h108.add(hexes.get(56));
+points.get(108).setHexes(h108);
 //109
 points.get(109).getNeighbors().add(points.get(108));
 points.get(109).getNeighbors().add(points.get(110));
 points.get(109).getNeighbors().add(points.get(120));
+ArrayList<Hex<E>> h109 = new ArrayList<>();
+h109.add(hexes.get(56));
+h109.add(hexes.get(57));
+h109.add(hexes.get(46));
+points.get(109).setHexes(h109);
 //110
 points.get(110).getNeighbors().add(points.get(99));
 points.get(110).getNeighbors().add(points.get(109));
 points.get(110).getNeighbors().add(points.get(111));
+ArrayList<Hex<E>> h110 = new ArrayList<>();
+h110.add(hexes.get(56));
+h110.add(hexes.get(57));
+h110.add(hexes.get(66));
+points.get(110).setHexes(h110);
 //111
 points.get(111).getNeighbors().add(points.get(22));
 points.get(111).getNeighbors().add(points.get(110));
 points.get(111).getNeighbors().add(points.get(122));
+ArrayList<Hex<E>> h111 = new ArrayList<>();
+h111.add(hexes.get(57));
+h111.add(hexes.get(66));
+h111.add(hexes.get(67));
+points.get(111).setHexes(h111);
 //112
 points.get(112).getNeighbors().add(points.get(53));
 points.get(112).getNeighbors().add(points.get(100));
 points.get(112).getNeighbors().add(points.get(125));
+ArrayList<Hex<E>> h112 = new ArrayList<>();
+h112.add(hexes.get(4));
+h112.add(hexes.get(5));
+h112.add(hexes.get(14));
+points.get(112).setHexes(h112);
 //113
 points.get(113).getNeighbors().add(points.get(100));
 points.get(113).getNeighbors().add(points.get(112));
 points.get(113).getNeighbors().add(points.get(114));
+ArrayList<Hex<E>> h113 = new ArrayList<>();
+h113.add(hexes.get(4));
+h113.add(hexes.get(13));
+h113.add(hexes.get(14));
+points.get(113).setHexes(h113);
 //114
 points.get(114).getNeighbors().add(points.get(113));
 points.get(114).getNeighbors().add(points.get(115));
 points.get(114).getNeighbors().add(points.get(127));
+ArrayList<Hex<E>> h114 = new ArrayList<>();
+h114.add(hexes.get(13));
+h114.add(hexes.get(14));
+h114.add(hexes.get(24));
+points.get(114).setHexes(h114);
 //115
 
 points.get(115).getNeighbors().add(points.get(102));
 points.get(115).getNeighbors().add(points.get(114));
 points.get(115).getNeighbors().add(points.get(116));
+ArrayList<Hex<E>> h115 = new ArrayList<>();
+h115.add(hexes.get(23));
+h115.add(hexes.get(24));
+h115.add(hexes.get(13));
+points.get(115).setHexes(h115);
 //116
 points.get(116).getNeighbors().add(points.get(105));
 points.get(116).getNeighbors().add(points.get(115));
 points.get(116).getNeighbors().add(points.get(117));
+ArrayList<Hex<E>> h116 = new ArrayList<>();
+h116.add(hexes.get(23));
+h116.add(hexes.get(24));
+h116.add(hexes.get(35));
+points.get(116).setHexes(h116);
 //117
 points.get(117).getNeighbors().add(points.get(116));
 points.get(117).getNeighbors().add(points.get(118));
 points.get(117).getNeighbors().add(points.get(128));
+ArrayList<Hex<E>> h117 = new ArrayList<>();
+h117.add(hexes.get(24));
+h117.add(hexes.get(35));
+h117.add(hexes.get(36));
+points.get(117).setHexes(h117);
 //118
 points.get(118).getNeighbors().add(points.get(117));
 points.get(118).getNeighbors().add(points.get(119));
 points.get(118).getNeighbors().add(points.get(131));
+ArrayList<Hex<E>> h118 = new ArrayList<>();
+h118.add(hexes.get(35));
+h118.add(hexes.get(36));
+h118.add(hexes.get(47));
+points.get(118).setHexes(h118);
 //119
 points.get(119).getNeighbors().add(points.get(106));
 points.get(119).getNeighbors().add(points.get(118));
 points.get(119).getNeighbors().add(points.get(120));
+ArrayList<Hex<E>> h119 = new ArrayList<>();
+h119.add(hexes.get(46));
+h119.add(hexes.get(47));
+h119.add(hexes.get(35));
+points.get(119).setHexes(h119);
 //120
 points.get(120).getNeighbors().add(points.get(109));
 points.get(120).getNeighbors().add(points.get(119));
 points.get(120).getNeighbors().add(points.get(121));
+ArrayList<Hex<E>> h120 = new ArrayList<>();
+h120.add(hexes.get(46));
+h120.add(hexes.get(47));
+h120.add(hexes.get(57));
+points.get(120).setHexes(h120);
 //121
 points.get(121).getNeighbors().add(points.get(120));
 points.get(121).getNeighbors().add(points.get(122));
 points.get(121).getNeighbors().add(points.get(132));
+ArrayList<Hex<E>> h121 = new ArrayList<>();
+h121.add(hexes.get(47));
+h121.add(hexes.get(57));
+h121.add(hexes.get(58));
+points.get(121).setHexes(h121);
 //122
 points.get(122).getNeighbors().add(points.get(111));
 points.get(122).getNeighbors().add(points.get(121));
 points.get(122).getNeighbors().add(points.get(123));
+ArrayList<Hex<E>> h122 = new ArrayList<>();
+h122.add(hexes.get(57));
+h122.add(hexes.get(58));
+h122.add(hexes.get(67));
+points.get(122).setHexes(h122);
 //123
 points.get(123).getNeighbors().add(points.get(24));
 points.get(123).getNeighbors().add(points.get(122));
 points.get(123).getNeighbors().add(points.get(134));
+ArrayList<Hex<E>> h123 = new ArrayList<>();
+h123.add(hexes.get(67));
+h123.add(hexes.get(68));
+h123.add(hexes.get(58));
+points.get(120).setHexes(h120);
 //124
 points.get(124).getNeighbors().add(points.get(51));
 points.get(124).getNeighbors().add(points.get(125));
 points.get(124).getNeighbors().add(points.get(137));
+ArrayList<Hex<E>> h124 = new ArrayList<>();
+h124.add(hexes.get(5));
+h124.add(hexes.get(6));
+h124.add(hexes.get(15));
+points.get(124).setHexes(h124);
 //125
 points.get(125).getNeighbors().add(points.get(112));
 points.get(125).getNeighbors().add(points.get(124));
 points.get(125).getNeighbors().add(points.get(126));
+ArrayList<Hex<E>> h125 = new ArrayList<>();
+h125.add(hexes.get(14));
+h125.add(hexes.get(15));
+h125.add(hexes.get(5));
+points.get(125).setHexes(h125);
 //126
 points.get(126).getNeighbors().add(points.get(125));
 points.get(126).getNeighbors().add(points.get(127));
 points.get(126).getNeighbors().add(points.get(139));
+ArrayList<Hex<E>> h126 = new ArrayList<>();
+h126.add(hexes.get(14));
+h126.add(hexes.get(15));
+h126.add(hexes.get(25));
+points.get(126).setHexes(h126);
 //127
 points.get(127).getNeighbors().add(points.get(114));
 points.get(127).getNeighbors().add(points.get(126));
 points.get(127).getNeighbors().add(points.get(128));
+ArrayList<Hex<E>> h127 = new ArrayList<>();
+h127.add(hexes.get(24));
+h127.add(hexes.get(25));
+h127.add(hexes.get(14));
+points.get(127).setHexes(h127);
 //128
 points.get(128).getNeighbors().add(points.get(117));
 points.get(128).getNeighbors().add(points.get(127));
 points.get(128).getNeighbors().add(points.get(129));
+ArrayList<Hex<E>> h128 = new ArrayList<>();
+h128.add(hexes.get(24));
+h128.add(hexes.get(25));
+h128.add(hexes.get(36));
+points.get(128).setHexes(h128);
 //129
 points.get(129).getNeighbors().add(points.get(128));
 points.get(129).getNeighbors().add(points.get(130));
 points.get(129).getNeighbors().add(points.get(140));
+ArrayList<Hex<E>> h129 = new ArrayList<>();
+h129.add(hexes.get(36));
+h129.add(hexes.get(37));
+h129.add(hexes.get(25));
+points.get(129).setHexes(h129);
 //130
 points.get(130).getNeighbors().add(points.get(129));
 points.get(130).getNeighbors().add(points.get(131));
 points.get(130).getNeighbors().add(points.get(143));
+ArrayList<Hex<E>> h130 = new ArrayList<>();
+h130.add(hexes.get(36));
+h130.add(hexes.get(37));
+h130.add(hexes.get(48));
+points.get(130).setHexes(h130);
 //131
 points.get(131).getNeighbors().add(points.get(118));
 points.get(131).getNeighbors().add(points.get(130));
 points.get(131).getNeighbors().add(points.get(132));
+ArrayList<Hex<E>> h131 = new ArrayList<>();
+h131.add(hexes.get(47));
+h131.add(hexes.get(48));
+h131.add(hexes.get(36));
+points.get(131).setHexes(h131);
 //132
 points.get(132).getNeighbors().add(points.get(121));
 points.get(132).getNeighbors().add(points.get(131));
 points.get(132).getNeighbors().add(points.get(133));
+ArrayList<Hex<E>> h132 = new ArrayList<>();
+h132.add(hexes.get(47));
+h132.add(hexes.get(48));
+h132.add(hexes.get(58));
+points.get(132).setHexes(h132);
 //133
 points.get(133).getNeighbors().add(points.get(132));
 points.get(133).getNeighbors().add(points.get(134));
 points.get(133).getNeighbors().add(points.get(144));
+ArrayList<Hex<E>> h133 = new ArrayList<>();
+h133.add(hexes.get(48));
+h133.add(hexes.get(58));
+h133.add(hexes.get(59));
+points.get(133).setHexes(h133);
 //134
 points.get(134).getNeighbors().add(points.get(123));
 points.get(134).getNeighbors().add(points.get(133));
 points.get(134).getNeighbors().add(points.get(135));
+ArrayList<Hex<E>> h134 = new ArrayList<>();
+h134.add(hexes.get(58));
+h134.add(hexes.get(59));
+h134.add(hexes.get(68));
+points.get(134).setHexes(h134);
 //135
 points.get(135).getNeighbors().add(points.get(134));
 points.get(135).getNeighbors().add(points.get(146));
 points.get(135).getNeighbors().add(points.get(26));
+ArrayList<Hex<E>> h135 = new ArrayList<>();
+h135.add(hexes.get(59));
+h135.add(hexes.get(68));
+h135.add(hexes.get(69));
+points.get(135).setHexes(h135);
 //136
 points.get(136).getNeighbors().add(points.get(49));
 points.get(136).getNeighbors().add(points.get(137));
 points.get(136).getNeighbors().add(points.get(149));
+ArrayList<Hex<E>> h136 = new ArrayList<>();
+h136.add(hexes.get(6));
+h136.add(hexes.get(7));
+h136.add(hexes.get(16));
+points.get(136).setHexes(h136);
 //137
 points.get(137).getNeighbors().add(points.get(124));
 points.get(137).getNeighbors().add(points.get(136));
 points.get(137).getNeighbors().add(points.get(138));
+ArrayList<Hex<E>> h137 = new ArrayList<>();
+h137.add(hexes.get(15));
+h137.add(hexes.get(16));
+h137.add(hexes.get(6));
+points.get(137).setHexes(h137);
 //138
 points.get(138).getNeighbors().add(points.get(137));
 points.get(138).getNeighbors().add(points.get(139));
 points.get(138).getNeighbors().add(points.get(151));
+ArrayList<Hex<E>> h138 = new ArrayList<>();
+h138.add(hexes.get(15));
+h138.add(hexes.get(16));
+h138.add(hexes.get(26));
+points.get(138).setHexes(h138);
 //139
 points.get(139).getNeighbors().add(points.get(126));
 points.get(139).getNeighbors().add(points.get(138));
 points.get(139).getNeighbors().add(points.get(140));
+ArrayList<Hex<E>> h139 = new ArrayList<>();
+h139.add(hexes.get(15));
+h139.add(hexes.get(25));
+h139.add(hexes.get(26));
+points.get(139).setHexes(h139);
 //140
 points.get(140).getNeighbors().add(points.get(129));
 points.get(140).getNeighbors().add(points.get(139));
 points.get(140).getNeighbors().add(points.get(141));
+ArrayList<Hex<E>> h140 = new ArrayList<>();
+h140.add(hexes.get(25));
+h140.add(hexes.get(26));
+h140.add(hexes.get(37));
+points.get(140).setHexes(h140);
 //141
 points.get(141).getNeighbors().add(points.get(140));
 points.get(141).getNeighbors().add(points.get(142));
 points.get(141).getNeighbors().add(points.get(152));
+ArrayList<Hex<E>> h141 = new ArrayList<>();
+h141.add(hexes.get(37));
+h141.add(hexes.get(38));
+h141.add(hexes.get(26));
+points.get(141).setHexes(h141);
 //142
 points.get(142).getNeighbors().add(points.get(141));
 points.get(142).getNeighbors().add(points.get(143));
 points.get(142).getNeighbors().add(points.get(155));
+ArrayList<Hex<E>> h142 = new ArrayList<>();
+h142.add(hexes.get(37));
+h142.add(hexes.get(38));
+h142.add(hexes.get(49));
+points.get(142).setHexes(h142);
 //143
 points.get(143).getNeighbors().add(points.get(130));
 points.get(143).getNeighbors().add(points.get(142));
 points.get(143).getNeighbors().add(points.get(144));
+ArrayList<Hex<E>> h143 = new ArrayList<>();
+h143.add(hexes.get(48));
+h143.add(hexes.get(49));
+h143.add(hexes.get(37));
+points.get(143).setHexes(h143);
 //144
 points.get(144).getNeighbors().add(points.get(133));
 points.get(144).getNeighbors().add(points.get(143));
 points.get(144).getNeighbors().add(points.get(145));
+ArrayList<Hex<E>> h144 = new ArrayList<>();
+h144.add(hexes.get(48));
+h144.add(hexes.get(49));
+h144.add(hexes.get(59));
+points.get(144).setHexes(h144);
 //145
 points.get(145).getNeighbors().add(points.get(144));
 points.get(145).getNeighbors().add(points.get(146));
 points.get(145).getNeighbors().add(points.get(156));
+ArrayList<Hex<E>> h145 = new ArrayList<>();
+h145.add(hexes.get(59));
+h145.add(hexes.get(60));
+h145.add(hexes.get(49));
+points.get(145).setHexes(h145);
 //146
 points.get(146).getNeighbors().add(points.get(135));
 points.get(146).getNeighbors().add(points.get(145));
 points.get(146).getNeighbors().add(points.get(147));
+ArrayList<Hex<E>> h146 = new ArrayList<>();
+h146.add(hexes.get(59));
+h146.add(hexes.get(60));
+h146.add(hexes.get(69));
+points.get(146).setHexes(h146);
 //147
 points.get(147).getNeighbors().add(points.get(28));
 points.get(147).getNeighbors().add(points.get(146));
 points.get(147).getNeighbors().add(points.get(158));
+ArrayList<Hex<E>> h147 = new ArrayList<>();
+h147.add(hexes.get(60));
+h147.add(hexes.get(69));
+h147.add(hexes.get(70));
+points.get(147).setHexes(h147);
 //148
 points.get(148).getNeighbors().add(points.get(47));
 points.get(148).getNeighbors().add(points.get(149));
 points.get(148).getNeighbors().add(points.get(160));
+ArrayList<Hex<E>> h148 = new ArrayList<>();
+h148.add(hexes.get(7));
+h148.add(hexes.get(8));
+h148.add(hexes.get(17));
+points.get(148).setHexes(h148);
 //149
 points.get(149).getNeighbors().add(points.get(136));
 points.get(149).getNeighbors().add(points.get(148));
 points.get(149).getNeighbors().add(points.get(150));
+ArrayList<Hex<E>> h149 = new ArrayList<>();
+h149.add(hexes.get(7));
+h149.add(hexes.get(16));
+h149.add(hexes.get(17));
+points.get(149).setHexes(h149);
 //150
 points.get(150).getNeighbors().add(points.get(149));
 points.get(150).getNeighbors().add(points.get(151));
 points.get(150).getNeighbors().add(points.get(162));
+ArrayList<Hex<E>> h150 = new ArrayList<>();
+h150.add(hexes.get(16));
+h150.add(hexes.get(17));
+h150.add(hexes.get(27));
+points.get(150).setHexes(h150);
 //151
 points.get(151).getNeighbors().add(points.get(138));
 points.get(151).getNeighbors().add(points.get(150));
 points.get(151).getNeighbors().add(points.get(152));
+ArrayList<Hex<E>> h151 = new ArrayList<>();
+h151.add(hexes.get(26));
+h151.add(hexes.get(27));
+h151.add(hexes.get(16));
+points.get(151).setHexes(h151);
 //152
 points.get(152).getNeighbors().add(points.get(141));
 points.get(152).getNeighbors().add(points.get(151));
 points.get(152).getNeighbors().add(points.get(153));
+ArrayList<Hex<E>> h152 = new ArrayList<>();
+h152.add(hexes.get(26));
+h152.add(hexes.get(27));
+h152.add(hexes.get(38));
+points.get(152).setHexes(h152);
 //153
 points.get(153).getNeighbors().add(points.get(152));
 points.get(153).getNeighbors().add(points.get(154));
 points.get(153).getNeighbors().add(points.get(163));
+ArrayList<Hex<E>> h153 = new ArrayList<>();
+h153.add(hexes.get(38));
+h153.add(hexes.get(39));
+h153.add(hexes.get(27));
+points.get(153).setHexes(h153);
 //154
 points.get(154).getNeighbors().add(points.get(153));
 points.get(154).getNeighbors().add(points.get(155));
 points.get(154).getNeighbors().add(points.get(166));
+ArrayList<Hex<E>> h154 = new ArrayList<>();
+h154.add(hexes.get(38));
+h154.add(hexes.get(39));
+h154.add(hexes.get(50));
+points.get(154).setHexes(h154);
 //155
 points.get(155).getNeighbors().add(points.get(142));
 points.get(155).getNeighbors().add(points.get(154));
 points.get(155).getNeighbors().add(points.get(156));
+ArrayList<Hex<E>> h155 = new ArrayList<>();
+h155.add(hexes.get(49));
+h155.add(hexes.get(50));
+h155.add(hexes.get(38));
+points.get(155).setHexes(h155);
 //156
 points.get(156).getNeighbors().add(points.get(145));
 points.get(156).getNeighbors().add(points.get(155));
 points.get(156).getNeighbors().add(points.get(157));
+ArrayList<Hex<E>> h156 = new ArrayList<>();
+h156.add(hexes.get(49));
+h156.add(hexes.get(50));
+h156.add(hexes.get(60));
+points.get(156).setHexes(h156);
 //157
 points.get(157).getNeighbors().add(points.get(156));
 points.get(157).getNeighbors().add(points.get(158));
 points.get(157).getNeighbors().add(points.get(167));
+ArrayList<Hex<E>> h157 = new ArrayList<>();
+h157.add(hexes.get(50));
+h157.add(hexes.get(60));
+h157.add(hexes.get(61));
+points.get(157).setHexes(h157);
 //158
 points.get(158).getNeighbors().add(points.get(147));
 points.get(158).getNeighbors().add(points.get(157));
 points.get(158).getNeighbors().add(points.get(159));
+ArrayList<Hex<E>> h158 = new ArrayList<>();
+h158.add(hexes.get(60));
+h158.add(hexes.get(61));
+h158.add(hexes.get(70));
+points.get(158).setHexes(h158);
 //159
 points.get(159).getNeighbors().add(points.get(158));
 points.get(159).getNeighbors().add(points.get(30));
 points.get(159).getNeighbors().add(points.get(169));
+ArrayList<Hex<E>> h159 = new ArrayList<>();
+h159.add(hexes.get(70));
+h159.add(hexes.get(71));
+h159.add(hexes.get(61));
+points.get(159).setHexes(h159);
 //160
 points.get(160).getNeighbors().add(points.get(44));
 points.get(160).getNeighbors().add(points.get(148));
 points.get(160).getNeighbors().add(points.get(161));
+ArrayList<Hex<E>> h160 = new ArrayList<>();
+h160.add(hexes.get(17));
+h160.add(hexes.get(18));
+h160.add(hexes.get(8));
+points.get(160).setHexes(h160);
 //161
 points.get(161).getNeighbors().add(points.get(160));
 points.get(161).getNeighbors().add(points.get(162));
 points.get(161).getNeighbors().add(points.get(170));
+ArrayList<Hex<E>> h161 = new ArrayList<>();
+h161.add(hexes.get(17));
+h161.add(hexes.get(18));
+h161.add(hexes.get(28));
+points.get(161).setHexes(h161);
 //162
 points.get(162).getNeighbors().add(points.get(150));
 points.get(162).getNeighbors().add(points.get(161));
 points.get(162).getNeighbors().add(points.get(163));
+ArrayList<Hex<E>> h162 = new ArrayList<>();
+h162.add(hexes.get(27));
+h162.add(hexes.get(28));
+h162.add(hexes.get(17));
+points.get(162).setHexes(h162);
 //163
 points.get(163).getNeighbors().add(points.get(153));
 points.get(163).getNeighbors().add(points.get(162));
 points.get(163).getNeighbors().add(points.get(164));
+ArrayList<Hex<E>> h163 = new ArrayList<>();
+h163.add(hexes.get(27));
+h163.add(hexes.get(28));
+h163.add(hexes.get(39));
+points.get(163).setHexes(h163);
 //164
 points.get(164).getNeighbors().add(points.get(163));
 points.get(164).getNeighbors().add(points.get(165));
 points.get(164).getNeighbors().add(points.get(171));
+ArrayList<Hex<E>> h164 = new ArrayList<>();
+h164.add(hexes.get(28));
+h164.add(hexes.get(39));
+h164.add(hexes.get(40));
+points.get(164).setHexes(h164);
 //165
 points.get(165).getNeighbors().add(points.get(164));
 points.get(165).getNeighbors().add(points.get(166));
 points.get(165).getNeighbors().add(points.get(174));
+ArrayList<Hex<E>> h165 = new ArrayList<>();
+h165.add(hexes.get(39));
+h165.add(hexes.get(40));
+h165.add(hexes.get(51));
+points.get(165).setHexes(h165);
 //166
 points.get(166).getNeighbors().add(points.get(154));
 points.get(166).getNeighbors().add(points.get(165));
 points.get(166).getNeighbors().add(points.get(167));
+ArrayList<Hex<E>> h166 = new ArrayList<>();
+h166.add(hexes.get(50));
+h166.add(hexes.get(51));
+h166.add(hexes.get(39));
+points.get(166).setHexes(h166);
 //167
 points.get(167).getNeighbors().add(points.get(157));
 points.get(167).getNeighbors().add(points.get(166));
 points.get(167).getNeighbors().add(points.get(168));
+ArrayList<Hex<E>> h167 = new ArrayList<>();
+h167.add(hexes.get(50));
+h167.add(hexes.get(51));
+h167.add(hexes.get(61));
+points.get(167).setHexes(h167);
 //168
 points.get(168).getNeighbors().add(points.get(167));
 points.get(168).getNeighbors().add(points.get(175));
 points.get(168).getNeighbors().add(points.get(169));
+ArrayList<Hex<E>> h168 = new ArrayList<>();
+h168.add(hexes.get(61));
+h168.add(hexes.get(62));
+h168.add(hexes.get(51));
+points.get(168).setHexes(h168);
 //169
 points.get(169).getNeighbors().add(points.get(159));
 points.get(169).getNeighbors().add(points.get(168));
 points.get(169).getNeighbors().add(points.get(33));
+ArrayList<Hex<E>> h169 = new ArrayList<>();
+h169.add(hexes.get(61));
+h169.add(hexes.get(62));
+h169.add(hexes.get(71));
+points.get(169).setHexes(h169);
 //170
 points.get(170).getNeighbors().add(points.get(161));
 points.get(170).getNeighbors().add(points.get(42));
 points.get(170).getNeighbors().add(points.get(171));
+ArrayList<Hex<E>> h170 = new ArrayList<>();
+h170.add(hexes.get(28));
+h170.add(hexes.get(29));
+h170.add(hexes.get(18));
+points.get(170).setHexes(h170);
 //171
 points.get(171).getNeighbors().add(points.get(164));
 points.get(171).getNeighbors().add(points.get(170));
 points.get(171).getNeighbors().add(points.get(172));
+ArrayList<Hex<E>> h171 = new ArrayList<>();
+h171.add(hexes.get(28));
+h171.add(hexes.get(29));
+h171.add(hexes.get(40));
+points.get(171).setHexes(h171);
 //172
 points.get(172).getNeighbors().add(points.get(40));
 points.get(172).getNeighbors().add(points.get(171));
 points.get(172).getNeighbors().add(points.get(173));
+ArrayList<Hex<E>> h172 = new ArrayList<>();
+h172.add(hexes.get(40));
+h172.add(hexes.get(41));
+h172.add(hexes.get(29));
+points.get(172).setHexes(h172);
 //173
 points.get(173).getNeighbors().add(points.get(37));
 points.get(173).getNeighbors().add(points.get(174));
 points.get(173).getNeighbors().add(points.get(172));
+ArrayList<Hex<E>> h173 = new ArrayList<>();
+h173.add(hexes.get(40));
+h173.add(hexes.get(41));
+h173.add(hexes.get(52));
+points.get(173).setHexes(h173);
 //174
 points.get(174).getNeighbors().add(points.get(165));
 points.get(174).getNeighbors().add(points.get(173));
 points.get(174).getNeighbors().add(points.get(175));
+ArrayList<Hex<E>> h174 = new ArrayList<>();
+h174.add(hexes.get(51));
+h174.add(hexes.get(52));
+h174.add(hexes.get(40));
+points.get(174).setHexes(h174);
 //175
 points.get(175).getNeighbors().add(points.get(174));
 points.get(175).getNeighbors().add(points.get(168));
 points.get(175).getNeighbors().add(points.get(35));
+ArrayList<Hex<E>> h175 = new ArrayList<>();
+h175.add(hexes.get(51));
+h175.add(hexes.get(52));
+h175.add(hexes.get(62));
+points.get(175).setHexes(h175);
 
-//creates the list of segments and their associated points and segments
 
-//0
-segments.get(0).getPoints().add(points.get(0));
-segments.get(0).getPoints().add(points.get(2));
-segments.get(0).getNeighbors().add(segments.get(1));
-segments.get(0).getNeighbors().add(segments.get(18));
-//1
-segments.get(1).getPoints().add(points.get(0));
-segments.get(1).getPoints().add(points.get(61));
-segments.get(1).getNeighbors().add(segments.get(0));
-segments.get(1).getNeighbors().add(segments.get(2));
-segments.get(1).getNeighbors().add(segments.get(19));
-//2
-segments.get(2).getPoints().add(points.get(60));
-segments.get(2).getPoints().add(points.get(61));
-segments.get(2).getNeighbors().add(segments.get(1));
-segments.get(2).getNeighbors().add(segments.get(3));
-segments.get(2).getNeighbors().add(segments.get(19));
-//3
-segments.get(3).getPoints().add(points.get(59));
-segments.get(3).getPoints().add(points.get(60));
-segments.get(3).getNeighbors().add(segments.get(2));
-segments.get(3).getNeighbors().add(segments.get(4));
-segments.get(3).getNeighbors().add(segments.get(20));
-//4
-segments.get(4).getPoints().add(points.get(58));
-segments.get(4).getPoints().add(points.get(59));
-segments.get(4).getNeighbors().add(segments.get(3));
-segments.get(4).getNeighbors().add(segments.get(5));
-segments.get(4).getNeighbors().add(segments.get(20));
-//5
-segments.get(5).getPoints().add(points.get(58));
-segments.get(5).getPoints().add(points.get(57));
-segments.get(5).getNeighbors().add(segments.get(4));
-segments.get(5).getNeighbors().add(segments.get(6));
-segments.get(5).getNeighbors().add(segments.get(21));
-//6
-segments.get(6).getPoints().add(points.get(56));
-segments.get(6).getPoints().add(points.get(57));
-segments.get(6).getNeighbors().add(segments.get(5));
-segments.get(6).getNeighbors().add(segments.get(7));
-segments.get(6).getNeighbors().add(segments.get(21));
-//7
-segments.get(7).getPoints().add(points.get(55));
-segments.get(7).getPoints().add(points.get(56));
-segments.get(7).getNeighbors().add(segments.get(6));
-segments.get(7).getNeighbors().add(segments.get(8));
-segments.get(7).getNeighbors().add(segments.get(22));
-//8
-segments.get(8).getPoints().add(points.get(54));
-segments.get(8).getPoints().add(points.get(55));
-segments.get(8).getNeighbors().add(segments.get(7));
-segments.get(8).getNeighbors().add(segments.get(9));
-segments.get(8).getNeighbors().add(segments.get(22));
-//9
-segments.get(9).getPoints().add(points.get(53));
-segments.get(9).getPoints().add(points.get(54));
-segments.get(9).getNeighbors().add(segments.get(8));
-segments.get(9).getNeighbors().add(segments.get(10));
-segments.get(9).getNeighbors().add(segments.get(23));
-//10
-segments.get(10).getPoints().add(points.get(52));
-segments.get(10).getPoints().add(points.get(53));
-segments.get(10).getNeighbors().add(segments.get(9));
-segments.get(10).getNeighbors().add(segments.get(11));
-segments.get(10).getNeighbors().add(segments.get(23));
-//11
-segments.get(11).getPoints().add(points.get(51));
-segments.get(11).getPoints().add(points.get(52));
-segments.get(11).getNeighbors().add(segments.get(10));
-segments.get(11).getNeighbors().add(segments.get(12));
-segments.get(11).getNeighbors().add(segments.get(24));
-//12
-segments.get(12).getPoints().add(points.get(50));
-segments.get(12).getPoints().add(points.get(51));
-segments.get(12).getNeighbors().add(segments.get(11));
-segments.get(12).getNeighbors().add(segments.get(13));
-segments.get(12).getNeighbors().add(segments.get(24));
-//13
-segments.get(13).getPoints().add(points.get(49));
-segments.get(13).getPoints().add(points.get(50));
-segments.get(13).getNeighbors().add(segments.get(12));
-segments.get(13).getNeighbors().add(segments.get(14));
-segments.get(13).getNeighbors().add(segments.get(25));
-//14
-segments.get(14).getPoints().add(points.get(48));
-segments.get(14).getPoints().add(points.get(49));
-segments.get(14).getNeighbors().add(segments.get(13));
-segments.get(14).getNeighbors().add(segments.get(15));
-segments.get(14).getNeighbors().add(segments.get(25));
-//15
-segments.get(15).getPoints().add(points.get(47));
-segments.get(15).getPoints().add(points.get(48));
-segments.get(15).getNeighbors().add(segments.get(14));
-segments.get(15).getNeighbors().add(segments.get(16));
-segments.get(15).getNeighbors().add(segments.get(26));
-//16
-segments.get(16).getPoints().add(points.get(46));
-segments.get(16).getPoints().add(points.get(47));
-segments.get(16).getNeighbors().add(segments.get(15));
-segments.get(16).getNeighbors().add(segments.get(17));
-segments.get(16).getNeighbors().add(segments.get(26));
-//17
-segments.get(17).getPoints().add(points.get(45));
-segments.get(17).getPoints().add(points.get(46));
-segments.get(17).getNeighbors().add(segments.get(16));
-segments.get(17).getNeighbors().add(segments.get(27));
-//18
-segments.get(18).getPoints().add(points.get(1));
-segments.get(18).getPoints().add(points.get(2));
-segments.get(18).getNeighbors().add(segments.get(0));
-segments.get(18).getNeighbors().add(segments.get(28));
-segments.get(18).getNeighbors().add(segments.get(29));
-//19
-segments.get(19).getPoints().add(points.get(64));
-segments.get(19).getPoints().add(points.get(61));
-segments.get(19).getNeighbors().add(segments.get(1));
-segments.get(19).getNeighbors().add(segments.get(2));
-segments.get(19).getNeighbors().add(segments.get(30));
-segments.get(19).getNeighbors().add(segments.get(31));
-//20
-segments.get(20).getPoints().add(points.get(59));
-segments.get(20).getPoints().add(points.get(62));
-segments.get(20).getNeighbors().add(segments.get(3));
-segments.get(20).getNeighbors().add(segments.get(4));
-segments.get(20).getNeighbors().add(segments.get(32));
-segments.get(20).getNeighbors().add(segments.get(33));
-//21
-segments.get(21).getPoints().add(points.get(57));
-segments.get(21).getPoints().add(points.get(88));
-segments.get(21).getNeighbors().add(segments.get(5));
-segments.get(21).getNeighbors().add(segments.get(6));
-segments.get(21).getNeighbors().add(segments.get(34));
-segments.get(21).getNeighbors().add(segments.get(35));
-//22
-segments.get(22).getPoints().add(points.get(55));
-segments.get(22).getPoints().add(points.get(100));
-segments.get(22).getNeighbors().add(segments.get(7));
-segments.get(22).getNeighbors().add(segments.get(8));
-segments.get(22).getNeighbors().add(segments.get(36));
-segments.get(22).getNeighbors().add(segments.get(37));
-//23
-segments.get(23).getPoints().add(points.get(53));
-segments.get(23).getPoints().add(points.get(112));
-segments.get(23).getNeighbors().add(segments.get(9));
-segments.get(23).getNeighbors().add(segments.get(10));
-segments.get(23).getNeighbors().add(segments.get(38));
-segments.get(23).getNeighbors().add(segments.get(39));
-//24
-segments.get(24).getPoints().add(points.get(51));
-segments.get(24).getPoints().add(points.get(124));
-segments.get(24).getNeighbors().add(segments.get(11));
-segments.get(24).getNeighbors().add(segments.get(12));
-segments.get(24).getNeighbors().add(segments.get(40));
-segments.get(24).getNeighbors().add(segments.get(41));
-//25
-segments.get(25).getPoints().add(points.get(49));
-segments.get(25).getPoints().add(points.get(136));
-segments.get(25).getNeighbors().add(segments.get(13));
-segments.get(25).getNeighbors().add(segments.get(14));
-segments.get(25).getNeighbors().add(segments.get(42));
-segments.get(25).getNeighbors().add(segments.get(43));
-//26
-segments.get(26).getPoints().add(points.get(47));
-segments.get(26).getPoints().add(points.get(148));
-segments.get(26).getNeighbors().add(segments.get(15));
-segments.get(26).getNeighbors().add(segments.get(16));
-segments.get(26).getNeighbors().add(segments.get(44));
-segments.get(26).getNeighbors().add(segments.get(45));
-//27
-segments.get(27).getPoints().add(points.get(45));
-segments.get(27).getPoints().add(points.get(44));
-segments.get(27).getNeighbors().add(segments.get(17));
-segments.get(27).getNeighbors().add(segments.get(46));
-segments.get(27).getNeighbors().add(segments.get(47));
-//28
-segments.get(28).getPoints().add(points.get(1));
-segments.get(28).getPoints().add(points.get(3));
-segments.get(28).getNeighbors().add(segments.get(18));
-segments.get(28).getNeighbors().add(segments.get(29));
-segments.get(28).getNeighbors().add(segments.get(48));
-//29
-segments.get(29).getPoints().add(points.get(1));
-segments.get(29).getPoints().add(points.get(65));
-segments.get(29).getNeighbors().add(segments.get(28));
-segments.get(29).getNeighbors().add(segments.get(30));
-segments.get(29).getNeighbors().add(segments.get(18));
-segments.get(29).getNeighbors().add(segments.get(49));
-//30
-segments.get(30).getPoints().add(points.get(64));
-segments.get(30).getPoints().add(points.get(65));
-segments.get(30).getNeighbors().add(segments.get(29));
-segments.get(30).getNeighbors().add(segments.get(31));
-segments.get(30).getNeighbors().add(segments.get(19));
-segments.get(30).getNeighbors().add(segments.get(49));
-//31
-segments.get(31).getPoints().add(points.get(63));
-segments.get(31).getPoints().add(points.get(64));
-segments.get(31).getNeighbors().add(segments.get(30));
-segments.get(31).getNeighbors().add(segments.get(32));
-segments.get(31).getNeighbors().add(segments.get(19));
-segments.get(31).getNeighbors().add(segments.get(50));
-//32
-segments.get(32).getPoints().add(points.get(62));
-segments.get(32).getPoints().add(points.get(63));
-segments.get(32).getNeighbors().add(segments.get(31));
-segments.get(32).getNeighbors().add(segments.get(33));
-segments.get(32).getNeighbors().add(segments.get(20));
-segments.get(32).getNeighbors().add(segments.get(50));
-//33
-segments.get(33).getPoints().add(points.get(62));
-segments.get(33).getPoints().add(points.get(89));
-segments.get(33).getNeighbors().add(segments.get(32));
-segments.get(33).getNeighbors().add(segments.get(34));
-segments.get(33).getNeighbors().add(segments.get(20));
-segments.get(33).getNeighbors().add(segments.get(51));
-//34
-segments.get(34).getPoints().add(points.get(88));
-segments.get(34).getPoints().add(points.get(89));
-segments.get(34).getNeighbors().add(segments.get(33));
-segments.get(34).getNeighbors().add(segments.get(35));
-segments.get(34).getNeighbors().add(segments.get(21));
-segments.get(34).getNeighbors().add(segments.get(51));
-//35
-segments.get(35).getPoints().add(points.get(88));
-segments.get(35).getPoints().add(points.get(101));
-segments.get(35).getNeighbors().add(segments.get(34));
-segments.get(35).getNeighbors().add(segments.get(36));
-segments.get(35).getNeighbors().add(segments.get(21));
-segments.get(35).getNeighbors().add(segments.get(52));
-//36
-segments.get(36).getPoints().add(points.get(100));
-segments.get(36).getPoints().add(points.get(101));
-segments.get(36).getNeighbors().add(segments.get(35));
-segments.get(36).getNeighbors().add(segments.get(37));
-segments.get(36).getNeighbors().add(segments.get(22));
-segments.get(36).getNeighbors().add(segments.get(52));
-//37
-segments.get(37).getPoints().add(points.get(100));
-segments.get(37).getPoints().add(points.get(113));
-segments.get(37).getNeighbors().add(segments.get(36));
-segments.get(37).getNeighbors().add(segments.get(38));
-segments.get(37).getNeighbors().add(segments.get(22));
-segments.get(37).getNeighbors().add(segments.get(53));
-//38
-segments.get(38).getPoints().add(points.get(112));
-segments.get(38).getPoints().add(points.get(113));
-segments.get(38).getNeighbors().add(segments.get(37));
-segments.get(38).getNeighbors().add(segments.get(39));
-segments.get(38).getNeighbors().add(segments.get(23));
-segments.get(38).getNeighbors().add(segments.get(53));
-//39
-segments.get(39).getPoints().add(points.get(112));
-segments.get(39).getPoints().add(points.get(125));
-segments.get(39).getNeighbors().add(segments.get(38));
-segments.get(39).getNeighbors().add(segments.get(40));
-segments.get(39).getNeighbors().add(segments.get(23));
-segments.get(39).getNeighbors().add(segments.get(54));
-//40
-segments.get(40).getPoints().add(points.get(124));
-segments.get(40).getPoints().add(points.get(125));
-segments.get(40).getNeighbors().add(segments.get(39));
-segments.get(40).getNeighbors().add(segments.get(41));
-segments.get(40).getNeighbors().add(segments.get(24));
-segments.get(40).getNeighbors().add(segments.get(54));
-//41
-segments.get(41).getPoints().add(points.get(124));
-segments.get(41).getPoints().add(points.get(137));
-segments.get(41).getNeighbors().add(segments.get(40));
-segments.get(41).getNeighbors().add(segments.get(42));
-segments.get(41).getNeighbors().add(segments.get(24));
-segments.get(41).getNeighbors().add(segments.get(55));
-//42
-segments.get(42).getPoints().add(points.get(136));
-segments.get(42).getPoints().add(points.get(137));
-segments.get(42).getNeighbors().add(segments.get(41));
-segments.get(42).getNeighbors().add(segments.get(43));
-segments.get(42).getNeighbors().add(segments.get(25));
-segments.get(42).getNeighbors().add(segments.get(55));
-//43
-segments.get(43).getPoints().add(points.get(136));
-segments.get(43).getPoints().add(points.get(149));
-segments.get(43).getNeighbors().add(segments.get(42));
-segments.get(43).getNeighbors().add(segments.get(44));
-segments.get(43).getNeighbors().add(segments.get(25));
-segments.get(43).getNeighbors().add(segments.get(56));
-//44
-segments.get(44).getPoints().add(points.get(148));
-segments.get(44).getPoints().add(points.get(149));
-segments.get(44).getNeighbors().add(segments.get(43));
-segments.get(44).getNeighbors().add(segments.get(45));
-segments.get(44).getNeighbors().add(segments.get(26));
-segments.get(44).getNeighbors().add(segments.get(56));
-//45
-segments.get(45).getPoints().add(points.get(148));
-segments.get(45).getPoints().add(points.get(160));
-segments.get(45).getNeighbors().add(segments.get(44));
-segments.get(45).getNeighbors().add(segments.get(46));
-segments.get(45).getNeighbors().add(segments.get(26));
-segments.get(45).getNeighbors().add(segments.get(57));
-//46
-segments.get(46).getPoints().add(points.get(44));
-segments.get(46).getPoints().add(points.get(160));
-segments.get(46).getNeighbors().add(segments.get(45));
-segments.get(46).getNeighbors().add(segments.get(47));
-segments.get(46).getNeighbors().add(segments.get(27));
-segments.get(46).getNeighbors().add(segments.get(57));
-//47
-segments.get(47).getPoints().add(points.get(43));
-segments.get(47).getPoints().add(points.get(44));
-segments.get(47).getNeighbors().add(segments.get(46));
-segments.get(47).getNeighbors().add(segments.get(27));
-segments.get(47).getNeighbors().add(segments.get(58));
-//48
-segments.get(48).getPoints().add(points.get(3));
-segments.get(48).getPoints().add(points.get(4));
-segments.get(48).getNeighbors().add(segments.get(28));
-segments.get(48).getNeighbors().add(segments.get(59));
-segments.get(48).getNeighbors().add(segments.get(60));
-//49
-segments.get(49).getPoints().add(points.get(65));
-segments.get(49).getPoints().add(points.get(66));
-segments.get(49).getNeighbors().add(segments.get(29));
-segments.get(49).getNeighbors().add(segments.get(30));
-segments.get(49).getNeighbors().add(segments.get(61));
-segments.get(49).getNeighbors().add(segments.get(62));
-//50
-segments.get(50).getPoints().add(points.get(63));
-segments.get(50).getPoints().add(points.get(68));
-segments.get(50).getNeighbors().add(segments.get(31));
-segments.get(50).getNeighbors().add(segments.get(32));
-segments.get(50).getNeighbors().add(segments.get(63));
-segments.get(50).getNeighbors().add(segments.get(64));
-//51
-segments.get(51).getPoints().add(points.get(89));
-segments.get(51).getPoints().add(points.get(90));
-segments.get(51).getNeighbors().add(segments.get(33));
-segments.get(51).getNeighbors().add(segments.get(34));
-segments.get(51).getNeighbors().add(segments.get(65));
-segments.get(51).getNeighbors().add(segments.get(66));
-//52
-segments.get(52).getPoints().add(points.get(101));
-segments.get(52).getPoints().add(points.get(102));
-segments.get(52).getNeighbors().add(segments.get(35));
-segments.get(52).getNeighbors().add(segments.get(36));
-segments.get(52).getNeighbors().add(segments.get(67));
-segments.get(52).getNeighbors().add(segments.get(68));
-//53
-segments.get(53).getPoints().add(points.get(113));
-segments.get(53).getPoints().add(points.get(114));
-segments.get(53).getNeighbors().add(segments.get(37));
-segments.get(53).getNeighbors().add(segments.get(38));
-segments.get(53).getNeighbors().add(segments.get(69));
-segments.get(53).getNeighbors().add(segments.get(70));
-//54
-segments.get(54).getPoints().add(points.get(125));
-segments.get(54).getPoints().add(points.get(126));
-segments.get(54).getNeighbors().add(segments.get(39));
-segments.get(54).getNeighbors().add(segments.get(40));
-segments.get(54).getNeighbors().add(segments.get(71));
-segments.get(54).getNeighbors().add(segments.get(72));
-//55
-segments.get(55).getPoints().add(points.get(137));
-segments.get(55).getPoints().add(points.get(138));
-segments.get(55).getNeighbors().add(segments.get(41));
-segments.get(55).getNeighbors().add(segments.get(42));
-segments.get(55).getNeighbors().add(segments.get(73));
-segments.get(55).getNeighbors().add(segments.get(74));
-//56
-segments.get(56).getPoints().add(points.get(149));
-segments.get(56).getPoints().add(points.get(150));
-segments.get(56).getNeighbors().add(segments.get(43));
-segments.get(56).getNeighbors().add(segments.get(44));
-segments.get(56).getNeighbors().add(segments.get(75));
-segments.get(56).getNeighbors().add(segments.get(76));
-//57
-segments.get(57).getPoints().add(points.get(160));
-segments.get(57).getPoints().add(points.get(161));
-segments.get(57).getNeighbors().add(segments.get(45));
-segments.get(57).getNeighbors().add(segments.get(46));
-segments.get(57).getNeighbors().add(segments.get(77));
-segments.get(57).getNeighbors().add(segments.get(78));
-//58
-segments.get(58).getPoints().add(points.get(42));
-segments.get(58).getPoints().add(points.get(43));
-segments.get(58).getNeighbors().add(segments.get(47));
-segments.get(58).getNeighbors().add(segments.get(79));
-segments.get(58).getNeighbors().add(segments.get(80));
-//59
-segments.get(59).getPoints().add(points.get(4));
-segments.get(59).getPoints().add(points.get(5));
-segments.get(59).getNeighbors().add(segments.get(48));
-segments.get(59).getNeighbors().add(segments.get(60));
-segments.get(59).getNeighbors().add(segments.get(81));
-//60
-segments.get(60).getPoints().add(points.get(4));
-segments.get(60).getPoints().add(points.get(69));
-segments.get(60).getNeighbors().add(segments.get(48));
-segments.get(60).getNeighbors().add(segments.get(59));
-segments.get(60).getNeighbors().add(segments.get(61));
-segments.get(60).getNeighbors().add(segments.get(82));
-//61
-segments.get(61).getPoints().add(points.get(66));
-segments.get(61).getPoints().add(points.get(69));
-segments.get(61).getNeighbors().add(segments.get(49));
-segments.get(61).getNeighbors().add(segments.get(60));
-segments.get(61).getNeighbors().add(segments.get(62));
-segments.get(61).getNeighbors().add(segments.get(82));
-//62
-segments.get(62).getPoints().add(points.get(66));
-segments.get(62).getPoints().add(points.get(67));
-segments.get(62).getNeighbors().add(segments.get(49));
-segments.get(62).getNeighbors().add(segments.get(61));
-segments.get(62).getNeighbors().add(segments.get(63));
-segments.get(62).getNeighbors().add(segments.get(83));
-//63
-segments.get(63).getPoints().add(points.get(67));
-segments.get(63).getPoints().add(points.get(68));
-segments.get(63).getNeighbors().add(segments.get(50));
-segments.get(63).getNeighbors().add(segments.get(62));
-segments.get(63).getNeighbors().add(segments.get(64));
-segments.get(63).getNeighbors().add(segments.get(83));
-//64
-segments.get(64).getPoints().add(points.get(68));
-segments.get(64).getPoints().add(points.get(91));
-segments.get(64).getNeighbors().add(segments.get(50));
-segments.get(64).getNeighbors().add(segments.get(63));
-segments.get(64).getNeighbors().add(segments.get(65));
-segments.get(64).getNeighbors().add(segments.get(84));
-//65
-segments.get(65).getPoints().add(points.get(90));
-segments.get(65).getPoints().add(points.get(91));
-segments.get(65).getNeighbors().add(segments.get(51));
-segments.get(65).getNeighbors().add(segments.get(64));
-segments.get(65).getNeighbors().add(segments.get(66));
-segments.get(65).getNeighbors().add(segments.get(84));
-//66
-segments.get(66).getPoints().add(points.get(90));
-segments.get(66).getPoints().add(points.get(103));
-segments.get(66).getNeighbors().add(segments.get(51));
-segments.get(66).getNeighbors().add(segments.get(65));
-segments.get(66).getNeighbors().add(segments.get(67));
-segments.get(66).getNeighbors().add(segments.get(85));
-//67
-segments.get(67).getPoints().add(points.get(102));
-segments.get(67).getPoints().add(points.get(103));
-segments.get(67).getNeighbors().add(segments.get(52));
-segments.get(67).getNeighbors().add(segments.get(66));
-segments.get(67).getNeighbors().add(segments.get(68));
-segments.get(67).getNeighbors().add(segments.get(85));
-//68
-segments.get(68).getPoints().add(points.get(102));
-segments.get(68).getPoints().add(points.get(115));
-segments.get(68).getNeighbors().add(segments.get(52));
-segments.get(68).getNeighbors().add(segments.get(67));
-segments.get(68).getNeighbors().add(segments.get(69));
-segments.get(68).getNeighbors().add(segments.get(86));
-//69
-segments.get(69).getPoints().add(points.get(114));
-segments.get(69).getPoints().add(points.get(115));
-segments.get(69).getNeighbors().add(segments.get(53));
-segments.get(69).getNeighbors().add(segments.get(68));
-segments.get(69).getNeighbors().add(segments.get(70));
-segments.get(69).getNeighbors().add(segments.get(86));
-//70
-segments.get(70).getPoints().add(points.get(114));
-segments.get(70).getPoints().add(points.get(127));
-segments.get(70).getNeighbors().add(segments.get(53));
-segments.get(70).getNeighbors().add(segments.get(69));
-segments.get(70).getNeighbors().add(segments.get(71));
-segments.get(70).getNeighbors().add(segments.get(87));
-//71
-segments.get(71).getPoints().add(points.get(126));
-segments.get(71).getPoints().add(points.get(127));
-segments.get(71).getNeighbors().add(segments.get(54));
-segments.get(71).getNeighbors().add(segments.get(70));
-segments.get(71).getNeighbors().add(segments.get(72));
-segments.get(71).getNeighbors().add(segments.get(87));
-//72
-segments.get(72).getPoints().add(points.get(126));
-segments.get(72).getPoints().add(points.get(139));
-segments.get(72).getNeighbors().add(segments.get(54));
-segments.get(72).getNeighbors().add(segments.get(71));
-segments.get(72).getNeighbors().add(segments.get(73));
-segments.get(72).getNeighbors().add(segments.get(88));
-//73
-segments.get(73).getPoints().add(points.get(138));
-segments.get(73).getPoints().add(points.get(139));
-segments.get(73).getNeighbors().add(segments.get(55));
-segments.get(73).getNeighbors().add(segments.get(72));
-segments.get(73).getNeighbors().add(segments.get(74));
-segments.get(73).getNeighbors().add(segments.get(88));
-//74
-segments.get(74).getPoints().add(points.get(138));
-segments.get(74).getPoints().add(points.get(151));
-segments.get(74).getNeighbors().add(segments.get(55));
-segments.get(74).getNeighbors().add(segments.get(73));
-segments.get(74).getNeighbors().add(segments.get(75));
-segments.get(74).getNeighbors().add(segments.get(89));
-//75
-segments.get(75).getPoints().add(points.get(150));
-segments.get(75).getPoints().add(points.get(151));
-segments.get(75).getNeighbors().add(segments.get(56));
-segments.get(75).getNeighbors().add(segments.get(74));
-segments.get(75).getNeighbors().add(segments.get(76));
-segments.get(75).getNeighbors().add(segments.get(89));
-//76
-segments.get(76).getPoints().add(points.get(150));
-segments.get(76).getPoints().add(points.get(162));
-segments.get(76).getNeighbors().add(segments.get(56));
-segments.get(76).getNeighbors().add(segments.get(75));
-segments.get(76).getNeighbors().add(segments.get(77));
-segments.get(76).getNeighbors().add(segments.get(90));
-//77
-segments.get(77).getPoints().add(points.get(161));
-segments.get(77).getPoints().add(points.get(162));
-segments.get(77).getNeighbors().add(segments.get(57));
-segments.get(77).getNeighbors().add(segments.get(76));
-segments.get(77).getNeighbors().add(segments.get(78));
-segments.get(77).getNeighbors().add(segments.get(90));
-//78
-segments.get(78).getPoints().add(points.get(161));
-segments.get(78).getPoints().add(points.get(170));
-segments.get(78).getNeighbors().add(segments.get(57));
-segments.get(78).getNeighbors().add(segments.get(77));
-segments.get(78).getNeighbors().add(segments.get(79));
-segments.get(78).getNeighbors().add(segments.get(91));
-//79
-segments.get(79).getPoints().add(points.get(42));
-segments.get(79).getPoints().add(points.get(170));
-segments.get(79).getNeighbors().add(segments.get(58));
-segments.get(79).getNeighbors().add(segments.get(78));
-segments.get(79).getNeighbors().add(segments.get(80));
-segments.get(79).getNeighbors().add(segments.get(91));
-//80
-segments.get(80).getPoints().add(points.get(41));
-segments.get(80).getPoints().add(points.get(42));
-segments.get(80).getNeighbors().add(segments.get(58));
-segments.get(80).getNeighbors().add(segments.get(79));
-segments.get(80).getNeighbors().add(segments.get(92));
-//81
-segments.get(81).getPoints().add(points.get(5));
-segments.get(81).getPoints().add(points.get(6));
-segments.get(81).getNeighbors().add(segments.get(59));
-segments.get(81).getNeighbors().add(segments.get(93));
-segments.get(81).getNeighbors().add(segments.get(94));
-//82
-segments.get(82).getPoints().add(points.get(69));
-segments.get(82).getPoints().add(points.get(71));
-segments.get(82).getNeighbors().add(segments.get(60));
-segments.get(82).getNeighbors().add(segments.get(61));
-segments.get(82).getNeighbors().add(segments.get(95));
-segments.get(82).getNeighbors().add(segments.get(96));
-//83
-segments.get(83).getPoints().add(points.get(67));
-segments.get(83).getPoints().add(points.get(73));
-segments.get(83).getNeighbors().add(segments.get(62));
-segments.get(83).getNeighbors().add(segments.get(63));
-segments.get(83).getNeighbors().add(segments.get(97));
-segments.get(83).getNeighbors().add(segments.get(98));
-//84
-segments.get(84).getPoints().add(points.get(91));
-segments.get(84).getPoints().add(points.get(92));
-segments.get(84).getNeighbors().add(segments.get(64));
-segments.get(84).getNeighbors().add(segments.get(65));
-segments.get(84).getNeighbors().add(segments.get(99));
-segments.get(84).getNeighbors().add(segments.get(100));
-//85
-segments.get(85).getPoints().add(points.get(103));
-segments.get(85).getPoints().add(points.get(104));
-segments.get(85).getNeighbors().add(segments.get(66));
-segments.get(85).getNeighbors().add(segments.get(67));
-segments.get(85).getNeighbors().add(segments.get(101));
-segments.get(85).getNeighbors().add(segments.get(102));
-//86
-segments.get(86).getPoints().add(points.get(115));
-segments.get(86).getPoints().add(points.get(116));
-segments.get(86).getNeighbors().add(segments.get(68));
-segments.get(86).getNeighbors().add(segments.get(69));
-segments.get(86).getNeighbors().add(segments.get(103));
-segments.get(86).getNeighbors().add(segments.get(104));
-//87
-segments.get(87).getPoints().add(points.get(127));
-segments.get(87).getPoints().add(points.get(128));
-segments.get(87).getNeighbors().add(segments.get(70));
-segments.get(87).getNeighbors().add(segments.get(71));
-segments.get(87).getNeighbors().add(segments.get(105));
-segments.get(87).getNeighbors().add(segments.get(106));
-//88
-segments.get(88).getPoints().add(points.get(139));
-segments.get(88).getPoints().add(points.get(140));
-segments.get(88).getNeighbors().add(segments.get(72));
-segments.get(88).getNeighbors().add(segments.get(73));
-segments.get(88).getNeighbors().add(segments.get(107));
-segments.get(88).getNeighbors().add(segments.get(108));
-//89
-segments.get(89).getPoints().add(points.get(151));
-segments.get(89).getPoints().add(points.get(152));
-segments.get(89).getNeighbors().add(segments.get(74));
-segments.get(89).getNeighbors().add(segments.get(75));
-segments.get(89).getNeighbors().add(segments.get(109));
-segments.get(89).getNeighbors().add(segments.get(110));
-//90
-segments.get(90).getPoints().add(points.get(162));
-segments.get(90).getPoints().add(points.get(163));
-segments.get(90).getNeighbors().add(segments.get(76));
-segments.get(90).getNeighbors().add(segments.get(77));
-segments.get(90).getNeighbors().add(segments.get(111));
-segments.get(90).getNeighbors().add(segments.get(112));
-//91
-segments.get(91).getPoints().add(points.get(170));
-segments.get(91).getPoints().add(points.get(171));
-segments.get(91).getNeighbors().add(segments.get(78));
-segments.get(91).getNeighbors().add(segments.get(79));
-segments.get(91).getNeighbors().add(segments.get(113));
-segments.get(91).getNeighbors().add(segments.get(114));
-//92
-segments.get(92).getPoints().add(points.get(40));
-segments.get(92).getPoints().add(points.get(41));
-segments.get(92).getNeighbors().add(segments.get(80));
-segments.get(92).getNeighbors().add(segments.get(115));
-segments.get(92).getNeighbors().add(segments.get(116));
-//93
-segments.get(93).getPoints().add(points.get(6));
-segments.get(93).getPoints().add(points.get(7));
-segments.get(93).getNeighbors().add(segments.get(81));
-segments.get(93).getNeighbors().add(segments.get(94));
-segments.get(93).getNeighbors().add(segments.get(117));
-//94
-segments.get(94).getPoints().add(points.get(6));
-segments.get(94).getPoints().add(points.get(70));
-segments.get(94).getNeighbors().add(segments.get(93));
-segments.get(94).getNeighbors().add(segments.get(95));
-segments.get(94).getNeighbors().add(segments.get(81));
-segments.get(94).getNeighbors().add(segments.get(118));
-//95
-segments.get(95).getPoints().add(points.get(70));
-segments.get(95).getPoints().add(points.get(71));
-segments.get(95).getNeighbors().add(segments.get(94));
-segments.get(95).getNeighbors().add(segments.get(96));
-segments.get(95).getNeighbors().add(segments.get(82));
-segments.get(95).getNeighbors().add(segments.get(118));
-//96
-segments.get(96).getPoints().add(points.get(71));
-segments.get(96).getPoints().add(points.get(72));
-segments.get(96).getNeighbors().add(segments.get(95));
-segments.get(96).getNeighbors().add(segments.get(97));
-segments.get(96).getNeighbors().add(segments.get(82));
-segments.get(96).getNeighbors().add(segments.get(119));
-//97
-segments.get(97).getPoints().add(points.get(72));
-segments.get(97).getPoints().add(points.get(73));
-segments.get(97).getNeighbors().add(segments.get(96));
-segments.get(97).getNeighbors().add(segments.get(98));
-segments.get(97).getNeighbors().add(segments.get(83));
-segments.get(97).getNeighbors().add(segments.get(119));
-//98
-segments.get(98).getPoints().add(points.get(73));
-segments.get(98).getPoints().add(points.get(79));
-segments.get(98).getNeighbors().add(segments.get(97));
-segments.get(98).getNeighbors().add(segments.get(99));
-segments.get(98).getNeighbors().add(segments.get(83));
-segments.get(98).getNeighbors().add(segments.get(120));
-//99
-segments.get(99).getPoints().add(points.get(79));
-segments.get(99).getPoints().add(points.get(92));
-segments.get(99).getNeighbors().add(segments.get(98));
-segments.get(99).getNeighbors().add(segments.get(100));
-segments.get(99).getNeighbors().add(segments.get(84));
-segments.get(99).getNeighbors().add(segments.get(120));
-//100
-segments.get(100).getPoints().add(points.get(92));
-segments.get(100).getPoints().add(points.get(93));
-segments.get(100).getNeighbors().add(segments.get(99));
-segments.get(100).getNeighbors().add(segments.get(101));
-segments.get(100).getNeighbors().add(segments.get(84));
-segments.get(100).getNeighbors().add(segments.get(121));
-//101
-segments.get(101).getPoints().add(points.get(93));
-segments.get(101).getPoints().add(points.get(104));
-segments.get(101).getNeighbors().add(segments.get(100));
-segments.get(101).getNeighbors().add(segments.get(102));
-segments.get(101).getNeighbors().add(segments.get(85));
-segments.get(101).getNeighbors().add(segments.get(121));
-//102
-segments.get(102).getPoints().add(points.get(104));
-segments.get(102).getPoints().add(points.get(105));
-segments.get(102).getNeighbors().add(segments.get(101));
-segments.get(102).getNeighbors().add(segments.get(103));
-segments.get(102).getNeighbors().add(segments.get(85));
-segments.get(102).getNeighbors().add(segments.get(122));
-//103
-segments.get(103).getPoints().add(points.get(105));
-segments.get(103).getPoints().add(points.get(116));
-segments.get(103).getNeighbors().add(segments.get(102));
-segments.get(103).getNeighbors().add(segments.get(104));
-segments.get(103).getNeighbors().add(segments.get(86));
-segments.get(103).getNeighbors().add(segments.get(122));
-//104
-segments.get(104).getPoints().add(points.get(116));
-segments.get(104).getPoints().add(points.get(117));
-segments.get(104).getNeighbors().add(segments.get(103));
-segments.get(104).getNeighbors().add(segments.get(105));
-segments.get(104).getNeighbors().add(segments.get(86));
-segments.get(104).getNeighbors().add(segments.get(123));
-//105
-segments.get(105).getPoints().add(points.get(117));
-segments.get(105).getPoints().add(points.get(128));
-segments.get(105).getNeighbors().add(segments.get(104));
-segments.get(105).getNeighbors().add(segments.get(106));
-segments.get(105).getNeighbors().add(segments.get(87));
-segments.get(105).getNeighbors().add(segments.get(123));
-//106
-segments.get(106).getPoints().add(points.get(128));
-segments.get(106).getPoints().add(points.get(129));
-segments.get(106).getNeighbors().add(segments.get(105));
-segments.get(106).getNeighbors().add(segments.get(107));
-segments.get(106).getNeighbors().add(segments.get(87));
-segments.get(106).getNeighbors().add(segments.get(124));
-//107
-segments.get(107).getPoints().add(points.get(129));
-segments.get(107).getPoints().add(points.get(140));
-segments.get(107).getNeighbors().add(segments.get(106));
-segments.get(107).getNeighbors().add(segments.get(108));
-segments.get(107).getNeighbors().add(segments.get(88));
-segments.get(107).getNeighbors().add(segments.get(124));
-//108
-segments.get(108).getPoints().add(points.get(140));
-segments.get(108).getPoints().add(points.get(141));
-segments.get(108).getNeighbors().add(segments.get(107));
-segments.get(108).getNeighbors().add(segments.get(109));
-segments.get(108).getNeighbors().add(segments.get(88));
-segments.get(108).getNeighbors().add(segments.get(125));
-//109
-segments.get(109).getPoints().add(points.get(141));
-segments.get(109).getPoints().add(points.get(152));
-segments.get(109).getNeighbors().add(segments.get(108));
-segments.get(109).getNeighbors().add(segments.get(110));
-segments.get(109).getNeighbors().add(segments.get(89));
-segments.get(109).getNeighbors().add(segments.get(125));
-//110
-segments.get(110).getPoints().add(points.get(152));
-segments.get(110).getPoints().add(points.get(153));
-segments.get(110).getNeighbors().add(segments.get(109));
-segments.get(110).getNeighbors().add(segments.get(111));
-segments.get(110).getNeighbors().add(segments.get(89));
-segments.get(110).getNeighbors().add(segments.get(126));
-//111
-segments.get(111).getPoints().add(points.get(153));
-segments.get(111).getPoints().add(points.get(163));
-segments.get(111).getNeighbors().add(segments.get(110));
-segments.get(111).getNeighbors().add(segments.get(112));
-segments.get(111).getNeighbors().add(segments.get(90));
-segments.get(111).getNeighbors().add(segments.get(126));
-//112
-segments.get(112).getPoints().add(points.get(163));
-segments.get(112).getPoints().add(points.get(164));
-segments.get(112).getNeighbors().add(segments.get(111));
-segments.get(112).getNeighbors().add(segments.get(113));
-segments.get(112).getNeighbors().add(segments.get(90));
-segments.get(112).getNeighbors().add(segments.get(127));
-//113
-segments.get(113).getPoints().add(points.get(164));
-segments.get(113).getPoints().add(points.get(171));
-segments.get(113).getNeighbors().add(segments.get(112));
-segments.get(113).getNeighbors().add(segments.get(114));
-segments.get(113).getNeighbors().add(segments.get(91));
-segments.get(113).getNeighbors().add(segments.get(127));
-//114
-segments.get(114).getPoints().add(points.get(171));
-segments.get(114).getPoints().add(points.get(172));
-segments.get(114).getNeighbors().add(segments.get(113));
-segments.get(114).getNeighbors().add(segments.get(115));
-segments.get(114).getNeighbors().add(segments.get(91));
-segments.get(114).getNeighbors().add(segments.get(128));
-//115
-segments.get(115).getPoints().add(points.get(40));
-segments.get(115).getPoints().add(points.get(172));
-segments.get(115).getNeighbors().add(segments.get(114));
-segments.get(115).getNeighbors().add(segments.get(116));
-segments.get(115).getNeighbors().add(segments.get(92));
-segments.get(115).getNeighbors().add(segments.get(128));
-//116
-segments.get(116).getPoints().add(points.get(39));
-segments.get(116).getPoints().add(points.get(40));
-segments.get(116).getNeighbors().add(segments.get(115));
-segments.get(116).getNeighbors().add(segments.get(92));
-segments.get(116).getNeighbors().add(segments.get(129));
-//117
-segments.get(117).getPoints().add(points.get(7));
-segments.get(117).getPoints().add(points.get(8));
-segments.get(117).getNeighbors().add(segments.get(93));
-segments.get(117).getNeighbors().add(segments.get(130));
-//118
-segments.get(118).getPoints().add(points.get(70));
-segments.get(118).getPoints().add(points.get(74));
-segments.get(118).getNeighbors().add(segments.get(94));
-segments.get(118).getNeighbors().add(segments.get(95));
-segments.get(118).getNeighbors().add(segments.get(131));
-segments.get(118).getNeighbors().add(segments.get(132));
-//119
-segments.get(119).getPoints().add(points.get(72));
-segments.get(119).getPoints().add(points.get(76));
-segments.get(119).getNeighbors().add(segments.get(96));
-segments.get(119).getNeighbors().add(segments.get(97));
-segments.get(119).getNeighbors().add(segments.get(133));
-segments.get(119).getNeighbors().add(segments.get(134));
-//120
-segments.get(120).getPoints().add(points.get(78));
-segments.get(120).getPoints().add(points.get(79));
-segments.get(120).getNeighbors().add(segments.get(98));
-segments.get(120).getNeighbors().add(segments.get(99));
-segments.get(120).getNeighbors().add(segments.get(135));
-segments.get(120).getNeighbors().add(segments.get(136));
-//121
-segments.get(121).getPoints().add(points.get(93));
-segments.get(121).getPoints().add(points.get(94));
-segments.get(121).getNeighbors().add(segments.get(100));
-segments.get(121).getNeighbors().add(segments.get(101));
-segments.get(121).getNeighbors().add(segments.get(137));
-segments.get(121).getNeighbors().add(segments.get(138));
-//122
-segments.get(122).getPoints().add(points.get(105));
-segments.get(122).getPoints().add(points.get(106));
-segments.get(122).getNeighbors().add(segments.get(102));
-segments.get(122).getNeighbors().add(segments.get(103));
-segments.get(122).getNeighbors().add(segments.get(139));
-segments.get(122).getNeighbors().add(segments.get(140));
-//123
-segments.get(123).getPoints().add(points.get(117));
-segments.get(123).getPoints().add(points.get(118));
-segments.get(123).getNeighbors().add(segments.get(104));
-segments.get(123).getNeighbors().add(segments.get(105));
-segments.get(123).getNeighbors().add(segments.get(141));
-segments.get(123).getNeighbors().add(segments.get(142));
-//124
-segments.get(124).getPoints().add(points.get(129));
-segments.get(124).getPoints().add(points.get(130));
-segments.get(124).getNeighbors().add(segments.get(106));
-segments.get(124).getNeighbors().add(segments.get(107));
-segments.get(124).getNeighbors().add(segments.get(143));
-segments.get(124).getNeighbors().add(segments.get(144));
-//125
-segments.get(125).getPoints().add(points.get(141));
-segments.get(125).getPoints().add(points.get(142));
-segments.get(125).getNeighbors().add(segments.get(108));
-segments.get(125).getNeighbors().add(segments.get(109));
-segments.get(125).getNeighbors().add(segments.get(145));
-segments.get(125).getNeighbors().add(segments.get(146));
-//126
-segments.get(126).getPoints().add(points.get(153));
-segments.get(126).getPoints().add(points.get(154));
-segments.get(126).getNeighbors().add(segments.get(110));
-segments.get(126).getNeighbors().add(segments.get(111));
-segments.get(126).getNeighbors().add(segments.get(147));
-segments.get(126).getNeighbors().add(segments.get(148));
-//127
-segments.get(127).getPoints().add(points.get(164));
-segments.get(127).getPoints().add(points.get(165));
-segments.get(127).getNeighbors().add(segments.get(112));
-segments.get(127).getNeighbors().add(segments.get(113));
-segments.get(127).getNeighbors().add(segments.get(149));
-segments.get(127).getNeighbors().add(segments.get(150));
-//128
-segments.get(128).getPoints().add(points.get(172));
-segments.get(128).getPoints().add(points.get(173));
-segments.get(128).getNeighbors().add(segments.get(114));
-segments.get(128).getNeighbors().add(segments.get(115));
-segments.get(128).getNeighbors().add(segments.get(151));
-segments.get(128).getNeighbors().add(segments.get(152));
-//129
-segments.get(129).getPoints().add(points.get(38));
-segments.get(129).getPoints().add(points.get(39));
-segments.get(129).getNeighbors().add(segments.get(116));
-segments.get(129).getNeighbors().add(segments.get(153));
-//130
-segments.get(130).getPoints().add(points.get(8));
-segments.get(130).getPoints().add(points.get(9));
-segments.get(130).getNeighbors().add(segments.get(117));
-segments.get(130).getNeighbors().add(segments.get(131));
-segments.get(130).getNeighbors().add(segments.get(154));
-//131
-segments.get(131).getPoints().add(points.get(9));
-segments.get(131).getPoints().add(points.get(74));
-segments.get(131).getNeighbors().add(segments.get(118));
-segments.get(131).getNeighbors().add(segments.get(130));
-segments.get(131).getNeighbors().add(segments.get(132));
-segments.get(131).getNeighbors().add(segments.get(154));
-//132
-segments.get(132).getPoints().add(points.get(74));
-segments.get(132).getPoints().add(points.get(75));
-segments.get(132).getNeighbors().add(segments.get(118));
-segments.get(132).getNeighbors().add(segments.get(131));
-segments.get(132).getNeighbors().add(segments.get(133));
-segments.get(132).getNeighbors().add(segments.get(155));
-//133
-segments.get(133).getPoints().add(points.get(75));
-segments.get(133).getPoints().add(points.get(76));
-segments.get(133).getNeighbors().add(segments.get(119));
-segments.get(133).getNeighbors().add(segments.get(132));
-segments.get(133).getNeighbors().add(segments.get(134));
-segments.get(133).getNeighbors().add(segments.get(155));
-//134
-segments.get(134).getPoints().add(points.get(76));
-segments.get(134).getPoints().add(points.get(77));
-segments.get(134).getNeighbors().add(segments.get(119));
-segments.get(134).getNeighbors().add(segments.get(133));
-segments.get(134).getNeighbors().add(segments.get(135));
-segments.get(134).getNeighbors().add(segments.get(156));
-//135
-segments.get(135).getPoints().add(points.get(77));
-segments.get(135).getPoints().add(points.get(78));
-segments.get(135).getNeighbors().add(segments.get(120));
-segments.get(135).getNeighbors().add(segments.get(134));
-segments.get(135).getNeighbors().add(segments.get(136));
-segments.get(135).getNeighbors().add(segments.get(156));
-//136
-segments.get(136).getPoints().add(points.get(78));
-segments.get(136).getPoints().add(points.get(95));
-segments.get(136).getNeighbors().add(segments.get(120));
-segments.get(136).getNeighbors().add(segments.get(135));
-segments.get(136).getNeighbors().add(segments.get(137));
-segments.get(136).getNeighbors().add(segments.get(157));
-//137
-segments.get(137).getPoints().add(points.get(94));
-segments.get(137).getPoints().add(points.get(95));
-segments.get(137).getNeighbors().add(segments.get(121));
-segments.get(137).getNeighbors().add(segments.get(136));
-segments.get(137).getNeighbors().add(segments.get(138));
-segments.get(137).getNeighbors().add(segments.get(157));
-//138
-segments.get(138).getPoints().add(points.get(94));
-segments.get(138).getPoints().add(points.get(107));
-segments.get(138).getNeighbors().add(segments.get(121));
-segments.get(138).getNeighbors().add(segments.get(137));
-segments.get(138).getNeighbors().add(segments.get(139));
-segments.get(138).getNeighbors().add(segments.get(158));
-//139
-segments.get(139).getPoints().add(points.get(106));
-segments.get(139).getPoints().add(points.get(107));
-segments.get(139).getNeighbors().add(segments.get(122));
-segments.get(139).getNeighbors().add(segments.get(138));
-segments.get(139).getNeighbors().add(segments.get(140));
-segments.get(139).getNeighbors().add(segments.get(158));
-//140
-segments.get(140).getPoints().add(points.get(106));
-segments.get(140).getPoints().add(points.get(119));
-segments.get(140).getNeighbors().add(segments.get(122));
-segments.get(140).getNeighbors().add(segments.get(139));
-segments.get(140).getNeighbors().add(segments.get(141));
-segments.get(140).getNeighbors().add(segments.get(159));
-//141
-segments.get(141).getPoints().add(points.get(118));
-segments.get(141).getPoints().add(points.get(119));
-segments.get(141).getNeighbors().add(segments.get(123));
-segments.get(141).getNeighbors().add(segments.get(140));
-segments.get(141).getNeighbors().add(segments.get(142));
-segments.get(141).getNeighbors().add(segments.get(159));
-//142
-segments.get(142).getPoints().add(points.get(118));
-segments.get(142).getPoints().add(points.get(131));
-segments.get(142).getNeighbors().add(segments.get(123));
-segments.get(142).getNeighbors().add(segments.get(141));
-segments.get(142).getNeighbors().add(segments.get(143));
-segments.get(142).getNeighbors().add(segments.get(160));
-//143
-segments.get(143).getPoints().add(points.get(130));
-segments.get(143).getPoints().add(points.get(131));
-segments.get(143).getNeighbors().add(segments.get(124));
-segments.get(143).getNeighbors().add(segments.get(142));
-segments.get(143).getNeighbors().add(segments.get(144));
-segments.get(143).getNeighbors().add(segments.get(160));
-//144
-segments.get(144).getPoints().add(points.get(130));
-segments.get(144).getPoints().add(points.get(143));
-segments.get(144).getNeighbors().add(segments.get(124));
-segments.get(144).getNeighbors().add(segments.get(143));
-segments.get(144).getNeighbors().add(segments.get(145));
-segments.get(144).getNeighbors().add(segments.get(161));
-//145
-segments.get(145).getPoints().add(points.get(142));
-segments.get(145).getPoints().add(points.get(143));
-segments.get(145).getNeighbors().add(segments.get(125));
-segments.get(145).getNeighbors().add(segments.get(144));
-segments.get(145).getNeighbors().add(segments.get(146));
-segments.get(145).getNeighbors().add(segments.get(161));
-//146
-segments.get(146).getPoints().add(points.get(142));
-segments.get(146).getPoints().add(points.get(155));
-segments.get(146).getNeighbors().add(segments.get(125));
-segments.get(146).getNeighbors().add(segments.get(145));
-segments.get(146).getNeighbors().add(segments.get(147));
-segments.get(146).getNeighbors().add(segments.get(162));
-//147
-segments.get(147).getPoints().add(points.get(154));
-segments.get(147).getPoints().add(points.get(155));
-segments.get(147).getNeighbors().add(segments.get(126));
-segments.get(147).getNeighbors().add(segments.get(146));
-segments.get(147).getNeighbors().add(segments.get(148));
-segments.get(147).getNeighbors().add(segments.get(162));
-//148
-segments.get(148).getPoints().add(points.get(154));
-segments.get(148).getPoints().add(points.get(166));
-segments.get(148).getNeighbors().add(segments.get(126));
-segments.get(148).getNeighbors().add(segments.get(147));
-segments.get(148).getNeighbors().add(segments.get(149));
-segments.get(148).getNeighbors().add(segments.get(163));
-//149
-segments.get(149).getPoints().add(points.get(165));
-segments.get(149).getPoints().add(points.get(166));
-segments.get(149).getNeighbors().add(segments.get(127));
-segments.get(149).getNeighbors().add(segments.get(148));
-segments.get(149).getNeighbors().add(segments.get(150));
-segments.get(149).getNeighbors().add(segments.get(163));
-//150
-segments.get(150).getPoints().add(points.get(165));
-segments.get(150).getPoints().add(points.get(174));
-segments.get(150).getNeighbors().add(segments.get(127));
-segments.get(150).getNeighbors().add(segments.get(149));
-segments.get(150).getNeighbors().add(segments.get(151));
-segments.get(150).getNeighbors().add(segments.get(164));
-//151
-segments.get(151).getPoints().add(points.get(173));
-segments.get(151).getPoints().add(points.get(174));
-segments.get(151).getNeighbors().add(segments.get(128));
-segments.get(151).getNeighbors().add(segments.get(150));
-segments.get(151).getNeighbors().add(segments.get(152));
-segments.get(151).getNeighbors().add(segments.get(164));
-//152
-segments.get(152).getPoints().add(points.get(173));
-segments.get(152).getPoints().add(points.get(37));
-segments.get(152).getNeighbors().add(segments.get(128));
-segments.get(152).getNeighbors().add(segments.get(151));
-segments.get(152).getNeighbors().add(segments.get(153));
-segments.get(152).getNeighbors().add(segments.get(165));
-//153
-segments.get(153).getPoints().add(points.get(37));
-segments.get(153).getPoints().add(points.get(38));
-segments.get(153).getNeighbors().add(segments.get(129));
-segments.get(153).getNeighbors().add(segments.get(152));
-segments.get(153).getNeighbors().add(segments.get(165));
-//154
-segments.get(154).getPoints().add(points.get(9));
-segments.get(154).getPoints().add(points.get(10));
-segments.get(154).getNeighbors().add(segments.get(166));
-segments.get(154).getNeighbors().add(segments.get(130));
-segments.get(154).getNeighbors().add(segments.get(131));
-//155
-segments.get(155).getPoints().add(points.get(75));
-segments.get(155).getPoints().add(points.get(80));
-segments.get(155).getNeighbors().add(segments.get(132));
-segments.get(155).getNeighbors().add(segments.get(133));
-segments.get(155).getNeighbors().add(segments.get(167));
-segments.get(155).getNeighbors().add(segments.get(168));
-//156
-segments.get(156).getPoints().add(points.get(77));
-segments.get(156).getPoints().add(points.get(82));
-segments.get(156).getNeighbors().add(segments.get(134));
-segments.get(156).getNeighbors().add(segments.get(135));
-segments.get(156).getNeighbors().add(segments.get(169));
-segments.get(156).getNeighbors().add(segments.get(170));
-//157
-segments.get(157).getPoints().add(points.get(95));
-segments.get(157).getPoints().add(points.get(96));
-segments.get(157).getNeighbors().add(segments.get(136));
-segments.get(157).getNeighbors().add(segments.get(137));
-segments.get(157).getNeighbors().add(segments.get(171));
-segments.get(157).getNeighbors().add(segments.get(172));
-//158
-segments.get(158).getPoints().add(points.get(107));
-segments.get(158).getPoints().add(points.get(108));
-segments.get(158).getNeighbors().add(segments.get(138));
-segments.get(158).getNeighbors().add(segments.get(139));
-segments.get(158).getNeighbors().add(segments.get(173));
-segments.get(158).getNeighbors().add(segments.get(174));
-//159
-segments.get(159).getPoints().add(points.get(119));
-segments.get(159).getPoints().add(points.get(120));
-segments.get(159).getNeighbors().add(segments.get(140));
-segments.get(159).getNeighbors().add(segments.get(141));
-segments.get(159).getNeighbors().add(segments.get(175));
-segments.get(159).getNeighbors().add(segments.get(176));
-//160
-segments.get(160).getPoints().add(points.get(131));
-segments.get(160).getPoints().add(points.get(132));
-segments.get(160).getNeighbors().add(segments.get(142));
-segments.get(160).getNeighbors().add(segments.get(143));
-segments.get(160).getNeighbors().add(segments.get(177));
-segments.get(160).getNeighbors().add(segments.get(178));
-//161
-segments.get(161).getPoints().add(points.get(143));
-segments.get(161).getPoints().add(points.get(144));
-segments.get(161).getNeighbors().add(segments.get(144));
-segments.get(161).getNeighbors().add(segments.get(145));
-segments.get(161).getNeighbors().add(segments.get(179));
-segments.get(161).getNeighbors().add(segments.get(180));
-//162
-segments.get(162).getPoints().add(points.get(155));
-segments.get(162).getPoints().add(points.get(156));
-segments.get(162).getNeighbors().add(segments.get(146));
-segments.get(162).getNeighbors().add(segments.get(147));
-segments.get(162).getNeighbors().add(segments.get(181));
-segments.get(162).getNeighbors().add(segments.get(182));
-//163
-segments.get(163).getPoints().add(points.get(166));
-segments.get(163).getPoints().add(points.get(167));
-segments.get(163).getNeighbors().add(segments.get(148));
-segments.get(163).getNeighbors().add(segments.get(149));
-segments.get(163).getNeighbors().add(segments.get(183));
-segments.get(163).getNeighbors().add(segments.get(184));
-//164
-segments.get(164).getPoints().add(points.get(174));
-segments.get(164).getPoints().add(points.get(175));
-segments.get(164).getNeighbors().add(segments.get(150));
-segments.get(164).getNeighbors().add(segments.get(151));
-segments.get(164).getNeighbors().add(segments.get(185));
-segments.get(164).getNeighbors().add(segments.get(186));
-//165
-segments.get(165).getPoints().add(points.get(36));
-segments.get(165).getPoints().add(points.get(37));
-segments.get(165).getNeighbors().add(segments.get(152));
-segments.get(165).getNeighbors().add(segments.get(153));
-segments.get(165).getNeighbors().add(segments.get(187));
-//166
-segments.get(166).getPoints().add(points.get(10));
-segments.get(166).getPoints().add(points.get(11));
-segments.get(166).getNeighbors().add(segments.get(154));
-segments.get(166).getNeighbors().add(segments.get(167));
-segments.get(166).getNeighbors().add(segments.get(188));
-//167
-segments.get(167).getPoints().add(points.get(11));
-segments.get(167).getPoints().add(points.get(80));
-segments.get(167).getNeighbors().add(segments.get(155));
-segments.get(167).getNeighbors().add(segments.get(166));
-segments.get(167).getNeighbors().add(segments.get(168));
-segments.get(167).getNeighbors().add(segments.get(188));
-//168
-segments.get(168).getPoints().add(points.get(80));
-segments.get(168).getPoints().add(points.get(81));
-segments.get(168).getNeighbors().add(segments.get(155));
-segments.get(168).getNeighbors().add(segments.get(167));
-segments.get(168).getNeighbors().add(segments.get(169));
-segments.get(168).getNeighbors().add(segments.get(189));
-//169
-segments.get(169).getPoints().add(points.get(81));
-segments.get(169).getPoints().add(points.get(82));
-segments.get(169).getNeighbors().add(segments.get(156));
-segments.get(169).getNeighbors().add(segments.get(168));
-segments.get(169).getNeighbors().add(segments.get(170));
-segments.get(169).getNeighbors().add(segments.get(189));
-//170
-segments.get(170).getPoints().add(points.get(82));
-segments.get(170).getPoints().add(points.get(84));
-segments.get(170).getNeighbors().add(segments.get(156));
-segments.get(170).getNeighbors().add(segments.get(169));
-segments.get(170).getNeighbors().add(segments.get(171));
-segments.get(170).getNeighbors().add(segments.get(190));
-//171
-segments.get(171).getPoints().add(points.get(84));
-segments.get(171).getPoints().add(points.get(96));
-segments.get(171).getNeighbors().add(segments.get(157));
-segments.get(171).getNeighbors().add(segments.get(170));
-segments.get(171).getNeighbors().add(segments.get(172));
-segments.get(171).getNeighbors().add(segments.get(190));
-//172
-segments.get(172).getPoints().add(points.get(96));
-segments.get(172).getPoints().add(points.get(97));
-segments.get(172).getNeighbors().add(segments.get(157));
-segments.get(172).getNeighbors().add(segments.get(171));
-segments.get(172).getNeighbors().add(segments.get(173));
-segments.get(172).getNeighbors().add(segments.get(191));
-//173
-segments.get(173).getPoints().add(points.get(97));
-segments.get(173).getPoints().add(points.get(108));
-segments.get(173).getNeighbors().add(segments.get(158));
-segments.get(173).getNeighbors().add(segments.get(172));
-segments.get(173).getNeighbors().add(segments.get(174));
-segments.get(173).getNeighbors().add(segments.get(191));
-//174
-segments.get(174).getPoints().add(points.get(108));
-segments.get(174).getPoints().add(points.get(109));
-segments.get(174).getNeighbors().add(segments.get(158));
-segments.get(174).getNeighbors().add(segments.get(173));
-segments.get(174).getNeighbors().add(segments.get(175));
-segments.get(174).getNeighbors().add(segments.get(192));
-//175
-segments.get(175).getPoints().add(points.get(109));
-segments.get(175).getPoints().add(points.get(120));
-segments.get(175).getNeighbors().add(segments.get(159));
-segments.get(175).getNeighbors().add(segments.get(174));
-segments.get(175).getNeighbors().add(segments.get(176));
-segments.get(175).getNeighbors().add(segments.get(192));
-//176
-segments.get(176).getPoints().add(points.get(120));
-segments.get(176).getPoints().add(points.get(121));
-segments.get(176).getNeighbors().add(segments.get(159));
-segments.get(176).getNeighbors().add(segments.get(175));
-segments.get(176).getNeighbors().add(segments.get(177));
-segments.get(176).getNeighbors().add(segments.get(193));
-//177
-segments.get(177).getPoints().add(points.get(121));
-segments.get(177).getPoints().add(points.get(132));
-segments.get(177).getNeighbors().add(segments.get(160));
-segments.get(177).getNeighbors().add(segments.get(176));
-segments.get(177).getNeighbors().add(segments.get(178));
-segments.get(177).getNeighbors().add(segments.get(193));
-//178
-segments.get(178).getPoints().add(points.get(132));
-segments.get(178).getPoints().add(points.get(133));
-segments.get(178).getNeighbors().add(segments.get(160));
-segments.get(178).getNeighbors().add(segments.get(177));
-segments.get(178).getNeighbors().add(segments.get(179));
-segments.get(178).getNeighbors().add(segments.get(194));
-//179
-segments.get(179).getPoints().add(points.get(133));
-segments.get(179).getPoints().add(points.get(144));
-segments.get(179).getNeighbors().add(segments.get(161));
-segments.get(179).getNeighbors().add(segments.get(178));
-segments.get(179).getNeighbors().add(segments.get(180));
-segments.get(179).getNeighbors().add(segments.get(194));
-//180
-segments.get(180).getPoints().add(points.get(144));
-segments.get(180).getPoints().add(points.get(145));
-segments.get(180).getNeighbors().add(segments.get(161));
-segments.get(180).getNeighbors().add(segments.get(179));
-segments.get(180).getNeighbors().add(segments.get(181));
-segments.get(180).getNeighbors().add(segments.get(195));
-//181
-segments.get(181).getPoints().add(points.get(145));
-segments.get(181).getPoints().add(points.get(156));
-segments.get(181).getNeighbors().add(segments.get(162));
-segments.get(181).getNeighbors().add(segments.get(180));
-segments.get(181).getNeighbors().add(segments.get(182));
-segments.get(181).getNeighbors().add(segments.get(195));
-//182
-segments.get(182).getPoints().add(points.get(156));
-segments.get(182).getPoints().add(points.get(157));
-segments.get(182).getNeighbors().add(segments.get(162));
-segments.get(182).getNeighbors().add(segments.get(181));
-segments.get(182).getNeighbors().add(segments.get(183));
-segments.get(182).getNeighbors().add(segments.get(196));
-//183
-segments.get(183).getPoints().add(points.get(157));
-segments.get(183).getPoints().add(points.get(167));
-segments.get(183).getNeighbors().add(segments.get(163));
-segments.get(183).getNeighbors().add(segments.get(182));
-segments.get(183).getNeighbors().add(segments.get(184));
-segments.get(183).getNeighbors().add(segments.get(196));
-//184
-segments.get(184).getPoints().add(points.get(167));
-segments.get(184).getPoints().add(points.get(168));
-segments.get(184).getNeighbors().add(segments.get(163));
-segments.get(184).getNeighbors().add(segments.get(183));
-segments.get(184).getNeighbors().add(segments.get(185));
-segments.get(184).getNeighbors().add(segments.get(197));
-//185
-segments.get(185).getPoints().add(points.get(168));
-segments.get(185).getPoints().add(points.get(175));
-segments.get(185).getNeighbors().add(segments.get(164));
-segments.get(185).getNeighbors().add(segments.get(184));
-segments.get(185).getNeighbors().add(segments.get(186));
-segments.get(185).getNeighbors().add(segments.get(197));
-//186
-segments.get(186).getPoints().add(points.get(175));
-segments.get(186).getPoints().add(points.get(35));
-segments.get(186).getNeighbors().add(segments.get(164));
-segments.get(186).getNeighbors().add(segments.get(185));
-segments.get(186).getNeighbors().add(segments.get(187));
-segments.get(186).getNeighbors().add(segments.get(198));
-//187
-segments.get(187).getPoints().add(points.get(35));
-segments.get(187).getPoints().add(points.get(36));
-segments.get(187).getNeighbors().add(segments.get(165));
-segments.get(187).getNeighbors().add(segments.get(186));
-segments.get(187).getNeighbors().add(segments.get(198));
-//188
-segments.get(188).getPoints().add(points.get(11));
-segments.get(188).getPoints().add(points.get(12));
-segments.get(188).getNeighbors().add(segments.get(166));
-segments.get(188).getNeighbors().add(segments.get(167));
-segments.get(188).getNeighbors().add(segments.get(199));
-//189
-segments.get(189).getPoints().add(points.get(81));
-segments.get(189).getPoints().add(points.get(83));
-segments.get(189).getNeighbors().add(segments.get(168));
-segments.get(189).getNeighbors().add(segments.get(169));
-segments.get(189).getNeighbors().add(segments.get(200));
-segments.get(189).getNeighbors().add(segments.get(201));
-//190
-segments.get(190).getPoints().add(points.get(84));
-segments.get(190).getPoints().add(points.get(85));
-segments.get(190).getNeighbors().add(segments.get(170));
-segments.get(190).getNeighbors().add(segments.get(171));
-segments.get(190).getNeighbors().add(segments.get(202));
-segments.get(190).getNeighbors().add(segments.get(203));
-//191
-segments.get(191).getPoints().add(points.get(97));
-segments.get(191).getPoints().add(points.get(98));
-segments.get(191).getNeighbors().add(segments.get(172));
-segments.get(191).getNeighbors().add(segments.get(173));
-segments.get(191).getNeighbors().add(segments.get(204));
-segments.get(191).getNeighbors().add(segments.get(205));
-//192
-segments.get(192).getPoints().add(points.get(109));
-segments.get(192).getPoints().add(points.get(110));
-segments.get(192).getNeighbors().add(segments.get(174));
-segments.get(192).getNeighbors().add(segments.get(175));
-segments.get(192).getNeighbors().add(segments.get(206));
-segments.get(192).getNeighbors().add(segments.get(207));
-//193
-segments.get(193).getPoints().add(points.get(121));
-segments.get(193).getPoints().add(points.get(122));
-segments.get(193).getNeighbors().add(segments.get(176));
-segments.get(193).getNeighbors().add(segments.get(177));
-segments.get(193).getNeighbors().add(segments.get(208));
-segments.get(193).getNeighbors().add(segments.get(209));
-//194
-segments.get(194).getPoints().add(points.get(133));
-segments.get(194).getPoints().add(points.get(134));
-segments.get(194).getNeighbors().add(segments.get(178));
-segments.get(194).getNeighbors().add(segments.get(179));
-segments.get(194).getNeighbors().add(segments.get(210));
-segments.get(194).getNeighbors().add(segments.get(211));
-//195
-segments.get(195).getPoints().add(points.get(145));
-segments.get(195).getPoints().add(points.get(146));
-segments.get(195).getNeighbors().add(segments.get(180));
-segments.get(195).getNeighbors().add(segments.get(181));
-segments.get(195).getNeighbors().add(segments.get(212));
-segments.get(195).getNeighbors().add(segments.get(213));
-//196
-segments.get(196).getPoints().add(points.get(157));
-segments.get(196).getPoints().add(points.get(158));
-segments.get(196).getNeighbors().add(segments.get(182));
-segments.get(196).getNeighbors().add(segments.get(183));
-segments.get(196).getNeighbors().add(segments.get(214));
-segments.get(196).getNeighbors().add(segments.get(215));
-//197
-segments.get(197).getPoints().add(points.get(168));
-segments.get(197).getPoints().add(points.get(169));
-segments.get(197).getNeighbors().add(segments.get(184));
-segments.get(197).getNeighbors().add(segments.get(185));
-segments.get(197).getNeighbors().add(segments.get(216));
-segments.get(197).getNeighbors().add(segments.get(217));
-//198
-segments.get(198).getPoints().add(points.get(35));
-segments.get(198).getPoints().add(points.get(34));
-segments.get(198).getNeighbors().add(segments.get(186));
-segments.get(198).getNeighbors().add(segments.get(187));
-segments.get(198).getNeighbors().add(segments.get(218));
-//199
-segments.get(199).getPoints().add(points.get(12));
-segments.get(199).getPoints().add(points.get(13));
-segments.get(199).getNeighbors().add(segments.get(200));
-segments.get(199).getNeighbors().add(segments.get(188));
-segments.get(199).getNeighbors().add(segments.get(219));
-//200
-segments.get(200).getPoints().add(points.get(13));
-segments.get(200).getPoints().add(points.get(83));
-segments.get(200).getNeighbors().add(segments.get(199));
-segments.get(200).getNeighbors().add(segments.get(201));
-segments.get(200).getNeighbors().add(segments.get(189));
-segments.get(200).getNeighbors().add(segments.get(219));
-//201
-segments.get(201).getPoints().add(points.get(83));
-segments.get(201).getPoints().add(points.get(86));
-segments.get(201).getNeighbors().add(segments.get(200));
-segments.get(201).getNeighbors().add(segments.get(202));
-segments.get(201).getNeighbors().add(segments.get(189));
-segments.get(201).getNeighbors().add(segments.get(220));
-//202
-segments.get(202).getPoints().add(points.get(85));
-segments.get(202).getPoints().add(points.get(86));
-segments.get(202).getNeighbors().add(segments.get(201));
-segments.get(202).getNeighbors().add(segments.get(203));
-segments.get(202).getNeighbors().add(segments.get(190));
-segments.get(202).getNeighbors().add(segments.get(220));
-//203
-segments.get(203).getPoints().add(points.get(85));
-segments.get(203).getPoints().add(points.get(87));
-segments.get(203).getNeighbors().add(segments.get(202));
-segments.get(203).getNeighbors().add(segments.get(204));
-segments.get(203).getNeighbors().add(segments.get(190));
-segments.get(203).getNeighbors().add(segments.get(221));
-//204
-segments.get(204).getPoints().add(points.get(87));
-segments.get(204).getPoints().add(points.get(98));
-segments.get(204).getNeighbors().add(segments.get(203));
-segments.get(204).getNeighbors().add(segments.get(205));
-segments.get(204).getNeighbors().add(segments.get(191));
-segments.get(204).getNeighbors().add(segments.get(221));
-//205
-segments.get(205).getPoints().add(points.get(98));
-segments.get(205).getPoints().add(points.get(99));
-segments.get(205).getNeighbors().add(segments.get(204));
-segments.get(205).getNeighbors().add(segments.get(206));
-segments.get(205).getNeighbors().add(segments.get(191));
-segments.get(205).getNeighbors().add(segments.get(222));
-//206
-segments.get(206).getPoints().add(points.get(99));
-segments.get(206).getPoints().add(points.get(110));
-segments.get(206).getNeighbors().add(segments.get(205));
-segments.get(206).getNeighbors().add(segments.get(207));
-segments.get(206).getNeighbors().add(segments.get(192));
-segments.get(206).getNeighbors().add(segments.get(222));
-//207
-segments.get(207).getPoints().add(points.get(110));
-segments.get(207).getPoints().add(points.get(111));
-segments.get(207).getNeighbors().add(segments.get(206));
-segments.get(207).getNeighbors().add(segments.get(208));
-segments.get(207).getNeighbors().add(segments.get(192));
-segments.get(207).getNeighbors().add(segments.get(223));
-//208
-segments.get(208).getPoints().add(points.get(111));
-segments.get(208).getPoints().add(points.get(122));
-segments.get(208).getNeighbors().add(segments.get(207));
-segments.get(208).getNeighbors().add(segments.get(209));
-segments.get(208).getNeighbors().add(segments.get(193));
-segments.get(208).getNeighbors().add(segments.get(223));
-//209
-segments.get(209).getPoints().add(points.get(122));
-segments.get(209).getPoints().add(points.get(123));
-segments.get(209).getNeighbors().add(segments.get(208));
-segments.get(209).getNeighbors().add(segments.get(210));
-segments.get(209).getNeighbors().add(segments.get(193));
-segments.get(209).getNeighbors().add(segments.get(224));
-//210
-segments.get(210).getPoints().add(points.get(123));
-segments.get(210).getPoints().add(points.get(134));
-segments.get(210).getNeighbors().add(segments.get(209));
-segments.get(210).getNeighbors().add(segments.get(211));
-segments.get(210).getNeighbors().add(segments.get(194));
-segments.get(210).getNeighbors().add(segments.get(224));
-//211
-segments.get(211).getPoints().add(points.get(134));
-segments.get(211).getPoints().add(points.get(135));
-segments.get(211).getNeighbors().add(segments.get(210));
-segments.get(211).getNeighbors().add(segments.get(212));
-segments.get(211).getNeighbors().add(segments.get(194));
-segments.get(211).getNeighbors().add(segments.get(225));
-//212
-segments.get(212).getPoints().add(points.get(135));
-segments.get(212).getPoints().add(points.get(146));
-segments.get(212).getNeighbors().add(segments.get(211));
-segments.get(212).getNeighbors().add(segments.get(213));
-segments.get(212).getNeighbors().add(segments.get(195));
-segments.get(212).getNeighbors().add(segments.get(225));
-//213
-segments.get(213).getPoints().add(points.get(146));
-segments.get(213).getPoints().add(points.get(147));
-segments.get(213).getNeighbors().add(segments.get(212));
-segments.get(213).getNeighbors().add(segments.get(214));
-segments.get(213).getNeighbors().add(segments.get(195));
-segments.get(213).getNeighbors().add(segments.get(226));
-//214
-segments.get(214).getPoints().add(points.get(147));
-segments.get(214).getPoints().add(points.get(158));
-segments.get(214).getNeighbors().add(segments.get(213));
-segments.get(214).getNeighbors().add(segments.get(215));
-segments.get(214).getNeighbors().add(segments.get(196));
-segments.get(214).getNeighbors().add(segments.get(226));
-//215
-segments.get(215).getPoints().add(points.get(158));
-segments.get(215).getPoints().add(points.get(159));
-segments.get(215).getNeighbors().add(segments.get(214));
-segments.get(215).getNeighbors().add(segments.get(215));
-segments.get(215).getNeighbors().add(segments.get(196));
-segments.get(215).getNeighbors().add(segments.get(227));
-//216
-segments.get(216).getPoints().add(points.get(159));
-segments.get(216).getPoints().add(points.get(169));
-segments.get(216).getNeighbors().add(segments.get(215));
-segments.get(216).getNeighbors().add(segments.get(217));
-segments.get(216).getNeighbors().add(segments.get(197));
-segments.get(216).getNeighbors().add(segments.get(227));
-//217
-segments.get(217).getPoints().add(points.get(169));
-segments.get(217).getPoints().add(points.get(33));
-segments.get(217).getNeighbors().add(segments.get(216));
-segments.get(217).getNeighbors().add(segments.get(218));
-segments.get(217).getNeighbors().add(segments.get(197));
-segments.get(217).getNeighbors().add(segments.get(228));
-//218
-segments.get(218).getPoints().add(points.get(33));
-segments.get(218).getPoints().add(points.get(34));
-segments.get(218).getNeighbors().add(segments.get(217));
-segments.get(218).getNeighbors().add(segments.get(198));
-segments.get(218).getNeighbors().add(segments.get(228));
-//219
-segments.get(219).getPoints().add(points.get(13));
-segments.get(219).getPoints().add(points.get(14));
-segments.get(219).getNeighbors().add(segments.get(199));
-segments.get(219).getNeighbors().add(segments.get(200));
-segments.get(219).getNeighbors().add(segments.get(229));
-//220
-segments.get(220).getPoints().add(points.get(16));
-segments.get(220).getPoints().add(points.get(86));
-segments.get(220).getNeighbors().add(segments.get(201));
-segments.get(220).getNeighbors().add(segments.get(202));
-segments.get(220).getNeighbors().add(segments.get(230));
-segments.get(220).getNeighbors().add(segments.get(231));
-//221
-segments.get(221).getPoints().add(points.get(18));
-segments.get(221).getPoints().add(points.get(87));
-segments.get(221).getNeighbors().add(segments.get(203));
-segments.get(221).getNeighbors().add(segments.get(204));
-segments.get(221).getNeighbors().add(segments.get(232));
-segments.get(221).getNeighbors().add(segments.get(233));
-//222
-segments.get(222).getPoints().add(points.get(20));
-segments.get(222).getPoints().add(points.get(99));
-segments.get(222).getNeighbors().add(segments.get(205));
-segments.get(222).getNeighbors().add(segments.get(206));
-segments.get(222).getNeighbors().add(segments.get(234));
-segments.get(222).getNeighbors().add(segments.get(235));
-//223
-segments.get(223).getPoints().add(points.get(22));
-segments.get(223).getPoints().add(points.get(111));
-segments.get(223).getNeighbors().add(segments.get(207));
-segments.get(223).getNeighbors().add(segments.get(208));
-segments.get(223).getNeighbors().add(segments.get(236));
-segments.get(223).getNeighbors().add(segments.get(237));
-//224
-segments.get(224).getPoints().add(points.get(24));
-segments.get(224).getPoints().add(points.get(123));
-segments.get(224).getNeighbors().add(segments.get(209));
-segments.get(224).getNeighbors().add(segments.get(210));
-segments.get(224).getNeighbors().add(segments.get(238));
-segments.get(224).getNeighbors().add(segments.get(239));
-//225
-segments.get(225).getPoints().add(points.get(26));
-segments.get(225).getPoints().add(points.get(135));
-segments.get(225).getNeighbors().add(segments.get(211));
-segments.get(225).getNeighbors().add(segments.get(212));
-segments.get(225).getNeighbors().add(segments.get(240));
-segments.get(225).getNeighbors().add(segments.get(241));
-//226
-segments.get(226).getPoints().add(points.get(28));
-segments.get(226).getPoints().add(points.get(147));
-segments.get(226).getNeighbors().add(segments.get(213));
-segments.get(226).getNeighbors().add(segments.get(214));
-segments.get(226).getNeighbors().add(segments.get(242));
-segments.get(226).getNeighbors().add(segments.get(243));
-//227
-segments.get(227).getPoints().add(points.get(30));
-segments.get(227).getPoints().add(points.get(159));
-segments.get(227).getNeighbors().add(segments.get(215));
-segments.get(227).getNeighbors().add(segments.get(216));
-segments.get(227).getNeighbors().add(segments.get(244));
-segments.get(227).getNeighbors().add(segments.get(245));
-//228
-segments.get(228).getPoints().add(points.get(32));
-segments.get(228).getPoints().add(points.get(33));
-segments.get(228).getNeighbors().add(segments.get(217));
-segments.get(228).getNeighbors().add(segments.get(218));
-segments.get(228).getNeighbors().add(segments.get(246));
-//229
-segments.get(229).getPoints().add(points.get(14));
-segments.get(229).getPoints().add(points.get(15));
-segments.get(229).getNeighbors().add(segments.get(219));
-segments.get(229).getNeighbors().add(segments.get(230));
-//230
-segments.get(230).getPoints().add(points.get(15));
-segments.get(230).getPoints().add(points.get(16));
-segments.get(230).getNeighbors().add(segments.get(220));
-segments.get(230).getNeighbors().add(segments.get(229));
-segments.get(230).getNeighbors().add(segments.get(231));
-//231
-segments.get(231).getPoints().add(points.get(16));
-segments.get(231).getPoints().add(points.get(17));
-segments.get(231).getNeighbors().add(segments.get(220));
-segments.get(231).getNeighbors().add(segments.get(230));
-segments.get(231).getNeighbors().add(segments.get(232));
-//232
-segments.get(232).getPoints().add(points.get(17));
-segments.get(232).getPoints().add(points.get(18));
-segments.get(232).getNeighbors().add(segments.get(221));
-segments.get(232).getNeighbors().add(segments.get(231));
-segments.get(232).getNeighbors().add(segments.get(233));
-//233
-segments.get(233).getPoints().add(points.get(18));
-segments.get(233).getPoints().add(points.get(19));
-segments.get(233).getNeighbors().add(segments.get(221));
-segments.get(233).getNeighbors().add(segments.get(232));
-segments.get(233).getNeighbors().add(segments.get(234));
-//234
-segments.get(234).getPoints().add(points.get(19));
-segments.get(234).getPoints().add(points.get(20));
-segments.get(234).getNeighbors().add(segments.get(222));
-segments.get(234).getNeighbors().add(segments.get(233));
-segments.get(234).getNeighbors().add(segments.get(235));
-//235
-segments.get(235).getPoints().add(points.get(20));
-segments.get(235).getPoints().add(points.get(21));
-segments.get(235).getNeighbors().add(segments.get(222));
-segments.get(235).getNeighbors().add(segments.get(234));
-segments.get(235).getNeighbors().add(segments.get(236));
-//236
-segments.get(236).getPoints().add(points.get(21));
-segments.get(236).getPoints().add(points.get(22));
-segments.get(236).getNeighbors().add(segments.get(223));
-segments.get(236).getNeighbors().add(segments.get(235));
-segments.get(236).getNeighbors().add(segments.get(237));
-//237
-segments.get(237).getPoints().add(points.get(22));
-segments.get(237).getPoints().add(points.get(23));
-segments.get(237).getNeighbors().add(segments.get(223));
-segments.get(237).getNeighbors().add(segments.get(236));
-segments.get(237).getNeighbors().add(segments.get(238));
-//238
-segments.get(238).getPoints().add(points.get(23));
-segments.get(238).getPoints().add(points.get(24));
-segments.get(238).getNeighbors().add(segments.get(224));
-segments.get(238).getNeighbors().add(segments.get(237));
-segments.get(238).getNeighbors().add(segments.get(239));
-//239
-segments.get(239).getPoints().add(points.get(24));
-segments.get(239).getPoints().add(points.get(25));
-segments.get(239).getNeighbors().add(segments.get(224));
-segments.get(239).getNeighbors().add(segments.get(238));
-segments.get(239).getNeighbors().add(segments.get(240));
-//240
-segments.get(240).getPoints().add(points.get(25));
-segments.get(240).getPoints().add(points.get(26));
-segments.get(240).getNeighbors().add(segments.get(225));
-segments.get(240).getNeighbors().add(segments.get(239));
-segments.get(240).getNeighbors().add(segments.get(241));
-//241
-segments.get(241).getPoints().add(points.get(26));
-segments.get(241).getPoints().add(points.get(27));
-segments.get(241).getNeighbors().add(segments.get(225));
-segments.get(241).getNeighbors().add(segments.get(240));
-segments.get(241).getNeighbors().add(segments.get(242));
-//242
-segments.get(242).getPoints().add(points.get(27));
-segments.get(242).getPoints().add(points.get(28));
-segments.get(242).getNeighbors().add(segments.get(226));
-segments.get(242).getNeighbors().add(segments.get(241));
-segments.get(242).getNeighbors().add(segments.get(243));
-//243
-segments.get(243).getPoints().add(points.get(28));
-segments.get(243).getPoints().add(points.get(29));
-segments.get(243).getNeighbors().add(segments.get(226));
-segments.get(243).getNeighbors().add(segments.get(242));
-segments.get(243).getNeighbors().add(segments.get(244));
-//244
-segments.get(244).getPoints().add(points.get(29));
-segments.get(244).getPoints().add(points.get(30));
-segments.get(244).getNeighbors().add(segments.get(227));
-segments.get(244).getNeighbors().add(segments.get(243));
-segments.get(244).getNeighbors().add(segments.get(245));
-//245
-segments.get(245).getPoints().add(points.get(30));
-segments.get(245).getPoints().add(points.get(31));
-segments.get(245).getNeighbors().add(segments.get(227));
-segments.get(245).getNeighbors().add(segments.get(244));
-segments.get(245).getNeighbors().add(segments.get(246));
-//246
-segments.get(246).getPoints().add(points.get(31));
-segments.get(246).getPoints().add(points.get(32));
-segments.get(246).getNeighbors().add(segments.get(228));
-segments.get(246).getNeighbors().add(segments.get(245));
+
+Board2();
 
 }
+	public void Board2() {
+		//creates the list of segments and their associated points and segments
+
+		//0
+		segments.get(0).getPoints().add(points.get(0));
+		segments.get(0).getPoints().add(points.get(2));
+		segments.get(0).getNeighbors().add(segments.get(1));
+		segments.get(0).getNeighbors().add(segments.get(18));
+
+		//1
+		segments.get(1).getPoints().add(points.get(0));
+		segments.get(1).getPoints().add(points.get(61));
+		segments.get(1).getNeighbors().add(segments.get(0));
+		segments.get(1).getNeighbors().add(segments.get(2));
+		segments.get(1).getNeighbors().add(segments.get(19));
+
+		//2
+		segments.get(2).getPoints().add(points.get(60));
+		segments.get(2).getPoints().add(points.get(61));
+		segments.get(2).getNeighbors().add(segments.get(1));
+		segments.get(2).getNeighbors().add(segments.get(3));
+		segments.get(2).getNeighbors().add(segments.get(19));
+		//3
+		segments.get(3).getPoints().add(points.get(59));
+		segments.get(3).getPoints().add(points.get(60));
+		segments.get(3).getNeighbors().add(segments.get(2));
+		segments.get(3).getNeighbors().add(segments.get(4));
+		segments.get(3).getNeighbors().add(segments.get(20));
+		//4
+		segments.get(4).getPoints().add(points.get(58));
+		segments.get(4).getPoints().add(points.get(59));
+		segments.get(4).getNeighbors().add(segments.get(3));
+		segments.get(4).getNeighbors().add(segments.get(5));
+		segments.get(4).getNeighbors().add(segments.get(20));
+		//5
+		segments.get(5).getPoints().add(points.get(58));
+		segments.get(5).getPoints().add(points.get(57));
+		segments.get(5).getNeighbors().add(segments.get(4));
+		segments.get(5).getNeighbors().add(segments.get(6));
+		segments.get(5).getNeighbors().add(segments.get(21));
+		//6
+		segments.get(6).getPoints().add(points.get(56));
+		segments.get(6).getPoints().add(points.get(57));
+		segments.get(6).getNeighbors().add(segments.get(5));
+		segments.get(6).getNeighbors().add(segments.get(7));
+		segments.get(6).getNeighbors().add(segments.get(21));
+		//7
+		segments.get(7).getPoints().add(points.get(55));
+		segments.get(7).getPoints().add(points.get(56));
+		segments.get(7).getNeighbors().add(segments.get(6));
+		segments.get(7).getNeighbors().add(segments.get(8));
+		segments.get(7).getNeighbors().add(segments.get(22));
+		//8
+		segments.get(8).getPoints().add(points.get(54));
+		segments.get(8).getPoints().add(points.get(55));
+		segments.get(8).getNeighbors().add(segments.get(7));
+		segments.get(8).getNeighbors().add(segments.get(9));
+		segments.get(8).getNeighbors().add(segments.get(22));
+		//9
+		segments.get(9).getPoints().add(points.get(53));
+		segments.get(9).getPoints().add(points.get(54));
+		segments.get(9).getNeighbors().add(segments.get(8));
+		segments.get(9).getNeighbors().add(segments.get(10));
+		segments.get(9).getNeighbors().add(segments.get(23));
+		//10
+		segments.get(10).getPoints().add(points.get(52));
+		segments.get(10).getPoints().add(points.get(53));
+		segments.get(10).getNeighbors().add(segments.get(9));
+		segments.get(10).getNeighbors().add(segments.get(11));
+		segments.get(10).getNeighbors().add(segments.get(23));
+		//11
+		segments.get(11).getPoints().add(points.get(51));
+		segments.get(11).getPoints().add(points.get(52));
+		segments.get(11).getNeighbors().add(segments.get(10));
+		segments.get(11).getNeighbors().add(segments.get(12));
+		segments.get(11).getNeighbors().add(segments.get(24));
+		//12
+		segments.get(12).getPoints().add(points.get(50));
+		segments.get(12).getPoints().add(points.get(51));
+		segments.get(12).getNeighbors().add(segments.get(11));
+		segments.get(12).getNeighbors().add(segments.get(13));
+		segments.get(12).getNeighbors().add(segments.get(24));
+		//13
+		segments.get(13).getPoints().add(points.get(49));
+		segments.get(13).getPoints().add(points.get(50));
+		segments.get(13).getNeighbors().add(segments.get(12));
+		segments.get(13).getNeighbors().add(segments.get(14));
+		segments.get(13).getNeighbors().add(segments.get(25));
+		//14
+		segments.get(14).getPoints().add(points.get(48));
+		segments.get(14).getPoints().add(points.get(49));
+		segments.get(14).getNeighbors().add(segments.get(13));
+		segments.get(14).getNeighbors().add(segments.get(15));
+		segments.get(14).getNeighbors().add(segments.get(25));
+		//15
+		segments.get(15).getPoints().add(points.get(47));
+		segments.get(15).getPoints().add(points.get(48));
+		segments.get(15).getNeighbors().add(segments.get(14));
+		segments.get(15).getNeighbors().add(segments.get(16));
+		segments.get(15).getNeighbors().add(segments.get(26));
+		//16
+		segments.get(16).getPoints().add(points.get(46));
+		segments.get(16).getPoints().add(points.get(47));
+		segments.get(16).getNeighbors().add(segments.get(15));
+		segments.get(16).getNeighbors().add(segments.get(17));
+		segments.get(16).getNeighbors().add(segments.get(26));
+		//17
+		segments.get(17).getPoints().add(points.get(45));
+		segments.get(17).getPoints().add(points.get(46));
+		segments.get(17).getNeighbors().add(segments.get(16));
+		segments.get(17).getNeighbors().add(segments.get(27));
+		//18
+		segments.get(18).getPoints().add(points.get(1));
+		segments.get(18).getPoints().add(points.get(2));
+		segments.get(18).getNeighbors().add(segments.get(0));
+		segments.get(18).getNeighbors().add(segments.get(28));
+		segments.get(18).getNeighbors().add(segments.get(29));
+		//19
+		segments.get(19).getPoints().add(points.get(64));
+		segments.get(19).getPoints().add(points.get(61));
+		segments.get(19).getNeighbors().add(segments.get(1));
+		segments.get(19).getNeighbors().add(segments.get(2));
+		segments.get(19).getNeighbors().add(segments.get(30));
+		segments.get(19).getNeighbors().add(segments.get(31));
+		//20
+		segments.get(20).getPoints().add(points.get(59));
+		segments.get(20).getPoints().add(points.get(62));
+		segments.get(20).getNeighbors().add(segments.get(3));
+		segments.get(20).getNeighbors().add(segments.get(4));
+		segments.get(20).getNeighbors().add(segments.get(32));
+		segments.get(20).getNeighbors().add(segments.get(33));
+		//21
+		segments.get(21).getPoints().add(points.get(57));
+		segments.get(21).getPoints().add(points.get(88));
+		segments.get(21).getNeighbors().add(segments.get(5));
+		segments.get(21).getNeighbors().add(segments.get(6));
+		segments.get(21).getNeighbors().add(segments.get(34));
+		segments.get(21).getNeighbors().add(segments.get(35));
+		//22
+		segments.get(22).getPoints().add(points.get(55));
+		segments.get(22).getPoints().add(points.get(100));
+		segments.get(22).getNeighbors().add(segments.get(7));
+		segments.get(22).getNeighbors().add(segments.get(8));
+		segments.get(22).getNeighbors().add(segments.get(36));
+		segments.get(22).getNeighbors().add(segments.get(37));
+		//23
+		segments.get(23).getPoints().add(points.get(53));
+		segments.get(23).getPoints().add(points.get(112));
+		segments.get(23).getNeighbors().add(segments.get(9));
+		segments.get(23).getNeighbors().add(segments.get(10));
+		segments.get(23).getNeighbors().add(segments.get(38));
+		segments.get(23).getNeighbors().add(segments.get(39));
+		//24
+		segments.get(24).getPoints().add(points.get(51));
+		segments.get(24).getPoints().add(points.get(124));
+		segments.get(24).getNeighbors().add(segments.get(11));
+		segments.get(24).getNeighbors().add(segments.get(12));
+		segments.get(24).getNeighbors().add(segments.get(40));
+		segments.get(24).getNeighbors().add(segments.get(41));
+		//25
+		segments.get(25).getPoints().add(points.get(49));
+		segments.get(25).getPoints().add(points.get(136));
+		segments.get(25).getNeighbors().add(segments.get(13));
+		segments.get(25).getNeighbors().add(segments.get(14));
+		segments.get(25).getNeighbors().add(segments.get(42));
+		segments.get(25).getNeighbors().add(segments.get(43));
+		//26
+		segments.get(26).getPoints().add(points.get(47));
+		segments.get(26).getPoints().add(points.get(148));
+		segments.get(26).getNeighbors().add(segments.get(15));
+		segments.get(26).getNeighbors().add(segments.get(16));
+		segments.get(26).getNeighbors().add(segments.get(44));
+		segments.get(26).getNeighbors().add(segments.get(45));
+		//27
+		segments.get(27).getPoints().add(points.get(45));
+		segments.get(27).getPoints().add(points.get(44));
+		segments.get(27).getNeighbors().add(segments.get(17));
+		segments.get(27).getNeighbors().add(segments.get(46));
+		segments.get(27).getNeighbors().add(segments.get(47));
+		//28
+		segments.get(28).getPoints().add(points.get(1));
+		segments.get(28).getPoints().add(points.get(3));
+		segments.get(28).getNeighbors().add(segments.get(18));
+		segments.get(28).getNeighbors().add(segments.get(29));
+		segments.get(28).getNeighbors().add(segments.get(48));
+		//29
+		segments.get(29).getPoints().add(points.get(1));
+		segments.get(29).getPoints().add(points.get(65));
+		segments.get(29).getNeighbors().add(segments.get(28));
+		segments.get(29).getNeighbors().add(segments.get(30));
+		segments.get(29).getNeighbors().add(segments.get(18));
+		segments.get(29).getNeighbors().add(segments.get(49));
+		//30
+		segments.get(30).getPoints().add(points.get(64));
+		segments.get(30).getPoints().add(points.get(65));
+		segments.get(30).getNeighbors().add(segments.get(29));
+		segments.get(30).getNeighbors().add(segments.get(31));
+		segments.get(30).getNeighbors().add(segments.get(19));
+		segments.get(30).getNeighbors().add(segments.get(49));
+		//31
+		segments.get(31).getPoints().add(points.get(63));
+		segments.get(31).getPoints().add(points.get(64));
+		segments.get(31).getNeighbors().add(segments.get(30));
+		segments.get(31).getNeighbors().add(segments.get(32));
+		segments.get(31).getNeighbors().add(segments.get(19));
+		segments.get(31).getNeighbors().add(segments.get(50));
+		//32
+		segments.get(32).getPoints().add(points.get(62));
+		segments.get(32).getPoints().add(points.get(63));
+		segments.get(32).getNeighbors().add(segments.get(31));
+		segments.get(32).getNeighbors().add(segments.get(33));
+		segments.get(32).getNeighbors().add(segments.get(20));
+		segments.get(32).getNeighbors().add(segments.get(50));
+		//33
+		segments.get(33).getPoints().add(points.get(62));
+		segments.get(33).getPoints().add(points.get(89));
+		segments.get(33).getNeighbors().add(segments.get(32));
+		segments.get(33).getNeighbors().add(segments.get(34));
+		segments.get(33).getNeighbors().add(segments.get(20));
+		segments.get(33).getNeighbors().add(segments.get(51));
+		//34
+		segments.get(34).getPoints().add(points.get(88));
+		segments.get(34).getPoints().add(points.get(89));
+		segments.get(34).getNeighbors().add(segments.get(33));
+		segments.get(34).getNeighbors().add(segments.get(35));
+		segments.get(34).getNeighbors().add(segments.get(21));
+		segments.get(34).getNeighbors().add(segments.get(51));
+		//35
+		segments.get(35).getPoints().add(points.get(88));
+		segments.get(35).getPoints().add(points.get(101));
+		segments.get(35).getNeighbors().add(segments.get(34));
+		segments.get(35).getNeighbors().add(segments.get(36));
+		segments.get(35).getNeighbors().add(segments.get(21));
+		segments.get(35).getNeighbors().add(segments.get(52));
+		//36
+		segments.get(36).getPoints().add(points.get(100));
+		segments.get(36).getPoints().add(points.get(101));
+		segments.get(36).getNeighbors().add(segments.get(35));
+		segments.get(36).getNeighbors().add(segments.get(37));
+		segments.get(36).getNeighbors().add(segments.get(22));
+		segments.get(36).getNeighbors().add(segments.get(52));
+		//37
+		segments.get(37).getPoints().add(points.get(100));
+		segments.get(37).getPoints().add(points.get(113));
+		segments.get(37).getNeighbors().add(segments.get(36));
+		segments.get(37).getNeighbors().add(segments.get(38));
+		segments.get(37).getNeighbors().add(segments.get(22));
+		segments.get(37).getNeighbors().add(segments.get(53));
+		//38
+		segments.get(38).getPoints().add(points.get(112));
+		segments.get(38).getPoints().add(points.get(113));
+		segments.get(38).getNeighbors().add(segments.get(37));
+		segments.get(38).getNeighbors().add(segments.get(39));
+		segments.get(38).getNeighbors().add(segments.get(23));
+		segments.get(38).getNeighbors().add(segments.get(53));
+		//39
+		segments.get(39).getPoints().add(points.get(112));
+		segments.get(39).getPoints().add(points.get(125));
+		segments.get(39).getNeighbors().add(segments.get(38));
+		segments.get(39).getNeighbors().add(segments.get(40));
+		segments.get(39).getNeighbors().add(segments.get(23));
+		segments.get(39).getNeighbors().add(segments.get(54));
+		//40
+		segments.get(40).getPoints().add(points.get(124));
+		segments.get(40).getPoints().add(points.get(125));
+		segments.get(40).getNeighbors().add(segments.get(39));
+		segments.get(40).getNeighbors().add(segments.get(41));
+		segments.get(40).getNeighbors().add(segments.get(24));
+		segments.get(40).getNeighbors().add(segments.get(54));
+		//41
+		segments.get(41).getPoints().add(points.get(124));
+		segments.get(41).getPoints().add(points.get(137));
+		segments.get(41).getNeighbors().add(segments.get(40));
+		segments.get(41).getNeighbors().add(segments.get(42));
+		segments.get(41).getNeighbors().add(segments.get(24));
+		segments.get(41).getNeighbors().add(segments.get(55));
+		//42
+		segments.get(42).getPoints().add(points.get(136));
+		segments.get(42).getPoints().add(points.get(137));
+		segments.get(42).getNeighbors().add(segments.get(41));
+		segments.get(42).getNeighbors().add(segments.get(43));
+		segments.get(42).getNeighbors().add(segments.get(25));
+		segments.get(42).getNeighbors().add(segments.get(55));
+		//43
+		segments.get(43).getPoints().add(points.get(136));
+		segments.get(43).getPoints().add(points.get(149));
+		segments.get(43).getNeighbors().add(segments.get(42));
+		segments.get(43).getNeighbors().add(segments.get(44));
+		segments.get(43).getNeighbors().add(segments.get(25));
+		segments.get(43).getNeighbors().add(segments.get(56));
+		//44
+		segments.get(44).getPoints().add(points.get(148));
+		segments.get(44).getPoints().add(points.get(149));
+		segments.get(44).getNeighbors().add(segments.get(43));
+		segments.get(44).getNeighbors().add(segments.get(45));
+		segments.get(44).getNeighbors().add(segments.get(26));
+		segments.get(44).getNeighbors().add(segments.get(56));
+		//45
+		segments.get(45).getPoints().add(points.get(148));
+		segments.get(45).getPoints().add(points.get(160));
+		segments.get(45).getNeighbors().add(segments.get(44));
+		segments.get(45).getNeighbors().add(segments.get(46));
+		segments.get(45).getNeighbors().add(segments.get(26));
+		segments.get(45).getNeighbors().add(segments.get(57));
+		//46
+		segments.get(46).getPoints().add(points.get(44));
+		segments.get(46).getPoints().add(points.get(160));
+		segments.get(46).getNeighbors().add(segments.get(45));
+		segments.get(46).getNeighbors().add(segments.get(47));
+		segments.get(46).getNeighbors().add(segments.get(27));
+		segments.get(46).getNeighbors().add(segments.get(57));
+		//47
+		segments.get(47).getPoints().add(points.get(43));
+		segments.get(47).getPoints().add(points.get(44));
+		segments.get(47).getNeighbors().add(segments.get(46));
+		segments.get(47).getNeighbors().add(segments.get(27));
+		segments.get(47).getNeighbors().add(segments.get(58));
+		//48
+		segments.get(48).getPoints().add(points.get(3));
+		segments.get(48).getPoints().add(points.get(4));
+		segments.get(48).getNeighbors().add(segments.get(28));
+		segments.get(48).getNeighbors().add(segments.get(59));
+		segments.get(48).getNeighbors().add(segments.get(60));
+		//49
+		segments.get(49).getPoints().add(points.get(65));
+		segments.get(49).getPoints().add(points.get(66));
+		segments.get(49).getNeighbors().add(segments.get(29));
+		segments.get(49).getNeighbors().add(segments.get(30));
+		segments.get(49).getNeighbors().add(segments.get(61));
+		segments.get(49).getNeighbors().add(segments.get(62));
+		//50
+		segments.get(50).getPoints().add(points.get(63));
+		segments.get(50).getPoints().add(points.get(68));
+		segments.get(50).getNeighbors().add(segments.get(31));
+		segments.get(50).getNeighbors().add(segments.get(32));
+		segments.get(50).getNeighbors().add(segments.get(63));
+		segments.get(50).getNeighbors().add(segments.get(64));
+		//51
+		segments.get(51).getPoints().add(points.get(89));
+		segments.get(51).getPoints().add(points.get(90));
+		segments.get(51).getNeighbors().add(segments.get(33));
+		segments.get(51).getNeighbors().add(segments.get(34));
+		segments.get(51).getNeighbors().add(segments.get(65));
+		segments.get(51).getNeighbors().add(segments.get(66));
+		//52
+		segments.get(52).getPoints().add(points.get(101));
+		segments.get(52).getPoints().add(points.get(102));
+		segments.get(52).getNeighbors().add(segments.get(35));
+		segments.get(52).getNeighbors().add(segments.get(36));
+		segments.get(52).getNeighbors().add(segments.get(67));
+		segments.get(52).getNeighbors().add(segments.get(68));
+		//53
+		segments.get(53).getPoints().add(points.get(113));
+		segments.get(53).getPoints().add(points.get(114));
+		segments.get(53).getNeighbors().add(segments.get(37));
+		segments.get(53).getNeighbors().add(segments.get(38));
+		segments.get(53).getNeighbors().add(segments.get(69));
+		segments.get(53).getNeighbors().add(segments.get(70));
+		//54
+		segments.get(54).getPoints().add(points.get(125));
+		segments.get(54).getPoints().add(points.get(126));
+		segments.get(54).getNeighbors().add(segments.get(39));
+		segments.get(54).getNeighbors().add(segments.get(40));
+		segments.get(54).getNeighbors().add(segments.get(71));
+		segments.get(54).getNeighbors().add(segments.get(72));
+		//55
+		segments.get(55).getPoints().add(points.get(137));
+		segments.get(55).getPoints().add(points.get(138));
+		segments.get(55).getNeighbors().add(segments.get(41));
+		segments.get(55).getNeighbors().add(segments.get(42));
+		segments.get(55).getNeighbors().add(segments.get(73));
+		segments.get(55).getNeighbors().add(segments.get(74));
+		//56
+		segments.get(56).getPoints().add(points.get(149));
+		segments.get(56).getPoints().add(points.get(150));
+		segments.get(56).getNeighbors().add(segments.get(43));
+		segments.get(56).getNeighbors().add(segments.get(44));
+		segments.get(56).getNeighbors().add(segments.get(75));
+		segments.get(56).getNeighbors().add(segments.get(76));
+		//57
+		segments.get(57).getPoints().add(points.get(160));
+		segments.get(57).getPoints().add(points.get(161));
+		segments.get(57).getNeighbors().add(segments.get(45));
+		segments.get(57).getNeighbors().add(segments.get(46));
+		segments.get(57).getNeighbors().add(segments.get(77));
+		segments.get(57).getNeighbors().add(segments.get(78));
+		//58
+		segments.get(58).getPoints().add(points.get(42));
+		segments.get(58).getPoints().add(points.get(43));
+		segments.get(58).getNeighbors().add(segments.get(47));
+		segments.get(58).getNeighbors().add(segments.get(79));
+		segments.get(58).getNeighbors().add(segments.get(80));
+		//59
+		segments.get(59).getPoints().add(points.get(4));
+		segments.get(59).getPoints().add(points.get(5));
+		segments.get(59).getNeighbors().add(segments.get(48));
+		segments.get(59).getNeighbors().add(segments.get(60));
+		segments.get(59).getNeighbors().add(segments.get(81));
+		//60
+		segments.get(60).getPoints().add(points.get(4));
+		segments.get(60).getPoints().add(points.get(69));
+		segments.get(60).getNeighbors().add(segments.get(48));
+		segments.get(60).getNeighbors().add(segments.get(59));
+		segments.get(60).getNeighbors().add(segments.get(61));
+		segments.get(60).getNeighbors().add(segments.get(82));
+		//61
+		segments.get(61).getPoints().add(points.get(66));
+		segments.get(61).getPoints().add(points.get(69));
+		segments.get(61).getNeighbors().add(segments.get(49));
+		segments.get(61).getNeighbors().add(segments.get(60));
+		segments.get(61).getNeighbors().add(segments.get(62));
+		segments.get(61).getNeighbors().add(segments.get(82));
+		//62
+		segments.get(62).getPoints().add(points.get(66));
+		segments.get(62).getPoints().add(points.get(67));
+		segments.get(62).getNeighbors().add(segments.get(49));
+		segments.get(62).getNeighbors().add(segments.get(61));
+		segments.get(62).getNeighbors().add(segments.get(63));
+		segments.get(62).getNeighbors().add(segments.get(83));
+		//63
+		segments.get(63).getPoints().add(points.get(67));
+		segments.get(63).getPoints().add(points.get(68));
+		segments.get(63).getNeighbors().add(segments.get(50));
+		segments.get(63).getNeighbors().add(segments.get(62));
+		segments.get(63).getNeighbors().add(segments.get(64));
+		segments.get(63).getNeighbors().add(segments.get(83));
+		//64
+		segments.get(64).getPoints().add(points.get(68));
+		segments.get(64).getPoints().add(points.get(91));
+		segments.get(64).getNeighbors().add(segments.get(50));
+		segments.get(64).getNeighbors().add(segments.get(63));
+		segments.get(64).getNeighbors().add(segments.get(65));
+		segments.get(64).getNeighbors().add(segments.get(84));
+		//65
+		segments.get(65).getPoints().add(points.get(90));
+		segments.get(65).getPoints().add(points.get(91));
+		segments.get(65).getNeighbors().add(segments.get(51));
+		segments.get(65).getNeighbors().add(segments.get(64));
+		segments.get(65).getNeighbors().add(segments.get(66));
+		segments.get(65).getNeighbors().add(segments.get(84));
+		//66
+		segments.get(66).getPoints().add(points.get(90));
+		segments.get(66).getPoints().add(points.get(103));
+		segments.get(66).getNeighbors().add(segments.get(51));
+		segments.get(66).getNeighbors().add(segments.get(65));
+		segments.get(66).getNeighbors().add(segments.get(67));
+		segments.get(66).getNeighbors().add(segments.get(85));
+		//67
+		segments.get(67).getPoints().add(points.get(102));
+		segments.get(67).getPoints().add(points.get(103));
+		segments.get(67).getNeighbors().add(segments.get(52));
+		segments.get(67).getNeighbors().add(segments.get(66));
+		segments.get(67).getNeighbors().add(segments.get(68));
+		segments.get(67).getNeighbors().add(segments.get(85));
+		//68
+		segments.get(68).getPoints().add(points.get(102));
+		segments.get(68).getPoints().add(points.get(115));
+		segments.get(68).getNeighbors().add(segments.get(52));
+		segments.get(68).getNeighbors().add(segments.get(67));
+		segments.get(68).getNeighbors().add(segments.get(69));
+		segments.get(68).getNeighbors().add(segments.get(86));
+		//69
+		segments.get(69).getPoints().add(points.get(114));
+		segments.get(69).getPoints().add(points.get(115));
+		segments.get(69).getNeighbors().add(segments.get(53));
+		segments.get(69).getNeighbors().add(segments.get(68));
+		segments.get(69).getNeighbors().add(segments.get(70));
+		segments.get(69).getNeighbors().add(segments.get(86));
+		//70
+		segments.get(70).getPoints().add(points.get(114));
+		segments.get(70).getPoints().add(points.get(127));
+		segments.get(70).getNeighbors().add(segments.get(53));
+		segments.get(70).getNeighbors().add(segments.get(69));
+		segments.get(70).getNeighbors().add(segments.get(71));
+		segments.get(70).getNeighbors().add(segments.get(87));
+		//71
+		segments.get(71).getPoints().add(points.get(126));
+		segments.get(71).getPoints().add(points.get(127));
+		segments.get(71).getNeighbors().add(segments.get(54));
+		segments.get(71).getNeighbors().add(segments.get(70));
+		segments.get(71).getNeighbors().add(segments.get(72));
+		segments.get(71).getNeighbors().add(segments.get(87));
+		//72
+		segments.get(72).getPoints().add(points.get(126));
+		segments.get(72).getPoints().add(points.get(139));
+		segments.get(72).getNeighbors().add(segments.get(54));
+		segments.get(72).getNeighbors().add(segments.get(71));
+		segments.get(72).getNeighbors().add(segments.get(73));
+		segments.get(72).getNeighbors().add(segments.get(88));
+		//73
+		segments.get(73).getPoints().add(points.get(138));
+		segments.get(73).getPoints().add(points.get(139));
+		segments.get(73).getNeighbors().add(segments.get(55));
+		segments.get(73).getNeighbors().add(segments.get(72));
+		segments.get(73).getNeighbors().add(segments.get(74));
+		segments.get(73).getNeighbors().add(segments.get(88));
+		//74
+		segments.get(74).getPoints().add(points.get(138));
+		segments.get(74).getPoints().add(points.get(151));
+		segments.get(74).getNeighbors().add(segments.get(55));
+		segments.get(74).getNeighbors().add(segments.get(73));
+		segments.get(74).getNeighbors().add(segments.get(75));
+		segments.get(74).getNeighbors().add(segments.get(89));
+		//75
+		segments.get(75).getPoints().add(points.get(150));
+		segments.get(75).getPoints().add(points.get(151));
+		segments.get(75).getNeighbors().add(segments.get(56));
+		segments.get(75).getNeighbors().add(segments.get(74));
+		segments.get(75).getNeighbors().add(segments.get(76));
+		segments.get(75).getNeighbors().add(segments.get(89));
+		//76
+		segments.get(76).getPoints().add(points.get(150));
+		segments.get(76).getPoints().add(points.get(162));
+		segments.get(76).getNeighbors().add(segments.get(56));
+		segments.get(76).getNeighbors().add(segments.get(75));
+		segments.get(76).getNeighbors().add(segments.get(77));
+		segments.get(76).getNeighbors().add(segments.get(90));
+		//77
+		segments.get(77).getPoints().add(points.get(161));
+		segments.get(77).getPoints().add(points.get(162));
+		segments.get(77).getNeighbors().add(segments.get(57));
+		segments.get(77).getNeighbors().add(segments.get(76));
+		segments.get(77).getNeighbors().add(segments.get(78));
+		segments.get(77).getNeighbors().add(segments.get(90));
+		//78
+		segments.get(78).getPoints().add(points.get(161));
+		segments.get(78).getPoints().add(points.get(170));
+		segments.get(78).getNeighbors().add(segments.get(57));
+		segments.get(78).getNeighbors().add(segments.get(77));
+		segments.get(78).getNeighbors().add(segments.get(79));
+		segments.get(78).getNeighbors().add(segments.get(91));
+		//79
+		segments.get(79).getPoints().add(points.get(42));
+		segments.get(79).getPoints().add(points.get(170));
+		segments.get(79).getNeighbors().add(segments.get(58));
+		segments.get(79).getNeighbors().add(segments.get(78));
+		segments.get(79).getNeighbors().add(segments.get(80));
+		segments.get(79).getNeighbors().add(segments.get(91));
+		//80
+		segments.get(80).getPoints().add(points.get(41));
+		segments.get(80).getPoints().add(points.get(42));
+		segments.get(80).getNeighbors().add(segments.get(58));
+		segments.get(80).getNeighbors().add(segments.get(79));
+		segments.get(80).getNeighbors().add(segments.get(92));
+		//81
+		segments.get(81).getPoints().add(points.get(5));
+		segments.get(81).getPoints().add(points.get(6));
+		segments.get(81).getNeighbors().add(segments.get(59));
+		segments.get(81).getNeighbors().add(segments.get(93));
+		segments.get(81).getNeighbors().add(segments.get(94));
+		//82
+		segments.get(82).getPoints().add(points.get(69));
+		segments.get(82).getPoints().add(points.get(71));
+		segments.get(82).getNeighbors().add(segments.get(60));
+		segments.get(82).getNeighbors().add(segments.get(61));
+		segments.get(82).getNeighbors().add(segments.get(95));
+		segments.get(82).getNeighbors().add(segments.get(96));
+		//83
+		segments.get(83).getPoints().add(points.get(67));
+		segments.get(83).getPoints().add(points.get(73));
+		segments.get(83).getNeighbors().add(segments.get(62));
+		segments.get(83).getNeighbors().add(segments.get(63));
+		segments.get(83).getNeighbors().add(segments.get(97));
+		segments.get(83).getNeighbors().add(segments.get(98));
+		//84
+		segments.get(84).getPoints().add(points.get(91));
+		segments.get(84).getPoints().add(points.get(92));
+		segments.get(84).getNeighbors().add(segments.get(64));
+		segments.get(84).getNeighbors().add(segments.get(65));
+		segments.get(84).getNeighbors().add(segments.get(99));
+		segments.get(84).getNeighbors().add(segments.get(100));
+		//85
+		segments.get(85).getPoints().add(points.get(103));
+		segments.get(85).getPoints().add(points.get(104));
+		segments.get(85).getNeighbors().add(segments.get(66));
+		segments.get(85).getNeighbors().add(segments.get(67));
+		segments.get(85).getNeighbors().add(segments.get(101));
+		segments.get(85).getNeighbors().add(segments.get(102));
+		//86
+		segments.get(86).getPoints().add(points.get(115));
+		segments.get(86).getPoints().add(points.get(116));
+		segments.get(86).getNeighbors().add(segments.get(68));
+		segments.get(86).getNeighbors().add(segments.get(69));
+		segments.get(86).getNeighbors().add(segments.get(103));
+		segments.get(86).getNeighbors().add(segments.get(104));
+		//87
+		segments.get(87).getPoints().add(points.get(127));
+		segments.get(87).getPoints().add(points.get(128));
+		segments.get(87).getNeighbors().add(segments.get(70));
+		segments.get(87).getNeighbors().add(segments.get(71));
+		segments.get(87).getNeighbors().add(segments.get(105));
+		segments.get(87).getNeighbors().add(segments.get(106));
+		//88
+		segments.get(88).getPoints().add(points.get(139));
+		segments.get(88).getPoints().add(points.get(140));
+		segments.get(88).getNeighbors().add(segments.get(72));
+		segments.get(88).getNeighbors().add(segments.get(73));
+		segments.get(88).getNeighbors().add(segments.get(107));
+		segments.get(88).getNeighbors().add(segments.get(108));
+		//89
+		segments.get(89).getPoints().add(points.get(151));
+		segments.get(89).getPoints().add(points.get(152));
+		segments.get(89).getNeighbors().add(segments.get(74));
+		segments.get(89).getNeighbors().add(segments.get(75));
+		segments.get(89).getNeighbors().add(segments.get(109));
+		segments.get(89).getNeighbors().add(segments.get(110));
+		//90
+		segments.get(90).getPoints().add(points.get(162));
+		segments.get(90).getPoints().add(points.get(163));
+		segments.get(90).getNeighbors().add(segments.get(76));
+		segments.get(90).getNeighbors().add(segments.get(77));
+		segments.get(90).getNeighbors().add(segments.get(111));
+		segments.get(90).getNeighbors().add(segments.get(112));
+		//91
+		segments.get(91).getPoints().add(points.get(170));
+		segments.get(91).getPoints().add(points.get(171));
+		segments.get(91).getNeighbors().add(segments.get(78));
+		segments.get(91).getNeighbors().add(segments.get(79));
+		segments.get(91).getNeighbors().add(segments.get(113));
+		segments.get(91).getNeighbors().add(segments.get(114));
+		//92
+		segments.get(92).getPoints().add(points.get(40));
+		segments.get(92).getPoints().add(points.get(41));
+		segments.get(92).getNeighbors().add(segments.get(80));
+		segments.get(92).getNeighbors().add(segments.get(115));
+		segments.get(92).getNeighbors().add(segments.get(116));
+		//93
+		segments.get(93).getPoints().add(points.get(6));
+		segments.get(93).getPoints().add(points.get(7));
+		segments.get(93).getNeighbors().add(segments.get(81));
+		segments.get(93).getNeighbors().add(segments.get(94));
+		segments.get(93).getNeighbors().add(segments.get(117));
+		//94
+		segments.get(94).getPoints().add(points.get(6));
+		segments.get(94).getPoints().add(points.get(70));
+		segments.get(94).getNeighbors().add(segments.get(93));
+		segments.get(94).getNeighbors().add(segments.get(95));
+		segments.get(94).getNeighbors().add(segments.get(81));
+		segments.get(94).getNeighbors().add(segments.get(118));
+		//95
+		segments.get(95).getPoints().add(points.get(70));
+		segments.get(95).getPoints().add(points.get(71));
+		segments.get(95).getNeighbors().add(segments.get(94));
+		segments.get(95).getNeighbors().add(segments.get(96));
+		segments.get(95).getNeighbors().add(segments.get(82));
+		segments.get(95).getNeighbors().add(segments.get(118));
+		//96
+		segments.get(96).getPoints().add(points.get(71));
+		segments.get(96).getPoints().add(points.get(72));
+		segments.get(96).getNeighbors().add(segments.get(95));
+		segments.get(96).getNeighbors().add(segments.get(97));
+		segments.get(96).getNeighbors().add(segments.get(82));
+		segments.get(96).getNeighbors().add(segments.get(119));
+		//97
+		segments.get(97).getPoints().add(points.get(72));
+		segments.get(97).getPoints().add(points.get(73));
+		segments.get(97).getNeighbors().add(segments.get(96));
+		segments.get(97).getNeighbors().add(segments.get(98));
+		segments.get(97).getNeighbors().add(segments.get(83));
+		segments.get(97).getNeighbors().add(segments.get(119));
+		//98
+		segments.get(98).getPoints().add(points.get(73));
+		segments.get(98).getPoints().add(points.get(79));
+		segments.get(98).getNeighbors().add(segments.get(97));
+		segments.get(98).getNeighbors().add(segments.get(99));
+		segments.get(98).getNeighbors().add(segments.get(83));
+		segments.get(98).getNeighbors().add(segments.get(120));
+		//99
+		segments.get(99).getPoints().add(points.get(79));
+		segments.get(99).getPoints().add(points.get(92));
+		segments.get(99).getNeighbors().add(segments.get(98));
+		segments.get(99).getNeighbors().add(segments.get(100));
+		segments.get(99).getNeighbors().add(segments.get(84));
+		segments.get(99).getNeighbors().add(segments.get(120));
+		//100
+		segments.get(100).getPoints().add(points.get(92));
+		segments.get(100).getPoints().add(points.get(93));
+		segments.get(100).getNeighbors().add(segments.get(99));
+		segments.get(100).getNeighbors().add(segments.get(101));
+		segments.get(100).getNeighbors().add(segments.get(84));
+		segments.get(100).getNeighbors().add(segments.get(121));
+		//101
+		segments.get(101).getPoints().add(points.get(93));
+		segments.get(101).getPoints().add(points.get(104));
+		segments.get(101).getNeighbors().add(segments.get(100));
+		segments.get(101).getNeighbors().add(segments.get(102));
+		segments.get(101).getNeighbors().add(segments.get(85));
+		segments.get(101).getNeighbors().add(segments.get(121));
+		//102
+		segments.get(102).getPoints().add(points.get(104));
+		segments.get(102).getPoints().add(points.get(105));
+		segments.get(102).getNeighbors().add(segments.get(101));
+		segments.get(102).getNeighbors().add(segments.get(103));
+		segments.get(102).getNeighbors().add(segments.get(85));
+		segments.get(102).getNeighbors().add(segments.get(122));
+		//103
+		segments.get(103).getPoints().add(points.get(105));
+		segments.get(103).getPoints().add(points.get(116));
+		segments.get(103).getNeighbors().add(segments.get(102));
+		segments.get(103).getNeighbors().add(segments.get(104));
+		segments.get(103).getNeighbors().add(segments.get(86));
+		segments.get(103).getNeighbors().add(segments.get(122));
+		//104
+		segments.get(104).getPoints().add(points.get(116));
+		segments.get(104).getPoints().add(points.get(117));
+		segments.get(104).getNeighbors().add(segments.get(103));
+		segments.get(104).getNeighbors().add(segments.get(105));
+		segments.get(104).getNeighbors().add(segments.get(86));
+		segments.get(104).getNeighbors().add(segments.get(123));
+		//105
+		segments.get(105).getPoints().add(points.get(117));
+		segments.get(105).getPoints().add(points.get(128));
+		segments.get(105).getNeighbors().add(segments.get(104));
+		segments.get(105).getNeighbors().add(segments.get(106));
+		segments.get(105).getNeighbors().add(segments.get(87));
+		segments.get(105).getNeighbors().add(segments.get(123));
+		//106
+		segments.get(106).getPoints().add(points.get(128));
+		segments.get(106).getPoints().add(points.get(129));
+		segments.get(106).getNeighbors().add(segments.get(105));
+		segments.get(106).getNeighbors().add(segments.get(107));
+		segments.get(106).getNeighbors().add(segments.get(87));
+		segments.get(106).getNeighbors().add(segments.get(124));
+		//107
+		segments.get(107).getPoints().add(points.get(129));
+		segments.get(107).getPoints().add(points.get(140));
+		segments.get(107).getNeighbors().add(segments.get(106));
+		segments.get(107).getNeighbors().add(segments.get(108));
+		segments.get(107).getNeighbors().add(segments.get(88));
+		segments.get(107).getNeighbors().add(segments.get(124));
+		//108
+		segments.get(108).getPoints().add(points.get(140));
+		segments.get(108).getPoints().add(points.get(141));
+		segments.get(108).getNeighbors().add(segments.get(107));
+		segments.get(108).getNeighbors().add(segments.get(109));
+		segments.get(108).getNeighbors().add(segments.get(88));
+		segments.get(108).getNeighbors().add(segments.get(125));
+		//109
+		segments.get(109).getPoints().add(points.get(141));
+		segments.get(109).getPoints().add(points.get(152));
+		segments.get(109).getNeighbors().add(segments.get(108));
+		segments.get(109).getNeighbors().add(segments.get(110));
+		segments.get(109).getNeighbors().add(segments.get(89));
+		segments.get(109).getNeighbors().add(segments.get(125));
+		//110
+		segments.get(110).getPoints().add(points.get(152));
+		segments.get(110).getPoints().add(points.get(153));
+		segments.get(110).getNeighbors().add(segments.get(109));
+		segments.get(110).getNeighbors().add(segments.get(111));
+		segments.get(110).getNeighbors().add(segments.get(89));
+		segments.get(110).getNeighbors().add(segments.get(126));
+		//111
+		segments.get(111).getPoints().add(points.get(153));
+		segments.get(111).getPoints().add(points.get(163));
+		segments.get(111).getNeighbors().add(segments.get(110));
+		segments.get(111).getNeighbors().add(segments.get(112));
+		segments.get(111).getNeighbors().add(segments.get(90));
+		segments.get(111).getNeighbors().add(segments.get(126));
+		//112
+		segments.get(112).getPoints().add(points.get(163));
+		segments.get(112).getPoints().add(points.get(164));
+		segments.get(112).getNeighbors().add(segments.get(111));
+		segments.get(112).getNeighbors().add(segments.get(113));
+		segments.get(112).getNeighbors().add(segments.get(90));
+		segments.get(112).getNeighbors().add(segments.get(127));
+		//113
+		segments.get(113).getPoints().add(points.get(164));
+		segments.get(113).getPoints().add(points.get(171));
+		segments.get(113).getNeighbors().add(segments.get(112));
+		segments.get(113).getNeighbors().add(segments.get(114));
+		segments.get(113).getNeighbors().add(segments.get(91));
+		segments.get(113).getNeighbors().add(segments.get(127));
+		//114
+		segments.get(114).getPoints().add(points.get(171));
+		segments.get(114).getPoints().add(points.get(172));
+		segments.get(114).getNeighbors().add(segments.get(113));
+		segments.get(114).getNeighbors().add(segments.get(115));
+		segments.get(114).getNeighbors().add(segments.get(91));
+		segments.get(114).getNeighbors().add(segments.get(128));
+		//115
+		segments.get(115).getPoints().add(points.get(40));
+		segments.get(115).getPoints().add(points.get(172));
+		segments.get(115).getNeighbors().add(segments.get(114));
+		segments.get(115).getNeighbors().add(segments.get(116));
+		segments.get(115).getNeighbors().add(segments.get(92));
+		segments.get(115).getNeighbors().add(segments.get(128));
+		//116
+		segments.get(116).getPoints().add(points.get(39));
+		segments.get(116).getPoints().add(points.get(40));
+		segments.get(116).getNeighbors().add(segments.get(115));
+		segments.get(116).getNeighbors().add(segments.get(92));
+		segments.get(116).getNeighbors().add(segments.get(129));
+		//117
+		segments.get(117).getPoints().add(points.get(7));
+		segments.get(117).getPoints().add(points.get(8));
+		segments.get(117).getNeighbors().add(segments.get(93));
+		segments.get(117).getNeighbors().add(segments.get(130));
+		//118
+		segments.get(118).getPoints().add(points.get(70));
+		segments.get(118).getPoints().add(points.get(74));
+		segments.get(118).getNeighbors().add(segments.get(94));
+		segments.get(118).getNeighbors().add(segments.get(95));
+		segments.get(118).getNeighbors().add(segments.get(131));
+		segments.get(118).getNeighbors().add(segments.get(132));
+		//119
+		segments.get(119).getPoints().add(points.get(72));
+		segments.get(119).getPoints().add(points.get(76));
+		segments.get(119).getNeighbors().add(segments.get(96));
+		segments.get(119).getNeighbors().add(segments.get(97));
+		segments.get(119).getNeighbors().add(segments.get(133));
+		segments.get(119).getNeighbors().add(segments.get(134));
+		//120
+		segments.get(120).getPoints().add(points.get(78));
+		segments.get(120).getPoints().add(points.get(79));
+		segments.get(120).getNeighbors().add(segments.get(98));
+		segments.get(120).getNeighbors().add(segments.get(99));
+		segments.get(120).getNeighbors().add(segments.get(135));
+		segments.get(120).getNeighbors().add(segments.get(136));
+		//121
+		segments.get(121).getPoints().add(points.get(93));
+		segments.get(121).getPoints().add(points.get(94));
+		segments.get(121).getNeighbors().add(segments.get(100));
+		segments.get(121).getNeighbors().add(segments.get(101));
+		segments.get(121).getNeighbors().add(segments.get(137));
+		segments.get(121).getNeighbors().add(segments.get(138));
+		//122
+		segments.get(122).getPoints().add(points.get(105));
+		segments.get(122).getPoints().add(points.get(106));
+		segments.get(122).getNeighbors().add(segments.get(102));
+		segments.get(122).getNeighbors().add(segments.get(103));
+		segments.get(122).getNeighbors().add(segments.get(139));
+		segments.get(122).getNeighbors().add(segments.get(140));
+		//123
+		segments.get(123).getPoints().add(points.get(117));
+		segments.get(123).getPoints().add(points.get(118));
+		segments.get(123).getNeighbors().add(segments.get(104));
+		segments.get(123).getNeighbors().add(segments.get(105));
+		segments.get(123).getNeighbors().add(segments.get(141));
+		segments.get(123).getNeighbors().add(segments.get(142));
+		//124
+		segments.get(124).getPoints().add(points.get(129));
+		segments.get(124).getPoints().add(points.get(130));
+		segments.get(124).getNeighbors().add(segments.get(106));
+		segments.get(124).getNeighbors().add(segments.get(107));
+		segments.get(124).getNeighbors().add(segments.get(143));
+		segments.get(124).getNeighbors().add(segments.get(144));
+		//125
+		segments.get(125).getPoints().add(points.get(141));
+		segments.get(125).getPoints().add(points.get(142));
+		segments.get(125).getNeighbors().add(segments.get(108));
+		segments.get(125).getNeighbors().add(segments.get(109));
+		segments.get(125).getNeighbors().add(segments.get(145));
+		segments.get(125).getNeighbors().add(segments.get(146));
+		//126
+		segments.get(126).getPoints().add(points.get(153));
+		segments.get(126).getPoints().add(points.get(154));
+		segments.get(126).getNeighbors().add(segments.get(110));
+		segments.get(126).getNeighbors().add(segments.get(111));
+		segments.get(126).getNeighbors().add(segments.get(147));
+		segments.get(126).getNeighbors().add(segments.get(148));
+		//127
+		segments.get(127).getPoints().add(points.get(164));
+		segments.get(127).getPoints().add(points.get(165));
+		segments.get(127).getNeighbors().add(segments.get(112));
+		segments.get(127).getNeighbors().add(segments.get(113));
+		segments.get(127).getNeighbors().add(segments.get(149));
+		segments.get(127).getNeighbors().add(segments.get(150));
+		//128
+		segments.get(128).getPoints().add(points.get(172));
+		segments.get(128).getPoints().add(points.get(173));
+		segments.get(128).getNeighbors().add(segments.get(114));
+		segments.get(128).getNeighbors().add(segments.get(115));
+		segments.get(128).getNeighbors().add(segments.get(151));
+		segments.get(128).getNeighbors().add(segments.get(152));
+		//129
+		segments.get(129).getPoints().add(points.get(38));
+		segments.get(129).getPoints().add(points.get(39));
+		segments.get(129).getNeighbors().add(segments.get(116));
+		segments.get(129).getNeighbors().add(segments.get(153));
+		//130
+		segments.get(130).getPoints().add(points.get(8));
+		segments.get(130).getPoints().add(points.get(9));
+		segments.get(130).getNeighbors().add(segments.get(117));
+		segments.get(130).getNeighbors().add(segments.get(131));
+		segments.get(130).getNeighbors().add(segments.get(154));
+		//131
+		segments.get(131).getPoints().add(points.get(9));
+		segments.get(131).getPoints().add(points.get(74));
+		segments.get(131).getNeighbors().add(segments.get(118));
+		segments.get(131).getNeighbors().add(segments.get(130));
+		segments.get(131).getNeighbors().add(segments.get(132));
+		segments.get(131).getNeighbors().add(segments.get(154));
+		//132
+		segments.get(132).getPoints().add(points.get(74));
+		segments.get(132).getPoints().add(points.get(75));
+		segments.get(132).getNeighbors().add(segments.get(118));
+		segments.get(132).getNeighbors().add(segments.get(131));
+		segments.get(132).getNeighbors().add(segments.get(133));
+		segments.get(132).getNeighbors().add(segments.get(155));
+		//133
+		segments.get(133).getPoints().add(points.get(75));
+		segments.get(133).getPoints().add(points.get(76));
+		segments.get(133).getNeighbors().add(segments.get(119));
+		segments.get(133).getNeighbors().add(segments.get(132));
+		segments.get(133).getNeighbors().add(segments.get(134));
+		segments.get(133).getNeighbors().add(segments.get(155));
+		//134
+		segments.get(134).getPoints().add(points.get(76));
+		segments.get(134).getPoints().add(points.get(77));
+		segments.get(134).getNeighbors().add(segments.get(119));
+		segments.get(134).getNeighbors().add(segments.get(133));
+		segments.get(134).getNeighbors().add(segments.get(135));
+		segments.get(134).getNeighbors().add(segments.get(156));
+		//135
+		segments.get(135).getPoints().add(points.get(77));
+		segments.get(135).getPoints().add(points.get(78));
+		segments.get(135).getNeighbors().add(segments.get(120));
+		segments.get(135).getNeighbors().add(segments.get(134));
+		segments.get(135).getNeighbors().add(segments.get(136));
+		segments.get(135).getNeighbors().add(segments.get(156));
+		//136
+		segments.get(136).getPoints().add(points.get(78));
+		segments.get(136).getPoints().add(points.get(95));
+		segments.get(136).getNeighbors().add(segments.get(120));
+		segments.get(136).getNeighbors().add(segments.get(135));
+		segments.get(136).getNeighbors().add(segments.get(137));
+		segments.get(136).getNeighbors().add(segments.get(157));
+		//137
+		segments.get(137).getPoints().add(points.get(94));
+		segments.get(137).getPoints().add(points.get(95));
+		segments.get(137).getNeighbors().add(segments.get(121));
+		segments.get(137).getNeighbors().add(segments.get(136));
+		segments.get(137).getNeighbors().add(segments.get(138));
+		segments.get(137).getNeighbors().add(segments.get(157));
+		//138
+		segments.get(138).getPoints().add(points.get(94));
+		segments.get(138).getPoints().add(points.get(107));
+		segments.get(138).getNeighbors().add(segments.get(121));
+		segments.get(138).getNeighbors().add(segments.get(137));
+		segments.get(138).getNeighbors().add(segments.get(139));
+		segments.get(138).getNeighbors().add(segments.get(158));
+		//139
+		segments.get(139).getPoints().add(points.get(106));
+		segments.get(139).getPoints().add(points.get(107));
+		segments.get(139).getNeighbors().add(segments.get(122));
+		segments.get(139).getNeighbors().add(segments.get(138));
+		segments.get(139).getNeighbors().add(segments.get(140));
+		segments.get(139).getNeighbors().add(segments.get(158));
+		//140
+		segments.get(140).getPoints().add(points.get(106));
+		segments.get(140).getPoints().add(points.get(119));
+		segments.get(140).getNeighbors().add(segments.get(122));
+		segments.get(140).getNeighbors().add(segments.get(139));
+		segments.get(140).getNeighbors().add(segments.get(141));
+		segments.get(140).getNeighbors().add(segments.get(159));
+		//141
+		segments.get(141).getPoints().add(points.get(118));
+		segments.get(141).getPoints().add(points.get(119));
+		segments.get(141).getNeighbors().add(segments.get(123));
+		segments.get(141).getNeighbors().add(segments.get(140));
+		segments.get(141).getNeighbors().add(segments.get(142));
+		segments.get(141).getNeighbors().add(segments.get(159));
+		//142
+		segments.get(142).getPoints().add(points.get(118));
+		segments.get(142).getPoints().add(points.get(131));
+		segments.get(142).getNeighbors().add(segments.get(123));
+		segments.get(142).getNeighbors().add(segments.get(141));
+		segments.get(142).getNeighbors().add(segments.get(143));
+		segments.get(142).getNeighbors().add(segments.get(160));
+		//143
+		segments.get(143).getPoints().add(points.get(130));
+		segments.get(143).getPoints().add(points.get(131));
+		segments.get(143).getNeighbors().add(segments.get(124));
+		segments.get(143).getNeighbors().add(segments.get(142));
+		segments.get(143).getNeighbors().add(segments.get(144));
+		segments.get(143).getNeighbors().add(segments.get(160));
+		//144
+		segments.get(144).getPoints().add(points.get(130));
+		segments.get(144).getPoints().add(points.get(143));
+		segments.get(144).getNeighbors().add(segments.get(124));
+		segments.get(144).getNeighbors().add(segments.get(143));
+		segments.get(144).getNeighbors().add(segments.get(145));
+		segments.get(144).getNeighbors().add(segments.get(161));
+		//145
+		segments.get(145).getPoints().add(points.get(142));
+		segments.get(145).getPoints().add(points.get(143));
+		segments.get(145).getNeighbors().add(segments.get(125));
+		segments.get(145).getNeighbors().add(segments.get(144));
+		segments.get(145).getNeighbors().add(segments.get(146));
+		segments.get(145).getNeighbors().add(segments.get(161));
+		//146
+		segments.get(146).getPoints().add(points.get(142));
+		segments.get(146).getPoints().add(points.get(155));
+		segments.get(146).getNeighbors().add(segments.get(125));
+		segments.get(146).getNeighbors().add(segments.get(145));
+		segments.get(146).getNeighbors().add(segments.get(147));
+		segments.get(146).getNeighbors().add(segments.get(162));
+		//147
+		segments.get(147).getPoints().add(points.get(154));
+		segments.get(147).getPoints().add(points.get(155));
+		segments.get(147).getNeighbors().add(segments.get(126));
+		segments.get(147).getNeighbors().add(segments.get(146));
+		segments.get(147).getNeighbors().add(segments.get(148));
+		segments.get(147).getNeighbors().add(segments.get(162));
+		//148
+		segments.get(148).getPoints().add(points.get(154));
+		segments.get(148).getPoints().add(points.get(166));
+		segments.get(148).getNeighbors().add(segments.get(126));
+		segments.get(148).getNeighbors().add(segments.get(147));
+		segments.get(148).getNeighbors().add(segments.get(149));
+		segments.get(148).getNeighbors().add(segments.get(163));
+		//149
+		segments.get(149).getPoints().add(points.get(165));
+		segments.get(149).getPoints().add(points.get(166));
+		segments.get(149).getNeighbors().add(segments.get(127));
+		segments.get(149).getNeighbors().add(segments.get(148));
+		segments.get(149).getNeighbors().add(segments.get(150));
+		segments.get(149).getNeighbors().add(segments.get(163));
+		//150
+		segments.get(150).getPoints().add(points.get(165));
+		segments.get(150).getPoints().add(points.get(174));
+		segments.get(150).getNeighbors().add(segments.get(127));
+		segments.get(150).getNeighbors().add(segments.get(149));
+		segments.get(150).getNeighbors().add(segments.get(151));
+		segments.get(150).getNeighbors().add(segments.get(164));
+		//151
+		segments.get(151).getPoints().add(points.get(173));
+		segments.get(151).getPoints().add(points.get(174));
+		segments.get(151).getNeighbors().add(segments.get(128));
+		segments.get(151).getNeighbors().add(segments.get(150));
+		segments.get(151).getNeighbors().add(segments.get(152));
+		segments.get(151).getNeighbors().add(segments.get(164));
+		//152
+		segments.get(152).getPoints().add(points.get(173));
+		segments.get(152).getPoints().add(points.get(37));
+		segments.get(152).getNeighbors().add(segments.get(128));
+		segments.get(152).getNeighbors().add(segments.get(151));
+		segments.get(152).getNeighbors().add(segments.get(153));
+		segments.get(152).getNeighbors().add(segments.get(165));
+		//153
+		segments.get(153).getPoints().add(points.get(37));
+		segments.get(153).getPoints().add(points.get(38));
+		segments.get(153).getNeighbors().add(segments.get(129));
+		segments.get(153).getNeighbors().add(segments.get(152));
+		segments.get(153).getNeighbors().add(segments.get(165));
+		//154
+		segments.get(154).getPoints().add(points.get(9));
+		segments.get(154).getPoints().add(points.get(10));
+		segments.get(154).getNeighbors().add(segments.get(166));
+		segments.get(154).getNeighbors().add(segments.get(130));
+		segments.get(154).getNeighbors().add(segments.get(131));
+		//155
+		segments.get(155).getPoints().add(points.get(75));
+		segments.get(155).getPoints().add(points.get(80));
+		segments.get(155).getNeighbors().add(segments.get(132));
+		segments.get(155).getNeighbors().add(segments.get(133));
+		segments.get(155).getNeighbors().add(segments.get(167));
+		segments.get(155).getNeighbors().add(segments.get(168));
+		//156
+		segments.get(156).getPoints().add(points.get(77));
+		segments.get(156).getPoints().add(points.get(82));
+		segments.get(156).getNeighbors().add(segments.get(134));
+		segments.get(156).getNeighbors().add(segments.get(135));
+		segments.get(156).getNeighbors().add(segments.get(169));
+		segments.get(156).getNeighbors().add(segments.get(170));
+		//157
+		segments.get(157).getPoints().add(points.get(95));
+		segments.get(157).getPoints().add(points.get(96));
+		segments.get(157).getNeighbors().add(segments.get(136));
+		segments.get(157).getNeighbors().add(segments.get(137));
+		segments.get(157).getNeighbors().add(segments.get(171));
+		segments.get(157).getNeighbors().add(segments.get(172));
+		//158
+		segments.get(158).getPoints().add(points.get(107));
+		segments.get(158).getPoints().add(points.get(108));
+		segments.get(158).getNeighbors().add(segments.get(138));
+		segments.get(158).getNeighbors().add(segments.get(139));
+		segments.get(158).getNeighbors().add(segments.get(173));
+		segments.get(158).getNeighbors().add(segments.get(174));
+		//159
+		segments.get(159).getPoints().add(points.get(119));
+		segments.get(159).getPoints().add(points.get(120));
+		segments.get(159).getNeighbors().add(segments.get(140));
+		segments.get(159).getNeighbors().add(segments.get(141));
+		segments.get(159).getNeighbors().add(segments.get(175));
+		segments.get(159).getNeighbors().add(segments.get(176));
+		//160
+		segments.get(160).getPoints().add(points.get(131));
+		segments.get(160).getPoints().add(points.get(132));
+		segments.get(160).getNeighbors().add(segments.get(142));
+		segments.get(160).getNeighbors().add(segments.get(143));
+		segments.get(160).getNeighbors().add(segments.get(177));
+		segments.get(160).getNeighbors().add(segments.get(178));
+		//161
+		segments.get(161).getPoints().add(points.get(143));
+		segments.get(161).getPoints().add(points.get(144));
+		segments.get(161).getNeighbors().add(segments.get(144));
+		segments.get(161).getNeighbors().add(segments.get(145));
+		segments.get(161).getNeighbors().add(segments.get(179));
+		segments.get(161).getNeighbors().add(segments.get(180));
+		//162
+		segments.get(162).getPoints().add(points.get(155));
+		segments.get(162).getPoints().add(points.get(156));
+		segments.get(162).getNeighbors().add(segments.get(146));
+		segments.get(162).getNeighbors().add(segments.get(147));
+		segments.get(162).getNeighbors().add(segments.get(181));
+		segments.get(162).getNeighbors().add(segments.get(182));
+		//163
+		segments.get(163).getPoints().add(points.get(166));
+		segments.get(163).getPoints().add(points.get(167));
+		segments.get(163).getNeighbors().add(segments.get(148));
+		segments.get(163).getNeighbors().add(segments.get(149));
+		segments.get(163).getNeighbors().add(segments.get(183));
+		segments.get(163).getNeighbors().add(segments.get(184));
+		//164
+		segments.get(164).getPoints().add(points.get(174));
+		segments.get(164).getPoints().add(points.get(175));
+		segments.get(164).getNeighbors().add(segments.get(150));
+		segments.get(164).getNeighbors().add(segments.get(151));
+		segments.get(164).getNeighbors().add(segments.get(185));
+		segments.get(164).getNeighbors().add(segments.get(186));
+		//165
+		segments.get(165).getPoints().add(points.get(36));
+		segments.get(165).getPoints().add(points.get(37));
+		segments.get(165).getNeighbors().add(segments.get(152));
+		segments.get(165).getNeighbors().add(segments.get(153));
+		segments.get(165).getNeighbors().add(segments.get(187));
+		//166
+		segments.get(166).getPoints().add(points.get(10));
+		segments.get(166).getPoints().add(points.get(11));
+		segments.get(166).getNeighbors().add(segments.get(154));
+		segments.get(166).getNeighbors().add(segments.get(167));
+		segments.get(166).getNeighbors().add(segments.get(188));
+		//167
+		segments.get(167).getPoints().add(points.get(11));
+		segments.get(167).getPoints().add(points.get(80));
+		segments.get(167).getNeighbors().add(segments.get(155));
+		segments.get(167).getNeighbors().add(segments.get(166));
+		segments.get(167).getNeighbors().add(segments.get(168));
+		segments.get(167).getNeighbors().add(segments.get(188));
+		//168
+		segments.get(168).getPoints().add(points.get(80));
+		segments.get(168).getPoints().add(points.get(81));
+		segments.get(168).getNeighbors().add(segments.get(155));
+		segments.get(168).getNeighbors().add(segments.get(167));
+		segments.get(168).getNeighbors().add(segments.get(169));
+		segments.get(168).getNeighbors().add(segments.get(189));
+		//169
+		segments.get(169).getPoints().add(points.get(81));
+		segments.get(169).getPoints().add(points.get(82));
+		segments.get(169).getNeighbors().add(segments.get(156));
+		segments.get(169).getNeighbors().add(segments.get(168));
+		segments.get(169).getNeighbors().add(segments.get(170));
+		segments.get(169).getNeighbors().add(segments.get(189));
+		//170
+		segments.get(170).getPoints().add(points.get(82));
+		segments.get(170).getPoints().add(points.get(84));
+		segments.get(170).getNeighbors().add(segments.get(156));
+		segments.get(170).getNeighbors().add(segments.get(169));
+		segments.get(170).getNeighbors().add(segments.get(171));
+		segments.get(170).getNeighbors().add(segments.get(190));
+		//171
+		segments.get(171).getPoints().add(points.get(84));
+		segments.get(171).getPoints().add(points.get(96));
+		segments.get(171).getNeighbors().add(segments.get(157));
+		segments.get(171).getNeighbors().add(segments.get(170));
+		segments.get(171).getNeighbors().add(segments.get(172));
+		segments.get(171).getNeighbors().add(segments.get(190));
+		//172
+		segments.get(172).getPoints().add(points.get(96));
+		segments.get(172).getPoints().add(points.get(97));
+		segments.get(172).getNeighbors().add(segments.get(157));
+		segments.get(172).getNeighbors().add(segments.get(171));
+		segments.get(172).getNeighbors().add(segments.get(173));
+		segments.get(172).getNeighbors().add(segments.get(191));
+		//173
+		segments.get(173).getPoints().add(points.get(97));
+		segments.get(173).getPoints().add(points.get(108));
+		segments.get(173).getNeighbors().add(segments.get(158));
+		segments.get(173).getNeighbors().add(segments.get(172));
+		segments.get(173).getNeighbors().add(segments.get(174));
+		segments.get(173).getNeighbors().add(segments.get(191));
+		//174
+		segments.get(174).getPoints().add(points.get(108));
+		segments.get(174).getPoints().add(points.get(109));
+		segments.get(174).getNeighbors().add(segments.get(158));
+		segments.get(174).getNeighbors().add(segments.get(173));
+		segments.get(174).getNeighbors().add(segments.get(175));
+		segments.get(174).getNeighbors().add(segments.get(192));
+		//175
+		segments.get(175).getPoints().add(points.get(109));
+		segments.get(175).getPoints().add(points.get(120));
+		segments.get(175).getNeighbors().add(segments.get(159));
+		segments.get(175).getNeighbors().add(segments.get(174));
+		segments.get(175).getNeighbors().add(segments.get(176));
+		segments.get(175).getNeighbors().add(segments.get(192));
+		//176
+		segments.get(176).getPoints().add(points.get(120));
+		segments.get(176).getPoints().add(points.get(121));
+		segments.get(176).getNeighbors().add(segments.get(159));
+		segments.get(176).getNeighbors().add(segments.get(175));
+		segments.get(176).getNeighbors().add(segments.get(177));
+		segments.get(176).getNeighbors().add(segments.get(193));
+		//177
+		segments.get(177).getPoints().add(points.get(121));
+		segments.get(177).getPoints().add(points.get(132));
+		segments.get(177).getNeighbors().add(segments.get(160));
+		segments.get(177).getNeighbors().add(segments.get(176));
+		segments.get(177).getNeighbors().add(segments.get(178));
+		segments.get(177).getNeighbors().add(segments.get(193));
+		//178
+		segments.get(178).getPoints().add(points.get(132));
+		segments.get(178).getPoints().add(points.get(133));
+		segments.get(178).getNeighbors().add(segments.get(160));
+		segments.get(178).getNeighbors().add(segments.get(177));
+		segments.get(178).getNeighbors().add(segments.get(179));
+		segments.get(178).getNeighbors().add(segments.get(194));
+		//179
+		segments.get(179).getPoints().add(points.get(133));
+		segments.get(179).getPoints().add(points.get(144));
+		segments.get(179).getNeighbors().add(segments.get(161));
+		segments.get(179).getNeighbors().add(segments.get(178));
+		segments.get(179).getNeighbors().add(segments.get(180));
+		segments.get(179).getNeighbors().add(segments.get(194));
+		//180
+		segments.get(180).getPoints().add(points.get(144));
+		segments.get(180).getPoints().add(points.get(145));
+		segments.get(180).getNeighbors().add(segments.get(161));
+		segments.get(180).getNeighbors().add(segments.get(179));
+		segments.get(180).getNeighbors().add(segments.get(181));
+		segments.get(180).getNeighbors().add(segments.get(195));
+		//181
+		segments.get(181).getPoints().add(points.get(145));
+		segments.get(181).getPoints().add(points.get(156));
+		segments.get(181).getNeighbors().add(segments.get(162));
+		segments.get(181).getNeighbors().add(segments.get(180));
+		segments.get(181).getNeighbors().add(segments.get(182));
+		segments.get(181).getNeighbors().add(segments.get(195));
+		//182
+		segments.get(182).getPoints().add(points.get(156));
+		segments.get(182).getPoints().add(points.get(157));
+		segments.get(182).getNeighbors().add(segments.get(162));
+		segments.get(182).getNeighbors().add(segments.get(181));
+		segments.get(182).getNeighbors().add(segments.get(183));
+		segments.get(182).getNeighbors().add(segments.get(196));
+		//183
+		segments.get(183).getPoints().add(points.get(157));
+		segments.get(183).getPoints().add(points.get(167));
+		segments.get(183).getNeighbors().add(segments.get(163));
+		segments.get(183).getNeighbors().add(segments.get(182));
+		segments.get(183).getNeighbors().add(segments.get(184));
+		segments.get(183).getNeighbors().add(segments.get(196));
+		//184
+		segments.get(184).getPoints().add(points.get(167));
+		segments.get(184).getPoints().add(points.get(168));
+		segments.get(184).getNeighbors().add(segments.get(163));
+		segments.get(184).getNeighbors().add(segments.get(183));
+		segments.get(184).getNeighbors().add(segments.get(185));
+		segments.get(184).getNeighbors().add(segments.get(197));
+		//185
+		segments.get(185).getPoints().add(points.get(168));
+		segments.get(185).getPoints().add(points.get(175));
+		segments.get(185).getNeighbors().add(segments.get(164));
+		segments.get(185).getNeighbors().add(segments.get(184));
+		segments.get(185).getNeighbors().add(segments.get(186));
+		segments.get(185).getNeighbors().add(segments.get(197));
+		//186
+		segments.get(186).getPoints().add(points.get(175));
+		segments.get(186).getPoints().add(points.get(35));
+		segments.get(186).getNeighbors().add(segments.get(164));
+		segments.get(186).getNeighbors().add(segments.get(185));
+		segments.get(186).getNeighbors().add(segments.get(187));
+		segments.get(186).getNeighbors().add(segments.get(198));
+		//187
+		segments.get(187).getPoints().add(points.get(35));
+		segments.get(187).getPoints().add(points.get(36));
+		segments.get(187).getNeighbors().add(segments.get(165));
+		segments.get(187).getNeighbors().add(segments.get(186));
+		segments.get(187).getNeighbors().add(segments.get(198));
+		//188
+		segments.get(188).getPoints().add(points.get(11));
+		segments.get(188).getPoints().add(points.get(12));
+		segments.get(188).getNeighbors().add(segments.get(166));
+		segments.get(188).getNeighbors().add(segments.get(167));
+		segments.get(188).getNeighbors().add(segments.get(199));
+		//189
+		segments.get(189).getPoints().add(points.get(81));
+		segments.get(189).getPoints().add(points.get(83));
+		segments.get(189).getNeighbors().add(segments.get(168));
+		segments.get(189).getNeighbors().add(segments.get(169));
+		segments.get(189).getNeighbors().add(segments.get(200));
+		segments.get(189).getNeighbors().add(segments.get(201));
+		//190
+		segments.get(190).getPoints().add(points.get(84));
+		segments.get(190).getPoints().add(points.get(85));
+		segments.get(190).getNeighbors().add(segments.get(170));
+		segments.get(190).getNeighbors().add(segments.get(171));
+		segments.get(190).getNeighbors().add(segments.get(202));
+		segments.get(190).getNeighbors().add(segments.get(203));
+		//191
+		segments.get(191).getPoints().add(points.get(97));
+		segments.get(191).getPoints().add(points.get(98));
+		segments.get(191).getNeighbors().add(segments.get(172));
+		segments.get(191).getNeighbors().add(segments.get(173));
+		segments.get(191).getNeighbors().add(segments.get(204));
+		segments.get(191).getNeighbors().add(segments.get(205));
+		//192
+		segments.get(192).getPoints().add(points.get(109));
+		segments.get(192).getPoints().add(points.get(110));
+		segments.get(192).getNeighbors().add(segments.get(174));
+		segments.get(192).getNeighbors().add(segments.get(175));
+		segments.get(192).getNeighbors().add(segments.get(206));
+		segments.get(192).getNeighbors().add(segments.get(207));
+		//193
+		segments.get(193).getPoints().add(points.get(121));
+		segments.get(193).getPoints().add(points.get(122));
+		segments.get(193).getNeighbors().add(segments.get(176));
+		segments.get(193).getNeighbors().add(segments.get(177));
+		segments.get(193).getNeighbors().add(segments.get(208));
+		segments.get(193).getNeighbors().add(segments.get(209));
+		//194
+		segments.get(194).getPoints().add(points.get(133));
+		segments.get(194).getPoints().add(points.get(134));
+		segments.get(194).getNeighbors().add(segments.get(178));
+		segments.get(194).getNeighbors().add(segments.get(179));
+		segments.get(194).getNeighbors().add(segments.get(210));
+		segments.get(194).getNeighbors().add(segments.get(211));
+		//195
+		segments.get(195).getPoints().add(points.get(145));
+		segments.get(195).getPoints().add(points.get(146));
+		segments.get(195).getNeighbors().add(segments.get(180));
+		segments.get(195).getNeighbors().add(segments.get(181));
+		segments.get(195).getNeighbors().add(segments.get(212));
+		segments.get(195).getNeighbors().add(segments.get(213));
+		//196
+		segments.get(196).getPoints().add(points.get(157));
+		segments.get(196).getPoints().add(points.get(158));
+		segments.get(196).getNeighbors().add(segments.get(182));
+		segments.get(196).getNeighbors().add(segments.get(183));
+		segments.get(196).getNeighbors().add(segments.get(214));
+		segments.get(196).getNeighbors().add(segments.get(215));
+		//197
+		segments.get(197).getPoints().add(points.get(168));
+		segments.get(197).getPoints().add(points.get(169));
+		segments.get(197).getNeighbors().add(segments.get(184));
+		segments.get(197).getNeighbors().add(segments.get(185));
+		segments.get(197).getNeighbors().add(segments.get(216));
+		segments.get(197).getNeighbors().add(segments.get(217));
+		//198
+		segments.get(198).getPoints().add(points.get(35));
+		segments.get(198).getPoints().add(points.get(34));
+		segments.get(198).getNeighbors().add(segments.get(186));
+		segments.get(198).getNeighbors().add(segments.get(187));
+		segments.get(198).getNeighbors().add(segments.get(218));
+		//199
+		segments.get(199).getPoints().add(points.get(12));
+		segments.get(199).getPoints().add(points.get(13));
+		segments.get(199).getNeighbors().add(segments.get(200));
+		segments.get(199).getNeighbors().add(segments.get(188));
+		segments.get(199).getNeighbors().add(segments.get(219));
+		//200
+		segments.get(200).getPoints().add(points.get(13));
+		segments.get(200).getPoints().add(points.get(83));
+		segments.get(200).getNeighbors().add(segments.get(199));
+		segments.get(200).getNeighbors().add(segments.get(201));
+		segments.get(200).getNeighbors().add(segments.get(189));
+		segments.get(200).getNeighbors().add(segments.get(219));
+		//201
+		segments.get(201).getPoints().add(points.get(83));
+		segments.get(201).getPoints().add(points.get(86));
+		segments.get(201).getNeighbors().add(segments.get(200));
+		segments.get(201).getNeighbors().add(segments.get(202));
+		segments.get(201).getNeighbors().add(segments.get(189));
+		segments.get(201).getNeighbors().add(segments.get(220));
+		//202
+		segments.get(202).getPoints().add(points.get(85));
+		segments.get(202).getPoints().add(points.get(86));
+		segments.get(202).getNeighbors().add(segments.get(201));
+		segments.get(202).getNeighbors().add(segments.get(203));
+		segments.get(202).getNeighbors().add(segments.get(190));
+		segments.get(202).getNeighbors().add(segments.get(220));
+		//203
+		segments.get(203).getPoints().add(points.get(85));
+		segments.get(203).getPoints().add(points.get(87));
+		segments.get(203).getNeighbors().add(segments.get(202));
+		segments.get(203).getNeighbors().add(segments.get(204));
+		segments.get(203).getNeighbors().add(segments.get(190));
+		segments.get(203).getNeighbors().add(segments.get(221));
+		//204
+		segments.get(204).getPoints().add(points.get(87));
+		segments.get(204).getPoints().add(points.get(98));
+		segments.get(204).getNeighbors().add(segments.get(203));
+		segments.get(204).getNeighbors().add(segments.get(205));
+		segments.get(204).getNeighbors().add(segments.get(191));
+		segments.get(204).getNeighbors().add(segments.get(221));
+		//205
+		segments.get(205).getPoints().add(points.get(98));
+		segments.get(205).getPoints().add(points.get(99));
+		segments.get(205).getNeighbors().add(segments.get(204));
+		segments.get(205).getNeighbors().add(segments.get(206));
+		segments.get(205).getNeighbors().add(segments.get(191));
+		segments.get(205).getNeighbors().add(segments.get(222));
+		//206
+		segments.get(206).getPoints().add(points.get(99));
+		segments.get(206).getPoints().add(points.get(110));
+		segments.get(206).getNeighbors().add(segments.get(205));
+		segments.get(206).getNeighbors().add(segments.get(207));
+		segments.get(206).getNeighbors().add(segments.get(192));
+		segments.get(206).getNeighbors().add(segments.get(222));
+		//207
+		segments.get(207).getPoints().add(points.get(110));
+		segments.get(207).getPoints().add(points.get(111));
+		segments.get(207).getNeighbors().add(segments.get(206));
+		segments.get(207).getNeighbors().add(segments.get(208));
+		segments.get(207).getNeighbors().add(segments.get(192));
+		segments.get(207).getNeighbors().add(segments.get(223));
+		//208
+		segments.get(208).getPoints().add(points.get(111));
+		segments.get(208).getPoints().add(points.get(122));
+		segments.get(208).getNeighbors().add(segments.get(207));
+		segments.get(208).getNeighbors().add(segments.get(209));
+		segments.get(208).getNeighbors().add(segments.get(193));
+		segments.get(208).getNeighbors().add(segments.get(223));
+		//209
+		segments.get(209).getPoints().add(points.get(122));
+		segments.get(209).getPoints().add(points.get(123));
+		segments.get(209).getNeighbors().add(segments.get(208));
+		segments.get(209).getNeighbors().add(segments.get(210));
+		segments.get(209).getNeighbors().add(segments.get(193));
+		segments.get(209).getNeighbors().add(segments.get(224));
+		//210
+		segments.get(210).getPoints().add(points.get(123));
+		segments.get(210).getPoints().add(points.get(134));
+		segments.get(210).getNeighbors().add(segments.get(209));
+		segments.get(210).getNeighbors().add(segments.get(211));
+		segments.get(210).getNeighbors().add(segments.get(194));
+		segments.get(210).getNeighbors().add(segments.get(224));
+		//211
+		segments.get(211).getPoints().add(points.get(134));
+		segments.get(211).getPoints().add(points.get(135));
+		segments.get(211).getNeighbors().add(segments.get(210));
+		segments.get(211).getNeighbors().add(segments.get(212));
+		segments.get(211).getNeighbors().add(segments.get(194));
+		segments.get(211).getNeighbors().add(segments.get(225));
+		//212
+		segments.get(212).getPoints().add(points.get(135));
+		segments.get(212).getPoints().add(points.get(146));
+		segments.get(212).getNeighbors().add(segments.get(211));
+		segments.get(212).getNeighbors().add(segments.get(213));
+		segments.get(212).getNeighbors().add(segments.get(195));
+		segments.get(212).getNeighbors().add(segments.get(225));
+		//213
+		segments.get(213).getPoints().add(points.get(146));
+		segments.get(213).getPoints().add(points.get(147));
+		segments.get(213).getNeighbors().add(segments.get(212));
+		segments.get(213).getNeighbors().add(segments.get(214));
+		segments.get(213).getNeighbors().add(segments.get(195));
+		segments.get(213).getNeighbors().add(segments.get(226));
+		//214
+		segments.get(214).getPoints().add(points.get(147));
+		segments.get(214).getPoints().add(points.get(158));
+		segments.get(214).getNeighbors().add(segments.get(213));
+		segments.get(214).getNeighbors().add(segments.get(215));
+		segments.get(214).getNeighbors().add(segments.get(196));
+		segments.get(214).getNeighbors().add(segments.get(226));
+		//215
+		segments.get(215).getPoints().add(points.get(158));
+		segments.get(215).getPoints().add(points.get(159));
+		segments.get(215).getNeighbors().add(segments.get(214));
+		segments.get(215).getNeighbors().add(segments.get(215));
+		segments.get(215).getNeighbors().add(segments.get(196));
+		segments.get(215).getNeighbors().add(segments.get(227));
+		//216
+		segments.get(216).getPoints().add(points.get(159));
+		segments.get(216).getPoints().add(points.get(169));
+		segments.get(216).getNeighbors().add(segments.get(215));
+		segments.get(216).getNeighbors().add(segments.get(217));
+		segments.get(216).getNeighbors().add(segments.get(197));
+		segments.get(216).getNeighbors().add(segments.get(227));
+		//217
+		segments.get(217).getPoints().add(points.get(169));
+		segments.get(217).getPoints().add(points.get(33));
+		segments.get(217).getNeighbors().add(segments.get(216));
+		segments.get(217).getNeighbors().add(segments.get(218));
+		segments.get(217).getNeighbors().add(segments.get(197));
+		segments.get(217).getNeighbors().add(segments.get(228));
+		//218
+		segments.get(218).getPoints().add(points.get(33));
+		segments.get(218).getPoints().add(points.get(34));
+		segments.get(218).getNeighbors().add(segments.get(217));
+		segments.get(218).getNeighbors().add(segments.get(198));
+		segments.get(218).getNeighbors().add(segments.get(228));
+		//219
+		segments.get(219).getPoints().add(points.get(13));
+		segments.get(219).getPoints().add(points.get(14));
+		segments.get(219).getNeighbors().add(segments.get(199));
+		segments.get(219).getNeighbors().add(segments.get(200));
+		segments.get(219).getNeighbors().add(segments.get(229));
+		//220
+		segments.get(220).getPoints().add(points.get(16));
+		segments.get(220).getPoints().add(points.get(86));
+		segments.get(220).getNeighbors().add(segments.get(201));
+		segments.get(220).getNeighbors().add(segments.get(202));
+		segments.get(220).getNeighbors().add(segments.get(230));
+		segments.get(220).getNeighbors().add(segments.get(231));
+		//221
+		segments.get(221).getPoints().add(points.get(18));
+		segments.get(221).getPoints().add(points.get(87));
+		segments.get(221).getNeighbors().add(segments.get(203));
+		segments.get(221).getNeighbors().add(segments.get(204));
+		segments.get(221).getNeighbors().add(segments.get(232));
+		segments.get(221).getNeighbors().add(segments.get(233));
+		//222
+		segments.get(222).getPoints().add(points.get(20));
+		segments.get(222).getPoints().add(points.get(99));
+		segments.get(222).getNeighbors().add(segments.get(205));
+		segments.get(222).getNeighbors().add(segments.get(206));
+		segments.get(222).getNeighbors().add(segments.get(234));
+		segments.get(222).getNeighbors().add(segments.get(235));
+		//223
+		segments.get(223).getPoints().add(points.get(22));
+		segments.get(223).getPoints().add(points.get(111));
+		segments.get(223).getNeighbors().add(segments.get(207));
+		segments.get(223).getNeighbors().add(segments.get(208));
+		segments.get(223).getNeighbors().add(segments.get(236));
+		segments.get(223).getNeighbors().add(segments.get(237));
+		//224
+		segments.get(224).getPoints().add(points.get(24));
+		segments.get(224).getPoints().add(points.get(123));
+		segments.get(224).getNeighbors().add(segments.get(209));
+		segments.get(224).getNeighbors().add(segments.get(210));
+		segments.get(224).getNeighbors().add(segments.get(238));
+		segments.get(224).getNeighbors().add(segments.get(239));
+		//225
+		segments.get(225).getPoints().add(points.get(26));
+		segments.get(225).getPoints().add(points.get(135));
+		segments.get(225).getNeighbors().add(segments.get(211));
+		segments.get(225).getNeighbors().add(segments.get(212));
+		segments.get(225).getNeighbors().add(segments.get(240));
+		segments.get(225).getNeighbors().add(segments.get(241));
+		//226
+		segments.get(226).getPoints().add(points.get(28));
+		segments.get(226).getPoints().add(points.get(147));
+		segments.get(226).getNeighbors().add(segments.get(213));
+		segments.get(226).getNeighbors().add(segments.get(214));
+		segments.get(226).getNeighbors().add(segments.get(242));
+		segments.get(226).getNeighbors().add(segments.get(243));
+		//227
+		segments.get(227).getPoints().add(points.get(30));
+		segments.get(227).getPoints().add(points.get(159));
+		segments.get(227).getNeighbors().add(segments.get(215));
+		segments.get(227).getNeighbors().add(segments.get(216));
+		segments.get(227).getNeighbors().add(segments.get(244));
+		segments.get(227).getNeighbors().add(segments.get(245));
+		//228
+		segments.get(228).getPoints().add(points.get(32));
+		segments.get(228).getPoints().add(points.get(33));
+		segments.get(228).getNeighbors().add(segments.get(217));
+		segments.get(228).getNeighbors().add(segments.get(218));
+		segments.get(228).getNeighbors().add(segments.get(246));
+		//229
+		segments.get(229).getPoints().add(points.get(14));
+		segments.get(229).getPoints().add(points.get(15));
+		segments.get(229).getNeighbors().add(segments.get(219));
+		segments.get(229).getNeighbors().add(segments.get(230));
+		//230
+		segments.get(230).getPoints().add(points.get(15));
+		segments.get(230).getPoints().add(points.get(16));
+		segments.get(230).getNeighbors().add(segments.get(220));
+		segments.get(230).getNeighbors().add(segments.get(229));
+		segments.get(230).getNeighbors().add(segments.get(231));
+		//231
+		segments.get(231).getPoints().add(points.get(16));
+		segments.get(231).getPoints().add(points.get(17));
+		segments.get(231).getNeighbors().add(segments.get(220));
+		segments.get(231).getNeighbors().add(segments.get(230));
+		segments.get(231).getNeighbors().add(segments.get(232));
+		//232
+		segments.get(232).getPoints().add(points.get(17));
+		segments.get(232).getPoints().add(points.get(18));
+		segments.get(232).getNeighbors().add(segments.get(221));
+		segments.get(232).getNeighbors().add(segments.get(231));
+		segments.get(232).getNeighbors().add(segments.get(233));
+		//233
+		segments.get(233).getPoints().add(points.get(18));
+		segments.get(233).getPoints().add(points.get(19));
+		segments.get(233).getNeighbors().add(segments.get(221));
+		segments.get(233).getNeighbors().add(segments.get(232));
+		segments.get(233).getNeighbors().add(segments.get(234));
+		//234
+		segments.get(234).getPoints().add(points.get(19));
+		segments.get(234).getPoints().add(points.get(20));
+		segments.get(234).getNeighbors().add(segments.get(222));
+		segments.get(234).getNeighbors().add(segments.get(233));
+		segments.get(234).getNeighbors().add(segments.get(235));
+		//235
+		segments.get(235).getPoints().add(points.get(20));
+		segments.get(235).getPoints().add(points.get(21));
+		segments.get(235).getNeighbors().add(segments.get(222));
+		segments.get(235).getNeighbors().add(segments.get(234));
+		segments.get(235).getNeighbors().add(segments.get(236));
+		//236
+		segments.get(236).getPoints().add(points.get(21));
+		segments.get(236).getPoints().add(points.get(22));
+		segments.get(236).getNeighbors().add(segments.get(223));
+		segments.get(236).getNeighbors().add(segments.get(235));
+		segments.get(236).getNeighbors().add(segments.get(237));
+		//237
+		segments.get(237).getPoints().add(points.get(22));
+		segments.get(237).getPoints().add(points.get(23));
+		segments.get(237).getNeighbors().add(segments.get(223));
+		segments.get(237).getNeighbors().add(segments.get(236));
+		segments.get(237).getNeighbors().add(segments.get(238));
+		//238
+		segments.get(238).getPoints().add(points.get(23));
+		segments.get(238).getPoints().add(points.get(24));
+		segments.get(238).getNeighbors().add(segments.get(224));
+		segments.get(238).getNeighbors().add(segments.get(237));
+		segments.get(238).getNeighbors().add(segments.get(239));
+		//239
+		segments.get(239).getPoints().add(points.get(24));
+		segments.get(239).getPoints().add(points.get(25));
+		segments.get(239).getNeighbors().add(segments.get(224));
+		segments.get(239).getNeighbors().add(segments.get(238));
+		segments.get(239).getNeighbors().add(segments.get(240));
+		//240
+		segments.get(240).getPoints().add(points.get(25));
+		segments.get(240).getPoints().add(points.get(26));
+		segments.get(240).getNeighbors().add(segments.get(225));
+		segments.get(240).getNeighbors().add(segments.get(239));
+		segments.get(240).getNeighbors().add(segments.get(241));
+		//241
+		segments.get(241).getPoints().add(points.get(26));
+		segments.get(241).getPoints().add(points.get(27));
+		segments.get(241).getNeighbors().add(segments.get(225));
+		segments.get(241).getNeighbors().add(segments.get(240));
+		segments.get(241).getNeighbors().add(segments.get(242));
+		//242
+		segments.get(242).getPoints().add(points.get(27));
+		segments.get(242).getPoints().add(points.get(28));
+		segments.get(242).getNeighbors().add(segments.get(226));
+		segments.get(242).getNeighbors().add(segments.get(241));
+		segments.get(242).getNeighbors().add(segments.get(243));
+		//243
+		segments.get(243).getPoints().add(points.get(28));
+		segments.get(243).getPoints().add(points.get(29));
+		segments.get(243).getNeighbors().add(segments.get(226));
+		segments.get(243).getNeighbors().add(segments.get(242));
+		segments.get(243).getNeighbors().add(segments.get(244));
+		//244
+		segments.get(244).getPoints().add(points.get(29));
+		segments.get(244).getPoints().add(points.get(30));
+		segments.get(244).getNeighbors().add(segments.get(227));
+		segments.get(244).getNeighbors().add(segments.get(243));
+		segments.get(244).getNeighbors().add(segments.get(245));
+		//245
+		segments.get(245).getPoints().add(points.get(30));
+		segments.get(245).getPoints().add(points.get(31));
+		segments.get(245).getNeighbors().add(segments.get(227));
+		segments.get(245).getNeighbors().add(segments.get(244));
+		segments.get(245).getNeighbors().add(segments.get(246));
+		//246
+		segments.get(246).getPoints().add(points.get(31));
+		segments.get(246).getPoints().add(points.get(32));
+		segments.get(246).getNeighbors().add(segments.get(228));
+		segments.get(246).getNeighbors().add(segments.get(245));
+		
+		for (int i=0; i<segments.size(); i++) {
+			for (int j=0; j<segments.get(i).getPoints().size(); j++) {
+				Point p = (Point) segments.get(i).getPoints().get(j);
+				if (!p.getSegments().contains(segments.get(i))) {
+				   p.getSegments().add(segments.get(i));
+				}
+				
+			}
+		}
+		//creates the list of hexes and their associated points
+
+		//0
+		hexes.get(0).setType('l');
+		ArrayList<Point<E>> temp = new ArrayList<>();
+		temp.add(points.get(0));
+		temp.add(points.get(1));
+		temp.add(points.get(2));
+		temp.add(points.get(61));
+		temp.add(points.get(64));
+		temp.add(points.get(65));
+		hexes.get(0).setPoints(temp);
+		//1
+		hexes.get(1).setType('l');
+		ArrayList<Point<E>> temp1 = new ArrayList<>();
+		temp.add(points.get(60));
+		temp.add(points.get(59));
+		temp.add(points.get(62));
+		temp.add(points.get(61));
+		temp.add(points.get(64));
+		temp.add(points.get(63));
+		hexes.get(1).setPoints(temp1);
+		//2
+		hexes.get(2).setType('s');
+		ArrayList<Point<E>> temp2 = new ArrayList<>();
+		temp.add(points.get(58));
+		temp.add(points.get(57));
+		temp.add(points.get(88));
+		temp.add(points.get(89));
+		temp.add(points.get(62));
+		temp.add(points.get(59));
+		hexes.get(2).setPoints(temp2);
+		//3
+		hexes.get(3).setType('s');
+		ArrayList<Point<E>> temp3 = new ArrayList<>();
+		temp.add(points.get(56));
+		temp.add(points.get(55));
+		temp.add(points.get(100));
+		temp.add(points.get(101));
+		temp.add(points.get(88));
+		temp.add(points.get(57));
+		hexes.get(3).setPoints(temp3);
+		//4
+		hexes.get(4).setType('l');
+		ArrayList<Point<E>> temp4 = new ArrayList<>();
+		temp.add(points.get(54));
+		temp.add(points.get(53));
+		temp.add(points.get(112));
+		temp.add(points.get(113));
+		temp.add(points.get(100));
+		temp.add(points.get(55));
+		hexes.get(4).setPoints(temp4);
+		//5
+		hexes.get(5).setType('l');
+		ArrayList<Point<E>> temp5 = new ArrayList<>();
+		temp.add(points.get(52));
+		temp.add(points.get(51));
+		temp.add(points.get(124));
+		temp.add(points.get(125));
+		temp.add(points.get(112));
+		temp.add(points.get(53));
+		hexes.get(5).setPoints(temp5);
+		//6
+		hexes.get(6).setType('l');
+		ArrayList<Point<E>> temp6 = new ArrayList<>();
+		temp.add(points.get(50));
+		temp.add(points.get(49));
+		temp.add(points.get(136));
+		temp.add(points.get(137));
+		temp.add(points.get(124));
+		temp.add(points.get(51));
+		hexes.get(6).setPoints(temp6);
+		//7
+		hexes.get(7).setType('l');
+		ArrayList<Point<E>> temp7 = new ArrayList<>();
+		temp.add(points.get(48));
+		temp.add(points.get(47));
+		temp.add(points.get(148));
+		temp.add(points.get(149));
+		temp.add(points.get(136));
+		temp.add(points.get(49));
+		hexes.get(7).setPoints(temp7);
+		//8
+		hexes.get(8).setType('l');
+		ArrayList<Point<E>> temp8 = new ArrayList<>();
+		temp.add(points.get(46));
+		temp.add(points.get(45));
+		temp.add(points.get(44));
+		temp.add(points.get(160));
+		temp.add(points.get(148));
+		temp.add(points.get(47));
+		hexes.get(8).setPoints(temp8);
+		//9
+		hexes.get(9).setType('l');
+		ArrayList<Point<E>> temp9 = new ArrayList<>();
+		temp.add(points.get(1));
+		temp.add(points.get(65));
+		temp.add(points.get(66));
+		temp.add(points.get(69));
+		temp.add(points.get(4));
+		temp.add(points.get(3));
+		hexes.get(9).setPoints(temp9);
+		//10
+		hexes.get(10).setType('l');
+		ArrayList<Point<E>> temp10 = new ArrayList<>();
+		temp.add(points.get(64));
+		temp.add(points.get(63));
+		temp.add(points.get(68));
+		temp.add(points.get(67));
+		temp.add(points.get(66));
+		temp.add(points.get(65));
+		hexes.get(10).setPoints(temp10);
+		//11
+		hexes.get(11).setType('s');
+		ArrayList<Point<E>> temp11 = new ArrayList<>();
+		temp.add(points.get(62));
+		temp.add(points.get(89));
+		temp.add(points.get(90));
+		temp.add(points.get(91));
+		temp.add(points.get(68));
+		temp.add(points.get(63));
+		hexes.get(11).setPoints(temp11);
+		//12
+		hexes.get(12).setType('s');
+		ArrayList<Point<E>> temp12 = new ArrayList<>();
+		temp.add(points.get(88));
+		temp.add(points.get(101));
+		temp.add(points.get(102));
+		temp.add(points.get(103));
+		temp.add(points.get(90));
+		temp.add(points.get(89));
+		hexes.get(12).setPoints(temp12);
+		//13
+		hexes.get(13).setType('u');
+		ArrayList<Point<E>> temp13 = new ArrayList<>();
+		temp.add(points.get(100));
+		temp.add(points.get(113));
+		temp.add(points.get(114));
+		temp.add(points.get(115));
+		temp.add(points.get(102));
+		temp.add(points.get(101));
+		hexes.get(13).setPoints(temp13);
+		//14
+		hexes.get(14).setType('u');
+		ArrayList<Point<E>> temp14 = new ArrayList<>();
+		temp.add(points.get(112));
+		temp.add(points.get(125));
+		temp.add(points.get(126));
+		temp.add(points.get(127));
+		temp.add(points.get(114));
+		temp.add(points.get(113));
+		hexes.get(14).setPoints(temp14);
+		//15
+		hexes.get(15).setType('u');
+		ArrayList<Point<E>> temp15 = new ArrayList<>();
+		temp.add(points.get(124));
+		temp.add(points.get(137));
+		temp.add(points.get(138));
+		temp.add(points.get(139));
+		temp.add(points.get(126));
+		temp.add(points.get(125));
+		hexes.get(15).setPoints(temp15);
+		//16
+		hexes.get(16).setType('u');
+		ArrayList<Point<E>> temp16 = new ArrayList<>();
+		temp.add(points.get(136));
+		temp.add(points.get(149));
+		temp.add(points.get(150));
+		temp.add(points.get(151));
+		temp.add(points.get(138));
+		temp.add(points.get(137));
+		hexes.get(16).setPoints(temp16);
+		//17
+		hexes.get(17).setType('u');
+		ArrayList<Point<E>> temp17 = new ArrayList<>();
+		temp.add(points.get(148));
+		temp.add(points.get(160));
+		temp.add(points.get(161));
+		temp.add(points.get(162));
+		temp.add(points.get(150));
+		temp.add(points.get(149));
+		hexes.get(17).setPoints(temp17);
+		//18
+		hexes.get(18).setType('l');
+		ArrayList<Point<E>> temp18 = new ArrayList<>();
+		temp.add(points.get(44));
+		temp.add(points.get(43));
+		temp.add(points.get(42));
+		temp.add(points.get(170));
+		temp.add(points.get(161));
+		temp.add(points.get(160));
+		hexes.get(18).setPoints(temp18);
+		//19
+		hexes.get(19).setType('l');
+		ArrayList<Point<E>> temp19 = new ArrayList<>();
+		temp.add(points.get(4));
+		temp.add(points.get(69));
+		temp.add(points.get(71));
+		temp.add(points.get(70));
+		temp.add(points.get(6));
+		temp.add(points.get(5));
+		hexes.get(19).setPoints(temp19);
+		//20
+		hexes.get(20).setType('l');
+		ArrayList<Point<E>> temp20 = new ArrayList<>();
+		temp.add(points.get(66));
+		temp.add(points.get(67));
+		temp.add(points.get(73));
+		temp.add(points.get(72));
+		temp.add(points.get(71));
+		temp.add(points.get(69));
+		hexes.get(20).setPoints(temp20);
+		//21
+		hexes.get(21).setType('s');
+		ArrayList<Point<E>> temp21 = new ArrayList<>();
+		temp.add(points.get(68));
+		temp.add(points.get(91));
+		temp.add(points.get(92));
+		temp.add(points.get(79));
+		temp.add(points.get(73));
+		temp.add(points.get(67));
+		hexes.get(21).setPoints(temp21);
+		//22
+		hexes.get(22).setType('s');
+		ArrayList<Point<E>> temp22 = new ArrayList<>();
+		temp.add(points.get(90));
+		temp.add(points.get(103));
+		temp.add(points.get(104));
+		temp.add(points.get(93));
+		temp.add(points.get(92));
+		temp.add(points.get(91));
+		hexes.get(22).setPoints(temp22);
+		//23
+		hexes.get(23).setType('u');
+		ArrayList<Point<E>> temp23 = new ArrayList<>();
+		temp.add(points.get(102));
+		temp.add(points.get(115));
+		temp.add(points.get(116));
+		temp.add(points.get(105));
+		temp.add(points.get(104));
+		temp.add(points.get(103));
+		hexes.get(23).setPoints(temp23);
+		//24
+		hexes.get(24).setType('u');
+		ArrayList<Point<E>> temp24 = new ArrayList<>();
+		temp.add(points.get(114));
+		temp.add(points.get(127));
+		temp.add(points.get(128));
+		temp.add(points.get(117));
+		temp.add(points.get(116));
+		temp.add(points.get(115));
+		hexes.get(24).setPoints(temp24);
+		//25
+		hexes.get(25).setType('u');
+		ArrayList<Point<E>> temp25 = new ArrayList<>();
+		temp.add(points.get(126));
+		temp.add(points.get(139));
+		temp.add(points.get(140));
+		temp.add(points.get(129));
+		temp.add(points.get(128));
+		temp.add(points.get(127));
+		hexes.get(25).setPoints(temp25);
+		//26
+		hexes.get(26).setType('u');
+		ArrayList<Point<E>> temp26 = new ArrayList<>();
+		temp.add(points.get(138));
+		temp.add(points.get(151));
+		temp.add(points.get(152));
+		temp.add(points.get(141));
+		temp.add(points.get(140));
+		temp.add(points.get(139));
+		hexes.get(26).setPoints(temp26);
+		//27
+		hexes.get(27).setType('u');
+		ArrayList<Point<E>> temp27 = new ArrayList<>();
+		temp.add(points.get(150));
+		temp.add(points.get(162));
+		temp.add(points.get(163));
+		temp.add(points.get(153));
+		temp.add(points.get(152));
+		temp.add(points.get(151));
+		hexes.get(27).setPoints(temp27);
+		//28
+		hexes.get(28).setType('u');
+		ArrayList<Point<E>> temp28 = new ArrayList<>();
+		temp.add(points.get(161));
+		temp.add(points.get(170));
+		temp.add(points.get(171));
+		temp.add(points.get(164));
+		temp.add(points.get(163));
+		temp.add(points.get(162));
+		hexes.get(28).setPoints(temp28);
+		//29
+		hexes.get(29).setType('u');
+		ArrayList<Point<E>> temp29 = new ArrayList<>();
+		temp.add(points.get(42));
+		temp.add(points.get(41));
+		temp.add(points.get(40));
+		temp.add(points.get(172));
+		temp.add(points.get(171));
+		temp.add(points.get(170));
+		hexes.get(29).setPoints(temp29);
+		//30
+		hexes.get(30).setType('l');
+		ArrayList<Point<E>> temp30 = new ArrayList<>();
+		temp.add(points.get(6));
+		temp.add(points.get(70));
+		temp.add(points.get(74));
+		temp.add(points.get(9));
+		temp.add(points.get(8));
+		temp.add(points.get(7));
+		hexes.get(30).setPoints(temp30);
+		//31
+		hexes.get(31).setType('l');
+		ArrayList<Point<E>> temp31 = new ArrayList<>();
+		temp.add(points.get(71));
+		temp.add(points.get(72));
+		temp.add(points.get(76));
+		temp.add(points.get(75));
+		temp.add(points.get(74));
+		temp.add(points.get(70));
+		hexes.get(31).setPoints(temp31);
+		//32
+		hexes.get(32).setType('l');
+		ArrayList<Point<E>> temp32 = new ArrayList<>();
+		temp.add(points.get(73));
+		temp.add(points.get(79));
+		temp.add(points.get(78));
+		temp.add(points.get(77));
+		temp.add(points.get(76));
+		temp.add(points.get(72));
+		hexes.get(32).setPoints(temp32);
+		//33
+		hexes.get(33).setType('s');
+		ArrayList<Point<E>> temp33 = new ArrayList<>();
+		temp.add(points.get(92));
+		temp.add(points.get(93));
+		temp.add(points.get(94));
+		temp.add(points.get(95));
+		temp.add(points.get(78));
+		temp.add(points.get(79));
+		hexes.get(33).setPoints(temp33);
+		//34
+		hexes.get(34).setType('s');
+		ArrayList<Point<E>> temp34 = new ArrayList<>();
+		temp.add(points.get(104));
+		temp.add(points.get(105));
+		temp.add(points.get(106));
+		temp.add(points.get(107));
+		temp.add(points.get(94));
+		temp.add(points.get(93));
+		hexes.get(34).setPoints(temp34);
+		//35
+		hexes.get(35).setType('s');
+		ArrayList<Point<E>> temp35 = new ArrayList<>();
+		temp.add(points.get(116));
+		temp.add(points.get(117));
+		temp.add(points.get(118));
+		temp.add(points.get(119));
+		temp.add(points.get(106));
+		temp.add(points.get(105));
+		hexes.get(35).setPoints(temp35);
+		//36
+		hexes.get(36).setType('s');
+		ArrayList<Point<E>> temp36 = new ArrayList<>();
+		temp.add(points.get(128));
+		temp.add(points.get(129));
+		temp.add(points.get(130));
+		temp.add(points.get(131));
+		temp.add(points.get(118));
+		temp.add(points.get(117));
+		hexes.get(36).setPoints(temp36);
+		//37
+		hexes.get(37).setType('s');
+		ArrayList<Point<E>> temp37 = new ArrayList<>();
+		temp.add(points.get(140));
+		temp.add(points.get(141));
+		temp.add(points.get(142));
+		temp.add(points.get(143));
+		temp.add(points.get(130));
+		temp.add(points.get(129));
+		hexes.get(37).setPoints(temp37);
+		//38
+		hexes.get(38).setType('s');
+		ArrayList<Point<E>> temp38 = new ArrayList<>();
+		temp.add(points.get(152));
+		temp.add(points.get(153));
+		temp.add(points.get(154));
+		temp.add(points.get(155));
+		temp.add(points.get(142));
+		temp.add(points.get(141));
+		hexes.get(38).setPoints(temp38);
+		//39
+		hexes.get(39).setType('s');
+		ArrayList<Point<E>> temp39 = new ArrayList<>();
+		temp.add(points.get(163));
+		temp.add(points.get(164));
+		temp.add(points.get(165));
+		temp.add(points.get(166));
+		temp.add(points.get(154));
+		temp.add(points.get(153));
+		hexes.get(39).setPoints(temp39);
+		//40
+		hexes.get(40).setType('s');
+		ArrayList<Point<E>> temp40 = new ArrayList<>();
+		temp.add(points.get(171));
+		temp.add(points.get(172));
+		temp.add(points.get(173));
+		temp.add(points.get(174));
+		temp.add(points.get(165));
+		temp.add(points.get(164));
+		hexes.get(40).setPoints(temp40);
+		//41
+		hexes.get(41).setType('s');
+		ArrayList<Point<E>> temp41 = new ArrayList<>();
+		temp.add(points.get(40));
+		temp.add(points.get(39));
+		temp.add(points.get(38));
+		temp.add(points.get(37));
+		temp.add(points.get(173));
+		temp.add(points.get(172));
+		hexes.get(41).setPoints(temp41);
+		//42
+		hexes.get(42).setType('l');
+		ArrayList<Point<E>> temp42 = new ArrayList<>();
+		temp.add(points.get(74));
+		temp.add(points.get(75));
+		temp.add(points.get(80));
+		temp.add(points.get(11));
+		temp.add(points.get(10));
+		temp.add(points.get(9));
+		hexes.get(42).setPoints(temp42);
+		//43
+		hexes.get(43).setType('l');
+		ArrayList<Point<E>> temp43 = new ArrayList<>();
+		temp.add(points.get(76));
+		temp.add(points.get(77));
+		temp.add(points.get(82));
+		temp.add(points.get(81));
+		temp.add(points.get(80));
+		temp.add(points.get(75));
+		hexes.get(43).setPoints(temp43);
+		//44
+		hexes.get(44).setType('s');
+		ArrayList<Point<E>> temp44 = new ArrayList<>();
+		temp.add(points.get(78));
+		temp.add(points.get(95));
+		temp.add(points.get(96));
+		temp.add(points.get(84));
+		temp.add(points.get(82));
+		temp.add(points.get(77));
+		hexes.get(44).setPoints(temp44);
+		//45
+		hexes.get(45).setType('s');
+		ArrayList<Point<E>> temp45 = new ArrayList<>();
+		temp.add(points.get(94));
+		temp.add(points.get(107));
+		temp.add(points.get(108));
+		temp.add(points.get(97));
+		temp.add(points.get(96));
+		temp.add(points.get(95));
+		hexes.get(45).setPoints(temp45);
+		//46
+		hexes.get(46).setType('u');
+		ArrayList<Point<E>> temp46 = new ArrayList<>();
+		temp.add(points.get(106));
+		temp.add(points.get(119));
+		temp.add(points.get(120));
+		temp.add(points.get(109));
+		temp.add(points.get(108));
+		temp.add(points.get(107));
+		hexes.get(46).setPoints(temp46);
+		//47
+		hexes.get(47).setType('u');
+		ArrayList<Point<E>> temp47 = new ArrayList<>();
+		temp.add(points.get(118));
+		temp.add(points.get(131));
+		temp.add(points.get(132));
+		temp.add(points.get(121));
+		temp.add(points.get(120));
+		temp.add(points.get(129));
+		hexes.get(47).setPoints(temp47);
+		//48
+		hexes.get(48).setType('s');
+		ArrayList<Point<E>> temp48 = new ArrayList<>();
+		temp.add(points.get(130));
+		temp.add(points.get(143));
+		temp.add(points.get(144));
+		temp.add(points.get(133));
+		temp.add(points.get(132));
+		temp.add(points.get(131));
+		hexes.get(48).setPoints(temp48);
+		//49
+		hexes.get(49).setType('u');
+		ArrayList<Point<E>> temp49 = new ArrayList<>();
+		temp.add(points.get(142));
+		temp.add(points.get(155));
+		temp.add(points.get(156));
+		temp.add(points.get(145));
+		temp.add(points.get(144));
+		temp.add(points.get(143));
+		hexes.get(49).setPoints(temp49);
+		//50
+		hexes.get(50).setType('s');
+		ArrayList<Point<E>> temp50 = new ArrayList<>();
+		temp.add(points.get(154));
+		temp.add(points.get(166));
+		temp.add(points.get(167));
+		temp.add(points.get(157));
+		temp.add(points.get(156));
+		temp.add(points.get(155));
+		hexes.get(50).setPoints(temp50);
+		//51
+		hexes.get(51).setType('u');
+		ArrayList<Point<E>> temp51 = new ArrayList<>();
+		temp.add(points.get(165));
+		temp.add(points.get(174));
+		temp.add(points.get(175));
+		temp.add(points.get(168));
+		temp.add(points.get(167));
+		temp.add(points.get(166));
+		hexes.get(51).setPoints(temp51);
+		//52
+		hexes.get(52).setType('u');
+		ArrayList<Point<E>> temp52 = new ArrayList<>();
+		temp.add(points.get(173));
+		temp.add(points.get(37));
+		temp.add(points.get(36));
+		temp.add(points.get(35));
+		temp.add(points.get(175));
+		temp.add(points.get(174));
+		hexes.get(52).setPoints(temp52);
+		//53
+		hexes.get(53).setType('l');
+		ArrayList<Point<E>> temp53 = new ArrayList<>();
+		temp.add(points.get(80));
+		temp.add(points.get(81));
+		temp.add(points.get(83));
+		temp.add(points.get(13));
+		temp.add(points.get(12));
+		temp.add(points.get(11));
+		hexes.get(53).setPoints(temp53);
+		//54
+		hexes.get(54).setType('l');
+		ArrayList<Point<E>> temp54 = new ArrayList<>();
+		temp.add(points.get(82));
+		temp.add(points.get(84));
+		temp.add(points.get(85));
+		temp.add(points.get(86));
+		temp.add(points.get(83));
+		temp.add(points.get(81));
+		hexes.get(54).setPoints(temp54);
+		//55
+		hexes.get(55).setType('s');
+		ArrayList<Point<E>> temp55 = new ArrayList<>();
+		temp.add(points.get(96));
+		temp.add(points.get(97));
+		temp.add(points.get(98));
+		temp.add(points.get(87));
+		temp.add(points.get(85));
+		temp.add(points.get(84));
+		hexes.get(55).setPoints(temp55);
+		//56
+		hexes.get(56).setType('s');
+		ArrayList<Point<E>> temp56 = new ArrayList<>();
+		temp.add(points.get(108));
+		temp.add(points.get(109));
+		temp.add(points.get(110));
+		temp.add(points.get(99));
+		temp.add(points.get(98));
+		temp.add(points.get(97));
+		hexes.get(56).setPoints(temp56);
+		//57
+		hexes.get(57).setType('u');
+		ArrayList<Point<E>> temp57 = new ArrayList<>();
+		temp.add(points.get(120));
+		temp.add(points.get(121));
+		temp.add(points.get(122));
+		temp.add(points.get(111));
+		temp.add(points.get(110));
+		temp.add(points.get(109));
+		hexes.get(57).setPoints(temp57);
+		//58
+		hexes.get(58).setType('u');
+		ArrayList<Point<E>> temp58 = new ArrayList<>();
+		temp.add(points.get(132));
+		temp.add(points.get(133));
+		temp.add(points.get(134));
+		temp.add(points.get(123));
+		temp.add(points.get(122));
+		temp.add(points.get(121));
+		hexes.get(58).setPoints(temp58);
+		//59
+		hexes.get(59).setType('u');
+		ArrayList<Point<E>> temp59 = new ArrayList<>();
+		temp.add(points.get(144));
+		temp.add(points.get(145));
+		temp.add(points.get(146));
+		temp.add(points.get(135));
+		temp.add(points.get(134));
+		temp.add(points.get(133));
+		hexes.get(59).setPoints(temp59);
+		//60
+		hexes.get(60).setType('u');
+		ArrayList<Point<E>> temp60 = new ArrayList<>();
+		temp.add(points.get(156));
+		temp.add(points.get(157));
+		temp.add(points.get(158));
+		temp.add(points.get(147));
+		temp.add(points.get(146));
+		temp.add(points.get(145));
+		hexes.get(60).setPoints(temp60);
+		//61
+		hexes.get(61).setType('u');
+		ArrayList<Point<E>> temp61 = new ArrayList<>();
+		temp.add(points.get(167));
+		temp.add(points.get(168));
+		temp.add(points.get(169));
+		temp.add(points.get(159));
+		temp.add(points.get(158));
+		temp.add(points.get(157));
+		hexes.get(61).setPoints(temp61);
+		//62
+		hexes.get(62).setType('u');
+		ArrayList<Point<E>> temp62 = new ArrayList<>();
+		temp.add(points.get(175));
+		temp.add(points.get(35));
+		temp.add(points.get(34));
+		temp.add(points.get(33));
+		temp.add(points.get(169));
+		temp.add(points.get(168));
+		hexes.get(62).setPoints(temp62);
+		//63
+		hexes.get(63).setType('l');
+		ArrayList<Point<E>> temp63 = new ArrayList<>();
+		temp.add(points.get(83));
+		temp.add(points.get(86));
+		temp.add(points.get(16));
+		temp.add(points.get(15));
+		temp.add(points.get(14));
+		temp.add(points.get(13));
+		hexes.get(63).setPoints(temp63);
+		//64
+		hexes.get(64).setType('l');
+		ArrayList<Point<E>> temp64 = new ArrayList<>();
+		temp.add(points.get(85));
+		temp.add(points.get(87));
+		temp.add(points.get(18));
+		temp.add(points.get(17));
+		temp.add(points.get(16));
+		temp.add(points.get(86));
+		hexes.get(64).setPoints(temp64);
+		//65
+		hexes.get(65).setType('s');
+		ArrayList<Point<E>> temp65 = new ArrayList<>();
+		temp.add(points.get(98));
+		temp.add(points.get(99));
+		temp.add(points.get(20));
+		temp.add(points.get(19));
+		temp.add(points.get(18));
+		temp.add(points.get(87));
+		hexes.get(65).setPoints(temp65);
+		//66
+		hexes.get(66).setType('s');
+		ArrayList<Point<E>> temp66 = new ArrayList<>();
+		temp.add(points.get(110));
+		temp.add(points.get(111));
+		temp.add(points.get(22));
+		temp.add(points.get(21));
+		temp.add(points.get(20));
+		temp.add(points.get(99));
+		hexes.get(66).setPoints(temp66);
+		//67
+		hexes.get(67).setType('u');
+		ArrayList<Point<E>> temp67 = new ArrayList<>();
+		temp.add(points.get(122));
+		temp.add(points.get(123));
+		temp.add(points.get(24));
+		temp.add(points.get(23));
+		temp.add(points.get(22));
+		temp.add(points.get(111));
+		hexes.get(67).setPoints(temp67);
+		//68
+		hexes.get(68).setType('u');
+		ArrayList<Point<E>> temp68 = new ArrayList<>();
+		temp.add(points.get(134));
+		temp.add(points.get(135));
+		temp.add(points.get(26));
+		temp.add(points.get(25));
+		temp.add(points.get(24));
+		temp.add(points.get(123));
+		hexes.get(68).setPoints(temp68);
+		//69
+		hexes.get(69).setType('u');
+		ArrayList<Point<E>> temp69 = new ArrayList<>();
+		temp.add(points.get(146));
+		temp.add(points.get(147));
+		temp.add(points.get(28));
+		temp.add(points.get(27));
+		temp.add(points.get(26));
+		temp.add(points.get(135));
+		hexes.get(69).setPoints(temp69);
+		//70
+		hexes.get(70).setType('u');
+		ArrayList<Point<E>> temp70 = new ArrayList<>();
+		temp.add(points.get(158));
+		temp.add(points.get(159));
+		temp.add(points.get(30));
+		temp.add(points.get(29));
+		temp.add(points.get(28));
+		temp.add(points.get(147));
+		hexes.get(70).setPoints(temp70);
+		//71
+		hexes.get(71).setType('u');
+		ArrayList<Point<E>> temp71 = new ArrayList<>();
+		temp.add(points.get(169));
+		temp.add(points.get(33));
+		temp.add(points.get(32));
+		temp.add(points.get(31));
+		temp.add(points.get(30));
+		temp.add(points.get(159));
+		hexes.get(71).setPoints(temp71);
+	}
+	
+	public static ArrayList<Point> getPoints () {
+		return points;
+	}
+	
+	public static ArrayList<Hex> getHexes() {
+		return hexes;
+	}
+	
+	public static ArrayList<Segment> getSegments() {
+		return segments;
+	}
 }
